@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Phone Manager</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <!--功能名称-->
+    <string name="app_manager">App Manager</string>
+    <string name="cpu_cooler">CPU Cooler</string>
+    <string name="junk_files">Junk Files</string>
+    <string name="charge_booster">Charge Booster</string>
+    <string name="update">Update</string>
+    <string name="feedback">Feedback</string>
+    <string name="comment">Comment</string>
+    <string name="about_us">About Us</string>
+</resources>
