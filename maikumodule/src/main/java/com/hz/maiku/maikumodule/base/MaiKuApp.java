@@ -63,6 +63,7 @@ public class MaiKuApp extends LitePalApplication {
             String AF_DEV_KEY =Config.getPropertiesURL(getApplicationContext(),"AF_DEV_KEY");
             String COLORPRIMARY =Config.getPropertiesURL(getApplicationContext(),"COLORPRIMARY");
             String COLORPRIMARYDARK =Config.getPropertiesURL(getApplicationContext(),"COLORPRIMARYDARK");
+            String PACKAGENAMEURL =Config.getPropertiesURL(getApplicationContext(),"PACKAGENAMEURL");
             if(!TextUtils.isEmpty(ADMOB_ID)){
                 Constant.ADMOB_ID =ADMOB_ID;
             }
@@ -79,11 +80,14 @@ public class MaiKuApp extends LitePalApplication {
             if(!TextUtils.isEmpty(COLORPRIMARY)){
                 Constant.COLORPRIMARY =COLORPRIMARY;
             }
+
             if(!TextUtils.isEmpty(COLORPRIMARYDARK)){
                 Constant.COLORPRIMARYDARK =COLORPRIMARYDARK;
             }
 
-
+            if(!TextUtils.isEmpty(COLORPRIMARYDARK)){
+                Constant.PACKAGENAMEURL =PACKAGENAMEURL;
+            }
 
         }catch (Exception e){
 

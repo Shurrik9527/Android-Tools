@@ -46,6 +46,7 @@ public class Constant {
     public static String AF_DEV_KEY = "gCjmRfaYsA8JeaeWR6GQyX";//AppsFlyer
     public static String COLORPRIMARY="#03a9f4";
     public static String COLORPRIMARYDARK="#0288d1";
+    public static String PACKAGENAMEURL="";
 
 
 }

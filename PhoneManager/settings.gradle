@@ -1,1 +1,3 @@
-include ':app', ':maikumodule'
+include ':app'
+include ':maikumodule'
+project(':maikumodule').projectDir =new File("../maikumodule")

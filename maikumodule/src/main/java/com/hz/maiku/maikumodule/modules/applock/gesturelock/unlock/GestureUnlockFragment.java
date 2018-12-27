@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.manager.CommLockInfoManager;
 import com.hz.maiku.maikumodule.modules.applock.gesturelock.createlock.GestureCreateFragment;
 import com.hz.maiku.maikumodule.service.LockService;
+import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.LockPatternUtils;
 import com.hz.maiku.maikumodule.util.LockPatternViewPattern;
 import com.hz.maiku.maikumodule.util.LockUtil;
@@ -135,7 +137,12 @@ public class GestureUnlockFragment extends Fragment implements GestureUnlockCont
                 if (mLockPatternUtils.checkPattern(pattern)) { //解锁成功,更改数据库状态
                     mLockPatternView.setDisplayMode(LockPatternView.DisplayMode.Correct);
                     if (actionFrom.equals(Constant.LOCK_FROM_LOCK_MAIN_ACITVITY)) {//是自己？
-                       // startActivity(new Intent(getActivity(), MainActivity.class));
+                        if(!TextUtils.isEmpty(Constant.PACKAGENAMEURL)){
+                            if(AppUtil.isInstalled(getContext(),Constant.PACKAGENAMEURL)){
+                                Intent intent = getContext().getPackageManager().getLaunchIntentForPackage(Constant.PACKAGENAMEURL);
+                                startActivity(intent);
+                            }
+                        }
                         getActivity().finish();
                     } else {
                         SpHelper.getInstance().put(Constant.LOCK_CURR_MILLISENCONS, System.currentTimeMillis());
@@ -184,7 +191,12 @@ public class GestureUnlockFragment extends Fragment implements GestureUnlockCont
         } else if (actionFrom.equals(Constant.LOCK_FROM_LOCK_MAIN_ACITVITY)) {
             getActivity().finish();
         } else {
-           // startActivity(new Intent(getActivity(), MainActivity.class));
+            if(!TextUtils.isEmpty(Constant.PACKAGENAMEURL)){
+                if(AppUtil.isInstalled(getContext(),Constant.PACKAGENAMEURL)){
+                    Intent intent = getContext().getPackageManager().getLaunchIntentForPackage(Constant.PACKAGENAMEURL);
+                    startActivity(intent);
+                }
+            }
         }
     }
 
