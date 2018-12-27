@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/setting_default" android:title="Setting" android:icon="@drawable/stroke_default_solid_default_radius5"></item>
+</menu>

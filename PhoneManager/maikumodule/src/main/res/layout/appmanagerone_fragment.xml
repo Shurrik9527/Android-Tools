@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/appmanagerone_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_above="@+id/appmanagerone_btn"
+
+        >
+    </android.support.v7.widget.RecyclerView>
+    <Button
+        android:id="@+id/appmanagerone_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/stroke_default_solid_default_radius5"
+        android:text="UNINSTALL"
+        android:inputType="text"
+        android:theme="@style/MyButton"
+        />
+</RelativeLayout>

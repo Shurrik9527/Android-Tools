@@ -1,0 +1,116 @@
+<resources>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <!--admob-->
+    <string name="admob_key">ca-app-pub-8013994383371748~1163211196</string>
+
+
+    <string name="common_sure">I Know</string>
+    <string name="common_cancle">cancle</string>
+    <string name="common_delete">delete</string>
+    <string name="common_save">save</string>
+    <string name="common_uptate">uptate</string>
+    <string name="common_submit">submit</string>
+
+    <!--Junk Files-->
+    <string name="junkcleaner_title">Junk Files</string>
+    <string name="system_cache">System Cache</string>
+    <string name="junkcleaner_process_title">Running Process</string>
+    <string name="junkcleaner_system_cache_tiele">App Cache</string>
+    <string name="junkcleaner_unused_apk_tiele">Unused Apk</string>
+    <string name="junkcleaner_temporary_file_tiele">Temporary File</string>
+    <string name="junkcleaner_log_file_tiele">Log File</string>
+    <!--CPU Cooler-->
+    <string name="cpucooler_title">CPU Cooler</string>
+    <!-- App Manager-->
+    <string name="appmanager_title">App Manager</string>
+    <string name="uninstall">Uninstall</string>
+    <!--Phone Booster-->
+    <string name="phonebooster_title">Phone Booster</string>
+    <!--Charge Booster-->
+    <string name="chargebooster_title">Charge Booster</string>
+    <string name="charge_cover">Charge Cover</string>
+    <string name="chargecover_desc">Use charging screen to accelerate charging.</string>
+    <string name="charge_alert">Charge Alert</string>
+    <string name="chargealert_desc">Sound alert when charging is completed.</string>
+    <string name="charge_protect_on">Charge Protect: ON</string>
+    <!--About Us-->
+    <string name="aboutus_title">About Us</string>
+
+
+    <!--图形解锁控件相关-->
+    <string name="lockscreen_access_pattern_cell_added">已添加单元格</string>
+    <string name="lockscreen_access_pattern_start">绘制解锁图案</string>
+    <string name="lockscreen_access_pattern_detected">密码已保存</string>
+    <string name="lockscreen_access_pattern_cleared">密码已删除</string>
+
+
+    <!--数字解锁相关-->
+    <string name="num_create_text_01">输入4位数密码即可解锁</string>
+    <string name="num_create_text_02">再次输入以确认</string>
+    <string name="num_create_text_03">密码不匹配，请重试</string>
+    <string name="number_1">1</string>
+    <string name="number_2">2</string>
+    <string name="number_3">3</string>
+    <string name="number_4">4</string>
+    <string name="number_5">5</string>
+    <string name="number_6">6</string>
+    <string name="number_7">7</string>
+    <string name="number_8">8</string>
+    <string name="number_9">9</string>
+    <string name="number_0">0</string>
+    <string name="password_short">请输入至少4个字符。</string>
+
+    <!--应用锁-->
+    <string name="lock_recording_intro_header">please reset you password</string>
+    <string name="lock_settings_help_how_to_record">How to draw unlock patterns</string>
+    <string name="lock_recording_incorrect_too_short">Please connect at least four points</string>
+    <string name="lock_pattern_entered_header">Reword Password</string>
+    <string name="lock_need_to_confirm">Please set your password again</string>
+    <string name="lock_need_to_unlock_wrong">Passwords do not match ,Please Try Again</string>
+    <string name="password_gestrue_tips">Draw Unlock Password</string>
+    <string name="lock_pattern_confirmed_header"></string>
+    <string name="gesturecreate_create_password">Please create you password and please set four or more password</string>
+    <string name="gesturecreate_top_title">Create Password</string>
+    <string name="gesturecreate_reset_tv">Reset</string>
+    <string name="gesturecreate_password_small">Sorry！You password is too little...</string>
+    <string name="gesturecreate_password_success">Congratulate!You Create Password Success</string>
+    <string name="gesturecreate_password_fail">Sorry！You two password are different,Please reset...</string>
+    <string name="gesturecreate_recommend_msg"> have been recommended to you</string>
+    <string name="setting_lock_applock_state_title">App Lock</string>
+    <string name="setting_lock_reset_password">Reset Password</string>
+    <string name="setting_lock_lockscreen">Add Lock After Lock Screen</string>
+    <string name="setting_lock_applock_state_open_success">open app lock!</string>
+    <string name="setting_lock_applock_state_close_success">close app lock!</string>
+    <string name="resetpassword_top_title">Reset Password</string>
+    <string name="resetpassword_success">Reset password success!</string>
+
+    <!--HarassIntercept-->
+    <string name="harassintercept_top_title">Do not disturb</string>
+    <string name="harassintercept_sms_title">SMS</string>
+    <string name="harassintercept_phone_title">PHONE</string>
+    <string name="harassintercept_phone_refriend_title">DEFRIEND</string>
+    <string name="harassintercept_phone_unrefriend_title">RESTORE</string>
+    <string name="harassintercept_phone_refriend_success">Congratulate! defriend is success</string>
+    <string name="harassintercept_phone_refriend_fail">Sorry! this user is defriend</string>
+
+    <string name="harassintercept_phone_unrefriend_success">Congratulate! undefriend is success</string>
+    <string name="harassintercept_phone_unrefriend_fail">Sorry! this user is friend</string>
+    <string name="harassintercept_phone_delete_success">Congratulate! delete is success</string>
+    <string name="harassintercept_phone_delete_title">Delete</string>
+    <string name="smsdetail_top_tile">SmsDetail</string>
+
+    <string name="trafficstatis_month">Month</string>
+    <string name="notification_delete_success">cleaner all notifacation success</string>
+    <string name="notification_cleaner_all">CLEAR NOTIFICATIONS</string>
+    <string name="notification_cleaner_notice">Junk Notifications</string>
+    <string name="notification_title_top">Notification Cleaner</string>
+    <string name="notification_blocked_title">User App</string>
+    <string name="notification_allowed_title">System App</string>
+    <string name="notification_open_state">OPEN NO/OFF</string>
+    <string name="notification_guide_open_state">Slide the button and select the app you want to block notifications</string>
+
+    <string name="wifi_guide_open_state">You can select wifi connection by sliding the button</string>
+
+</resources>

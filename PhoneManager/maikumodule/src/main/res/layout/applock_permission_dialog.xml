@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/stroke_gray_solid_white_radius5"
+              android:orientation="vertical"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Notication"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="Your system is greater than or equal to 5，need to get permission to view application usage"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/permission_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:id="@+id/permission_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/permission_icon"
+            android:text="@string/app_name"
+            android:textSize="14sp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/permission_icon"
+            android:text="close"
+            android:textSize="14sp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/permission_title_tv"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="20dp"
+        >
+        <TextView
+            android:id="@+id/btn_permission_close"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/stroke_blue_solid_blue_radius5"
+            android:gravity="center"
+            android:text="cancel"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/btn_permission"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/stroke_blue_solid_blue_radius5"
+            android:gravity="center"
+            android:text="sure"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</LinearLayout>

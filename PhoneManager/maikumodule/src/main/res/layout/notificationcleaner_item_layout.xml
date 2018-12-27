@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/notification_item_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_10"
+        >
+
+        <ImageView
+            android:id="@+id/notification_item_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/notification_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textSize="14sp"
+            android:textColor="@color/default_text"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/notification_item_icon"
+            />
+
+        <TextView
+            android:id="@+id/notification_item_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/description_text"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/notification_item_icon"
+            android:layout_below="@+id/notification_item_name"
+            />
+
+        <TextView
+            android:id="@+id/notification_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textSize="14sp"
+            android:textColor="@color/default_text"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray1"
+        android:layout_marginLeft="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="2dp"
+        />
+
+</RelativeLayout>
+

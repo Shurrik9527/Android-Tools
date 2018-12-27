@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray1"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorPrimaryLight"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/notification_open_state"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="25dp"
+            />
+
+        <Switch
+            android:id="@+id/settingapp_openstate_sw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:shadowColor="@color/colorPrimary"
+            android:theme="@style/MySwitch"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:dividerPadding="10dp"
+            android:showDividers="middle"
+            android:background="@drawable/frame_end_color"
+            >
+
+            <RadioButton
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/notification_blocked_title"
+                android:id="@+id/notification_blocked_rb"
+                android:button="@null"
+                android:checked="true"
+                android:textSize="16sp"
+                android:textColor="@drawable/blue_black_selector"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@drawable/gray_white_pressed"
+                android:inputType="text"
+                android:layout_marginBottom="1dp" />
+
+            <RadioButton
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="@string/notification_allowed_title"
+                android:id="@+id/notification_allowed_rb"
+                android:button="@null"
+                android:checked="false"
+                android:textSize="16sp"
+                android:inputType="text"
+                android:textColor="@drawable/blue_black_selector"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/gray_white_pressed" />
+
+        </RadioGroup>
+
+        <TableRow
+            android:id="@+id/discount_tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            >
+
+            <ImageView
+                android:id="@+id/settingapp_iv"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:scaleType="fitXY"
+                android:layout_weight="1"
+                android:src="@color/colorPrimary"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@null"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/settingapp_vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:flipInterval="30"
+            android:fadingEdge="none"
+            android:persistentDrawingCache="animation"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="bottom"
+             />
+
+    </LinearLayout>
+
+
+</LinearLayout>

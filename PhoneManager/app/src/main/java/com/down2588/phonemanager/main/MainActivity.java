@@ -1,36 +1,53 @@
 package com.down2588.phonemanager.main;
 
+import android.annotation.TargetApi;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
-
+import android.widget.FrameLayout;
 import com.down2588.phonemanager.BaseActivity;
 import com.down2588.phonemanager.R;
-import com.down2588.phonemanager.aboutus.AboutUsActivity;
+import com.hz.maiku.maikumodule.modules.aboutus.AboutUsActivity;
+import com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerService;
+import com.hz.maiku.maikumodule.service.GrayService;
+import com.hz.maiku.maikumodule.service.VMDaemonJobService;
+import com.hz.maiku.maikumodule.util.AdUtil;
+import com.hz.maiku.maikumodule.util.AppUtil;
+import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.jaeger.library.StatusBarUtil;
-
-import butterknife.BindColor;
-import butterknife.BindDrawable;
 import butterknife.BindView;
 
 /**
  * Created by Shurrik on 2018/12/26.
  */
 public class MainActivity extends BaseActivity {
-    @BindView(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
-    @BindColor(R.color.colorPrimaryDark)
-    int colorPrimaryDark;
-    @BindDrawable(R.drawable.ic_menu)
-    Drawable menu;
+
+
+    @BindView(R.id.fl_content)
+    FrameLayout flContent;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     protected int getContentViewId() {
@@ -52,7 +69,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initStatusBar() {
-        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, colorPrimaryDark);
+        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorPrimaryDark));
         // Set up the navigation drawer.
         setupDrawerContent(navigationView);
     }
@@ -60,7 +77,27 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setIcon(menu);
+        setIcon(getResources().getDrawable(R.drawable.ic_menu));
+        //读取最新广告配置并展示
+        AdUtil.getAdTypeAndShow(this, "MainActivity.init()");
+        //开启服务，开启锁屏界面
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(new Intent(this, ScreenLockerService.class));
+        } else {
+            startService(new Intent(this, ScreenLockerService.class));
+        }
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            startJobScheduler();
+        } else {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(new Intent(getApplicationContext(), GrayService.class));
+            } else {
+                startService(new Intent(getApplicationContext(), GrayService.class));
+            }
+        }
+
     }
 
     @Override
@@ -125,15 +162,30 @@ public class MainActivity extends BaseActivity {
      * 跳转到应用详情页面
      */
     public void goToAppDetailPage(String packageName) {
-//        if (AppUtil.isInstalled(this, "com.android.vending")) {
-//            final String GOOGLE_PLAY = "com.android.vending";
-//            Uri uri = Uri.parse("market://details?id=" + packageName);
-//            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-//            intent.setPackage(GOOGLE_PLAY);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(intent);
-//        } else {
-//            ToastUtil.showToast(MainActivity.this, "Please install GooglePlay first!");
-//        }
+        if (AppUtil.isInstalled(this, "com.android.vending")) {
+            final String GOOGLE_PLAY = "com.android.vending";
+            Uri uri = Uri.parse("market://details?id=" + packageName);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setPackage(GOOGLE_PLAY);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            ToastUtil.showToast(MainActivity.this, "Please install GooglePlay first!");
+        }
     }
+
+
+    /**
+     * 5.x以上系统启用 JobScheduler API 进行实现守护进程的唤醒操作
+     */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void startJobScheduler() {
+        int jobId = 1;
+        JobInfo.Builder jobInfo = new JobInfo.Builder(jobId, new ComponentName(this, VMDaemonJobService.class));
+        jobInfo.setPeriodic(10000);
+        jobInfo.setPersisted(true);
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        jobScheduler.schedule(jobInfo.build());
+    }
+
 }

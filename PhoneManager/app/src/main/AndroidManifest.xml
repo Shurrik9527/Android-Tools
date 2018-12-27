@@ -6,7 +6,33 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
+    <uses-permission android:name="android.permission.DELETE_CACHE_FILES" />
+    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+    <!-- 应用锁需要的权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
 
     <application
@@ -27,21 +53,89 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--关于我们-->
-        <activity android:name=".aboutus.AboutUsActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.cpucooler.CpuCoolerActivity" />
+        <activity
+            android:name="com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerActivity"
+            android:launchMode="singleInstance" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.cpucooler.cpucoolersuccess.CpuCoolerSuccessActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.junkcleaner.junkcleanersuccess.JunkCleanerSuccessActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.junkcleaner.optimized.OptimizedActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.aboutus.AboutUsActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.applock.AppLockActivity" />
+        <activity
+            android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.unlock.GestureUnlockActivity"
+            android:excludeFromRecents="true"
+            android:label=""
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/unlock_activity_style" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.createlock.GestureCreateActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.resetlock.ResetPasswordActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.base.EmptyActivity" android:theme="@android:style/Theme.Translucent"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.trafficstatis.TrafficStatisActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.wifi.WifiActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.NotificationCleanerActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.settingapp.SettingAppActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.setting.SettingLockActivity"/>
 
-        <!--AppsFlyer-->
+        <!-- 锁屏服务 -->
+        <service android:name="com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerService" />
+
+        <receiver android:name="com.hz.maiku.maikumodule.modules.appmanager.PackageReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!-- 加载应用服务 -->
+        <service android:name="com.hz.maiku.maikumodule.service.LoadAppListService" />
+        <!-- 应用锁服务 -->
+        <service android:name="com.hz.maiku.maikumodule.service.LockService" />
+        <service android:name="com.hz.maiku.maikumodule.service.HideAppService" />
+
+        <!-- 启动服务广播 -->
+        <receiver android:name="com.hz.maiku.maikumodule.broadcase.BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- AppsFlyer -->
         <receiver
-            android:name="com.appsflyer.SingleInstallBroadcastReceiver"
+            android:name="com.hz.maiku.maikumodule.broadcase.InstallBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-        <!--AdMob-->
+
+        <service android:name="com.hz.maiku.maikumodule.service.PhoneService" />
+
+        <!-- AdMob -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3854636213881603~4396724052" />
+            android:value="@string/admob_key" />
+
+        <service
+            android:name="com.hz.maiku.maikumodule.service.VMDaemonJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name="com.hz.maiku.maikumodule.service.GrayService" />
+
+        <service android:name="com.hz.maiku.maikumodule.service.NotificationService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

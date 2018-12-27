@@ -1,0 +1,60 @@
+<com.hz.maiku.maikumodule.widget.SildingFinishLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sfl_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_sreenlocker">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/element_double_space"
+        android:textColor="@color/white"
+        android:text="00:00"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_time"
+        android:layout_centerHorizontal="true"
+        android:text="2018-9-29"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_batteryinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:drawableTop="@mipmap/ic_screenlocker_moon"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_date"
+        android:text="100%"
+        android:gravity="center"
+        android:textSize="@dimen/text_large_size"/>
+    <ImageView
+        android:id="@+id/iv_batterystatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/element_default_space"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_batteryinfo"
+        android:scaleType="fitXY"/>
+
+    <com.romainpiel.shimmer.ShimmerTextView
+        android:id="@+id/stv_slidetounlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Slide To Unlock"
+        android:textColor="@color/stv_slidetounlock"
+        android:layout_marginBottom="@dimen/element_default_space"
+        android:textSize="30dp" />
+
+</com.hz.maiku.maikumodule.widget.SildingFinishLayout>

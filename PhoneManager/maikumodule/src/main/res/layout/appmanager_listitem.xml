@@ -1,0 +1,62 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/element_default_space"
+    >
+
+    <ImageView
+        android:id="@+id/iv_appicon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/element_default_space"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxEms="12"
+        android:text="@string/app_name"
+        android:textColor="@color/default_text"
+        android:textSize="@dimen/text_default_size"
+        app:layout_constraintBottom_toTopOf="@id/tv_apppackagename"
+        app:layout_constraintStart_toEndOf="@+id/iv_appicon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_apppackagename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_appname"
+        android:layout_marginLeft="@dimen/element_default_space"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxEms="15"
+        android:text="@string/app_name"
+        android:textColor="@color/description_text"
+        android:textSize="@dimen/text_small_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_appicon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_appname" />
+
+    <Button
+        android:id="@+id/b_uninstall"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/uninstall"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_default_size"
+        android:layout_marginTop="@dimen/element_half_space"
+        android:layout_marginBottom="@dimen/element_half_space"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/b_common"/>
+</android.support.constraint.ConstraintLayout>

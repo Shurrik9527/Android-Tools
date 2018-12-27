@@ -7,30 +7,35 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.appsflyer.AppsFlyerLib;
 import com.baidu.crabsdk.CrabSDK;
+import com.hz.maiku.maikumodule.R2;
+import com.hz.maiku.maikumodule.util.ActivityUtil;
 import com.jaeger.library.StatusBarUtil;
 
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 /**
  * @author heguogui
  * @version v 1.0.0
+ * @describe Activity 基类
+ * @date 2018/9/6
+ * @email 252774645@qq.com
  */
 public abstract class BaseActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindColor(R.color.colorPrimaryDark)
     int colorPrimaryDark;
-
     private ActionBar actionBar;
 
 
@@ -41,16 +46,22 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 布局文件Id
+     *
+     * @return
      */
     protected abstract int getContentViewId();
 
     /**
      * 获取fragment
+     *
+     * @return
      */
     protected abstract Fragment getFragment();
 
     /**
      * 布局中Fragment的ID
+     *
+     * @return
      */
     protected abstract int getFragmentContentId();
 
@@ -69,6 +80,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         // Set up the toolBar.
         initToolbar();
 
+        ActivityUtil.getmInstance().add(this);
         // 将fragment添加到activity
         addFragmentToActivity();
         // 后续初始化操作
@@ -93,10 +105,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initToolbar() {
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        if(actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
     }
 
     /**
@@ -131,9 +141,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(getFragmentContentId());
         if (fragment == null) {
             // create the fragment
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(getFragmentContentId(), getFragment());
-            transaction.commitAllowingStateLoss();
+            fragment = getFragment();
+            ActivityUtil.getmInstance().addFragmentToActivity(getSupportFragmentManager(), fragment, getFragmentContentId());
         }
     }
 
@@ -148,6 +157,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ActivityUtil.getmInstance().removeActivity(this);
     }
 
     @Override
@@ -184,5 +194,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onPause() {
         CrabSDK.onPause(this);
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

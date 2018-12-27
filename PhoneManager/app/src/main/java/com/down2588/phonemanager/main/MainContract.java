@@ -1,7 +1,8 @@
 package com.down2588.phonemanager.main;
 
-import com.down2588.phonemanager.BasePresenter;
-import com.down2588.phonemanager.BaseView;
+
+import com.hz.maiku.maikumodule.base.BasePresenter;
+import com.hz.maiku.maikumodule.base.BaseView;
 
 /**
  * Created by Shurrik on 2018/12/26.

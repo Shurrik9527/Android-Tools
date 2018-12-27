@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    >
+
+
+
+    <RelativeLayout
+        android:id="@+id/junkclearn_rotate_rl"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        >
+
+        <ImageView
+            android:id="@+id/junkclearn_success_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/success_icon"
+            android:layout_centerInParent="true"
+            />
+
+        <ImageView
+            android:id="@+id/junkclearn_success_rotate_iv"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@mipmap/rotate_icon0"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <com.hz.maiku.maikumodule.widget.DigitalRollingTextView
+        android:id="@+id/junkclearn_success_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
+        android:text="0.00"
+        android:textStyle="normal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/junkclearn_rotate_rl"
+        />
+    <TextView
+        android:id="@+id/junkclearn_success_dw_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="M"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:layout_toRightOf="@+id/junkclearn_success_tv"
+        android:layout_below="@+id/junkclearn_rotate_rl"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/junkclearn_msg_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:text="Dropped"
+        android:textStyle="normal"
+        android:layout_below="@+id/junkclearn_success_tv"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/junkclearn_msg_tv"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:id="@+id/junkclearn_time_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:text="59s to reach the optimal cooling effect"
+            android:textStyle="normal"
+            />
+    </RelativeLayout>
+
+
+</RelativeLayout>

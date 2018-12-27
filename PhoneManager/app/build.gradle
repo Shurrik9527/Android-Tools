@@ -34,8 +34,13 @@ android {
         checkReleaseBuilds true
         //lint 遇到 error 时继续 构建
         abortOnError false
-
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -51,25 +56,21 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //沉浸式状态栏
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
-
     //ButterKnife是一个专注于Android系统的View注入框架
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     //动画库
     implementation 'com.airbnb.android:lottie:2.6.0'
 
-    //AdMob
-    implementation 'com.google.android.gms:play-services-ads:17.1.2'
-
-    //FaceBook Ads
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.facebook.android:audience-network-sdk:5.+'
-
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation  'org.litepal.android:core:1.6.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //AppsFlyer
     implementation 'com.appsflyer:af-android-sdk:4.8.15@aar'
     implementation 'com.android.installreferrer:installreferrer:1.0'
-
     //百度Crab
     implementation 'crab.baidu.crabsdk:crabsdk:7.3.5@aar'
+    implementation project(':maikumodule')
 }

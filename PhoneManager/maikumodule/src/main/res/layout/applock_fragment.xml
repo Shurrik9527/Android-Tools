@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/applock_searchview_rl"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary0"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/applock_searchview"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/stroke_gray_solid_white_radius5"
+            app:closeIcon="@mipmap/input_delete_icon"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerVertical="true"
+            app:queryHint="search app"
+            app:iconifiedByDefault="false"
+            android:clickable="false"
+            android:focusable="false"
+            >
+        </android.support.v7.widget.SearchView>
+
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/applock_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/applock_searchview_rl"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

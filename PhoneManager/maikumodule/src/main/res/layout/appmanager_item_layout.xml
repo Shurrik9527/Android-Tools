@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/appmanager_item_rl"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_toLeftOf="@+id/appmanager_item_cb"
+        >
+
+        <ImageView
+            android:id="@+id/appmanager_item_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/appmanager_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/default_text"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/appmanager_item_icon"
+            />
+
+        <TextView
+            android:id="@+id/appmanager_item_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/description_text"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/appmanager_item_icon"
+            android:layout_below="@+id/appmanager_item_name"
+            />
+
+    </RelativeLayout>
+
+    <CheckBox
+        android:id="@+id/appmanager_item_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray1"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="2dp"
+        />
+
+</RelativeLayout>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cpucooler_background_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/cpucooler_thermometer_iv"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/cpucooler_thermometer_icon" />
+
+
+    <ImageView
+        android:id="@+id/cpu_scan_iv"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@mipmap/cpu_scan"
+        android:layout_centerInParent="true"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cpucooler_thermometer_iv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45dp"
+        android:gravity="center"
+        android:text="Scaning CPU..."
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</RelativeLayout>
+
+
+

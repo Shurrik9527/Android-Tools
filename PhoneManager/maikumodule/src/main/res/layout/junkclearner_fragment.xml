@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:id="@+id/junkclearner_Rl"
+        android:background="@mipmap/junkcleaner_bg"
+        >
+
+        <ImageView
+            android:id="@+id/junkclearner_point_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/junkcleaner_point"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            />
+
+        <com.hz.maiku.maikumodule.widget.DigitalRollingTextView
+            android:id="@+id/junkclearner_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textColor="@color/colorAccent"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:id="@+id/junkclearner_num_dw_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:layout_alignBottom="@+id/junkclearner_num_tv"
+            android:layout_toRightOf="@+id/junkclearner_num_tv"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="2dp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Memory Used"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_below="@+id/junkclearner_num_tv"
+            />
+
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/junkclearner_current_scan_tv"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/junkclearner_Rl"
+        android:textSize="12sp"
+        android:textColor="@color/description_text"
+       android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        />
+
+    <ExpandableListView
+        android:overScrollMode="never"
+        android:id="@+id/junkclearner_elv"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/junkclearner_current_scan_tv"
+        />
+
+    <ImageView
+        android:id="@+id/junkclearner_start_iv"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@mipmap/clean"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        />
+
+
+</RelativeLayout>
