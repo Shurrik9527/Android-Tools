@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_16"
+        android:textSize="18dp"
         android:text="@string/wifi_guide_open_state"
         android:layout_marginRight="35dp"
         android:layout_marginLeft="35dp"
@@ -27,17 +27,25 @@
         android:layout_marginRight="80dp"
         />
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:textSize="@dimen/sp_16"
-        android:textColor="@color/white"
-        android:background="@drawable/stroke_default_solid_default_radius5"
-        android:layout_below="@+id/guide_wifi_tv"
-        android:layout_marginTop="15dp"
+    <!--<Button-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:textSize="@dimen/sp_16"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:background="@drawable/stroke_default_solid_default_radius5"-->
+        <!--android:layout_below="@+id/guide_wifi_tv"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:text="@string/common_sure"-->
+        <!--android:textStyle="italic"-->
+        <!--/>-->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ok_iv"
         android:layout_centerHorizontal="true"
-        android:text="@string/common_sure"
-        android:textStyle="italic"
+        android:layout_below="@+id/guide_wifi_tv"
         />
 
 </RelativeLayout>
