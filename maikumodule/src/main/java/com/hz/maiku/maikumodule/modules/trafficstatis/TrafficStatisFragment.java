@@ -18,10 +18,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.bean.TrafficStatisBean;
 import com.hz.maiku.maikumodule.bean.WifiMobileBean;
+import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.FormatUtil;
 import com.hz.maiku.maikumodule.util.TimeUtil;
 import com.hz.maiku.maikumodule.widget.DigitalRollingTextView;
@@ -77,6 +79,7 @@ public class TrafficStatisFragment extends Fragment implements TrafficStatisCont
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new TrafficStatisPresenter(this, getContext());
+        EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "trafficstatis");
     }
 
     @Override

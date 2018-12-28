@@ -21,11 +21,13 @@ import android.widget.TableRow;
 import com.app.hubert.guide.NewbieGuide;
 import com.app.hubert.guide.model.GuidePage;
 import com.app.hubert.guide.model.HighLight;
+import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.base.FragmentPagerAdapter;
 import com.hz.maiku.maikumodule.bean.NotificationBean;
+import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 
 import java.util.ArrayList;
@@ -107,6 +109,7 @@ public class SettingAppFragment extends Fragment implements SettingAppConstract.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Notification Cleaner Open");
                     SpHelper.getInstance().put(Constant.NOTIFICATION_OPEN_STATE,true);
                     presenter.subscribe();
                 }else{

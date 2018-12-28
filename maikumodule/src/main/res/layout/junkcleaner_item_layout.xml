@@ -54,6 +54,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerInParent="true"
+            android:buttonTint="@color/colorPrimary"
             />
 
         <com.hz.maiku.maikumodule.widget.ProgressWheel

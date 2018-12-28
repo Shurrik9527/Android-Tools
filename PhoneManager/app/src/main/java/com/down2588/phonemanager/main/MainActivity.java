@@ -75,12 +75,7 @@ public class MainActivity extends BaseActivity {
         setIcon(getResources().getDrawable(R.drawable.ic_menu));
         //读取最新广告配置并展示
         AdUtil.getAdTypeAndShow(this, "MainActivity.init()");
-        //开启服务，开启锁屏界面
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(new Intent(this, ScreenLockerService.class));
-        } else {
-            startService(new Intent(this, ScreenLockerService.class));
-        }
+
 
         //守护进程
 //        if (Build.VERSION.SDK_INT >= 21) {
