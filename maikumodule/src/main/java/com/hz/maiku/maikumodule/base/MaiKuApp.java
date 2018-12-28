@@ -2,7 +2,6 @@ package com.hz.maiku.maikumodule.base;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.ResourceBusyException;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,10 +22,12 @@ import com.hz.maiku.maikumodule.manager.SMSManager;
 import com.hz.maiku.maikumodule.service.HideAppService;
 import com.hz.maiku.maikumodule.service.LoadAppListService;
 import com.hz.maiku.maikumodule.service.LockService;
+import com.hz.maiku.maikumodule.util.AdUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
-import com.hz.maiku.maikumodule.util.XmlFileUtil;
+import com.hz.maiku.maikumodule.util.ToastUtil;
 
 import org.litepal.LitePalApplication;
+
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ import java.util.Map;
 
 public class MaiKuApp extends LitePalApplication {
 
-    private static  final  String  TAG =MaiKuApp.class.getName();
+    private static final String TAG = MaiKuApp.class.getName();
     public static Context mContext;
     public static List<AppProcessInfornBean> cpuLists;
 
@@ -49,48 +50,59 @@ public class MaiKuApp extends LitePalApplication {
         initConfig();
         initManagers();
         initServices();
-        initAppsFlyer();
-        initBaiduCrab();
-    }
 
+        if (AdUtil.IS_SHOW_AD) {
+            initAppsFlyer();
+            initBaiduCrab();
+        }
+    }
 
 
     private void initConfig() {
         try {
-            String ADMOB_ID =Config.getPropertiesURL(getApplicationContext(),"ADMOB_ID");
-            String FACEBOOK_ID =Config.getPropertiesURL(getApplicationContext(),"FACEBOOK_ID");
-            String BAIDU_KEY =Config.getPropertiesURL(getApplicationContext(),"BAIDU_KEY");
-            String AF_DEV_KEY =Config.getPropertiesURL(getApplicationContext(),"AF_DEV_KEY");
-            String COLORPRIMARY =Config.getPropertiesURL(getApplicationContext(),"COLORPRIMARY");
-            String COLORPRIMARYDARK =Config.getPropertiesURL(getApplicationContext(),"COLORPRIMARYDARK");
-            String PACKAGENAMEURL =Config.getPropertiesURL(getApplicationContext(),"PACKAGENAMEURL");
-            if(!TextUtils.isEmpty(ADMOB_ID)){
-                Constant.ADMOB_ID =ADMOB_ID;
-            }
-            if(!TextUtils.isEmpty(FACEBOOK_ID)){
-                Constant.FACEBOOK_ID =FACEBOOK_ID;
-            }
-            if(!TextUtils.isEmpty(BAIDU_KEY)){
-                Constant.BAIDU_KEY =BAIDU_KEY;
-            }
-            if(!TextUtils.isEmpty(AF_DEV_KEY)){
-                Constant.AF_DEV_KEY =AF_DEV_KEY;
-            }
+            String BASE_URL = Config.getPropertiesURL(getApplicationContext(), "BASE_URL");
+            String APP_NAME = Config.getPropertiesURL(getApplicationContext(), "APP_NAME");
+            String UNIT_ID = Config.getPropertiesURL(getApplicationContext(), "UNIT_ID");
+            String PLACEMENT_ID = Config.getPropertiesURL(getApplicationContext(), "PLACEMENT_ID");
+            String BAIDU_KEY = Config.getPropertiesURL(getApplicationContext(), "BAIDU_KEY");
+            String AF_DEV_KEY = Config.getPropertiesURL(getApplicationContext(), "AF_DEV_KEY");
+            String PACKAGE_NAME = Config.getPropertiesURL(getApplicationContext(), "PACKAGE_NAME");
+            String GMAIL = Config.getPropertiesURL(getApplicationContext(), "GMAIL");
+            String COLORPRIMARY = Config.getPropertiesURL(getApplicationContext(), "COLORPRIMARY");
+            String COLORPRIMARYDARK = Config.getPropertiesURL(getApplicationContext(), "COLORPRIMARYDARK");
 
-            if(!TextUtils.isEmpty(COLORPRIMARY)){
-                Constant.COLORPRIMARY =COLORPRIMARY;
+            if (!TextUtils.isEmpty(UNIT_ID)) {
+                Constant.UNIT_ID = UNIT_ID;
             }
-
-            if(!TextUtils.isEmpty(COLORPRIMARYDARK)){
-                Constant.COLORPRIMARYDARK =COLORPRIMARYDARK;
+            if (!TextUtils.isEmpty(APP_NAME)) {
+                Constant.APP_NAME = APP_NAME;
             }
-
-            if(!TextUtils.isEmpty(COLORPRIMARYDARK)){
-                Constant.PACKAGENAMEURL =PACKAGENAMEURL;
+            if (!TextUtils.isEmpty(BASE_URL)) {
+                Constant.BASE_URL = BASE_URL;
             }
-
-        }catch (Exception e){
-
+            if (!TextUtils.isEmpty(PLACEMENT_ID)) {
+                Constant.PLACEMENT_ID = PLACEMENT_ID;
+            }
+            if (!TextUtils.isEmpty(BAIDU_KEY)) {
+                Constant.BAIDU_KEY = BAIDU_KEY;
+            }
+            if (!TextUtils.isEmpty(AF_DEV_KEY)) {
+                Constant.AF_DEV_KEY = AF_DEV_KEY;
+            }
+            if (!TextUtils.isEmpty(GMAIL)) {
+                Constant.GMAIL = GMAIL;
+            }
+            if (!TextUtils.isEmpty(PACKAGE_NAME)) {
+                Constant.PACKAGE_NAME = PACKAGE_NAME;
+            }
+            if (!TextUtils.isEmpty(COLORPRIMARY)) {
+                Constant.COLORPRIMARY = COLORPRIMARY;
+            }
+            if (!TextUtils.isEmpty(COLORPRIMARYDARK)) {
+                Constant.COLORPRIMARYDARK = COLORPRIMARYDARK;
+            }
+        } catch (Exception e) {
+            ToastUtil.showToast(this, "You must finish config.properties first.");
         }
     }
 
@@ -105,10 +117,10 @@ public class MaiKuApp extends LitePalApplication {
         CallLogManager.init(getApplicationContext());
         SMSManager.init(getApplicationContext());
         NotificationsManager.init(getApplicationContext());
-        boolean isInit = (boolean) SpHelper.getInstance().get(Constant.NOTIFICATION_INIT_APP,false);
-        if(!isInit){
+        boolean isInit = (boolean) SpHelper.getInstance().get(Constant.NOTIFICATION_INIT_APP, false);
+        if (!isInit) {
             NotificationsManager.getmInstance().initAppSelectState();
-            SpHelper.getInstance().put(Constant.NOTIFICATION_INIT_APP,true);
+            SpHelper.getInstance().put(Constant.NOTIFICATION_INIT_APP, true);
         }
     }
 
@@ -137,7 +149,6 @@ public class MaiKuApp extends LitePalApplication {
                 startService(new Intent(this, LockService.class));
             }
         }
-
     }
 
     /**

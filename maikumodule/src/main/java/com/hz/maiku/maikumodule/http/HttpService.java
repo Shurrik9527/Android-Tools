@@ -12,6 +12,12 @@ import retrofit2.http.Query;
  */
 
 public interface HttpService {
+    /**
+     * 读取远程广告配置
+     * @param action always = getadtype
+     * @param type application name
+     * @return AdInfo
+     */
     @POST("/android.php")
-    Observable<HttpResult<AdInfo>> getAdType(@Query("action") String action);
+    Observable<HttpResult<AdInfo>> getAdType(@Query("action") String action, @Query("type") String type);
 }

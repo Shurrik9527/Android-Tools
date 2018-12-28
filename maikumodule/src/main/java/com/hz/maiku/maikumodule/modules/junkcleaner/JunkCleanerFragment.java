@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.base.Constant;
@@ -35,6 +36,7 @@ import com.hz.maiku.maikumodule.bean.JunkCleanerGroupBean;
 import com.hz.maiku.maikumodule.bean.JunkCleanerMultiItemBean;
 import com.hz.maiku.maikumodule.modules.junkcleaner.junkcleanersuccess.JunkCleanerSuccessActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.optimized.OptimizedActivity;
+import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.util.TimeUtil;
@@ -84,6 +86,7 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     private float mTemp = 0.0f;
     private static final Long totalNum = 3072L;
     private static final int PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1102;
+
     public JunkCleanerFragment() {
         // Required empty public constructor
     }
@@ -126,11 +129,9 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     public void initView() {
         junkclearnerNumTv.setText("0.00");
         junkclearnerNumTv.setModleType(DigitalRollingTextView.ModleType.MONEY_TYPE);
-        startAnimation(-90.0f,500);
+        startAnimation(-90.0f, 500);
         setBtnEnable(false);
     }
-
-
 
 
     @Override
@@ -146,6 +147,8 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
                 isStart = false;
                 if (presenter != null) {
                     presenter.startCleanJunkTask(mAdapter.getData());
+                    //垃圾清理被点击了
+                    EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "JunkCleaner clicked!");
                 }
             }
         });
@@ -156,14 +159,14 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     public void initData() {
 
         //8.0授权
-        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.O){
-            if(!hasPermission()){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (!hasPermission()) {
                 Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
                 startActivityForResult(intent, PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
-            }else{
+            } else {
                 junkCleanerScan();
             }
-        }else{
+        } else {
             junkCleanerScan();
         }
 
@@ -192,8 +195,8 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
             return;
         Log.i(TAG, "size=" + size);
 
-        if(size.contains(",")){
-            size =size.replace(",",".");
+        if (size.contains(",")) {
+            size = size.replace(",", ".");
         }
 
         if (junkclearnerNumTv != null) {
@@ -214,12 +217,12 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
                 junkclearnerNumTv.setContent(mNum);
                 junkclearnerNumDwTv.setText("G");
                 try {
-                    if(!TextUtils.isEmpty(mNum)){
-                        float  number =Float.parseFloat(mNum)*1024;
-                        mNum=String.valueOf(number);
+                    if (!TextUtils.isEmpty(mNum)) {
+                        float number = Float.parseFloat(mNum) * 1024;
+                        mNum = String.valueOf(number);
                         setProgress();
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -267,7 +270,7 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
 
     @Override
     public void clickGroup(boolean isExpand, int index) {
-        if(junkclearnerElv!=null){
+        if (junkclearnerElv != null) {
             if (!isExpand) {
                 junkclearnerElv.expandGroup(index);
             } else {
@@ -311,10 +314,10 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
         mJunkCleanerDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                if(mJunkCleanerDialog!=null&&mJunkCleanerDialog.isShowing()){
+                if (mJunkCleanerDialog != null && mJunkCleanerDialog.isShowing()) {
                     mJunkCleanerDialog.dismiss();
                 }
-                if(getActivity()!=null){
+                if (getActivity() != null) {
                     getActivity().finish();
                 }
             }
@@ -444,14 +447,14 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     }
 
     @Override
-    public void startAnimation(float progress,long time) {
+    public void startAnimation(float progress, long time) {
 
         RotateAnimation rotateAnimation = new RotateAnimation(mTemp, progress, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 1);
         LinearInterpolator lir = new LinearInterpolator();
         rotateAnimation.setInterpolator(lir);
         rotateAnimation.setDuration(time);//设置动画持续时间
         rotateAnimation.setFillAfter(true);//动画执行完后是否停留在执行完的状态
-        if(junkclearnerPointIv!=null){
+        if (junkclearnerPointIv != null) {
             junkclearnerPointIv.startAnimation(rotateAnimation);
         }
         mTemp = progress;
@@ -462,44 +465,44 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     public void setProgress() {
 
         float msize = Float.parseFloat(mNum);
-        if(msize>0){
+        if (msize > 0) {
             if (msize < 100.0) {
                 mProgress = -70.0f;
-            }else if (msize >= 100 && msize <150) {
+            } else if (msize >= 100 && msize < 150) {
                 mProgress = -50.0f;
-            }else if (msize >= 150 && msize < 200){
+            } else if (msize >= 150 && msize < 200) {
                 mProgress = -30.0f;
-            }else if (msize >= 200 && msize < 250){
+            } else if (msize >= 200 && msize < 250) {
                 mProgress = -10.0f;
-            }else if (msize >= 300 && msize < 400){
+            } else if (msize >= 300 && msize < 400) {
                 mProgress = 10.0f;
             } else if (msize >= 400 && msize < 600) {
                 mProgress = 30.0f;
-            }else if (msize >= 600 && msize < 1024) {
+            } else if (msize >= 600 && msize < 1024) {
                 mProgress = 50.0f;
-            }else if (msize >= 1024 && msize < 2048) {
+            } else if (msize >= 1024 && msize < 2048) {
                 mProgress = 60.0f;
-            }else if (msize >= 2048) {
+            } else if (msize >= 2048) {
                 mProgress = 70.0f;
             }
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(mHandler!=null){
-                        mHandler.sendEmptyMessageDelayed(0,1000);
+                    if (mHandler != null) {
+                        mHandler.sendEmptyMessageDelayed(0, 1000);
                     }
                 }
-            },100);
+            }, 100);
         }
     }
 
     @Override
     public void setBtnEnable(boolean enable) {
-        if(junkclearnerStartIv!=null){
-            if(enable){
+        if (junkclearnerStartIv != null) {
+            if (enable) {
                 junkclearnerStartIv.setEnabled(true);
-            }else{
+            } else {
                 junkclearnerStartIv.setEnabled(false);
             }
         }
@@ -509,7 +512,7 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     public boolean hasPermission() {
         AppOpsManager appOps = (AppOpsManager) getContext().getSystemService(Context.APP_OPS_SERVICE);
         int mode = 0;
-        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
                     android.os.Process.myUid(), getContext().getPackageName());
         }
@@ -523,7 +526,7 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            startAnimation(mProgress,5000);
+            startAnimation(mProgress, 5000);
         }
     };
 
@@ -531,7 +534,7 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     @Override
     public void onPause() {
         super.onPause();
-        if(junkclearnerPointIv!=null){
+        if (junkclearnerPointIv != null) {
             junkclearnerPointIv.clearAnimation();
         }
     }
@@ -540,8 +543,8 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS) {
             if (!hasPermission()) {
-                startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
-            }else{
+                startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+            } else {
                 junkCleanerScan();
             }
         }

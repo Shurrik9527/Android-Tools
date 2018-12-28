@@ -3,10 +3,8 @@ package com.down2588.phonemanager.main;
 import android.Manifest;
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +17,6 @@ import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-
-import java.util.function.Consumer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -157,7 +153,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new io.reactivex.functions.Consumer<Boolean>() {
             @Override
             public void accept(Boolean aBoolean) throws Exception {
-                if(!aBoolean){
+                if (!aBoolean) {
                     showMessageTips("Sorry! no permission, some functions are not available");
                     showPermissions();
                 }

@@ -11,6 +11,9 @@ import com.hz.maiku.maikumodule.util.RxBus.RxBusHelper;
 
 import io.reactivex.disposables.CompositeDisposable;
 
+/**
+ * 当应用程序图标被隐藏时使用
+ */
 public class EmptyActivity extends Activity {
 
     @Override

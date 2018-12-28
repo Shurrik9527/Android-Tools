@@ -14,10 +14,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.AdInfo;
-import com.hz.maiku.maikumodule.event.EmptyEvent;
 import com.hz.maiku.maikumodule.http.HttpCenter;
 import com.hz.maiku.maikumodule.http.HttpResult;
-import com.hz.maiku.maikumodule.util.RxBus.RxBus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,11 +29,21 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AdUtil {
     //广告出现的时间
-    public static long SHOW_TIME = 0l;
+    public static long SHOW_TIME = 0;
     public static int AD_TYPE = AdUtil.TYPE_FACEBOOK;
+    /**
+     * 1 开启
+     * 0 关闭
+     */
+    public static int AD_STATUS = 1;
+    public static long AD_TIME = 3600000;
+
     private static final int TYPE_FACEBOOK = 1;
     private static final int TYPE_ADMOB = 2;
     private static final String TAG = AdUtil.class.getSimpleName();
+    /**
+     * 发布第一版的时候设置为false
+     */
     public static boolean IS_SHOW_AD = false;
 
     /**
@@ -64,9 +72,8 @@ public class AdUtil {
     }
 
     private static void showFacebookAds(final Context context) {
-
 //        AdSettings.addTestDevice("386dcd1a-4ea0-4757-889c-5c8a5a6271bb");
-        final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.FACEBOOK_ID);
+        final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.PLACEMENT_ID);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
             String TAG = "Facebook";
@@ -81,45 +88,20 @@ public class AdUtil {
             public void onInterstitialDismissed(Ad ad) {
                 // Interstitial dismissed callback
                 Log.e(TAG, "Interstitial ad dismissed.");
-                if (interstitialAd != null) {
-                    interstitialAd.destroy();
-                }
-                RxBus.getDefault().post(new EmptyEvent());
+                interstitialAd.destroy();
+                //RxBus.getDefault().post(new EmptyEvent());
             }
 
             @Override
             public void onError(Ad ad, AdError adError) {
                 // Ad error callback
                 Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
-                if (interstitialAd != null) {
-                    interstitialAd.destroy();
-                }
-                RxBus.getDefault().post(new EmptyEvent());
+                interstitialAd.destroy();
+                //RxBus.getDefault().post(new EmptyEvent());
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
-//                Observable.create(new ObservableOnSubscribe<String>() {
-//                    @Override
-//                    public void subscribe(ObservableEmitter<String> e) throws Exception {
-//                        e.onNext(AppUtil.getAid(context));
-//                    }
-//                }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
-//                    @Override
-//                    public void accept(String aid) throws Exception {
-//                        String ip = AppUtil.getIPAddress(context);
-//                        if (aid == null) {
-//                            Log.e(TAG, "get Google Advertising ID failed!");
-//                            aid = "";
-//                        }
-//
-//
-//                        Map<String, Object> eventValues = new HashMap<>();
-//                        eventValues.put(AFInAppEventParameterName.AD_REVENUE_NETWORK_NAME, ip);
-//                        eventValues.put(AFInAppEventParameterName.ACHIEVEMENT_ID, aid);
-//                        AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.AD_CLICK, eventValues);
-//                    }
-//                });
                 // Interstitial ad is loaded and ready to be displayed
                 Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
                 // Show the ad
@@ -130,8 +112,7 @@ public class AdUtil {
             public void onAdClicked(Ad ad) {
                 // Ad clicked callback
                 Log.d(TAG, "Interstitial ad clicked!");
-
-                AdUtil.onAdClick(context, TAG, Constant.FACEBOOK_ID);
+                AdUtil.onAdClick(context, TAG, Constant.PLACEMENT_ID);
             }
 
             @Override
@@ -153,13 +134,21 @@ public class AdUtil {
         AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.AD_CLICK, eventValues);
     }
 
+    /**
+     * It could be that you have only recently created a new Ad Unit ID and requesting for live ads.
+     * It could take a few hours for ads to start getting served if that is that case.
+     * If you are receiving test ads then your implementation is fine.
+     * Just wait a few hours and see if you are able to receive live ads then.
+     * If not, can send us your Ad Unit ID for us to look into.
+     * @param context
+     */
     private static void showAdModAds(final Context context) {
         //初始化AdMob
         MobileAds.initialize(context);
 
         //初始化Interstitial Ads
         final com.google.android.gms.ads.InterstitialAd interstitialAd = new com.google.android.gms.ads.InterstitialAd(context);
-        interstitialAd.setAdUnitId(Constant.ADMOB_ID);
+        interstitialAd.setAdUnitId(Constant.UNIT_ID);
         AdRequest request = new AdRequest.Builder()
 //                .addTestDevice("3354EE0DE60D4DE6C845A1C28842FDEA")
                 .build();
@@ -185,7 +174,7 @@ public class AdUtil {
             public void onAdOpened() {
                 // Code to be executed when the ad is displayed.
                 Log.d(TAG, "Interstitial ad onAdOpened.");
-                AdUtil.onAdClick(context, TAG,Constant.ADMOB_ID);
+                AdUtil.onAdClick(context, TAG, Constant.UNIT_ID);
             }
 
             @Override
@@ -214,7 +203,7 @@ public class AdUtil {
      */
     public static void getAdTypeAndShow(final Context context, final String source) {
         if (IS_SHOW_AD) {
-            HttpCenter.getService().getAdType("getad_type").subscribeOn(Schedulers.io())//指定网络请求所在的线程
+            HttpCenter.getService().getAdType("getad_type", Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
                     .doOnSubscribe(new Consumer<Disposable>() {
                         @Override
                         public void accept(Disposable disposable) throws Exception {
@@ -240,6 +229,8 @@ public class AdUtil {
                                 if (adInfoHttpResult.getData() != null) {
                                     AdInfo adInfo = adInfoHttpResult.getData();
                                     AdUtil.AD_TYPE = adInfo.getAd_type();
+                                    AdUtil.AD_STATUS = adInfo.getAd_status();
+                                    AdUtil.AD_TIME = adInfo.getAd_time();
                                     Log.d(TAG, "Interstitial ad type is [" + adInfo.getAd_name() + "] now!");
                                 }
                             }
