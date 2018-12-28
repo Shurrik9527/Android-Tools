@@ -318,6 +318,9 @@ public class ProcessManager {
      */
     public void killBackgroundProcesses(String processName) {
 
+        if(TextUtils.isEmpty(processName)){
+           return;
+        }
         String packageName = null;
         try {
             if (!processName.contains(":")) {

@@ -2,9 +2,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
 
-    <!--admob-->
-    <string name="admob_key">ca-app-pub-8013994383371748~1163211196</string>
-
 
     <string name="common_sure">I Know</string>
     <string name="common_cancle">cancle</string>
