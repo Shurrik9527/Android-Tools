@@ -20,6 +20,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.base.Constant;
@@ -27,6 +28,7 @@ import com.hz.maiku.maikumodule.base.MaiKuApp;
 import com.hz.maiku.maikumodule.bean.AppProcessInfornBean;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolersuccess.CpuCoolerSuccessActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.optimized.OptimizedActivity;
+import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.util.TimeUtil;
@@ -80,8 +82,8 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            Bundle mBundle =getArguments();
-            this.temp =mBundle.getFloat("TEMP");
+            Bundle mBundle = getArguments();
+            this.temp = mBundle.getFloat("TEMP");
         }
 
         new CpuCoolerPresenter(this);
@@ -106,12 +108,12 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.cpucooler_fragment, container, false);
         ButterKnife.bind(this, root);
-        if( isOptimized()){
+        if (isOptimized()) {
             Intent mIntent = new Intent(getActivity(), OptimizedActivity.class);
-            mIntent.putExtra("BUNDLE",getResources().getString(R.string.cpucooler_title));
+            mIntent.putExtra("BUNDLE", getResources().getString(R.string.cpucooler_title));
             startActivity(mIntent);
             getActivity().finish();
-        }else{
+        } else {
             initView();
             initData();
         }
@@ -125,7 +127,7 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
 
     @Override
     public void initView() {
-        if(cpucoolerThermometerTv!=null){
+        if (cpucoolerThermometerTv != null) {
             cpucoolerThermometerTv.setDuration(2000);
             cpucoolerThermometerTv.setModleType(DigitalRollingTextView.ModleType.COOLER_TYPE);
         }
@@ -148,8 +150,8 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
 
     @Override
     public void showTemperature(float temper) {
-        this.temp =temper;
-        cpucoolerThermometerTv.setContent(temper+"");
+        this.temp = temper;
+        cpucoolerThermometerTv.setContent(temper + "");
     }
 
     @Override
@@ -160,13 +162,13 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
     @Override
     public void initData() {
 
-        if(MaiKuApp.cpuLists!=null){
-            mLists =MaiKuApp.cpuLists;
+        if (MaiKuApp.cpuLists != null) {
+            mLists = MaiKuApp.cpuLists;
         }
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         cpucoolerThermometerRv.setLayoutManager(layoutManager);
         mAdapter = new CpuCoolerAdapter(getActivity());
-        if(mLists!=null){
+        if (mLists != null) {
             mAdapter.setNewData(mLists);
         }
         cpucoolerThermometerRv.setAdapter(mAdapter);
@@ -246,7 +248,7 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
     public void cleanFinish() {
         if (getActivity() != null) {
             //隐藏按钮
-            if(cpucoolerStartIv!=null){
+            if (cpucoolerStartIv != null) {
                 cpucoolerStartIv.setVisibility(View.GONE);
             }
             //开启动画 及延迟 由于时间太快 目的让温度有时间降温
@@ -284,8 +286,8 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
                         }
 
                         Intent mIntent = new Intent(getActivity(), CpuCoolerSuccessActivity.class);
-                        if(mIntent!=null){
-                            mIntent.putExtra("BUNDLE",temp+"");
+                        if (mIntent != null) {
+                            mIntent.putExtra("BUNDLE", temp + "");
                         }
                         startActivity(mIntent);
                         getActivity().finish();
@@ -352,25 +354,25 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
     @Override
     public boolean isOptimized() {
         //获取上次清理保存时间
-        String  lastTime= (String) SpHelper.getInstance().get(Constant.SAVE_CPU_COOLER_TIME,"");
-        if(!TextUtils.isEmpty(lastTime)&&!TimeUtil.isTrue(lastTime,TimeUtil.currentTimeStr(),1000*60*5)){
+        String lastTime = (String) SpHelper.getInstance().get(Constant.SAVE_CPU_COOLER_TIME, "");
+        if (!TextUtils.isEmpty(lastTime) && !TimeUtil.isTrue(lastTime, TimeUtil.currentTimeStr(), 1000 * 60 * 5)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     @Override
     public void initProcessList(List<AppProcessInfornBean> list) {
-        if(list!=null){
+        if (list != null) {
             mAdapter.setNewData(list);
         }
     }
 
     @Override
     public void initTemp(float temp) {
-        if(cpucoolerThermometerTv!=null){
-            cpucoolerThermometerTv.setContent(temp+"");
+        if (cpucoolerThermometerTv != null) {
+            cpucoolerThermometerTv.setContent(temp + "");
         }
     }
 
@@ -385,28 +387,26 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
     public void onClick() {
         //保存此时清理状态
 
-        if(StringUtil.isFastDoubleClick()){
+        if (StringUtil.isFastDoubleClick()) {
             return;
         }
 
-        if(MaiKuApp.cpuLists!=null){
+        if (MaiKuApp.cpuLists != null) {
             MaiKuApp.cpuLists = null;
         }
 
 
         if (presenter != null) {
             if (mLists != null && mLists.size() > 0) {
-                SpHelper.getInstance().put(Constant.SAVE_CPU_COOLER_TIME,TimeUtil.currentTimeStr());
+                SpHelper.getInstance().put(Constant.SAVE_CPU_COOLER_TIME, TimeUtil.currentTimeStr());
                 isStart = false;
                 cpucoolerStartIv.setEnabled(false);
                 presenter.startCleanApp(mLists);
+                //Cpu降温被点击了
+                EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "CpuCooler clicked!");
             }
         }
     }
-
-
-
-
 
 
 }

@@ -1,5 +1,7 @@
 package com.hz.maiku.maikumodule.http;
 
+import com.hz.maiku.maikumodule.base.Constant;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -12,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class HttpCenter {
-    private static final String BASE_URL = "http://blackteach.com/";
+    private static final String BASE_URL = Constant.BASE_URL;;
 
     protected static Retrofit getRetrofit(Retrofit.Builder builder) {
         OkHttpClient.Builder client = new OkHttpClient().newBuilder();

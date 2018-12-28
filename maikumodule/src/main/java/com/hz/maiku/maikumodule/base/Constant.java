@@ -11,9 +11,9 @@ package com.hz.maiku.maikumodule.base;
 public class Constant {
 
     public static final int TYPE_TITLE = 0;
-    public static final String SAVE_JUNK_CLEANER_TIME ="SAVE_JUNK_CLEANER_TIME";//上次垃圾扫描时间
-    public static final String SAVE_JUNK_CLEANER_ISALL ="SAVE_JUNK_CLEANER_ISALL";//清理垃圾是否所有
-    public static final String SAVE_CPU_COOLER_TIME ="SAVE_CPU_COOLER_TIME";//上次CPU降温时间
+    public static final String SAVE_JUNK_CLEANER_TIME = "SAVE_JUNK_CLEANER_TIME";//上次垃圾扫描时间
+    public static final String SAVE_JUNK_CLEANER_ISALL = "SAVE_JUNK_CLEANER_ISALL";//清理垃圾是否所有
+    public static final String SAVE_CPU_COOLER_TIME = "SAVE_CPU_COOLER_TIME";//上次CPU降温时间
 
     public static final String APP_PACKAGE_NAME = MaiKuApp.getmContext().getPackageName(); //包名
     public static final String LOCK_IS_INIT_FAVITER = "lock_is_init_faviter"; //是否初始化了推荐数据库表
@@ -36,17 +36,44 @@ public class Constant {
     public static final String UPDATE_PHONE_SQLITE = "UPDATE_PHONE_SQLITE";
     public static final String UPDATE_CONTRACT_SQLITE = "UPDATE_CONTRACT_SQLITE";
     public static final String WIFI_OPEN = "WIFI_OPEN";
-    public static final String NOTIFICATION_SELECT_APP ="NOTIFICATION_SELECT_APP";
-    public static final String NOTIFICATION_INIT_APP ="NOTIFICATION_INIT_APP";
-    public static final String NOTIFICATION_OPEN_STATE ="NOTIFICATION_OPEN_STATE";
+    public static final String NOTIFICATION_SELECT_APP = "NOTIFICATION_SELECT_APP";
+    public static final String NOTIFICATION_INIT_APP = "NOTIFICATION_INIT_APP";
+    public static final String NOTIFICATION_OPEN_STATE = "NOTIFICATION_OPEN_STATE";
 
-    public static String ADMOB_ID = "ca-app-pub-8013994383371748/1342340443";//admob
-    public static String FACEBOOK_ID = "ca-app-pub-8013994383371748/1342340443";//facebook
-    public static String BAIDU_KEY ="5c9805947a41c4dd";//百度crash
-    public static String AF_DEV_KEY = "gCjmRfaYsA8JeaeWR6GQyX";//AppsFlyer
-    public static String COLORPRIMARY="#03a9f4";
-    public static String COLORPRIMARYDARK="#0288d1";
-    public static String PACKAGENAMEURL="";
+    /**
+     * 域名
+     */
+    public static String BASE_URL;
+    /**
+     * 域名
+     */
+    public static String APP_NAME;
+    /**
+     * Admob
+     */
+    public static String UNIT_ID;
+    /**
+     * FacebookAd
+     */
+    public static String PLACEMENT_ID;
+    /**
+     * 百度Crab
+     */
+    public static String BAIDU_KEY;
+    /**
+     * AppsFlyer
+     */
+    public static String AF_DEV_KEY;
+    /**
+     * 宿主PackageName
+     */
+    public static String PACKAGE_NAME;
+    /**
+     * 宿主Gmail
+     */
+    public static String GMAIL;
+    public static String COLORPRIMARY = "#03a9f4";
+    public static String COLORPRIMARYDARK = "#0288d1";
 
 
 }

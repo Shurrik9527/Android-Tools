@@ -86,8 +86,8 @@ public class GestureUnlockFragment extends Fragment implements GestureUnlockCont
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle mBundle =getArguments();
-        if(mBundle!=null){
+        Bundle mBundle = getArguments();
+        if (mBundle != null) {
             //获取解锁应用的包名
             pkgName = mBundle.getString(Constant.LOCK_PACKAGE_NAME);
             //获取按返回键的操作
@@ -137,9 +137,9 @@ public class GestureUnlockFragment extends Fragment implements GestureUnlockCont
                 if (mLockPatternUtils.checkPattern(pattern)) { //解锁成功,更改数据库状态
                     mLockPatternView.setDisplayMode(LockPatternView.DisplayMode.Correct);
                     if (actionFrom.equals(Constant.LOCK_FROM_LOCK_MAIN_ACITVITY)) {//是自己？
-                        if(!TextUtils.isEmpty(Constant.PACKAGENAMEURL)){
-                            if(AppUtil.isInstalled(getContext(),Constant.PACKAGENAMEURL)){
-                                Intent intent = getContext().getPackageManager().getLaunchIntentForPackage(Constant.PACKAGENAMEURL);
+                        if (!TextUtils.isEmpty(Constant.PACKAGE_NAME)) {
+                            if (AppUtil.isInstalled(getContext(), Constant.PACKAGE_NAME)) {
+                                Intent intent = getContext().getPackageManager().getLaunchIntentForPackage(Constant.PACKAGE_NAME);
                                 startActivity(intent);
                             }
                         }
@@ -181,7 +181,7 @@ public class GestureUnlockFragment extends Fragment implements GestureUnlockCont
     }
 
     @Override
-    public void onBackKey(){
+    public void onBackKey() {
 
         if (actionFrom.equals(Constant.LOCK_FROM_FINISH)) {
             Intent homeIntent = new Intent(Intent.ACTION_MAIN);
@@ -191,9 +191,9 @@ public class GestureUnlockFragment extends Fragment implements GestureUnlockCont
         } else if (actionFrom.equals(Constant.LOCK_FROM_LOCK_MAIN_ACITVITY)) {
             getActivity().finish();
         } else {
-            if(!TextUtils.isEmpty(Constant.PACKAGENAMEURL)){
-                if(AppUtil.isInstalled(getContext(),Constant.PACKAGENAMEURL)){
-                    Intent intent = getContext().getPackageManager().getLaunchIntentForPackage(Constant.PACKAGENAMEURL);
+            if (!TextUtils.isEmpty(Constant.PACKAGE_NAME)) {
+                if (AppUtil.isInstalled(getContext(), Constant.PACKAGE_NAME)) {
+                    Intent intent = getContext().getPackageManager().getLaunchIntentForPackage(Constant.PACKAGE_NAME);
                     startActivity(intent);
                 }
             }
@@ -261,7 +261,7 @@ public class GestureUnlockFragment extends Fragment implements GestureUnlockCont
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mGestureUnlockReceiver!=null){
+        if (mGestureUnlockReceiver != null) {
             getActivity().unregisterReceiver(mGestureUnlockReceiver);
         }
     }
@@ -272,14 +272,10 @@ public class GestureUnlockFragment extends Fragment implements GestureUnlockCont
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(FINISH_UNLOCK_THIS_APP)) {
-                if(getActivity()!=null){
+                if (getActivity() != null) {
                     getActivity().finish();
                 }
             }
         }
     }
-
-
-
-
 }

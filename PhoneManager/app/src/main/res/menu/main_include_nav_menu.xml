@@ -19,14 +19,14 @@
         android:id="@+id/main_update_menu_item"
         android:icon="@drawable/ic_update"
         android:title="@string/update" />
-    <item
-        android:id="@+id/main_feedback_menu_item"
-        android:icon="@drawable/ic_feedback"
-        android:title="@string/feedback" />
-    <item
-        android:id="@+id/main_comment_menu_item"
-        android:icon="@drawable/ic_comment"
-        android:title="@string/comment" />
+    <!--<item-->
+        <!--android:id="@+id/main_feedback_menu_item"-->
+        <!--android:icon="@drawable/ic_feedback"-->
+        <!--android:title="@string/feedback" />-->
+    <!--<item-->
+        <!--android:id="@+id/main_comment_menu_item"-->
+        <!--android:icon="@drawable/ic_comment"-->
+        <!--android:title="@string/comment" />-->
     <item
         android:id="@+id/main_aboutus_menu_item"
         android:icon="@drawable/ic_aboutus"
