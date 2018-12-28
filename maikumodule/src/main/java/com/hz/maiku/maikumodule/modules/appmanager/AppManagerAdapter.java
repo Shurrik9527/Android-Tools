@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
+import com.hz.maiku.maikumodule.util.EventUtil;
 
 import java.util.List;
 
@@ -63,6 +65,7 @@ public class AppManagerAdapter extends BaseAdapter {
         holder.bUnstall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EventUtil.sendEvent(context, AFInAppEventType.START_TRIAL, "App Managerment");
                 Uri uri = Uri.parse("package:" + applicationInfo.packageName);
                 //创建Intent意图
                 Intent intent = new Intent(Intent.ACTION_DELETE, uri);

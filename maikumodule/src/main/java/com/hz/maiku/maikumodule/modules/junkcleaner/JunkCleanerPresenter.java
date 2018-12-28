@@ -449,7 +449,7 @@ public class JunkCleanerPresenter implements JunkCleanerContract.Presenter {
         ArrayList<JunkCleanerMultiItemBean> list = new ArrayList<>();
         int title[] = {R.string.junkcleaner_process_title, R.string.junkcleaner_system_cache_tiele, R.string.junkcleaner_unused_apk_tiele,
                 R.string.junkcleaner_temporary_file_tiele, R.string.junkcleaner_log_file_tiele};
-        int resourceId[] = {R.mipmap.junkcleaner_processing_icon,R.mipmap.junkcleaner_appcache_icon, R.mipmap.junkcleaner_usedapk_icon,R.mipmap.junkcleaner_temp_icon, R.mipmap.junkcleaner_log_icon};
+        int resourceId[] = {R.drawable.ic_process_icon,R.drawable.ic_appcache_icon, R.drawable.ic_unused_icon,R.drawable.ic_tempfile_icon, R.drawable.ic_logfile_icon};
         for (int i = 0; i < 5; i++) {
             JunkCleanerTypeBean junkType = new JunkCleanerTypeBean();
             junkType.setTitle(mContext.getString(title[i]))

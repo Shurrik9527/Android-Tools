@@ -24,13 +24,16 @@ import android.widget.RelativeLayout;
 
 import com.app.hubert.guide.NewbieGuide;
 import com.app.hubert.guide.model.GuidePage;
+import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.base.MaiKuApp;
 import com.hz.maiku.maikumodule.bean.NotificationMsgBean;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
+import com.hz.maiku.maikumodule.modules.junkcleaner.optimized.OptimizedActivity;
 import com.hz.maiku.maikumodule.modules.notificationcleaner.settingapp.SettingAppActivity;
 import com.hz.maiku.maikumodule.util.AppUtil;
+import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.NotificationsCleanerUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
@@ -382,11 +385,13 @@ public class NotificationCleanerFragment extends Fragment implements Notificatio
             if(mlist!=null&&mlist.size()>0){
                 mlist.clear();
                 showAllMsg(mlist);
+                EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Notification Cleaner");
                 NotificationsManager.getmInstance().deleteAllNotificationInfo();
-                if(notificationBtn!=null){
-                    notificationBtn.setText(getContext().getResources().getString(R.string.notification_cleaner_all));
-                }
-                setViewState(false);
+
+                Intent mIntent = new Intent(getActivity(), OptimizedActivity.class);
+                mIntent.putExtra("BUNDLE", getResources().getString(R.string.notification_title_top));
+                startActivity(mIntent);
+                getActivity().finish();
             }
         }
     }

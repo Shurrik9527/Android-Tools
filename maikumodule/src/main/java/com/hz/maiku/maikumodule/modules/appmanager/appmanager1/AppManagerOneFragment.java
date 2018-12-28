@@ -15,12 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.appsflyer.AFInAppEventType;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.bean.AppManagerBean;
 import com.hz.maiku.maikumodule.tasks.UninstallAppTask;
+import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import java.util.ArrayList;
@@ -220,6 +223,7 @@ public class AppManagerOneFragment extends Fragment implements AppManagerOneCont
             if(StringUtil.isFastDoubleClick()){
                 return;
             }
+            EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "App Managerment");
             if(data!=null&&data.size()>0){
                 new UninstallAppTask(getContext(),data).execute();
             }

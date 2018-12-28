@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.app.hubert.guide.NewbieGuide;
 import com.app.hubert.guide.model.GuidePage;
 import com.app.hubert.guide.model.HighLight;
+import com.appsflyer.AFInAppEventType;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.hz.maiku.maikumodule.R;
@@ -41,6 +42,7 @@ import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.WifiBean;
 import com.hz.maiku.maikumodule.modules.trafficstatis.TrafficStatisPresenter;
+import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
@@ -132,6 +134,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
+                EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "wifi");
                 WifiBean wifiBean = realWifiList.get(position);
                 if (wifiBean.getState().equals(WifiHelper.WIFI_STATE_UNCONNECT) || wifiBean.getState().equals(WifiHelper.WIFI_STATE_CONNECT)) {
                     String capabilities = realWifiList.get(position).getCapabilities();

@@ -13,12 +13,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.enums.LockStage;
 import com.hz.maiku.maikumodule.modules.applock.AppLockActivity;
 import com.hz.maiku.maikumodule.service.LockService;
+import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.LockPatternUtils;
 import com.hz.maiku.maikumodule.util.LockPatternViewPattern;
 import com.hz.maiku.maikumodule.util.SpHelper;
@@ -161,6 +163,7 @@ public class GestureCreateFragment extends Fragment implements GestureCreateCont
         showMessageTips(getString(R.string.gesturecreate_password_success));
         mLockPatternUtils.saveLockPattern(mChosenPattern); //保存密码
         clearPattern();
+
         if(getActivity()!=null){
             startActivity(getActivity(), AppLockActivity.class,null);
         }
@@ -168,7 +171,8 @@ public class GestureCreateFragment extends Fragment implements GestureCreateCont
 
     @Override
     public void startActivity(Context mContext, Class<?> mclass, Bundle mBundle) {
-
+        //创建锁屏密码成功
+        EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "App Locked");
         SpHelper.getInstance().put(Constant.LOCK_STATE,true);////开启应用锁开关
         getActivity().startService(new Intent(getActivity(), LockService.class));
         SpHelper.getInstance().put(Constant.LOCK_IS_FIRST_LOCK, false);//第一次设置成功

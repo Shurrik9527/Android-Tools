@@ -19,6 +19,7 @@ import com.hz.maiku.maikumodule.manager.MemoryManager;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
 import com.hz.maiku.maikumodule.manager.ProcessManager;
 import com.hz.maiku.maikumodule.manager.SMSManager;
+import com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerService;
 import com.hz.maiku.maikumodule.service.HideAppService;
 import com.hz.maiku.maikumodule.service.LoadAppListService;
 import com.hz.maiku.maikumodule.service.LockService;
@@ -149,6 +150,15 @@ public class MaiKuApp extends LitePalApplication {
                 startService(new Intent(this, LockService.class));
             }
         }
+
+
+        //开启服务，开启锁屏界面
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(new Intent(this, ScreenLockerService.class));
+        } else {
+            startService(new Intent(this, ScreenLockerService.class));
+        }
+
     }
 
     /**

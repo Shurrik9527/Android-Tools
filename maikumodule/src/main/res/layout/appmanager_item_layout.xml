@@ -59,7 +59,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-
+        android:buttonTint="@color/colorPrimary"
         />
     <TextView
         android:layout_width="match_parent"
