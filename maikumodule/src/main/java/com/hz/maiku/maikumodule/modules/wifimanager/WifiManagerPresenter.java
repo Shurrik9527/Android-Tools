@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.wifi;
+package com.hz.maiku.maikumodule.modules.wifimanager;
 
 import android.content.Context;
 
@@ -21,13 +21,13 @@ import io.reactivex.schedulers.Schedulers;
  * @date 2018/12/18
  * @email 252774645@qq.com
  */
-public class WifiPresenter implements WifiContract.Presenter{
+public class WifiManagerPresenter implements WifiManagerContract.Presenter{
 
-    private static final String TAG =WifiPresenter.class.getName();
+    private static final String TAG =WifiManagerPresenter.class.getName();
     private Context mContext;
-    private WifiContract.View mView=null;
+    private WifiManagerContract.View mView=null;
 
-    public WifiPresenter(final WifiContract.View view, Context context) {
+    public WifiManagerPresenter(final WifiManagerContract.View view, Context context) {
         this.mView = view;
         this.mContext =context;
         mView.setPresenter(this);

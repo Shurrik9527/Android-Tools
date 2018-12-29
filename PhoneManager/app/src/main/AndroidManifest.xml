@@ -78,7 +78,7 @@
         <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.resetlock.ResetPasswordActivity" />
         <activity android:name="com.hz.maiku.maikumodule.base.EmptyActivity" android:theme="@android:style/Theme.Translucent"/>
         <activity android:name="com.hz.maiku.maikumodule.modules.trafficstatis.TrafficStatisActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.wifi.WifiActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.wifimanager.WifiManagerActivity"/>
         <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.NotificationCleanerActivity"/>
         <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.settingapp.SettingAppActivity"/>
         <activity android:name="com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneActivity"/>

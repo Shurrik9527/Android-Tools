@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.wifi;
+package com.hz.maiku.maikumodule.modules.wifimanager;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDelegate;
@@ -13,7 +13,7 @@ import com.hz.maiku.maikumodule.base.BaseActivity;
  * @date 2018/12/18
  * @email 252774645@qq.com
  */
-public class WifiActivity extends BaseActivity {
+public class WifiManagerActivity extends BaseActivity {
     @Override
     protected int getContentViewId() {
         return R.layout.base_activity;
@@ -21,7 +21,7 @@ public class WifiActivity extends BaseActivity {
 
     @Override
     protected Fragment getFragment() {
-        return WifiFragment.newInstance();
+        return WifiManagerFragment.newInstance();
     }
 
     @Override

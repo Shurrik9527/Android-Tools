@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.wifi;
+package com.hz.maiku.maikumodule.modules.wifimanager;
 
 import com.hz.maiku.maikumodule.base.BasePresenter;
 import com.hz.maiku.maikumodule.base.BaseView;
@@ -13,9 +13,9 @@ import java.util.List;
  * @date 2018/12/18
  * @email 252774645@qq.com
  */
-public class WifiContract {
+public class WifiManagerContract {
 
-    public interface View extends BaseView<WifiContract.Presenter> {
+    public interface View extends BaseView<WifiManagerContract.Presenter> {
         void  showAllWifi(List<WifiBean> lists);
         void showPermission();
         void  initData();
