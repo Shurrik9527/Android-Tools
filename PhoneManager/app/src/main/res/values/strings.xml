@@ -13,14 +13,8 @@
     <string name="feedback">Feedback</string>
     <string name="comment">Comment</string>
     <string name="about_us">About Us</string>
-<<<<<<< HEAD
+
     <!--其他-->
     <string name="start">Start</string>
-=======
 
-    <!--admob-->
-    <string name="admob_key">ca-app-pub-8013994383371748~1163211196</string>
-
-
->>>>>>> f155ae4... add module code
 </resources>
