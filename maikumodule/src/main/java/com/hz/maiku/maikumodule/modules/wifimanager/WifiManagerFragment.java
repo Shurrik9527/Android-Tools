@@ -166,10 +166,13 @@ public class WifiManagerFragment extends Fragment implements WifiManagerContract
                 if (isChecked) {
                     SpHelper.getInstance().put(Constant.WIFI_OPEN, true);
                     //扫描
-                    if (WifiHelper.isOpenWifi(getContext())) {
-                        if (mPresenter != null) {
-                            mPresenter.scanAllWifis();
-                        }
+//                    if (WifiHelper.isOpenWifi(getContext())) {
+//                        if (mPresenter != null) {
+//                            mPresenter.scanAllWifis();
+//                        }
+//                    }
+                    if (mPresenter != null) {
+                        mPresenter.scanAllWifis();
                     }
                     WifiHelper.openWifi(getContext());
                     if (wifimanagerRv != null) {
@@ -237,6 +240,10 @@ public class WifiManagerFragment extends Fragment implements WifiManagerContract
             }
             Collections.sort(realWifiList);
             mWifiAdapter.setNewData(realWifiList);
+
+
+
+
         }
     }
 
@@ -244,9 +251,10 @@ public class WifiManagerFragment extends Fragment implements WifiManagerContract
     public void showPermission() {
 
         mHasPermission = checkPermission();
-        if (!mHasPermission && WifiHelper.isOpenWifi(getContext())) {  //未获取权限，申请权限
+        if (!mHasPermission ) {  //未获取权限，申请权限
+            WifiHelper.openWifi(getContext());
             requestPermission();
-        } else if (mHasPermission && WifiHelper.isOpenWifi(getContext())) {  //已经获取权限
+        } else if (mHasPermission) {  //已经获取权限
             //扫描
             if (mPresenter != null) {
                 mPresenter.scanAllWifis();
