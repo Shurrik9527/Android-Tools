@@ -6,14 +6,15 @@ import android.view.View;
 
 /**
  * @author heguogui
- * @version v 1.0.0
- * @describe
- * @date 2018/10/18
- * @email 252774645@qq.com
+ * update by Shurrik at 2018-12-29 for GridManager 2 cols
  */
-public class SpaceItemDecoration extends RecyclerView.ItemDecoration{
+public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
-    int mSpace;
+    private int mSpace;
+
+    public SpaceItemDecoration(int space) {
+        this.mSpace = space;
+    }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
@@ -21,12 +22,9 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration{
         outRect.left = mSpace;
         outRect.right = mSpace;
         outRect.bottom = mSpace;
-        if (parent.getChildAdapterPosition(view) == 0) {
+        if (parent.getChildAdapterPosition(view) == 0 || parent.getChildAdapterPosition(view) == 1) {
             outRect.top = mSpace;
         }
     }
 
-    public SpaceItemDecoration(int space) {
-        this.mSpace = space;
-    }
 }

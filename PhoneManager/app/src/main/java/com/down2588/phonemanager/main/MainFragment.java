@@ -2,20 +2,19 @@ package com.down2588.phonemanager.main;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.down2588.phonemanager.R;
-import com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneActivity;
-import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
-import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
-import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
+import com.hz.maiku.maikumodule.util.SpaceItemDecoration;
+import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
@@ -33,6 +32,8 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @BindView(R.id.lav_phonebooster)
     LottieAnimationView lavPhoneBooster;
+    @BindView(R.id.rv_main_functions)
+    RecyclerView rvMainFunctions;
 
     public MainFragment() {
         // Required empty public constructor
@@ -84,28 +85,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         this.presenter = presenter;
     }
 
-    @OnClick(R.id.cv_junkcleaner)
-    @Override
-    public void showJunkCleaner() {
-        //垃圾清理
-        startActivity(new Intent(getActivity(), JunkCleanerActivity.class));
-    }
-
-    @OnClick(R.id.cv_appmanager)
-    @Override
-    public void showAppManager() {
-        //应用管理
-        startActivity(new Intent(getActivity(), AppManagerOneActivity.class));
-    }
-
-    @OnClick(R.id.cv_cpucooler)
-    @Override
-    public void showCpuCooler() {
-        //手机降温
-        startActivity(new Intent(getActivity(), CpuCoolerScanActivity.class));
-    }
-
-    @OnClick(R.id.lav_phonebooster)
+    @OnClick({R.id.lav_phonebooster, R.id.b_phonebooster})
     @Override
     public void showPhoneBooster() {
         //播放动画
@@ -113,26 +93,15 @@ public class MainFragment extends Fragment implements MainContract.View {
         //停止动画
         //lavPhoneBooster.cancelAnimation();
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f).setDuration(3000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = Float.parseFloat(animation.getAnimatedValue().toString());
-                if (value >= 1f) {
-                    //优化加速
-                }
+        animator.addUpdateListener(animation -> {
+            float value = Float.parseFloat(animation.getAnimatedValue().toString());
+            if (value >= 1f) {
+                //优化加速
+                ToastUtil.showToast(getActivity(), "Your phone is much better now!");
             }
         });
         animator.start();
     }
-
-
-    @OnClick(R.id.cv_chargebooster)
-    @Override
-    public void showChargeBooster() {
-        //智能充电
-        startActivity(new Intent(getActivity(), ChargeBoosterActivity.class));
-    }
-
 
     @Override
     public void showPermissions() {
@@ -165,6 +134,20 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void initView() {
         showPhoneBooster();
+
+
+
+        //实例化Adapter并且给RecyclerView设上
+        MainFunctionsGridAdapter adapter = new MainFunctionsGridAdapter(getActivity(), presenter.getFunctions());
+        rvMainFunctions.setAdapter(adapter);
+        // 如果我们想要一个GridView形式的RecyclerView，那么在LayoutManager上我们就要使用GridLayoutManager
+        // 实例化一个GridLayoutManager，列数为2
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        //设置颜色分割线
+        rvMainFunctions.addItemDecoration(new SpaceItemDecoration(30));
+        //把LayoutManager设置给RecyclerView
+        rvMainFunctions.setLayoutManager(layoutManager);
+
     }
 
     @Override

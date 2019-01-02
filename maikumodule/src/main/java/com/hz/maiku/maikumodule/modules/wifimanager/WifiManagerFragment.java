@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.wifi;
+package com.hz.maiku.maikumodule.modules.wifimanager;
 
 
 import android.Manifest;
@@ -17,8 +17,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -41,7 +39,7 @@ import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.WifiBean;
-import com.hz.maiku.maikumodule.modules.trafficstatis.TrafficStatisPresenter;
+
 import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.StringUtil;
@@ -65,9 +63,9 @@ import butterknife.ButterKnife;
  * @date 2018/10/30
  * @email 252774645@qq.com
  */
-public class WifiFragment extends Fragment implements WifiContract.View {
+public class WifiManagerFragment extends Fragment implements WifiManagerContract.View {
 
-    private static final String TAG = WifiFragment.class.getName();
+    private static final String TAG = WifiManagerFragment.class.getName();
     @BindView(R2.id.wifimanager_rv)
     RecyclerView wifimanagerRv;
     @BindView(R2.id.wifi_connected_tv)
@@ -78,8 +76,8 @@ public class WifiFragment extends Fragment implements WifiContract.View {
     Switch wifiConnectedCb;
 
 
-    private WifiAdapter mWifiAdapter;
-    private WifiContract.Presenter mPresenter;
+    private WifiManagerAdapter mWifiAdapter;
+    private WifiManagerContract.Presenter mPresenter;
     private static final int REQUEST_CODE = 0X04;
     private boolean mHasPermission;
     private List<WifiBean> realWifiList;
@@ -89,13 +87,14 @@ public class WifiFragment extends Fragment implements WifiContract.View {
     private static final String[] NEEDED_PERMISSIONS = new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
     private int connectType = 0;//1：连接成功？2 正在连接（如果wifi热点列表发生变需要该字段）
     private InputDialog mInputDialog;
-    public WifiFragment() {
+
+    public WifiManagerFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static WifiFragment newInstance() {
-        WifiFragment fragment = new WifiFragment();
+    public static WifiManagerFragment newInstance() {
+        WifiManagerFragment fragment = new WifiManagerFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -104,7 +103,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new WifiPresenter(this,getContext());
+        new WifiManagerPresenter(this, getContext());
     }
 
     @Override
@@ -119,8 +118,8 @@ public class WifiFragment extends Fragment implements WifiContract.View {
     }
 
     @Override
-    public void setPresenter(WifiContract.Presenter presenter) {
-        this.mPresenter =presenter;
+    public void setPresenter(WifiManagerContract.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 
     @Override
@@ -153,19 +152,19 @@ public class WifiFragment extends Fragment implements WifiContract.View {
             }
         });
 
-        if(WifiHelper.isOpenWifi(getContext())){
-            SpHelper.getInstance().put(Constant.WIFI_OPEN,true);
+        if (WifiHelper.isOpenWifi(getContext())) {
+            SpHelper.getInstance().put(Constant.WIFI_OPEN, true);
             wifiConnectedCb.setChecked(true);
-        }else{
-            SpHelper.getInstance().put(Constant.WIFI_OPEN,false);
+        } else {
+            SpHelper.getInstance().put(Constant.WIFI_OPEN, false);
             wifiConnectedCb.setChecked(false);
         }
 
         wifiConnectedCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    SpHelper.getInstance().put(Constant.WIFI_OPEN,true);
+                if (isChecked) {
+                    SpHelper.getInstance().put(Constant.WIFI_OPEN, true);
                     //扫描
                     if (WifiHelper.isOpenWifi(getContext())) {
                         if (mPresenter != null) {
@@ -173,21 +172,21 @@ public class WifiFragment extends Fragment implements WifiContract.View {
                         }
                     }
                     WifiHelper.openWifi(getContext());
-                    if(wifimanagerRv!=null){
+                    if (wifimanagerRv != null) {
                         wifimanagerRv.setVisibility(View.VISIBLE);
                     }
-                }else{
+                } else {
 
-                    SpHelper.getInstance().put(Constant.WIFI_OPEN,false);
+                    SpHelper.getInstance().put(Constant.WIFI_OPEN, false);
                     List<WifiBean> emptyLists = new ArrayList<>();
-                    if(mWifiAdapter!=null){
+                    if (mWifiAdapter != null) {
                         mWifiAdapter.setNewData(emptyLists);
                     }
-                    if(wifiRl!=null){
+                    if (wifiRl != null) {
                         wifiRl.setVisibility(View.GONE);
                     }
 
-                    if(wifimanagerRv!=null){
+                    if (wifimanagerRv != null) {
                         wifimanagerRv.setVisibility(View.GONE);
                     }
 
@@ -199,7 +198,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
 
     @Override
     public void showMessageTips(String msg) {
-        ToastUtil.showToast(getContext(),msg);
+        ToastUtil.showToast(getContext(), msg);
     }
 
 
@@ -228,9 +227,9 @@ public class WifiFragment extends Fragment implements WifiContract.View {
                 if (wifiConnected != null) {
                     wifiRl.setVisibility(View.VISIBLE);
                     wifiConnectedTv.setText(wifiConnected.getWifiName());
-                    SpHelper.getInstance().put(Constant.WIFI_OPEN,true);
+                    SpHelper.getInstance().put(Constant.WIFI_OPEN, true);
                     wifiConnectedCb.setChecked(true);
-                    showMessageTips("Congratulate "+wifiConnected.getWifiName()+" "+WifiHelper.WIFI_STATE_CONNECT);
+                    showMessageTips("Congratulate " + wifiConnected.getWifiName() + " " + WifiHelper.WIFI_STATE_CONNECT);
                 }
 
             } else {
@@ -258,21 +257,22 @@ public class WifiFragment extends Fragment implements WifiContract.View {
 
     @Override
     public void initData() {
-        mWifiAdapter = new WifiAdapter();
+        mWifiAdapter = new WifiManagerAdapter();
         wifimanagerRv.setAdapter(mWifiAdapter);
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
             showPermission();
-        }else{
-            boolean wifiopen= (boolean) SpHelper.getInstance().get(Constant.WIFI_OPEN,false);
-            if(wifiopen){
+        }else {
+
+            boolean wifiopen = (boolean) SpHelper.getInstance().get(Constant.WIFI_OPEN, false);
+            if (wifiopen) {
                 //扫描
                 if (WifiHelper.isOpenWifi(getContext())) {
                     if (mPresenter != null) {
                         mPresenter.scanAllWifis();
                     }
                 }
-            }else {
+            } else {
                 if (wifiRl != null) {
                     wifiRl.setVisibility(View.GONE);
                 }
@@ -311,8 +311,8 @@ public class WifiFragment extends Fragment implements WifiContract.View {
 
     @Override
     public void wifiChange() {
-        boolean wifiopen= (boolean) SpHelper.getInstance().get(Constant.WIFI_OPEN,false);
-        if(wifiopen){
+        boolean wifiopen = (boolean) SpHelper.getInstance().get(Constant.WIFI_OPEN, false);
+        if (wifiopen) {
             if (mPresenter != null) {
                 mPresenter.scanAllWifis();
             }
@@ -353,9 +353,9 @@ public class WifiFragment extends Fragment implements WifiContract.View {
 
         if (index != -1) {
             wifiRl.setVisibility(View.VISIBLE);
-            if(wifiName.contains("\"")){
-                wifiConnectedTv.setText(wifiName.substring(1,wifiName.length()-1));
-            }else{
+            if (wifiName.contains("\"")) {
+                wifiConnectedTv.setText(wifiName.substring(1, wifiName.length() - 1));
+            } else {
                 wifiConnectedTv.setText(wifiName);
             }
 
@@ -369,22 +369,22 @@ public class WifiFragment extends Fragment implements WifiContract.View {
 
     @Override
     public void configurationWifi(final WifiBean wifiBean) {
-        if(wifiBean!=null){
+        if (wifiBean != null) {
             mInputDialog = new InputDialog(getContext(), wifiBean.getWifiName(), null, new InputDialog.ConfirmListener() {
                 @Override
                 public void callback(String content) {
-                    if(!TextUtils.isEmpty(content)){
-                        String capabilities =wifiBean.getCapabilities();
-                        WifiConfiguration tempConfig  =WifiHelper.isExsits(wifiBean.getWifiName(),getContext());
-                        boolean isAdd =false;
-                        if(tempConfig == null){
-                            WifiConfiguration wifiConfiguration =  WifiHelper.createWifiConfig(wifiBean.getWifiName(),content,WifiHelper.getWifiCipher(capabilities));
-                            isAdd= WifiHelper.addNetWork(wifiConfiguration,getContext());
-                        }else{
-                            isAdd=WifiHelper.addNetWork(tempConfig,getContext());
+                    if (!TextUtils.isEmpty(content)) {
+                        String capabilities = wifiBean.getCapabilities();
+                        WifiConfiguration tempConfig = WifiHelper.isExsits(wifiBean.getWifiName(), getContext());
+                        boolean isAdd = false;
+                        if (tempConfig == null) {
+                            WifiConfiguration wifiConfiguration = WifiHelper.createWifiConfig(wifiBean.getWifiName(), content, WifiHelper.getWifiCipher(capabilities));
+                            isAdd = WifiHelper.addNetWork(wifiConfiguration, getContext());
+                        } else {
+                            isAdd = WifiHelper.addNetWork(tempConfig, getContext());
                         }
-                        if(isAdd){
-                            showMessageTips("Add "+wifiBean.getWifiName()+" success,Please wait a few seconds,If no connect ,Please try again");
+                        if (isAdd) {
+                            showMessageTips("Add " + wifiBean.getWifiName() + " success,Please wait a few seconds,If no connect ,Please try again");
                             mInputDialog.dismiss();
                         }
                     }
@@ -398,7 +398,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
     @Override
     public void onResume() {
         super.onResume();
-        NewbieGuide.with(this).setLabel("wifiConnectedCb").addGuidePage(GuidePage.newInstance().addHighLight(wifiConnectedCb,HighLight.Shape.CIRCLE).setLayoutRes(R.layout.guide_wifi_open_layout)).setShowCounts(1).show();
+        NewbieGuide.with(this).setLabel("wifiConnectedCb").addGuidePage(GuidePage.newInstance().addHighLight(wifiConnectedCb, HighLight.Shape.CIRCLE).setLayoutRes(R.layout.guide_wifi_open_layout)).setShowCounts(1).show();
         initReceiver();
     }
 
@@ -415,9 +415,9 @@ public class WifiFragment extends Fragment implements WifiContract.View {
                 }
             } //如果同意权限
 
-            if (hasAllPermission&&getActivity()!=null) {
+            if (hasAllPermission && getActivity() != null) {
                 mHasPermission = true;
-                NewbieGuide.with(this).setLabel("wifiConnectedCb").addGuidePage(GuidePage.newInstance().addHighLight(wifiConnectedCb,HighLight.Shape.CIRCLE).setLayoutRes(R.layout.guide_notification_open_layout)).setShowCounts(1).show();
+                NewbieGuide.with(this).setLabel("wifiConnectedCb").addGuidePage(GuidePage.newInstance().addHighLight(wifiConnectedCb, HighLight.Shape.CIRCLE).setLayoutRes(R.layout.guide_notification_open_layout)).setShowCounts(1).show();
                 if (WifiHelper.isOpenWifi(getActivity()) && mHasPermission) { //如果wifi开关是开 并且 已经获取权限
                     if (mPresenter != null) {
                         mPresenter.scanAllWifis();
@@ -428,7 +428,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
                 AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "PERMISSIONS", "Sorry! Permissions is not get,This modle can't use,Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
                     @Override
                     public void callback() {
-                        if(getActivity()!=null){
+                        if (getActivity() != null) {
                             getActivity().finish();
                         }
                     }
@@ -444,9 +444,9 @@ public class WifiFragment extends Fragment implements WifiContract.View {
     public void onDestroy() {
         super.onDestroy();
         getContext().unregisterReceiver(wifiReceiver);
-        if(mInputDialog!=null&&mInputDialog.isShowing()){
+        if (mInputDialog != null && mInputDialog.isShowing()) {
             mInputDialog.dismiss();
-            mInputDialog =null;
+            mInputDialog = null;
         }
 
     }
@@ -491,7 +491,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
                 }
             } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(intent.getAction())) {//移动网络连接上
                 NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-                if (NetworkInfo.State.DISCONNECTED == info.getState()) {//wifi没连接上
+                if (NetworkInfo.State.DISCONNECTED == info.getState() && realWifiList != null) {//wifi没连接上
                     Log.d(TAG, "wifi没连接上");
                     for (int i = 0; i < realWifiList.size(); i++) {//没连接上将 所有的连接状态都置为“未连接”
                         realWifiList.get(i).setState(WifiHelper.WIFI_STATE_UNCONNECT);
@@ -499,6 +499,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
                     if (mWifiAdapter != null && realWifiList != null) {
                         mWifiAdapter.setNewData(realWifiList);
                     }
+
                 } else if (NetworkInfo.State.CONNECTED == info.getState()) {//wifi连接上了
                     Log.d(TAG, "wifi连接上了");
                     wifiChange();
@@ -507,7 +508,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
 //                    WifiInfo connectedWifiInfo = WifiHelper.getConnectedWifiInfo(getContext());
 //                    connectType = 2;
 //                    wifiListSet(connectedWifiInfo.getSSID(), connectType);
- //                   showMessageTips("Connecting...");
+                    //                   showMessageTips("Connecting...");
                 }
             } else if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(intent.getAction())) {
                 Log.d(TAG, "网络列表变化了");

@@ -1,10 +1,5 @@
-package com.hz.maiku.maikumodule.modules.wifi;
+package com.hz.maiku.maikumodule.modules.wifimanager;
 
-import android.graphics.drawable.AnimatedVectorDrawable;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.content.res.AppCompatResources;
-import android.support.v7.widget.AppCompatImageView;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -19,10 +14,10 @@ import com.hz.maiku.maikumodule.bean.WifiBean;
  * @date 2018/11/14
  * @email 252774645@qq.com
  */
-public class WifiAdapter extends BaseQuickAdapter<WifiBean,BaseViewHolder> {
+public class WifiManagerAdapter extends BaseQuickAdapter<WifiBean,BaseViewHolder> {
 
 
-    public WifiAdapter() {
+    public WifiManagerAdapter() {
         super(R.layout.wifi_item_layout);
     }
 
