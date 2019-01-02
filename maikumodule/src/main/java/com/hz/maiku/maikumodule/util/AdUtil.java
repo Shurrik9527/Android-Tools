@@ -72,7 +72,8 @@ public class AdUtil {
     }
 
     private static void showFacebookAds(final Context context) {
-//        AdSettings.addTestDevice("386dcd1a-4ea0-4757-889c-5c8a5a6271bb");
+        //Logcat search "Test mode device hash"
+//        AdSettings.addTestDevice("a087f8ac-8224-477f-a1df-d14ae18e53ad");
         final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.PLACEMENT_ID);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
@@ -150,7 +151,7 @@ public class AdUtil {
         final com.google.android.gms.ads.InterstitialAd interstitialAd = new com.google.android.gms.ads.InterstitialAd(context);
         interstitialAd.setAdUnitId(Constant.UNIT_ID);
         AdRequest request = new AdRequest.Builder()
-                .addTestDevice("3354EE0DE60D4DE6C845A1C28842FDEA")
+//                .addTestDevice("3354EE0DE60D4DE6C845A1C28842FDEA")
                 .build();
         interstitialAd.loadAd(request);
         //初始化成功以后直接显示

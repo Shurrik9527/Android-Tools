@@ -34,8 +34,8 @@ public class MainPresenter implements MainContract.Presenter {
                 R.string.cpu_cooler,
                 R.string.app_manager,
                 R.string.charge_booster,
-                R.string.notification_cleaner
-                //R.string.wifi_manager
+                R.string.notification_cleaner,
+                R.string.wifi_manager
         };
 
         int[] backgroundColors = {
@@ -43,8 +43,8 @@ public class MainPresenter implements MainContract.Presenter {
                 R.color.cpu_cooler,
                 R.color.app_manager,
                 R.color.charge_booster,
-                R.color.notification_cleaner
-                //R.color.wifi_manager
+                R.color.notification_cleaner,
+                R.color.wifi_manager
         };
 
         int[] icons = {
@@ -52,8 +52,8 @@ public class MainPresenter implements MainContract.Presenter {
                 R.drawable.ic_cpu_cooler,
                 R.drawable.ic_app_manager,
                 R.drawable.ic_charge_booster,
-                R.drawable.ic_notification_cleaner
-                //R.drawable.ic_wifi_manager
+                R.drawable.ic_notification_cleaner,
+                R.drawable.ic_wifi_manager
         };
 
         List<MainFunctionItem> dataList = new ArrayList<>();
