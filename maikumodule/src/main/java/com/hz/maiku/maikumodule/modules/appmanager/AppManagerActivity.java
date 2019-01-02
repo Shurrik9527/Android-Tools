@@ -28,6 +28,6 @@ public class AppManagerActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle(getString(R.string.appmanager_title));
+        setTitle(getString(R.string.app_manager));
     }
 }

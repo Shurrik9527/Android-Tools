@@ -32,7 +32,7 @@ public class WifiManagerActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle("Wifi");
+        setTitle(getString(R.string.wifi_manager));
         //兼容vector
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }

@@ -35,6 +35,6 @@ public class JunkCleanerActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle(getString(R.string.junkcleaner_title));
+        setTitle(getString(R.string.junk_cleaner));
     }
 }

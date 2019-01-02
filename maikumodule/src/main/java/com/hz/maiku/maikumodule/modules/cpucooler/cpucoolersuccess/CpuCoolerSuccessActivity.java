@@ -47,6 +47,6 @@ public class CpuCoolerSuccessActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle(getString(R.string.cpucooler_title));
+        setTitle(getString(R.string.cpu_cooler));
     }
 }

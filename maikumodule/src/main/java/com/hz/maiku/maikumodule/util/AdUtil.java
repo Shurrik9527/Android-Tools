@@ -42,9 +42,9 @@ public class AdUtil {
     private static final int TYPE_ADMOB = 2;
     private static final String TAG = AdUtil.class.getSimpleName();
     /**
-     * 发布第一版的时候设置为false
+     * 发布第一版的时候设置为false, 其余情况下都是true
      */
-    public static boolean IS_SHOW_AD = false;
+    public static boolean IS_SHOW_AD = true;
 
     /**
      * 显示广告
@@ -150,7 +150,7 @@ public class AdUtil {
         final com.google.android.gms.ads.InterstitialAd interstitialAd = new com.google.android.gms.ads.InterstitialAd(context);
         interstitialAd.setAdUnitId(Constant.UNIT_ID);
         AdRequest request = new AdRequest.Builder()
-//                .addTestDevice("3354EE0DE60D4DE6C845A1C28842FDEA")
+                .addTestDevice("3354EE0DE60D4DE6C845A1C28842FDEA")
                 .build();
         interstitialAd.loadAd(request);
         //初始化成功以后直接显示
@@ -231,7 +231,7 @@ public class AdUtil {
                                     AdUtil.AD_TYPE = adInfo.getAd_type();
                                     AdUtil.AD_STATUS = adInfo.getAd_status();
                                     AdUtil.AD_TIME = adInfo.getAd_time();
-                                    Log.d(TAG, "Interstitial ad type is [" + adInfo.getAd_name() + "] now!");
+                                    Log.d(TAG, "Interstitial ad type is [" + adInfo.getAd_name() + "] now! status is [" + AdUtil.AD_STATUS + "] and time is " + AdUtil.AD_TIME);
                                 }
                             }
                         }

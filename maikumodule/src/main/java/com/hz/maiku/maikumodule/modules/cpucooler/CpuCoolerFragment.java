@@ -110,7 +110,7 @@ public class CpuCoolerFragment extends Fragment implements CpuCoolerContract.Vie
         ButterKnife.bind(this, root);
         if (isOptimized()) {
             Intent mIntent = new Intent(getActivity(), OptimizedActivity.class);
-            mIntent.putExtra("BUNDLE", getResources().getString(R.string.cpucooler_title));
+            mIntent.putExtra("BUNDLE", getResources().getString(R.string.cpu_cooler));
             startActivity(mIntent);
             getActivity().finish();
         } else {
