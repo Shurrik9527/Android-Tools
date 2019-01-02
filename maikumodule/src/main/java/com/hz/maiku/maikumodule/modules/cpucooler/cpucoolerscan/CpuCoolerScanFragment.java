@@ -25,6 +25,7 @@ import com.hz.maiku.maikumodule.modules.cpucooler.CpuCoolerActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.optimized.OptimizedActivity;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.TimeUtil;
+import com.hz.maiku.maikumodule.widget.dialog.AlertSingleDialog;
 
 import java.util.List;
 
@@ -212,7 +213,16 @@ public class CpuCoolerScanFragment extends Fragment implements CpuCoolerScanCont
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS) {
             if (!hasPermission()) {
-                startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+                //startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
+                AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "PERMISSIONS", "Sorry! Permissions is not get,This modle can't use,Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
+                    @Override
+                    public void callback() {
+                        if(getActivity()!=null){
+                            getActivity().finish();
+                        }
+                    }
+                });
+                dialog.show();
             }else{
                 startScan();
             }

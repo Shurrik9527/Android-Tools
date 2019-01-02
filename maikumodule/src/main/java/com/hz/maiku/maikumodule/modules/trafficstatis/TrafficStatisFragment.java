@@ -197,7 +197,7 @@ public class TrafficStatisFragment extends Fragment implements TrafficStatisCont
                     presenter.getMonthTrafficStatistics();
                 }
             }else{
-                AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "NOTICTION", "Sorry! Permissions is not get,This modle can't use,Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
+                AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "PERMISSIONS", "Sorry! Permissions is not get,This modle can't use,Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
                     @Override
                     public void callback() {
                         if(getActivity()!=null){

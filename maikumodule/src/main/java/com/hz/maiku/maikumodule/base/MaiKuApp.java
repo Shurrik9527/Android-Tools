@@ -129,6 +129,7 @@ public class MaiKuApp extends LitePalApplication {
      * 初始化服务
      */
     private void initServices() {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(new Intent(this, LoadAppListService.class));
         } else {

@@ -166,14 +166,10 @@ public class WifiFragment extends Fragment implements WifiContract.View {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     SpHelper.getInstance().put(Constant.WIFI_OPEN,true);
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                        showPermission();
-                    } else {
-                        //扫描
-                        if (WifiHelper.isOpenWifi(getContext())) {
-                            if (mPresenter != null) {
-                                mPresenter.scanAllWifis();
-                            }
+                    //扫描
+                    if (WifiHelper.isOpenWifi(getContext())) {
+                        if (mPresenter != null) {
+                            mPresenter.scanAllWifis();
                         }
                     }
                     WifiHelper.openWifi(getContext());
@@ -265,23 +261,22 @@ public class WifiFragment extends Fragment implements WifiContract.View {
         mWifiAdapter = new WifiAdapter();
         wifimanagerRv.setAdapter(mWifiAdapter);
 
-        boolean wifiopen= (boolean) SpHelper.getInstance().get(Constant.WIFI_OPEN,false);
-        if(wifiopen){
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                showPermission();
-            } else {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            showPermission();
+        }else{
+            boolean wifiopen= (boolean) SpHelper.getInstance().get(Constant.WIFI_OPEN,false);
+            if(wifiopen){
                 //扫描
                 if (WifiHelper.isOpenWifi(getContext())) {
                     if (mPresenter != null) {
                         mPresenter.scanAllWifis();
                     }
                 }
+            }else {
+                if (wifiRl != null) {
+                    wifiRl.setVisibility(View.GONE);
+                }
             }
-        }else {
-            if (wifiRl != null) {
-                wifiRl.setVisibility(View.GONE);
-            }
-
         }
 
     }
@@ -430,7 +425,7 @@ public class WifiFragment extends Fragment implements WifiContract.View {
                 }
             } else { //用户不同意权限
                 mHasPermission = false;
-                AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "NOTICTION", "Sorry! Permissions is not get,This modle can't use,Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
+                AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "PERMISSIONS", "Sorry! Permissions is not get,This modle can't use,Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
                     @Override
                     public void callback() {
                         if(getActivity()!=null){

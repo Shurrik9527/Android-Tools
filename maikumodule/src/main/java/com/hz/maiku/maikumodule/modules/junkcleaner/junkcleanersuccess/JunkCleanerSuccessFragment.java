@@ -144,30 +144,35 @@ public class JunkCleanerSuccessFragment extends Fragment implements JunkCleanerS
             return;
         }
 
-        float msize =0.0f;
-        if(size.contains("M")){
-            String[] sizes =size.split("M");
-            if(sizes[0].contains(",")){
-                sizes[0] =sizes[0].replace(",",".");
+        try {
+            float msize =0.0f;
+            if(size.contains("M")){
+                String[] sizes =size.split("M");
+                if(sizes[0].contains(",")){
+                    sizes[0] =sizes[0].replace(",",".");
+                }
+                if(!TextUtils.isEmpty(sizes[0])){
+                    msize =Float.valueOf(sizes[0]);
+                }
             }
-            if(!TextUtils.isEmpty(sizes[0])){
-                msize =Float.valueOf(sizes[0]);
+
+            if(cpucoolerSuccessRotateIv!=null){
+                cpucoolerSuccessRotateIv.clearAnimation();
+                cpucoolerSuccessRotateIv.setVisibility(View.GONE);
             }
+
+            if(!TextUtils.isEmpty(mTemp)) {
+                float temp = Float.parseFloat(mTemp);
+                BigDecimal bigDecimal = new BigDecimal(Math.abs(msize - temp));
+                float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+                if(cpucoolerSuccessTv!=null){
+                    cpucoolerSuccessTv.setContent(dropped + "");
+                }
+            }
+        }catch (Exception e){
+
         }
 
-        if(cpucoolerSuccessRotateIv!=null){
-            cpucoolerSuccessRotateIv.clearAnimation();
-            cpucoolerSuccessRotateIv.setVisibility(View.GONE);
-        }
-
-        if(!TextUtils.isEmpty(mTemp)) {
-            float temp = Float.parseFloat(mTemp);
-            BigDecimal bigDecimal = new BigDecimal(Math.abs(msize - temp));
-            float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
-            if(cpucoolerSuccessTv!=null){
-                cpucoolerSuccessTv.setContent(dropped + "");
-            }
-        }
     }
 
     @Override
