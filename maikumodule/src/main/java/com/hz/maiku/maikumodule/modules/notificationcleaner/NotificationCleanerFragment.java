@@ -392,10 +392,9 @@ public class NotificationCleanerFragment extends Fragment implements Notificatio
             }
             List<NotificationMsgBean> mlist = mAdapter.getData();
             if(mlist!=null&&mlist.size()>0){
-
                 NotificationsManager.getmInstance().deleteNotificationInfoTable(mlist);
-                mlist.clear();
-                showAllMsg(mlist);
+                List<NotificationMsgBean> list = new ArrayList<>();
+                showAllMsg(list);
                 EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Notification Cleaner");
                 Intent mIntent = new Intent(getActivity(), OptimizedActivity.class);
                 mIntent.putExtra("BUNDLE", getResources().getString(R.string.notification_title_top));

@@ -97,7 +97,9 @@ public class MainFragment extends Fragment implements MainContract.View {
             float value = Float.parseFloat(animation.getAnimatedValue().toString());
             if (value >= 1f) {
                 //优化加速
-                ToastUtil.showToast(getActivity(), "Your phone is much better now!");
+                if(getActivity()!=null){
+                    ToastUtil.showToast(getActivity(), "Your phone is much better now!");
+                }
             }
         });
         animator.start();

@@ -83,7 +83,7 @@
         <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.settingapp.SettingAppActivity"/>
         <activity android:name="com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneActivity"/>
         <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.setting.SettingLockActivity"/>
-
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity"/>
         <!-- 锁屏服务 -->
         <service android:name="com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerService" />
 

@@ -15,6 +15,7 @@ import com.down2588.phonemanager.R;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.CpuCoolerActivity;
+import com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
 import com.hz.maiku.maikumodule.modules.notificationcleaner.NotificationCleanerActivity;
 import com.hz.maiku.maikumodule.modules.wifimanager.WifiManagerActivity;

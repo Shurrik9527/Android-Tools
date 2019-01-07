@@ -109,5 +109,18 @@
     <string name="notification_guide_open_state">Slide the button and select the app you want to block notifications</string>
 
     <string name="wifi_guide_open_state">You can select wifi connection by sliding the button</string>
+    <string name="deepclean_scan_complete">Scan is complete</string>
+    <string name="deepclean_images_title">Images</string>
+    <string name="deepclean_videos_title">Videos</string>
+    <string name="deepclean_uninstallapps_title">Uninstall Apps</string>
+    <string name="deepclean_audio_title">Audios</string>
+    <string name="deepclean_appdata_title">App Data</string>
+    <string name="deepclean_installationpackage_title">Installation Package</string>
+    <string name="deepclean_largefiles_title">Large Files</string>
+    <string name="deepclean_audio_msg">Clean disliked song to save apace</string>
+    <string name="deepclean_appdata_msg">Clean app to save apace</string>
+    <string name="deepclean_large_files_msg">Clean large files to free up apace</string>
+    <string name="deepclean_installationpackage_msg">Clean unused app installation package</string>
+    <string name="deepclean_top_title">Deep Clean</string>
 
 </resources>
