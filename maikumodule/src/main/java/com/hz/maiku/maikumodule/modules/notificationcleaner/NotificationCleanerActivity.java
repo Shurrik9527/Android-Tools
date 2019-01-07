@@ -1,14 +1,9 @@
 package com.hz.maiku.maikumodule.modules.notificationcleaner;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.base.BaseActivity;
-import com.hz.maiku.maikumodule.modules.notificationcleaner.settingapp.SettingAppActivity;
 
 /**
  * @author heguogui
@@ -37,7 +32,7 @@ public class NotificationCleanerActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle(getString(R.string.notification_title_top));
+        setTitle(getString(R.string.notification_cleaner));
     }
 
 }

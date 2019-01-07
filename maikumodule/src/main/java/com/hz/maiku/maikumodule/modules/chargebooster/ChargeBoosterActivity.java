@@ -29,6 +29,6 @@ public class ChargeBoosterActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle(getString(R.string.chargebooster_title));
+        setTitle(getString(R.string.charge_booster));
     }
 }

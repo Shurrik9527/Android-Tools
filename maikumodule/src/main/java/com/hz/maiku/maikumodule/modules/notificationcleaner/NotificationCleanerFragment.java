@@ -27,7 +27,6 @@ import com.app.hubert.guide.model.GuidePage;
 import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
-import com.hz.maiku.maikumodule.base.MaiKuApp;
 import com.hz.maiku.maikumodule.bean.NotificationMsgBean;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
 import com.hz.maiku.maikumodule.modules.junkcleaner.optimized.OptimizedActivity;
@@ -37,7 +36,6 @@ import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.NotificationsCleanerUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import com.hz.maiku.maikumodule.widget.DialogPermission;
 import com.hz.maiku.maikumodule.widget.SpaceItemDecoration;
 import com.hz.maiku.maikumodule.widget.dialog.AlertSingleDialog;
 import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
@@ -397,7 +395,7 @@ public class NotificationCleanerFragment extends Fragment implements Notificatio
                 showAllMsg(list);
                 EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Notification Cleaner");
                 Intent mIntent = new Intent(getActivity(), OptimizedActivity.class);
-                mIntent.putExtra("BUNDLE", getResources().getString(R.string.notification_title_top));
+                mIntent.putExtra("BUNDLE", getResources().getString(R.string.notification_cleaner));
                 startActivity(mIntent);
                 getActivity().finish();
             }

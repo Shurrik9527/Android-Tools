@@ -1,0 +1,51 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.MainFragment">
+
+    <RelativeLayout
+        android:id="@+id/rl_phonebooster"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryLight"
+        android:padding="@dimen/element_default_space"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_phonebooster"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            app:lottie_autoPlay="false"
+            app:lottie_fileName="mian_fragment_animation.json"
+            app:lottie_loop="false" />
+
+        <Button
+            android:id="@+id/b_phonebooster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lav_phonebooster"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/element_default_space"
+            android:background="@drawable/b_main_booster"
+            android:text="@string/start"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main_functions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/element_half_space"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_phonebooster" />
+    <!-- TODO: Update blank fragment layout -->
+
+
+</android.support.constraint.ConstraintLayout>

@@ -42,9 +42,9 @@ public class AdUtil {
     private static final int TYPE_ADMOB = 2;
     private static final String TAG = AdUtil.class.getSimpleName();
     /**
-     * 发布第一版的时候设置为false
+     * 发布第一版的时候设置为false, 其余情况下都是true
      */
-    public static boolean IS_SHOW_AD = false;
+    public static boolean IS_SHOW_AD = true;
 
     /**
      * 显示广告
@@ -72,7 +72,8 @@ public class AdUtil {
     }
 
     private static void showFacebookAds(final Context context) {
-//        AdSettings.addTestDevice("386dcd1a-4ea0-4757-889c-5c8a5a6271bb");
+        //Logcat search "Test mode device hash"
+//        AdSettings.addTestDevice("a087f8ac-8224-477f-a1df-d14ae18e53ad");
         final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.PLACEMENT_ID);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
@@ -231,7 +232,7 @@ public class AdUtil {
                                     AdUtil.AD_TYPE = adInfo.getAd_type();
                                     AdUtil.AD_STATUS = adInfo.getAd_status();
                                     AdUtil.AD_TIME = adInfo.getAd_time();
-                                    Log.d(TAG, "Interstitial ad type is [" + adInfo.getAd_name() + "] now!");
+                                    Log.d(TAG, "Interstitial ad type is [" + adInfo.getAd_name() + "] now! status is [" + AdUtil.AD_STATUS + "] and time is " + AdUtil.AD_TIME);
                                 }
                             }
                         }

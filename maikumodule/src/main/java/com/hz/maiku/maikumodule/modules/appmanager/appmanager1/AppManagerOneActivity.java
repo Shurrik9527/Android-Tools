@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.base.BaseActivity;
-import com.hz.maiku.maikumodule.modules.appmanager.AppManagerFragment;
-import com.hz.maiku.maikumodule.modules.appmanager.AppManagerPresenter;
 
 /**
  * @author heguogui
@@ -36,7 +34,7 @@ public class AppManagerOneActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle(getString(R.string.appmanager_title));
+        setTitle(getString(R.string.app_manager));
     }
 
 }

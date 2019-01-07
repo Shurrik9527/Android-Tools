@@ -11,7 +11,7 @@
     <string name="common_submit">submit</string>
 
     <!--Junk Files-->
-    <string name="junkcleaner_title">Junk Files</string>
+    <string name="junk_cleaner">Junk Cleaner</string>
     <string name="system_cache">System Cache</string>
     <string name="junkcleaner_process_title">Running Process</string>
     <string name="junkcleaner_system_cache_tiele">App Cache</string>
@@ -19,14 +19,14 @@
     <string name="junkcleaner_temporary_file_tiele">Temp File</string>
     <string name="junkcleaner_log_file_tiele">Log File</string>
     <!--CPU Cooler-->
-    <string name="cpucooler_title">CPU Cooler</string>
+    <string name="cpu_cooler">CPU Cooler</string>
     <!-- App Manager-->
-    <string name="appmanager_title">App Manager</string>
+    <string name="app_manager">App Manager</string>
     <string name="uninstall">Uninstall</string>
     <!--Phone Booster-->
     <string name="phonebooster_title">Phone Booster</string>
     <!--Charge Booster-->
-    <string name="chargebooster_title">Charge Booster</string>
+    <string name="charge_booster">Charge Booster</string>
     <string name="charge_cover">Charge Cover</string>
     <string name="chargecover_desc">Use charging screen to accelerate charging.</string>
     <string name="charge_alert">Charge Alert</string>
@@ -98,16 +98,19 @@
     <string name="harassintercept_phone_delete_title">Delete</string>
     <string name="smsdetail_top_tile">SmsDetail</string>
 
+    <!--通知栏管理-->
+    <string name="notification_cleaner">Notification Cleaner</string>
     <string name="trafficstatis_month">Month</string>
     <string name="notification_delete_success">cleaner all notifacation success</string>
     <string name="notification_cleaner_all">CLEAR NOTIFICATIONS</string>
     <string name="notification_cleaner_notice">Junk Notifications</string>
-    <string name="notification_title_top">Notification Cleaner</string>
     <string name="notification_blocked_title">User App</string>
     <string name="notification_allowed_title">System App</string>
     <string name="notification_open_state">OPEN NO/OFF</string>
     <string name="notification_guide_open_state">Slide the button and select the app you want to block notifications</string>
 
+    <!--Wi-Fi管理-->
+    <string name="wifi_manager">Wi-Fi Manager</string>
     <string name="wifi_guide_open_state">You can select wifi connection by sliding the button</string>
     <string name="deepclean_scan_complete">Scan is complete</string>
     <string name="deepclean_images_title">Images</string>

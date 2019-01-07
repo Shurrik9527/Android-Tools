@@ -181,7 +181,7 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
         if (!TextUtils.isEmpty(lastTime) && !TimeUtil.isTrue(lastTime, TimeUtil.currentTimeStr(), 1000 * 60 * 5) && isAll) {
             //跳转 最佳页面
             Intent mIntent = new Intent(getActivity(), OptimizedActivity.class);
-            mIntent.putExtra("BUNDLE", getResources().getString(R.string.junkcleaner_title));
+            mIntent.putExtra("BUNDLE", getResources().getString(R.string.junk_cleaner));
             startActivity(mIntent);
             getActivity().finish();
         } else {

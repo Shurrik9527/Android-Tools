@@ -34,7 +34,7 @@ public class ScreenLockerService extends Service {
                 }
 
                 //每1小时允许展示一次广告
-                if ((System.currentTimeMillis() - AdUtil.SHOW_TIME > 3600000l || AdUtil.SHOW_TIME == 0l) && AdUtil.IS_SHOW_AD) {
+                if ((System.currentTimeMillis() - AdUtil.SHOW_TIME > AdUtil.AD_TIME || AdUtil.SHOW_TIME == 0) && AdUtil.IS_SHOW_AD && AdUtil.AD_STATUS == 1) {
                     //读取最新广告配置并展示
                     AdUtil.getAdTypeAndShow(ScreenLockerService.this, "ScreenLockerService.onReceive()");
 //                    Intent emptyIntent = new Intent();
