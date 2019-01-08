@@ -72,8 +72,4 @@ public class Constant {
      * 宿主Gmail
      */
     public static String GMAIL;
-    public static String COLORPRIMARY = "#03a9f4";
-    public static String COLORPRIMARYDARK = "#0288d1";
-
-
 }
