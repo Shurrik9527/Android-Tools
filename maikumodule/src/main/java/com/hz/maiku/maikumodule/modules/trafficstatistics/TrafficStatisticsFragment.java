@@ -1,6 +1,7 @@
-package com.hz.maiku.maikumodule.modules.trafficstatis;
+package com.hz.maiku.maikumodule.modules.trafficstatistics;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,14 +42,11 @@ import io.reactivex.functions.Consumer;
 /**
  * @author heguogui
  * @version v 3.0.0
- * @describe 降温成功Fragment
- * @date 2018/12/13
- * @email 252774645@qq.com
  */
-public class TrafficStatisFragment extends Fragment implements TrafficStatisContract.View {
+public class TrafficStatisticsFragment extends Fragment implements TrafficStatisticsContract.View {
 
 
-    private static final String TAG = TrafficStatisFragment.class.getName();
+    private static final String TAG = TrafficStatisticsFragment.class.getName();
     @BindView(R2.id.trafficstatistics_total_tv)
     DigitalRollingTextView trafficstatisticsTotalTv;
     @BindView(R2.id.trafficstatistics_total_dw_tv)
@@ -58,17 +57,17 @@ public class TrafficStatisFragment extends Fragment implements TrafficStatisCont
     TextView trafficstatisticsTimeTv;
     @BindView(R2.id.trafficstatistics_rv)
     RecyclerView trafficstatisticsRv;
-    private TrafficStatisContract.Presenter presenter;
-    private TrafficStatisAdapter mAdapter;
+    private TrafficStatisticsContract.Presenter presenter;
+    private TrafficStatisticsAdapter mAdapter;
     private static final int REQUEST_CODE = 0X01;
 
-    public TrafficStatisFragment() {
+    public TrafficStatisticsFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static TrafficStatisFragment newInstance() {
-        TrafficStatisFragment fragment = new TrafficStatisFragment();
+    public static TrafficStatisticsFragment newInstance() {
+        TrafficStatisticsFragment fragment = new TrafficStatisticsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -78,53 +77,56 @@ public class TrafficStatisFragment extends Fragment implements TrafficStatisCont
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new TrafficStatisPresenter(this, getContext());
-        EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "trafficstatis");
+        new TrafficStatisticsPresenter(this, getContext());
+        EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Traffic Statistics has been used!");
     }
 
     @Override
     public void showData(List<TrafficStatisBean> mlists) {
-        if(mlists!=null){
+        if (mlists != null) {
             mAdapter.setNewData(mlists);
         }
     }
 
     @Override
     public void showAllTraffic(WifiMobileBean bean) {
-        if(bean==null){
+        if (bean == null) {
             return;
         }
 
-        FormatUtil.FileSize mFileSize=FormatUtil.formatSizeBy1024(bean.getMobileSize()+bean.getWifiSize());
-        if(trafficstatisticsTotalTv!=null&&mFileSize!=null){
+        FormatUtil.FileSize mFileSize = FormatUtil.formatSizeBy1024(bean.getMobileSize() + bean.getWifiSize());
+        if (trafficstatisticsTotalTv != null && mFileSize != null) {
             trafficstatisticsTotalTv.setDuration(2000);
             trafficstatisticsTotalTv.setModleType(DigitalRollingTextView.ModleType.MONEY_TYPE);
-            trafficstatisticsTotalTv.setContent(mFileSize.mSize+"");
-            trafficstatisticsTotalDwTv.setText(mFileSize.mUnit.name()+"");
+            trafficstatisticsTotalTv.setContent(String.valueOf(mFileSize.mSize));
+            trafficstatisticsTotalDwTv.setText(String.valueOf(mFileSize.mUnit.name()));
         }
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void showPermission() {
-        RxPermissions rxPermission = new RxPermissions(getActivity());
+        RxPermissions rxPermission = new RxPermissions(Objects.requireNonNull(getActivity()));
         rxPermission.requestEach(Manifest.permission.READ_PHONE_STATE).subscribe(new Consumer<Permission>() {
             @Override
             public void accept(Permission permission) throws Exception {
-                if(permission.granted){//授权了
-                    if(!hasPermissionToReadNetworkStats()){//去授权
-                        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-                        startActivityForResult(intent, REQUEST_CODE);
-                    }else{
-                        if(presenter!=null){
+                if (permission.granted) {//授权了
+                    if (!hasPermissionToReadNetworkStats()) {//去授权
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+                            startActivityForResult(intent, REQUEST_CODE);
+                        }
+                    } else {
+                        if (presenter != null) {
                             presenter.getMonthSize();
                             presenter.getMonthTrafficStatistics();
                         }
                     }
-                }else{
-                    AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "NOTICTION", "Sorry! Permissions is not get,This modle can't use,Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
+                } else {
+                    AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "Notice!", "Sorry! We have no access to do this, Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
                         @Override
                         public void callback() {
-                            if(getActivity()!=null){
+                            if (getActivity() != null) {
                                 getActivity().finish();
                             }
                         }
@@ -150,15 +152,15 @@ public class TrafficStatisFragment extends Fragment implements TrafficStatisCont
 
 
     @Override
-    public void setPresenter(TrafficStatisContract.Presenter presenter) {
-        this.presenter =presenter;
+    public void setPresenter(TrafficStatisticsContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
     public void initView() {
 
-        trafficstatisticsTimeTv.setText(TimeUtil.currentMonthStr()+getString(R.string.trafficstatis_month)+"Used");
-        mAdapter = new TrafficStatisAdapter();
+        trafficstatisticsTimeTv.setText(TimeUtil.currentMonthStr() + getString(R.string.trafficstatis_month) + "Used");
+        mAdapter = new TrafficStatisticsAdapter();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         trafficstatisticsRv.setLayoutManager(layoutManager);
@@ -190,17 +192,17 @@ public class TrafficStatisFragment extends Fragment implements TrafficStatisCont
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE){
-            if(hasPermissionToReadNetworkStats()){
-                if(presenter!=null){
+        if (requestCode == REQUEST_CODE) {
+            if (hasPermissionToReadNetworkStats()) {
+                if (presenter != null) {
                     presenter.getMonthSize();
                     presenter.getMonthTrafficStatistics();
                 }
-            }else{
+            } else {
                 AlertSingleDialog dialog = new AlertSingleDialog(getContext(), "PERMISSIONS", "Sorry! Permissions is not get,This modle can't use,Please try again。", "Sure", new AlertSingleDialog.ConfirmListener() {
                     @Override
                     public void callback() {
-                        if(getActivity()!=null){
+                        if (getActivity() != null) {
                             getActivity().finish();
                         }
                     }

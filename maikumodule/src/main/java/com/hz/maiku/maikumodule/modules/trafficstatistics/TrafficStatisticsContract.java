@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.trafficstatis;
+package com.hz.maiku.maikumodule.modules.trafficstatistics;
 
 import com.hz.maiku.maikumodule.base.BasePresenter;
 import com.hz.maiku.maikumodule.base.BaseView;
@@ -14,9 +14,9 @@ import java.util.List;
  * @date 2018/12/18
  * @email 252774645@qq.com
  */
-public class TrafficStatisContract {
+public class TrafficStatisticsContract {
 
-    public interface View extends BaseView<TrafficStatisContract.Presenter> {
+    public interface View extends BaseView<TrafficStatisticsContract.Presenter> {
         //显示当前运行的进行数据
         void showData(List<TrafficStatisBean> mlists);
         void showAllTraffic(WifiMobileBean bean);

@@ -39,9 +39,6 @@ import butterknife.ButterKnife;
 /**
  * @author heguogui
  * @version v 1.0.0
- * @describe
- * @date 2018/12/21
- * @email 252774645@qq.com
  */
 public class SettingAppFragment extends Fragment implements SettingAppConstract.View {
 
@@ -99,21 +96,21 @@ public class SettingAppFragment extends Fragment implements SettingAppConstract.
         notificationAllowedRb.setOnClickListener(new MyOnClickListener(1));
 
 
-        boolean openstate = (boolean) SpHelper.getInstance().get(Constant.NOTIFICATION_OPEN_STATE,false);
-        if(openstate){
+        boolean openstate = (boolean) SpHelper.getInstance().get(Constant.NOTIFICATION_OPEN_STATE, false);
+        if (openstate) {
             settingappOpenstateSw.setChecked(true);
-        }else{
+        } else {
             settingappOpenstateSw.setChecked(false);
         }
         settingappOpenstateSw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Notification Cleaner Open");
-                    SpHelper.getInstance().put(Constant.NOTIFICATION_OPEN_STATE,true);
+                if (isChecked) {
+                    EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Notification Cleaner clicked!");
+                    SpHelper.getInstance().put(Constant.NOTIFICATION_OPEN_STATE, true);
                     presenter.subscribe();
-                }else{
-                    SpHelper.getInstance().put(Constant.NOTIFICATION_OPEN_STATE,false);
+                } else {
+                    SpHelper.getInstance().put(Constant.NOTIFICATION_OPEN_STATE, false);
                     presenter.subscribe();
                 }
             }
@@ -202,7 +199,7 @@ public class SettingAppFragment extends Fragment implements SettingAppConstract.
     @Override
     public void onResume() {
         super.onResume();
-        NewbieGuide.with(this).setLabel("settingappOpenstateSw").addGuidePage(GuidePage.newInstance().addHighLight(settingappOpenstateSw,HighLight.Shape.CIRCLE).setLayoutRes(R.layout.guide_notification_open_layout)).setShowCounts(1).show();
+        NewbieGuide.with(this).setLabel("settingappOpenstateSw").addGuidePage(GuidePage.newInstance().addHighLight(settingappOpenstateSw, HighLight.Shape.CIRCLE).setLayoutRes(R.layout.guide_notification_open_layout)).setShowCounts(1).show();
         presenter.subscribe();
     }
 

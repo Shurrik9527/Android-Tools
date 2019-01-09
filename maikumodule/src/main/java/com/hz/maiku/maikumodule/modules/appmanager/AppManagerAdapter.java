@@ -62,10 +62,10 @@ public class AppManagerAdapter extends BaseAdapter {
         holder.ivAppIcon.setImageDrawable(applicationInfo.loadIcon(context.getPackageManager()));
         holder.tvAppName.setText(applicationInfo.loadLabel(context.getPackageManager()));
         holder.tvAppPackageName.setText(applicationInfo.packageName);
-        holder.bUnstall.setOnClickListener(new View.OnClickListener() {
+        holder.bUninstall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventUtil.sendEvent(context, AFInAppEventType.START_TRIAL, "App Managerment");
+                EventUtil.sendEvent(context, AFInAppEventType.START_TRIAL, "Someone try to uninstall by App Manager!");
                 Uri uri = Uri.parse("package:" + applicationInfo.packageName);
                 //创建Intent意图
                 Intent intent = new Intent(Intent.ACTION_DELETE, uri);
@@ -84,7 +84,7 @@ public class AppManagerAdapter extends BaseAdapter {
         @BindView(R2.id.tv_apppackagename)
         TextView tvAppPackageName;
         @BindView(R2.id.b_uninstall)
-        Button bUnstall;
+        Button bUninstall;
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }

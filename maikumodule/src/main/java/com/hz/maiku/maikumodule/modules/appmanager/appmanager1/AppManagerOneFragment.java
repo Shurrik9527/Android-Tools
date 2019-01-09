@@ -26,7 +26,7 @@ import com.hz.maiku.maikumodule.tasks.UninstallAppTask;
 import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,6 +46,7 @@ public class AppManagerOneFragment extends Fragment implements AppManagerOneCont
     private int count;
     private APPManagerOneAdapter adapter;
     private UninstallReceiver mUninstallReceiver;
+
     public AppManagerOneFragment() {
         // Required empty public constructor
     }
@@ -108,15 +109,15 @@ public class AppManagerOneFragment extends Fragment implements AppManagerOneCont
         appmanageroneRv.addOnItemTouchListener(new OnItemChildClickListener() {
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                data =adapter.getData();
-                AppManagerBean managerBean =data.get(position);
-                if(data!=null&&data.size()>0){
-                    if(view.getId()==R.id.appmanager_item_rl){
+                data = adapter.getData();
+                AppManagerBean managerBean = data.get(position);
+                if (data != null && data.size() > 0) {
+                    if (view.getId() == R.id.appmanager_item_rl) {
                         Intent intent = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
                         intent.addCategory(Intent.CATEGORY_DEFAULT);
-                        intent.setData(Uri.parse("package:"+managerBean.getApplicationInfo().packageName));
+                        intent.setData(Uri.parse("package:" + managerBean.getApplicationInfo().packageName));
                         getContext().startActivity(intent);
-                    }else if(view.getId()==R.id.appmanager_item_cb) {
+                    } else if (view.getId() == R.id.appmanager_item_cb) {
                         if (managerBean.isSelect()) {
                             managerBean.setSelect(false);
                         } else {
@@ -136,19 +137,19 @@ public class AppManagerOneFragment extends Fragment implements AppManagerOneCont
 
     @Override
     public void showMessageTips(String msg) {
-        ToastUtil.showToast(getContext(),msg);
+        ToastUtil.showToast(getContext(), msg);
     }
 
     @Override
     public void refresh(String packageName) {
-        if(data!=null){
+        if (data != null) {
 
-            if(packageName.contains(":")){
-                packageName =packageName.split(":")[1];
+            if (packageName.contains(":")) {
+                packageName = packageName.split(":")[1];
             }
-            for (AppManagerBean appManagerBean :data){
-                if(appManagerBean.getApplicationInfo().packageName.equals(packageName)){
-                    Log.i(TAG,"==="+appManagerBean.getApplicationInfo().packageName);
+            for (AppManagerBean appManagerBean : data) {
+                if (appManagerBean.getApplicationInfo().packageName.equals(packageName)) {
+                    Log.i(TAG, "===" + appManagerBean.getApplicationInfo().packageName);
                     data.remove(appManagerBean);
                     break;
                 }
@@ -173,20 +174,20 @@ public class AppManagerOneFragment extends Fragment implements AppManagerOneCont
     @Override
     public void refreshView() {
 
-        if(appmanageroneBtn!=null){
-            if(data!=null){
-                count =0;
-                for (AppManagerBean mbean:data){
-                    if(mbean.isSelect()){
+        if (appmanageroneBtn != null) {
+            if (data != null) {
+                count = 0;
+                for (AppManagerBean mbean : data) {
+                    if (mbean.isSelect()) {
                         count++;
                     }
                 }
-                if(count>0){
-                    appmanageroneBtn.setText("Uninstall("+count+")");
-                }else {
+                if (count > 0) {
+                    appmanageroneBtn.setText("Uninstall(" + count + ")");
+                } else {
                     appmanageroneBtn.setText("Uninstall");
                 }
-            }else {
+            } else {
                 appmanageroneBtn.setText("Uninstall");
             }
         }
@@ -199,9 +200,9 @@ public class AppManagerOneFragment extends Fragment implements AppManagerOneCont
     private class UninstallReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent!=null){
+            if (intent != null) {
                 String packageName = intent.getDataString();
-                if(!TextUtils.isEmpty(packageName)){
+                if (!TextUtils.isEmpty(packageName)) {
                     refresh(packageName);
                 }
             }
@@ -217,15 +218,15 @@ public class AppManagerOneFragment extends Fragment implements AppManagerOneCont
 
     @OnClick(R2.id.appmanagerone_btn)
     public void onClick() {
-        if(count==0){
+        if (count == 0) {
             showMessageTips("Please select need to uninstall App");
-        }else{
-            if(StringUtil.isFastDoubleClick()){
+        } else {
+            if (StringUtil.isFastDoubleClick()) {
                 return;
             }
-            EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "App Managerment");
-            if(data!=null&&data.size()>0){
-                new UninstallAppTask(getContext(),data).execute();
+            EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Someone try to uninstall by App Manager's Multiple selection!");
+            if (data != null && data.size() > 0) {
+                new UninstallAppTask(getContext(), data).execute();
             }
         }
 

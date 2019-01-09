@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.trafficstatis;
+package com.hz.maiku.maikumodule.modules.trafficstatistics;
 
 import android.text.TextUtils;
 import android.widget.ImageView;
@@ -17,10 +17,10 @@ import com.hz.maiku.maikumodule.util.FormatUtil;
  * @date 2018/12/18
  * @email 252774645@qq.com
  */
-public class TrafficStatisAdapter extends BaseQuickAdapter<TrafficStatisBean,BaseViewHolder> {
+public class TrafficStatisticsAdapter extends BaseQuickAdapter<TrafficStatisBean,BaseViewHolder> {
 
 
-    public TrafficStatisAdapter() {
+    public TrafficStatisticsAdapter() {
         super(R.layout.trafficstatis_item_layout);
     }
 

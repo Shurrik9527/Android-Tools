@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.trafficstatis;
+package com.hz.maiku.maikumodule.modules.trafficstatistics;
 
 import android.support.v4.app.Fragment;
 import com.hz.maiku.maikumodule.R;
@@ -11,7 +11,7 @@ import com.hz.maiku.maikumodule.base.BaseActivity;
  * @date 2018/12/18
  * @email 252774645@qq.com
  */
-public class TrafficStatisActivity extends BaseActivity {
+public class TrafficStatisticsActivity extends BaseActivity {
     @Override
     protected int getContentViewId() {
         return R.layout.base_activity;
@@ -19,7 +19,7 @@ public class TrafficStatisActivity extends BaseActivity {
 
     @Override
     protected Fragment getFragment() {
-        return TrafficStatisFragment.newInstance();
+        return TrafficStatisticsFragment.newInstance();
     }
 
     @Override

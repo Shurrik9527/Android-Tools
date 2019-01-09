@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.trafficstatis;
+package com.hz.maiku.maikumodule.modules.trafficstatistics;
 
 import android.content.Context;
 import android.os.Build;
@@ -8,7 +8,6 @@ import com.hz.maiku.maikumodule.bean.TrafficStatisBean;
 import com.hz.maiku.maikumodule.bean.WifiMobileBean;
 import com.hz.maiku.maikumodule.manager.LoadingDialogManager;
 import com.hz.maiku.maikumodule.util.TrafficStatisUtil;
-import com.hz.maiku.maikumodule.widget.dialog.LoadingDialog;
 
 import java.util.List;
 import io.reactivex.Observable;
@@ -25,14 +24,14 @@ import io.reactivex.schedulers.Schedulers;
  * @date 2018/11/30
  * @email 252774645@qq.com
  */
-public class TrafficStatisPresenter implements TrafficStatisContract.Presenter{
+public class TrafficStatisticsPresenter implements TrafficStatisticsContract.Presenter{
 
 
-    private static final String TAG =TrafficStatisPresenter.class.getName();
+    private static final String TAG =TrafficStatisticsPresenter.class.getName();
     private Context mContext;
-    private TrafficStatisContract.View mView=null;
+    private TrafficStatisticsContract.View mView=null;
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public TrafficStatisPresenter(final TrafficStatisContract.View view, Context context) {
+    public TrafficStatisticsPresenter(final TrafficStatisticsContract.View view, Context context) {
         this.mView = view;
         this.mContext =context;
         mView.setPresenter(this);

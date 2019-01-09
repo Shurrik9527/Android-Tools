@@ -79,7 +79,7 @@
         <activity
             android:name="com.hz.maiku.maikumodule.base.EmptyActivity"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name="com.hz.maiku.maikumodule.modules.trafficstatis.TrafficStatisActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.trafficstatistics.TrafficStatisticsActivity" />
         <activity android:name="com.hz.maiku.maikumodule.modules.wifimanager.WifiManagerActivity" />
         <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.NotificationCleanerActivity" />
         <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.settingapp.SettingAppActivity" />

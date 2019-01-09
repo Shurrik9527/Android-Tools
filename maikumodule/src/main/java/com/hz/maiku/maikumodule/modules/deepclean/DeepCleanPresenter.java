@@ -5,12 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import com.hz.maiku.maikumodule.bean.AlbumBean;
-import com.hz.maiku.maikumodule.bean.TrafficStatisBean;
-import com.hz.maiku.maikumodule.bean.WifiMobileBean;
-import com.hz.maiku.maikumodule.manager.LoadingDialogManager;
-import com.hz.maiku.maikumodule.modules.trafficstatis.TrafficStatisContract;
 import com.hz.maiku.maikumodule.util.DeepCleanUtil;
-import com.hz.maiku.maikumodule.util.TrafficStatisUtil;
 
 import java.util.List;
 
