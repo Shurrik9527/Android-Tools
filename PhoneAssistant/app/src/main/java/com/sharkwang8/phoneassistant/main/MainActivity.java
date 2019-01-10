@@ -77,15 +77,6 @@ public class MainActivity extends BaseActivity {
         setIcon(getResources().getDrawable(R.drawable.ic_menu));
         //读取最新广告配置并展示
         AdUtil.getAdTypeAndShow(this, "MainActivity.init()");
-
-
-        //守护进程
-//        if (Build.VERSION.SDK_INT >= 21) {
-//            startJobScheduler();
-//        } else {
-//            startService(new Intent(getApplicationContext(), GrayService.class));
-//        }
-
     }
 
     @Override

@@ -30,7 +30,7 @@ import io.reactivex.schedulers.Schedulers;
 public class AdUtil {
     //广告出现的时间
     public static long SHOW_TIME = 0;
-    public static int AD_TYPE = AdUtil.TYPE_FACEBOOK;
+    private static int AD_TYPE = AdUtil.TYPE_FACEBOOK;
     /**
      * 1 开启
      * 0 关闭
@@ -40,6 +40,7 @@ public class AdUtil {
 
     private static final int TYPE_FACEBOOK = 1;
     private static final int TYPE_ADMOB = 2;
+    private static final int TYPE_BAIDU = 3;
     private static final String TAG = AdUtil.class.getSimpleName();
     /**
      * 发布第一版的时候设置为false, 其余情况下都是true
@@ -49,14 +50,16 @@ public class AdUtil {
     /**
      * 显示广告
      */
-    public static void showAds(Context context, String source) {
-        if (IS_SHOW_AD) {
+    public static void showAds(Context context, String source) { if (IS_SHOW_AD) {
             switch (AdUtil.AD_TYPE) {
                 case TYPE_FACEBOOK:
                     AdUtil.showFacebookAds(context);
                     break;
                 case TYPE_ADMOB:
                     AdUtil.showAdModAds(context);
+                    break;
+                case TYPE_BAIDU:
+//                    AdUtil.showBaiduAds(context);
                     break;
                 default:
                     //判断Fackbook是否安装
@@ -70,6 +73,40 @@ public class AdUtil {
             Log.e(TAG, "Interstitial ad at " + source);
         }
     }
+
+//    private static void showBaiduAds(final Context context) {
+//        final com.duapps.ad.InterstitialAd interstitialAd = new InterstitialAd(context,162105, InterstitialAd.Type.SCREEN);
+//        interstitialAd.setInterstitialListener(new AbsInterstitialListener() {
+//            String TAG = "Baidu";
+//            @Override
+//            public void onAdFail(int errcode) {
+//                Log.d(TAG, "Interstitial call to onAdFail, errorcode(" + errcode + ")");
+//            }
+//
+//            @Override
+//            public void onAdReceive() {
+//                interstitialAd.show();
+//                Log.d(TAG, "Interstitial call to onAdReceive()!");
+//            }
+//
+//            @Override
+//            public void onAdDismissed() {
+//                Log.d(TAG, "Interstitial call to onAdDismissed()!");
+//                interstitialAd.destroy();
+//            }
+//
+//            @Override
+//            public void onAdPresent() {
+//                Log.d(TAG, "Interstitial call to onAdPresent()!");
+//            }
+//
+//            @Override
+//            public void onAdClicked() {
+//                Log.d(TAG, "Interstitial call to onAdClicked()!");
+//            }
+//        });
+//        interstitialAd.load();
+//    }
 
     private static void showFacebookAds(final Context context) {
         //Logcat search "Test mode device hash"
@@ -141,6 +178,7 @@ public class AdUtil {
      * If you are receiving test ads then your implementation is fine.
      * Just wait a few hours and see if you are able to receive live ads then.
      * If not, can send us your Ad Unit ID for us to look into.
+     *
      * @param context
      */
     private static void showAdModAds(final Context context) {
