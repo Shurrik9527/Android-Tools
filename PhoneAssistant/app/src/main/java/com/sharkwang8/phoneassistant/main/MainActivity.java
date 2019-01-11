@@ -8,10 +8,13 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.appsflyer.AFInAppEventType;
+import com.duapps.ad.AbsInterstitialListener;
+import com.duapps.ad.InterstitialAd;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.modules.aboutus.AboutUsActivity;
 import com.hz.maiku.maikumodule.modules.applock.AppLockActivity;
@@ -31,7 +34,7 @@ import butterknife.BindView;
 /**
  * Created by Shurrik on 2018/12/26.
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements AdUtil.BaiduAdListener {
 
     @BindView(R.id.fl_content)
     FrameLayout flContent;
@@ -75,6 +78,9 @@ public class MainActivity extends BaseActivity {
     protected void init() {
         super.init();
         setIcon(getResources().getDrawable(R.drawable.ic_menu));
+
+        //百度广告监听
+        AdUtil.init(this);
         //读取最新广告配置并展示
         AdUtil.getAdTypeAndShow(this, "MainActivity.init()");
     }
@@ -169,6 +175,40 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void showBaiduAds() {
+        InterstitialAd interstitialAd = new InterstitialAd(this, 162105, InterstitialAd.Type.SCREEN);
+        interstitialAd.setInterstitialListener(new AbsInterstitialListener() {
+            String TAG = "Baidu";
+            @Override
+            public void onAdFail(int errorCode) {
+                Log.d(TAG, "Interstitial call to onAdFail, errorCode(" + errorCode + ")");
+            }
+
+            @Override
+            public void onAdReceive() {
+                interstitialAd.show();
+                Log.d(TAG, "Interstitial call to onAdReceive()!");
+            }
+
+            @Override
+            public void onAdDismissed() {
+                Log.d(TAG, "Interstitial call to onAdDismissed()!");
+                interstitialAd.destroy();
+            }
+
+            @Override
+            public void onAdPresent() {
+                Log.d(TAG, "Interstitial call to onAdPresent()!");
+            }
+
+            @Override
+            public void onAdClicked() {
+                Log.d(TAG, "Interstitial call to onAdClicked()!");
+            }
+        });
+        interstitialAd.load();
+    }
 
 //    /**
 //     * 5.x以上系统启用 JobScheduler API 进行实现守护进程的唤醒操作
