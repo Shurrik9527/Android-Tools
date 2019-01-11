@@ -11,11 +11,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.appsflyer.AppsFlyerLib;
 import com.baidu.crabsdk.CrabSDK;
-import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.util.ActivityUtil;
 import com.jaeger.library.StatusBarUtil;
@@ -28,16 +26,12 @@ import butterknife.ButterKnife;
 /**
  * @author heguogui
  * @version v 1.0.0
- * @describe Activity 基类
- * @date 2018/9/6
- * @email 252774645@qq.com
  */
 public abstract class BaseActivity extends AppCompatActivity {
     @BindView(R2.id.toolbar)
     Toolbar toolbar;
     @BindColor(R2.color.colorPrimaryDark)
     int colorPrimaryDark;
-
     private ActionBar actionBar;
 
 
@@ -48,22 +42,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 布局文件Id
-     *
-     * @return
      */
     protected abstract int getContentViewId();
 
     /**
      * 获取fragment
-     *
-     * @return
      */
     protected abstract Fragment getFragment();
 
     /**
      * 布局中Fragment的ID
-     *
-     * @return
      */
     protected abstract int getFragmentContentId();
 
@@ -107,8 +95,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initToolbar() {
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
     }
 
     /**
@@ -152,14 +142,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 加载完fragment之后进行一些初始化操作
      */
     protected void init() {
-        if(toolbar!=null){
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onBackPressed();
-                }
-            });
-        }
+
     }
 
 

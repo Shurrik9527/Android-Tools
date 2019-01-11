@@ -96,12 +96,6 @@ public class MaiKuApp extends LitePalApplication {
             if (!TextUtils.isEmpty(PACKAGE_NAME)) {
                 Constant.PACKAGE_NAME = PACKAGE_NAME;
             }
-            if (!TextUtils.isEmpty(COLORPRIMARY)) {
-                Constant.COLORPRIMARY = COLORPRIMARY;
-            }
-            if (!TextUtils.isEmpty(COLORPRIMARYDARK)) {
-                Constant.COLORPRIMARYDARK = COLORPRIMARYDARK;
-            }
         } catch (Exception e) {
             ToastUtil.showToast(this, "You must finish config.properties first.");
         }

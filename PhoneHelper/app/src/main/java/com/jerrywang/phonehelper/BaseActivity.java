@@ -25,9 +25,6 @@ import butterknife.ButterKnife;
 /**
  * @author heguogui
  * @version v 1.0.0
- * @describe Activity 基类
- * @date 2018/9/6
- * @email 252774645@qq.com
  */
 public abstract class BaseActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
@@ -44,22 +41,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 布局文件Id
-     *
-     * @return
      */
     protected abstract int getContentViewId();
 
     /**
      * 获取fragment
-     *
-     * @return
      */
     protected abstract Fragment getFragment();
 
     /**
      * 布局中Fragment的ID
-     *
-     * @return
      */
     protected abstract int getFragmentContentId();
 
@@ -103,8 +94,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initToolbar() {
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
     }
 
     /**

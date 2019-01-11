@@ -22,7 +22,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:layout_centerVertical="true"
-            app:queryHint="search app"
+            app:queryHint="Search App"
             app:iconifiedByDefault="false"
             android:clickable="false"
             android:focusable="false"

@@ -172,7 +172,7 @@ public class GestureCreateFragment extends Fragment implements GestureCreateCont
     @Override
     public void startActivity(Context mContext, Class<?> mclass, Bundle mBundle) {
         //创建锁屏密码成功
-        EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "App Locked");
+        EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Someone turn on the App Locker!");
         SpHelper.getInstance().put(Constant.LOCK_STATE,true);////开启应用锁开关
         getActivity().startService(new Intent(getActivity(), LockService.class));
         SpHelper.getInstance().put(Constant.LOCK_IS_FIRST_LOCK, false);//第一次设置成功

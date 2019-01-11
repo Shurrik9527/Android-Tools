@@ -3,22 +3,13 @@ package com.hz.maiku.maikumodule.modules.deepclean;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
-
 import com.hz.maiku.maikumodule.bean.AlbumBean;
 import com.hz.maiku.maikumodule.bean.ApkBean;
 import com.hz.maiku.maikumodule.bean.AudioBean;
-import com.hz.maiku.maikumodule.bean.TrafficStatisBean;
 import com.hz.maiku.maikumodule.bean.VideoBean;
-import com.hz.maiku.maikumodule.bean.WifiMobileBean;
-import com.hz.maiku.maikumodule.manager.LoadingDialogManager;
-import com.hz.maiku.maikumodule.modules.trafficstatis.TrafficStatisContract;
 import com.hz.maiku.maikumodule.util.DeepCleanUtil;
-import com.hz.maiku.maikumodule.util.TrafficStatisUtil;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;

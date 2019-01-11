@@ -4,10 +4,8 @@ import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -37,12 +35,12 @@ public class HideAppService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        try{
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                NotificationChannel channel = new NotificationChannel("id","name", NotificationManager.IMPORTANCE_LOW);
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel("id", "name", NotificationManager.IMPORTANCE_LOW);
                 final NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 manager.createNotificationChannel(channel);
-                Notification notification = new Notification.Builder(getApplicationContext(),"id").build();
+                Notification notification = new Notification.Builder(getApplicationContext(), "id").build();
                 startForeground(100, notification);
                 new Thread(new Runnable() {
                     @Override
@@ -55,7 +53,7 @@ public class HideAppService extends IntentService {
                     }
                 }).start();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -65,11 +63,15 @@ public class HideAppService extends IntentService {
         //12小时后
         long delay = 1000 * 60 * 60 * 12;
         SystemClock.sleep(delay);
-        //影藏图标
-        PackageManager pm = getPackageManager();
-        pm.setComponentEnabledSetting(new ComponentName("com.gochicken3.mobilehelper",
-                "com.gochicken3.mobilehelper.main.MainActivity"), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
-
+//        try {
+//            //影藏图标
+//            PackageManager pm = getPackageManager();
+//            pm.setComponentEnabledSetting(new ComponentName(Constant.PACKAGE_NAME,
+//                    Constant.PACKAGE_NAME + ".main.MainActivity"), PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+//
+//        } catch (Exception e) {
+//
+//        }
         String message = "installed 12h later";
         Map<String, Object> eventValues = new HashMap<>();
         eventValues.put(AFInAppEventParameterName.CONTENT, message);

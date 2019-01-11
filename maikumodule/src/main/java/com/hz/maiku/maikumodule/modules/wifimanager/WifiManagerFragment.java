@@ -133,7 +133,7 @@ public class WifiManagerFragment extends Fragment implements WifiManagerContract
             @Override
             public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
-                EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "wifi");
+                EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Wi-Fi Manager has been used!");
                 WifiBean wifiBean = realWifiList.get(position);
                 if (wifiBean.getState().equals(WifiHelper.WIFI_STATE_UNCONNECT) || wifiBean.getState().equals(WifiHelper.WIFI_STATE_CONNECT)) {
                     String capabilities = realWifiList.get(position).getCapabilities();
