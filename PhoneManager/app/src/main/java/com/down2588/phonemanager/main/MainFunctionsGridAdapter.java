@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.down2588.phonemanager.R;
+import com.hz.maiku.maikumodule.modules.applock.gesturelock.createlock.GestureCreateActivity;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.CpuCoolerActivity;
+import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
 import com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
 import com.hz.maiku.maikumodule.modules.notificationcleaner.NotificationCleanerActivity;
@@ -65,7 +67,7 @@ public class MainFunctionsGridAdapter extends RecyclerView.Adapter<MainFunctions
                     intent.setClass(context, JunkCleanerActivity.class);
                     break;
                 case R.string.cpu_cooler:
-                    intent.setClass(context, CpuCoolerActivity.class);
+                    intent.setClass(context, CpuCoolerScanActivity.class);
                     break;
                 case R.string.app_manager:
                     intent.setClass(context, AppManagerActivity.class);

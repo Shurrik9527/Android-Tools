@@ -12,6 +12,7 @@ public class ImageBean {
     private String mUrl;
     private boolean isSelect;
     private String mTime;
+    private long size;
 
     public String getmUrl() {
         return mUrl;
@@ -37,12 +38,21 @@ public class ImageBean {
         this.mTime = mTime;
     }
 
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
+
     @Override
     public String toString() {
         return "ImageBean{" +
                 "mUrl='" + mUrl + '\'' +
                 ", isSelect=" + isSelect +
                 ", mTime='" + mTime + '\'' +
+                ", size=" + size +
                 '}';
     }
 }

@@ -67,6 +67,7 @@ public class AlertSingleDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.confirm_tv){
+            confirmListener.callback();
             dismiss();
         }
     }

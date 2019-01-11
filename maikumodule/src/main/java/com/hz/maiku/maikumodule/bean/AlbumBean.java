@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2019/1/4
  * @email 252774645@qq.com
  */
-public class AlbumBean {
+public class AlbumBean implements Comparable<AlbumBean>{
 
     public String firstImagePath;//文件夹的第一张图片路径
     public String folderName;//文件夹名
@@ -67,5 +67,17 @@ public class AlbumBean {
                 ", albumFolder=" + albumFolder +
                 ", imageBeans=" + imageBeans +
                 '}';
+    }
+
+    @Override public int compareTo(AlbumBean o) {
+        int level1 = this.getImageCounts();
+        int level2 = o.getImageCounts();
+        if(level1<level2){
+            return 1;
+        }else if(level1>level2){
+            return -1;
+        }else{
+            return 0;
+        }
     }
 }

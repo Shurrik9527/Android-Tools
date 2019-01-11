@@ -24,7 +24,11 @@ import com.hz.maiku.maikumodule.bean.AppBean;
 import com.hz.maiku.maikumodule.bean.AppInformBean;
 import com.hz.maiku.maikumodule.bean.NotificationBean;
 
+import net.dongliu.apk.parser.ApkFile;
+import net.dongliu.apk.parser.bean.ApkMeta;
+
 import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -35,7 +39,9 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import io.reactivex.Observable;
@@ -533,6 +539,21 @@ public class AppUtil {
             mlists.add(bean);
         }
         return mlists;
+    }
+
+    /**
+     * 根据路径获取apk 信息
+     * @param apkUrl
+     * @return
+     */
+    public static ApkFile readApkInform(String apkUrl){
+        try {
+            ApkFile apkFile = new ApkFile(new File(apkUrl));
+            return apkFile;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

@@ -67,7 +67,6 @@ dependencies {
     implementation 'com.android.installreferrer:installreferrer:1.0'
     //百度Crab
     implementation 'crab.baidu.crabsdk:crabsdk:7.3.5@aar'
-
     //权限控制
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     //数据库工具
@@ -75,7 +74,6 @@ dependencies {
     //RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
     //主要功能模块
     implementation project(':maikumodule')
 }

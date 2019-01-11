@@ -9,7 +9,7 @@
     <string name="common_save">save</string>
     <string name="common_uptate">uptate</string>
     <string name="common_submit">submit</string>
-
+    <string name="common_warm_prompt">Warm prompt</string>
     <!--Junk Files-->
     <string name="junk_cleaner">Junk Cleaner</string>
     <string name="system_cache">System Cache</string>
