@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- 应用锁需要的权限 -->
     <uses-permission android:name="android.permission.REAL_GET_TASKS" />
     <uses-permission

@@ -1173,4 +1173,5 @@ public class LockPatternView extends View {
             }
         };
     }
+
 }

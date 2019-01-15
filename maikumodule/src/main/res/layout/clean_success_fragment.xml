@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+
+    <RelativeLayout
+        android:id="@+id/clean_rotate_rl"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        >
+        <ImageView
+            android:id="@+id/clean_success_iv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/success_icon"
+            android:layout_centerInParent="true"
+            />
+
+        <ImageView
+            android:id="@+id/clean_success_rotate_iv"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@mipmap/rotate_icon0"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <com.hz.maiku.maikumodule.widget.DigitalRollingTextView
+        android:id="@+id/clean_success_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
+        android:text="0.0"
+        android:textStyle="normal"
+        android:layout_below="@+id/clean_rotate_rl"
+        android:layout_centerHorizontal="true"
+        app:runWhenChange="false"
+        />
+    <TextView
+        android:id="@+id/clean_success_dw_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KB"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:layout_toRightOf="@+id/clean_success_tv"
+        android:layout_below="@+id/clean_rotate_rl"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/clean_msg_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:text="Dropped"
+        android:textStyle="normal"
+        android:layout_below="@+id/clean_success_tv"
+        />
+
+
+
+
+</RelativeLayout>

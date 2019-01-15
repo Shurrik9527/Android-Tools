@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+   <GridView
+       android:id="@+id/select_iamge_gv"
+       android:numColumns="3"
+       android:verticalSpacing="2dp"
+       android:horizontalSpacing="2dp"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_above="@+id/select_image_btn"
+       android:layout_marginBottom="2dp"
+       >
+
+   </GridView>
+
+   <Button
+       android:id="@+id/select_image_btn"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_marginLeft="25dp"
+       android:layout_marginRight="25dp"
+       android:layout_marginBottom="@dimen/dp_10"
+       android:textColor="@color/white"
+       android:textSize="15dp"
+       android:gravity="center"
+       android:paddingTop="5dp"
+       android:paddingBottom="5dp"
+       android:background="@drawable/stroke_default_solid_default_radius5"
+       android:text="Clean"
+       android:inputType="text"
+       android:theme="@style/MyButton"
+       />
+
+</RelativeLayout>
+
+

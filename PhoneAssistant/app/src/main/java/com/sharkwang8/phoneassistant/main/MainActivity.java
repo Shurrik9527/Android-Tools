@@ -199,11 +199,13 @@ public class MainActivity extends BaseActivity implements AdUtil.BaiduAdListener
 
             @Override
             public void onAdPresent() {
+                super.onAdPresent();
                 Log.d(TAG, "Interstitial call to onAdPresent()!");
             }
 
             @Override
             public void onAdClicked() {
+                super.onAdPresent();
                 Log.d(TAG, "Interstitial call to onAdClicked()!");
             }
         });

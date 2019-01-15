@@ -65,7 +65,7 @@ public class SpHelper {
         } else {
             editor.putString(key, object.toString());
         }
-        editor.commit();
+        editor.apply();
     }
 
     /**

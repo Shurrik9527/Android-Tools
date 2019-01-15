@@ -1,24 +1,43 @@
 package com.hz.maiku.maikumodule.modules.deepclean;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.bean.AlbumBean;
+import com.hz.maiku.maikumodule.bean.ApkBean;
+import com.hz.maiku.maikumodule.bean.AudioBean;
+import com.hz.maiku.maikumodule.bean.ImageBean;
+import com.hz.maiku.maikumodule.bean.VideoBean;
+import com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImageActivity;
+import com.hz.maiku.maikumodule.modules.deepclean.selectVideo.SelectVideoActivity;
+import com.hz.maiku.maikumodule.modules.deepclean.selectaudio.SelectAudiosActivity;
+import com.hz.maiku.maikumodule.modules.deepclean.uninstallapk.SelectApkActivity;
+import com.hz.maiku.maikumodule.util.FormatUtil;
+import com.hz.maiku.maikumodule.util.SpaceItemDecoration;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.hz.maiku.maikumodule.widget.DigitalRollingTextView;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -105,9 +124,25 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     ImageView deepcleanInstallationpackageNextIv;
     @BindView(R2.id.deepclean_installationpackage_rl)
     RelativeLayout deepcleanInstallationpackageRl;
+    @BindView(R2.id.deepclean_images_num_tv)
+    TextView deepcleanImagesNumTv;
+    @BindView(R2.id.deepclean_videos_num_tv)
+    TextView deepcleanVideosNumTv;
+    @BindView(R2.id.deepclean_uninstallapp_num_tv)
+    TextView deepcleanUninstallappNumTv;
+    @BindView(R2.id.deepclean_audio_num_tv)
+    TextView deepcleanAudioNumTv;
+    @BindView(R2.id.deepclean_appcache_num_tv)
+    TextView deepcleanAppcacheNumTv;
+    @BindView(R2.id.deepclean_largefile_num_tv)
+    TextView deepcleanLargefileNumTv;
+    @BindView(R2.id.deepclean_installationpackage_num_tv)
+    TextView deepcleanInstallationpackageNumTv;
 
     private DeepCleanContract.Presenter presenter;
-    private DeepCleanAdapter mAdapter;
+    private DeepCleanImageAdapter mImageAdapter;
+    private DeepCleanVideoAdapter mDeepCleanVideoAdapter;
+    private DeepCleanUnInstallApkAdapter mDeepCleanUnInstallApkAdapter;
 
     public DeepCleanFragment() {
         // Required empty public constructor
@@ -129,10 +164,193 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     }
 
     @Override
-    public void showData(List<AlbumBean> mlists) {
-        if (mlists != null) {
-            // mAdapter.setNewData(mlists);
+    public void showImageData(List<AlbumBean> mlists) {
+
+        if (mlists == null || mlists.size() == 0) {
+            deepcleanIamgesRv.setVisibility(View.GONE);
+        } else {
+            deepcleanIamgesRv.setVisibility(View.VISIBLE);
+            Collections.sort(mlists);
+            List<ImageBean> mlist = new ArrayList<>();
+            int msize = mlists.get(0).getImageBeans().size();
+            if (msize > 2) {
+                mlist.add(mlists.get(0).getImageBeans().get(0));
+                mlist.add(mlists.get(0).getImageBeans().get(1));
+                mlist.add(mlists.get(0).getImageBeans().get(2));
+            } else if (msize == 2) {
+                mlist.add(mlists.get(0).getImageBeans().get(0));
+                mlist.add(mlists.get(0).getImageBeans().get(1));
+            } else if (msize == 1) {
+                mlist.add(mlists.get(0).getImageBeans().get(0));
+            }
+            if (mImageAdapter != null) {
+                mImageAdapter.setNewData(mlist);
+            }
+            if (deepcleanImagesNumTv != null) {
+                List<ImageBean> mImageBeanlists = new ArrayList<>();
+                for (int i = 0; i < mlists.size(); i++) {
+                    mImageBeanlists.addAll(mlists.get(i).getImageBeans());
+                }
+                long mSize = 0;
+                for (int i = 0; i < mImageBeanlists.size(); i++) {
+                    ImageBean bean = mImageBeanlists.get(i);
+                    mSize = mSize + bean.getSize();
+                }
+                if (mSize > 0) {
+                    FormatUtil.FileSize mFileSize = FormatUtil.formatFileSize(mSize);
+                    String msizes = mFileSize.mSize;
+                    if (msizes.contains(",")) {
+                        msizes = msizes.replace(",", ".");
+                    }
+                    BigDecimal bigDecimal = new BigDecimal(msizes);
+                    float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+                    if (deepcleanImagesNumTv != null) {
+                        deepcleanImagesNumTv.setText(dropped + " " + mFileSize.mUnit + "");
+                    }
+                }
+            }
         }
+    }
+
+    @Override
+    public void showVideos(List<VideoBean> mlists) {
+
+        if (mlists == null || mlists.size() == 0) {
+            deepcleanVideosRv.setVisibility(View.GONE);
+        } else {
+            deepcleanVideosRv.setVisibility(View.VISIBLE);
+            List<VideoBean> mlist = new ArrayList<>();
+            int msize = mlists.size();
+            if (msize == 5) {
+                mlist.add(mlists.get(0));
+                mlist.add(mlists.get(1));
+                mlist.add(mlists.get(2));
+                mlist.add(mlists.get(3));
+                mlist.add(mlists.get(4));
+            } else if (msize == 4) {
+                mlist.add(mlists.get(0));
+                mlist.add(mlists.get(1));
+                mlist.add(mlists.get(2));
+                mlist.add(mlists.get(3));
+            } else if (msize == 3) {
+                mlist.add(mlists.get(0));
+                mlist.add(mlists.get(1));
+                mlist.add(mlists.get(2));
+            } else if (msize == 2) {
+                mlist.add(mlists.get(0));
+                mlist.add(mlists.get(1));
+            } else if (msize == 1) {
+                mlist.add(mlists.get(0));
+            }
+            if (mDeepCleanVideoAdapter != null) {
+                mDeepCleanVideoAdapter.setNewData(mlist);
+            }
+            if (deepcleanVideosNumTv != null) {
+
+                long mSize = 0;
+                for (int i = 0; i < mlist.size(); i++) {
+                    VideoBean bean = mlist.get(i);
+                    mSize = mSize + bean.getSize();
+                }
+                if (mSize > 0) {
+                    FormatUtil.FileSize mFileSize = FormatUtil.formatFileSize(mSize);
+                    String msizes = mFileSize.mSize;
+                    if (msizes.contains(",")) {
+                        msizes = msizes.replace(",", ".");
+                    }
+                    BigDecimal bigDecimal = new BigDecimal(msizes);
+                    float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+                    if (deepcleanVideosNumTv != null) {
+                        deepcleanVideosNumTv.setText(dropped + " " + mFileSize.mUnit + "");
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    @Override
+    public void showApks(List<ApkBean> mlists) {
+
+        if (mlists == null || mlists.size() == 0) {
+            deepcleanUninstallappRv.setVisibility(View.GONE);
+        } else {
+            deepcleanUninstallappRv.setVisibility(View.VISIBLE);
+            List<ApkBean> mlist = new ArrayList<>();
+            int msize = mlists.size();
+            if (msize == 5) {
+                mlist.add(mlists.get(0));
+                mlist.add(mlists.get(1));
+                mlist.add(mlists.get(2));
+                mlist.add(mlists.get(3));
+                mlist.add(mlists.get(4));
+            } else if (msize == 4) {
+                mlist.add(mlists.get(0));
+                mlist.add(mlists.get(1));
+                mlist.add(mlists.get(2));
+                mlist.add(mlists.get(3));
+            } else if (msize == 3) {
+                mlist.add(mlists.get(0));
+                mlist.add(mlists.get(1));
+                mlist.add(mlists.get(2));
+            } else if (msize == 2) {
+                mlist.add(mlists.get(0));
+                mlist.add(mlists.get(1));
+            } else if (msize == 1) {
+                mlist.add(mlists.get(0));
+            }
+            if (mDeepCleanUnInstallApkAdapter != null) {
+                mDeepCleanUnInstallApkAdapter.setNewData(mlist);
+            }
+            if (deepcleanUninstallappNumTv != null) {
+
+                long mSize = 0;
+                for (int i = 0; i < mlist.size(); i++) {
+                    ApkBean bean = mlist.get(i);
+                    mSize = mSize + bean.getmSize();
+                }
+                if (mSize > 0) {
+                    FormatUtil.FileSize mFileSize = FormatUtil.formatFileSize(mSize);
+                    String msizes = mFileSize.mSize;
+                    if (msizes.contains(",")) {
+                        msizes = msizes.replace(",", ".");
+                    }
+                    BigDecimal bigDecimal = new BigDecimal(msizes);
+                    float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+                    if (deepcleanUninstallappNumTv != null) {
+                        deepcleanUninstallappNumTv.setText(dropped + " " + mFileSize.mUnit + "");
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    @Override
+    public void showAudios(List<AudioBean> mLists) {
+
+        if (mLists != null && mLists.size() > 0) {
+            long mSize = 0;
+            for (int i = 0; i < mLists.size(); i++) {
+                AudioBean bean = mLists.get(i);
+                mSize = mSize + bean.getSize();
+            }
+            if (mSize > 0) {
+                FormatUtil.FileSize mFileSize = FormatUtil.formatFileSize(mSize);
+                String msizes = mFileSize.mSize;
+                if (msizes.contains(",")) {
+                    msizes = msizes.replace(",", ".");
+                }
+                BigDecimal bigDecimal = new BigDecimal(msizes);
+                float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+                if (deepcleanAudioNumTv != null) {
+                    deepcleanAudioNumTv.setText(dropped + " " + mFileSize.mUnit + "");
+                }
+            }
+        }
+
     }
 
 
@@ -144,20 +362,106 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     @Override
     public void initView() {
 
-        GridLayoutManager gridLayoutIamgesManager = new GridLayoutManager(getActivity(), 4);
-        gridLayoutIamgesManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        GridLayoutManager gridLayoutIamgesManager = new GridLayoutManager(getActivity(), 3);
         deepcleanIamgesRv.setLayoutManager(gridLayoutIamgesManager);
-        GridLayoutManager gridLayoutVideosManager = new GridLayoutManager(getActivity(), 4);
-        gridLayoutVideosManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        deepcleanIamgesRv.setLayoutManager(gridLayoutVideosManager);
-        GridLayoutManager gridLayoutUninstallappManager = new GridLayoutManager(getActivity(), 4);
-        gridLayoutUninstallappManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        deepcleanIamgesRv.setLayoutManager(gridLayoutUninstallappManager);
+        deepcleanIamgesRv.addItemDecoration(new SpaceItemDecoration(10));
+        mImageAdapter = new DeepCleanImageAdapter(getContext());
+        deepcleanIamgesRv.setAdapter(mImageAdapter);
+        deepcleanIamgesRv.addOnItemTouchListener(new OnItemChildClickListener() {
+            @Override
+            public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(getContext(), SelectImageActivity.class));
+            }
+        });
 
 
-        if(presenter!=null){
-            presenter.getImages();
-        }
+        GridLayoutManager gridLayoutVideosManager = new GridLayoutManager(getActivity(), 5);
+        deepcleanVideosRv.setLayoutManager(gridLayoutVideosManager);
+        deepcleanVideosRv.addItemDecoration(new SpaceItemDecoration(10));
+        mDeepCleanVideoAdapter = new DeepCleanVideoAdapter(getContext());
+        deepcleanVideosRv.setAdapter(mDeepCleanVideoAdapter);
+        deepcleanVideosRv.addOnItemTouchListener(new OnItemChildClickListener() {
+            @Override
+            public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(getContext(), SelectVideoActivity.class));
+            }
+        });
+
+
+        GridLayoutManager gridLayoutUninstallappManager = new GridLayoutManager(getActivity(), 5);
+        deepcleanUninstallappRv.setLayoutManager(gridLayoutUninstallappManager);
+        mDeepCleanUnInstallApkAdapter = new DeepCleanUnInstallApkAdapter(getContext());
+        deepcleanUninstallappRv.setAdapter(mDeepCleanUnInstallApkAdapter);
+        deepcleanUninstallappRv.addOnItemTouchListener(new OnItemChildClickListener() {
+            @Override
+            public void onSimpleItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(getContext(), SelectApkActivity.class));
+            }
+        });
+
+        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        deepcleanAudiosRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),SelectAudiosActivity.class));
+            }
+        });
+
+        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
     }
 
@@ -166,6 +470,16 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (presenter != null) {
+            presenter.getImages();
+            presenter.getVideos();
+            presenter.getUnInstallApk();
+            presenter.getAudios();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -180,28 +494,7 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-
-
-    @OnClick({R2.id.deepclean_images_rl, R2.id.deepclean_videos_rl, R2.id.deepclean_uninstallapps_rl, R2.id.deepclean_audios_rl, R2.id.deepclean_appdatas_rl, R2.id.deepclean_largefiles_rl, R2.id.deepclean_installationpackage_rl})
-    public void onClick(View view) {
-        int m_id = view.getId();
-        if(m_id==R2.id.deepclean_images_rl){
-            ToastUtil.showToast(getContext(),"0");
-        }else if(m_id==R2.id.deepclean_videos_rl){
-            ToastUtil.showToast(getContext(),"1");
-        }else if(m_id==R2.id.deepclean_uninstallapps_rl){
-            ToastUtil.showToast(getContext(),"2");
-        }else if(m_id==R2.id.deepclean_audios_rl){
-            ToastUtil.showToast(getContext(),"3");
-        }else if(m_id==R2.id.deepclean_appdatas_rl){
-            ToastUtil.showToast(getContext(),"4");
-        }else if(m_id==R2.id.deepclean_largefiles_rl){
-            ToastUtil.showToast(getContext(),"5");
-        }else if(m_id==R2.id.deepclean_installationpackage_rl){
-            ToastUtil.showToast(getContext(),"6");
-        }
 
     }
+
 }

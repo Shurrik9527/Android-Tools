@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/deepclean_video_icon_iv"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_centerInParent="true"
+            />
+        <TextView
+            android:id="@+id/deepclean_video_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/deepclean_video_icon_iv"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/stroke_gray_solid_transparent_radius5"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -29,5 +29,6 @@
     <color name="stv_slidetounlock">#08f90e</color>
     <color name="red">#ffff0000</color>
     <color name="transparent_default">#00000000</color>
+    <color name="half_transparent">#55000000</color>
 
 </resources>

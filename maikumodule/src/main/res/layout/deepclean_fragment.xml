@@ -82,7 +82,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:descendantFocusability="blocksDescendants"
             android:orientation="vertical"
             >
             <RelativeLayout
@@ -91,7 +90,7 @@
             <RelativeLayout
                 android:id="@+id/deepclean_images_rl"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 >
                 <RelativeLayout
@@ -128,6 +127,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/deepclean_images_num_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00B"
@@ -142,12 +142,11 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/deepclean_iamges_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="90dp"
                     android:layout_below="@+id/deepclean_image_rl"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:focusable="false"
                     >
                 </android.support.v7.widget.RecyclerView>
 
@@ -156,7 +155,7 @@
             <RelativeLayout
                 android:id="@+id/deepclean_videos_rl"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/deepclean_images_rl"
@@ -195,6 +194,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/deepclean_videos_num_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00B"
@@ -209,12 +209,10 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/deepclean_videos_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="90dp"
                     android:layout_below="@+id/deepclean_video_rl"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     >
                 </android.support.v7.widget.RecyclerView>
 
@@ -223,7 +221,7 @@
             <RelativeLayout
                 android:id="@+id/deepclean_uninstallapps_rl"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/deepclean_videos_rl"
@@ -262,6 +260,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/deepclean_uninstallapp_num_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.00B"
@@ -276,12 +275,10 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/deepclean_uninstallapp_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="90dp"
                     android:layout_below="@+id/deepclean_uninstallapp_rl"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
                     >
                 </android.support.v7.widget.RecyclerView>
 
@@ -295,6 +292,7 @@
                 android:background="@color/white"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/deepclean_uninstallapps_rl"
+                android:descendantFocusability="beforeDescendants"
                 >
 
                 <ImageView
@@ -339,6 +337,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/deepclean_audio_num_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.00B"
@@ -402,6 +401,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/deepclean_appcache_num_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.00B"
@@ -466,6 +466,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/deepclean_largefile_num_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.00B"
@@ -529,6 +530,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/deepclean_installationpackage_num_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.00B"

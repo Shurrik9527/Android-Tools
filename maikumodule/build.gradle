@@ -39,9 +39,8 @@ android {
 //makeJar.dependsOn(build)
 
 
-
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -61,6 +60,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     //图片加载框架
     implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
     //RX获取权限
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     //Banner
@@ -69,18 +69,19 @@ dependencies {
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
     //底部菜单栏
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.3'
-
     //动画库
     implementation 'com.airbnb.android:lottie:2.6.0'
     //5.0以上获取后台进程
+    //    implementation 'com.jaredrummler:android-processes:1.0.9'
     implementation 'com.jaredrummler:android-processes:1.0.9'
+
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
     // BaseRecyclerViewAdapterHelper
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     //闪烁的TextView
     implementation 'com.romainpiel.shimmer:library:1.4.0@aar'
     //数据库
-    implementation  'org.litepal.android:core:1.6.1'
+    implementation 'org.litepal.android:core:1.6.1'
     implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
     //AdMob
     implementation 'com.google.android.gms:play-services-ads:17.1.2'
@@ -95,8 +96,10 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
-    implementation ('com.github.huburt-Hu:NewbieGuide:v2.4.0'){
+    implementation('com.github.huburt-Hu:NewbieGuide:v2.4.0') {
         exclude group: 'com.android.support'
     }
+    implementation files('libs/apk-parser-2.5.3.jar')
+
+
 }

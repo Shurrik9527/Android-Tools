@@ -495,4 +495,52 @@ public class TimeUtil {
         return formatter.format(new Date(System.currentTimeMillis()));
     }
 
+
+    public static String videoTime(long time){
+        try {
+
+            if(time==0){
+                return "0s";
+            }else if(time>1000&&time<60000){
+                return String.format("%.2f",(float)time/1000)+"s";
+            }else if(time>60000&&time<3600000){
+                String times =String.format("%.2f",(float)time/60000);
+                return times+"m";
+            }else if(time>3600000){
+                String times =String.format("%.2f",(float)time/3600000);
+                return times+"h";
+            }else {
+                return "0s";
+            }
+
+//            if(time==0){
+//                return "0:00";
+//            }else if(time>1000&&time<60000){
+//                return String.format("%.2f",(float)time/1000)+"s";
+//            }else if(time>60000&&time<3600000){
+//                String times =String.format("%.2f",(float)time/60000);
+//                if(times.contains(",")){
+//                    times =times.replace(",",".");
+//                }
+//                String[] timeStr =times.split(".");
+//                String time2 =String.valueOf(Long.parseLong(timeStr[1])*60);
+//                return timeStr[0]+":"+time2;
+//            }else if(time>3600000){
+//                String times =String.format("%.0f",(float)time/3600000);
+//                if(times.contains(",")){
+//                    times =times.replace(",",".");
+//                }
+//                String[] timeStr =times.split(".");
+//                String time2 =String.valueOf(Long.parseLong(timeStr[1])*3600);
+//                return timeStr[0]+":"+time2+":00";
+//            }else {
+//                return "0:00";
+//            }
+        }catch (Exception e){
+            return "0:00";
+        }
+    }
+
+
+
 }

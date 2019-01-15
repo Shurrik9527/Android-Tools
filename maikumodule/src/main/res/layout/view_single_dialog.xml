@@ -14,7 +14,7 @@
         android:layout_marginTop="20dp"
         android:lineSpacingExtra="8dp"
         android:gravity="center"
-        android:textColor="@color/description_text"
+        android:textColor="@color/default_text"
         android:textSize="18sp"
         tools:text="title" />
 
@@ -26,11 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginTop="20dp"
-        android:textColor="@color/gray1"
+        android:textColor="@color/description_text"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textSize="14sp"
-        android:gravity="left|center_vertical"
+        android:gravity="center"
         tools:text="content" />
 
 
@@ -61,7 +61,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/stroke_default_solid_default_radius5"
             />
     </LinearLayout>
 </RelativeLayout>
