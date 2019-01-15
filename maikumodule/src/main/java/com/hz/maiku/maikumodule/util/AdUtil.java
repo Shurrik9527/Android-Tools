@@ -49,10 +49,22 @@ public class AdUtil {
      */
     public static boolean IS_SHOW_AD = true;
 
+    private static BaiduAdListener listener;
     /**
-     * 显示广告
+     * 百度广告接口
      */
-    public static void showAds(Context context, String source) { if (IS_SHOW_AD) {
+    public interface BaiduAdListener {
+        void showBaiduAds();
+    }
+    public static void init(BaiduAdListener listener) {
+        AdUtil.listener = listener;
+    }
+
+    /**
+     * 直接显示广告
+     */
+    public static void showAds(Context context, String source) {
+        if (IS_SHOW_AD) {
             switch (AdUtil.AD_TYPE) {
                 case TYPE_FACEBOOK:
                     AdUtil.showFacebookAds(context);
@@ -61,7 +73,8 @@ public class AdUtil {
                     AdUtil.showAdModAds(context);
                     break;
                 case TYPE_BAIDU:
-//                    AdUtil.showBaiduAds(context);
+                    if ( AdUtil.listener != null)
+                        AdUtil.listener.showBaiduAds();
                     break;
                 default:
                     //判断Fackbook是否安装

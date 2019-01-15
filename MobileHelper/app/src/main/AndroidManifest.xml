@@ -76,27 +76,10 @@
             android:theme="@style/unlock_activity_style" />
         <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.createlock.GestureCreateActivity" />
         <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.resetlock.ResetPasswordActivity" />
-        <activity android:name="com.hz.maiku.maikumodule.base.EmptyActivity" android:theme="@android:style/Theme.Translucent"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.trafficstatistics.TrafficStatisticsActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.wifimanager.WifiManagerActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.NotificationCleanerActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.settingapp.SettingAppActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.setting.SettingLockActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImageActivity"/>
-        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.cleansuccess.CleanSuccessActivity"
-            android:launchMode="singleTask"
-            />
-        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.selectVideo.SelectVideoActivity"
-            android:launchMode="singleTask"
-            />
-        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.uninstallapk.SelectApkActivity"
-            android:launchMode="singleTask"
-            />
-        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.selectaudio.SelectAudiosActivity"
-            android:launchMode="singleTask"
-            />
+        <activity android:name="com.hz.maiku.maikumodule.modules.notificationcleaner.settingapp.SettingAppActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.setting.SettingLockActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity" />
         <!-- 锁屏服务 -->
         <service android:name="com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerService" />
 
