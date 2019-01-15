@@ -125,5 +125,7 @@
     <string name="deepclean_large_files_msg">Clean large files to free up apace</string>
     <string name="deepclean_installationpackage_msg">Clean unused app installation package</string>
     <string name="deepclean_top_title">Deep Clean</string>
+    <string name="deep_clean_audio_noplay">This voice cannot play!</string>
+    <string name="deep_clean_amr_noplay">Amr is not playable</string>
 
 </resources>

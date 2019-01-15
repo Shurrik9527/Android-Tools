@@ -4,6 +4,8 @@ import com.hz.maiku.maikumodule.base.BasePresenter;
 import com.hz.maiku.maikumodule.base.BaseView;
 import com.hz.maiku.maikumodule.bean.AlbumBean;
 import com.hz.maiku.maikumodule.bean.ApkBean;
+import com.hz.maiku.maikumodule.bean.ApkInformBean;
+import com.hz.maiku.maikumodule.bean.AppBean;
 import com.hz.maiku.maikumodule.bean.AudioBean;
 import com.hz.maiku.maikumodule.bean.VideoBean;
 
@@ -24,6 +26,7 @@ public class DeepCleanContract {
         void showVideos(List<VideoBean> mlists);
         void showApks(List<ApkBean> mlists);
         void showAudios(List<AudioBean> mLists);
+        void showSpecialApk(List<AppBean> mLists);
 
     }
 
@@ -32,5 +35,6 @@ public class DeepCleanContract {
         void getVideos();
         void getUnInstallApk();
         void getAudios();
+        void getSpecialApk();
     }
 }

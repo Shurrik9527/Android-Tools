@@ -6,6 +6,8 @@ import android.util.Log;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AppsFlyerLib;
+import com.duapps.ad.AbsInterstitialListener;
+import com.duapps.ad.InterstitialAd;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.InterstitialAdListener;
@@ -74,39 +76,39 @@ public class AdUtil {
         }
     }
 
-//    private static void showBaiduAds(final Context context) {
-//        final com.duapps.ad.InterstitialAd interstitialAd = new InterstitialAd(context,162105, InterstitialAd.Type.SCREEN);
-//        interstitialAd.setInterstitialListener(new AbsInterstitialListener() {
-//            String TAG = "Baidu";
-//            @Override
-//            public void onAdFail(int errcode) {
-//                Log.d(TAG, "Interstitial call to onAdFail, errorcode(" + errcode + ")");
-//            }
-//
-//            @Override
-//            public void onAdReceive() {
-//                interstitialAd.show();
-//                Log.d(TAG, "Interstitial call to onAdReceive()!");
-//            }
-//
-//            @Override
-//            public void onAdDismissed() {
-//                Log.d(TAG, "Interstitial call to onAdDismissed()!");
-//                interstitialAd.destroy();
-//            }
-//
-//            @Override
-//            public void onAdPresent() {
-//                Log.d(TAG, "Interstitial call to onAdPresent()!");
-//            }
-//
-//            @Override
-//            public void onAdClicked() {
-//                Log.d(TAG, "Interstitial call to onAdClicked()!");
-//            }
-//        });
-//        interstitialAd.load();
-//    }
+    private static void showBaiduAds(final Context context) {
+        final com.duapps.ad.InterstitialAd interstitialAd = new InterstitialAd(context,162105, InterstitialAd.Type.SCREEN);
+        interstitialAd.setInterstitialListener(new AbsInterstitialListener() {
+            String TAG = "Baidu";
+            @Override
+            public void onAdFail(int errcode) {
+                Log.d(TAG, "Interstitial call to onAdFail, errorcode(" + errcode + ")");
+            }
+
+            @Override
+            public void onAdReceive() {
+                interstitialAd.show();
+                Log.d(TAG, "Interstitial call to onAdReceive()!");
+            }
+
+            @Override
+            public void onAdDismissed() {
+                Log.d(TAG, "Interstitial call to onAdDismissed()!");
+                interstitialAd.destroy();
+            }
+
+            @Override
+            public void onAdPresent() {
+                Log.d(TAG, "Interstitial call to onAdPresent()!");
+            }
+
+            @Override
+            public void onAdClicked() {
+                Log.d(TAG, "Interstitial call to onAdClicked()!");
+            }
+        });
+        interstitialAd.load();
+    }
 
     private static void showFacebookAds(final Context context) {
         //Logcat search "Test mode device hash"

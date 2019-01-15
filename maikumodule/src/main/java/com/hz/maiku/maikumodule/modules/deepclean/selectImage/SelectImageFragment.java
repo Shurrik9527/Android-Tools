@@ -23,6 +23,7 @@ import com.hz.maiku.maikumodule.util.FormatUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.widget.dialog.AlertDoubleBtnDialog;
 import com.hz.maiku.maikumodule.widget.dialog.AlertSingleDialog;
+import com.hz.maiku.maikumodule.widget.dialog.ShowImagesDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,7 +100,11 @@ public class SelectImageFragment extends Fragment implements SelectImageContract
         selectIamgeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                if (mlist != null && mlist.size() > 0) {
+                    ImageBean mImageBean = mlist.get(position);
+                    ShowImagesDialog imagesDialog = new ShowImagesDialog(getContext(),mImageBean.getmUrl());
+                    imagesDialog.show();
+                }
             }
         });
 

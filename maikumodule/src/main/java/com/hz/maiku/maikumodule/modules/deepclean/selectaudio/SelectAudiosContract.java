@@ -21,6 +21,7 @@ public class SelectAudiosContract {
         void showAudiosData(List<AudioBean> mlists);
         void reflashView();
         void cleanSuccess(long mSize);
+        void startAudios(String url,int pos);
     }
 
     public interface Presenter extends BasePresenter {

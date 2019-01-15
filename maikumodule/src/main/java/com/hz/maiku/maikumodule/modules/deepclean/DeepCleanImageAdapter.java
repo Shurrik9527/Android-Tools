@@ -9,9 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.bean.ImageBean;
-import com.hz.maiku.maikumodule.bean.TrafficStatisBean;
-import com.hz.maiku.maikumodule.util.AlxImageLoader;
-import com.hz.maiku.maikumodule.util.FormatUtil;
+
 
 
 /**
@@ -23,10 +21,8 @@ import com.hz.maiku.maikumodule.util.FormatUtil;
  */
 public class DeepCleanImageAdapter extends BaseQuickAdapter<ImageBean,BaseViewHolder> {
 
-    private AlxImageLoader mLoader;
     public DeepCleanImageAdapter(Context context) {
         super(R.layout.deepclean_image_item_layout);
-        mLoader = new AlxImageLoader(context);
     }
 
     @Override
@@ -38,7 +34,6 @@ public class DeepCleanImageAdapter extends BaseQuickAdapter<ImageBean,BaseViewHo
             Glide.with(mContext)
                     .load(item.getmUrl())
                     .into(mIcon);
-//            mLoader.setAsyncBitmapFromSD(item.getmUrl(),mIcon,300,false,true,true);
         }
     }
 }

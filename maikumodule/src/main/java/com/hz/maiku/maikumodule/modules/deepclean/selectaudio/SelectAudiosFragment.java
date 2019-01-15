@@ -2,9 +2,11 @@ package com.hz.maiku.maikumodule.modules.deepclean.selectaudio;
 
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +16,20 @@ import android.widget.GridView;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.bean.AudioBean;
+import com.hz.maiku.maikumodule.manager.AudioPlayManager;
 import com.hz.maiku.maikumodule.modules.deepclean.cleansuccess.CleanSuccessActivity;
 import com.hz.maiku.maikumodule.util.FormatUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
+import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.hz.maiku.maikumodule.widget.dialog.AlertDoubleBtnDialog;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 
 
 /**
@@ -39,11 +46,11 @@ public class SelectAudiosFragment extends Fragment implements SelectAudiosContra
     GridView selectAudioGv;
     @BindView(R2.id.select_audio_btn)
     Button selectAudioBtn;
-
+    private MediaPlayer player;
     private SelectAudiosContract.Presenter presenter;
     private SelectAudiosAdapter mSelectAudiosAdapter;
     private List<AudioBean> mlist;
-
+    private int selectPos=-1;
     public SelectAudiosFragment() {
         // Required empty public constructor
     }
@@ -92,6 +99,11 @@ public class SelectAudiosFragment extends Fragment implements SelectAudiosContra
         selectAudioGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (mlist != null && mlist.size() > 0) {
+                    AudioBean mAudioBean = mlist.get(position);
+                    startAudios(mAudioBean.getmUrl(),position);
+                }
 
             }
         });
@@ -170,6 +182,27 @@ public class SelectAudiosFragment extends Fragment implements SelectAudiosContra
         }
         startActivity(mIntent);
         getActivity().finish();
+    }
+
+    @Override
+    public void startAudios(String url,int pos) {
+        if (AudioPlayManager.getInstance().isPlaying() && pos == selectPos) {//正在播放
+            selectPos =-1;
+        } else {
+            selectPos = pos;
+            if(url.contains(".amr")){
+                ToastUtil.showToast(getContext(),getString(R.string.deep_clean_amr_noplay));
+                return;
+            }
+            AudioPlayManager.getInstance().startPlay(url);
+        }
+    }
+
+
+    @Override
+    public void onDestroy() {
+        AudioPlayManager.getInstance().stopPlay();
+        super.onDestroy();
     }
 
     @OnClick(R2.id.select_audio_btn)

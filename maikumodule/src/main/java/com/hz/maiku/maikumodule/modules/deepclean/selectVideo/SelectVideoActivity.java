@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.base.BaseActivity;
-import com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImageFragment;
+
 
 /**
  * @author heguogui

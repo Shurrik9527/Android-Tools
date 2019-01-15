@@ -22,9 +22,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
-
-
     }
 
 }
@@ -74,7 +71,6 @@ dependencies {
     //5.0以上获取后台进程
     //    implementation 'com.jaredrummler:android-processes:1.0.9'
     implementation 'com.jaredrummler:android-processes:1.0.9'
-
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
     // BaseRecyclerViewAdapterHelper
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
@@ -93,13 +89,12 @@ dependencies {
     implementation 'com.android.installreferrer:installreferrer:1.0'
     //百度Crab
     implementation 'crab.baidu.crabsdk:crabsdk:7.3.5@aar'
-
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation('com.github.huburt-Hu:NewbieGuide:v2.4.0') {
         exclude group: 'com.android.support'
     }
     implementation files('libs/apk-parser-2.5.3.jar')
-
-
+    implementation(name: 'baiduad-1.2.2', ext: 'aar')
+    implementation 'com.github.chrisbanes.photoview:library:+'
 }

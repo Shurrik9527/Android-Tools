@@ -21,6 +21,7 @@ import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.bean.AlbumBean;
 import com.hz.maiku.maikumodule.bean.ApkBean;
+import com.hz.maiku.maikumodule.bean.AppBean;
 import com.hz.maiku.maikumodule.bean.AudioBean;
 import com.hz.maiku.maikumodule.bean.ImageBean;
 import com.hz.maiku.maikumodule.bean.VideoBean;
@@ -173,11 +174,23 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
             Collections.sort(mlists);
             List<ImageBean> mlist = new ArrayList<>();
             int msize = mlists.get(0).getImageBeans().size();
-            if (msize > 2) {
+            if (msize >4) {
                 mlist.add(mlists.get(0).getImageBeans().get(0));
                 mlist.add(mlists.get(0).getImageBeans().get(1));
                 mlist.add(mlists.get(0).getImageBeans().get(2));
-            } else if (msize == 2) {
+                mlist.add(mlists.get(0).getImageBeans().get(3));
+                mlist.add(mlists.get(0).getImageBeans().get(4));
+
+            } else if (msize == 4) {
+                mlist.add(mlists.get(0).getImageBeans().get(0));
+                mlist.add(mlists.get(0).getImageBeans().get(1));
+                mlist.add(mlists.get(0).getImageBeans().get(2));
+                mlist.add(mlists.get(0).getImageBeans().get(3));
+            } else if (msize == 3) {
+                mlist.add(mlists.get(0).getImageBeans().get(0));
+                mlist.add(mlists.get(0).getImageBeans().get(1));
+                mlist.add(mlists.get(0).getImageBeans().get(2));
+            }  else if (msize == 2) {
                 mlist.add(mlists.get(0).getImageBeans().get(0));
                 mlist.add(mlists.get(0).getImageBeans().get(1));
             } else if (msize == 1) {
@@ -221,7 +234,7 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
             deepcleanVideosRv.setVisibility(View.VISIBLE);
             List<VideoBean> mlist = new ArrayList<>();
             int msize = mlists.size();
-            if (msize == 5) {
+            if (msize >4) {
                 mlist.add(mlists.get(0));
                 mlist.add(mlists.get(1));
                 mlist.add(mlists.get(2));
@@ -279,7 +292,7 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
             deepcleanUninstallappRv.setVisibility(View.VISIBLE);
             List<ApkBean> mlist = new ArrayList<>();
             int msize = mlists.size();
-            if (msize == 5) {
+            if (msize >4) {
                 mlist.add(mlists.get(0));
                 mlist.add(mlists.get(1));
                 mlist.add(mlists.get(2));
@@ -353,6 +366,11 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
 
     }
 
+    @Override
+    public void showSpecialApk(List<AppBean> mLists) {
+
+    }
+
 
     @Override
     public void setPresenter(DeepCleanContract.Presenter presenter) {
@@ -362,9 +380,8 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     @Override
     public void initView() {
 
-        GridLayoutManager gridLayoutIamgesManager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager gridLayoutIamgesManager = new GridLayoutManager(getActivity(), 5);
         deepcleanIamgesRv.setLayoutManager(gridLayoutIamgesManager);
-        deepcleanIamgesRv.addItemDecoration(new SpaceItemDecoration(10));
         mImageAdapter = new DeepCleanImageAdapter(getContext());
         deepcleanIamgesRv.setAdapter(mImageAdapter);
         deepcleanIamgesRv.addOnItemTouchListener(new OnItemChildClickListener() {
@@ -377,7 +394,6 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
 
         GridLayoutManager gridLayoutVideosManager = new GridLayoutManager(getActivity(), 5);
         deepcleanVideosRv.setLayoutManager(gridLayoutVideosManager);
-        deepcleanVideosRv.addItemDecoration(new SpaceItemDecoration(10));
         mDeepCleanVideoAdapter = new DeepCleanVideoAdapter(getContext());
         deepcleanVideosRv.setAdapter(mDeepCleanVideoAdapter);
         deepcleanVideosRv.addOnItemTouchListener(new OnItemChildClickListener() {
@@ -399,24 +415,28 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
             }
         });
 
+
+
+
+
         deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), SelectImageActivity.class));
             }
         });
 
-        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+        deepcleanVideosRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), SelectVideoActivity.class));
             }
         });
 
-        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+        deepcleanUninstallappRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), SelectApkActivity.class));
             }
         });
 
@@ -427,40 +447,27 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
             }
         });
 
-        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+        deepcleanAppdatasRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ToastUtil.showToast(getContext(),"05");
             }
         });
 
-        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+        deepcleanLargefilesRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ToastUtil.showToast(getContext(),"06");
             }
         });
 
-        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
+        deepcleanInstallationpackageRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ToastUtil.showToast(getContext(),"07");
             }
         });
 
-        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
 
     }

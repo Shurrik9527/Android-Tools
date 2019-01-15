@@ -15,6 +15,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
+import com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.gochicken3.mobilehelper.R;
@@ -126,6 +127,8 @@ public class MainFragment extends Fragment implements MainContract.View {
             if (value >= 1f) {
                 if(getContext()!=null){
                     ToastUtil.showToast(getContext(), "Phone Boosted");
+                    //深度清理
+                    //startActivity(new Intent(getContext(),DeepCleanActivity.class));
                 }
             }
         });

@@ -20,6 +20,7 @@ public class SelectVideoContract {
         void showVideoData(List<VideoBean> mlists);
         void reflashView();
         void cleanSuccess(long mSize);
+        void startVideos(String url);
     }
 
     public interface Presenter extends BasePresenter {

@@ -30,6 +30,11 @@ allprojects {
         maven {
             url 'https://dl.bintray.com/crab/baidu'
         }
+
+        flatDir {
+            dirs project(':maikumodule').file('libs')
+        }
+
     }
 }
 

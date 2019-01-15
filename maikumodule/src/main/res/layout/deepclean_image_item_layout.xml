@@ -9,8 +9,8 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/deepcleanimage_icon_iv"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:src="@mipmap/ic_launcher"
             android:layout_centerInParent="true"
             />

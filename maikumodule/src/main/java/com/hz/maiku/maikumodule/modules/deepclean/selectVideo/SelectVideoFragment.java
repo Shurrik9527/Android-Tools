@@ -2,9 +2,11 @@ package com.hz.maiku.maikumodule.modules.deepclean.selectVideo;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +16,12 @@ import android.widget.GridView;
 
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
-import com.hz.maiku.maikumodule.bean.AlbumBean;
-import com.hz.maiku.maikumodule.bean.ImageBean;
 import com.hz.maiku.maikumodule.bean.VideoBean;
 import com.hz.maiku.maikumodule.modules.deepclean.cleansuccess.CleanSuccessActivity;
-import com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImageAdapter;
-import com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImageContract;
-import com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImagePresenter;
 import com.hz.maiku.maikumodule.util.FormatUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.widget.dialog.AlertDoubleBtnDialog;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -52,7 +47,6 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
     private SelectVideoContract.Presenter presenter;
     private SelectVideoAdapter mSelectVideoAdapter;
     private List<VideoBean> mlist;
-
     public SelectVideoFragment() {
         // Required empty public constructor
     }
@@ -101,7 +95,10 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
         selectIamgeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                if (mlist != null && mlist.size() > 0) {
+                    VideoBean mVideoBean = mlist.get(position);
+                    startVideos(mVideoBean.getmUrl());
+                }
             }
         });
 
@@ -180,6 +177,18 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
         startActivity(mIntent);
         getActivity().finish();
     }
+
+    @Override
+    public void startVideos(String url) {
+        if(!TextUtils.isEmpty(url)){
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+            intent.setType("video/*");
+            intent.setDataAndType(uri , "video/*");
+            startActivity(intent);
+        }
+    }
+
 
     @OnClick(R2.id.select_image_btn)
     public void onClick() {

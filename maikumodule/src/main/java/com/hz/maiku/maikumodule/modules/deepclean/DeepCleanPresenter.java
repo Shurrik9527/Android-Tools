@@ -140,6 +140,11 @@ public class DeepCleanPresenter implements DeepCleanContract.Presenter{
     }
 
     @Override
+    public void getSpecialApk() {
+
+    }
+
+    @Override
     public void subscribe() {
 
     }

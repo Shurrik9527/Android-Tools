@@ -3,6 +3,7 @@
     android:id="@+id/select_image_rl"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:background="#BBBBBB">
 
     <ImageView

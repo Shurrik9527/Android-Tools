@@ -90,12 +90,12 @@ public class SelectApkAdapter extends ArrayAdapter<ApkBean>{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if (viewHolder.iv_photo.getLayoutParams() != null) {
-            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) viewHolder.iv_photo.getLayoutParams();
-            lp.width = destWidth;
-            lp.height = destHeight;
-            viewHolder.iv_photo.setLayoutParams(lp);
-        }
+//        if (viewHolder.iv_photo.getLayoutParams() != null) {
+//            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) viewHolder.iv_photo.getLayoutParams();
+//            lp.width = destWidth;
+//            lp.height = destHeight;
+//            viewHolder.iv_photo.setLayoutParams(lp);
+//        }
         ApkBean mApkBean = allPhotoList.get(position);
         if(mApkBean.isSelect()){
             viewHolder.iv_select.setChecked(true);

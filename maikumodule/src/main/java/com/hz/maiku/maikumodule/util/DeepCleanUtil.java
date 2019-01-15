@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,6 +23,7 @@ import com.hz.maiku.maikumodule.base.MaiKuApp;
 import com.hz.maiku.maikumodule.bean.AlbumBean;
 import com.hz.maiku.maikumodule.bean.ApkBean;
 import com.hz.maiku.maikumodule.bean.ApkInformBean;
+import com.hz.maiku.maikumodule.bean.AppBean;
 import com.hz.maiku.maikumodule.bean.AudioBean;
 import com.hz.maiku.maikumodule.bean.ImageBean;
 import com.hz.maiku.maikumodule.bean.JunkCleanerInformBean;
@@ -450,6 +452,7 @@ public class DeepCleanUtil {
 
 
 //
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static List<AudioBean> getAllAudios(){
 
         if(!SDUtil.isSDCardAvailable()){
@@ -460,7 +463,8 @@ public class DeepCleanUtil {
         return selectAudios(externalDir,mLists);
     }
 
-    public static List<AudioBean> selectAudios(File externalDir,List<AudioBean> list){
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static List<AudioBean> selectAudios(File externalDir, List<AudioBean> list){
         try {
             if(externalDir!=null&&externalDir.exists()){
                 File[] files = externalDir.listFiles();
@@ -474,10 +478,16 @@ public class DeepCleanUtil {
                             mBean.setSize(file.length());
                             mBean.setmUrl(file.getAbsolutePath());
                             mBean.setSelect(false);
+
                             if (MimeTypes.isAmr(file)) {
                                 mBean.setType("amr");
                                 mBean.setmName("audio.amr");
+//                                String url =mBean.getmUrl().substring(0,mBean.getmUrl().length()-4)+".mp3";
+//                                Log.i(TAG,"url====="+url);
+//                                VoiceUtil.amrToMap3(mBean.getmUrl(),url);
+//                                mBean.setmUrl(url);
                                 list.add(mBean);
+                                Log.i(TAG,"mBean==="+mBean.getmUrl());
                             }
 
                             if(MimeTypes.isWav(file)){
@@ -521,6 +531,7 @@ public class DeepCleanUtil {
      */
     public static  Observable<List<AudioBean>> getAllAudiosObservable() {
         return Observable.create(new ObservableOnSubscribe<List<AudioBean>>() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void subscribe(ObservableEmitter<List<AudioBean>> e) throws Exception {
                 e.onNext(getAllAudios());
@@ -618,6 +629,46 @@ public class DeepCleanUtil {
             return false;
         }
     }
+
+
+
+    public static List<AppBean> getAllSpecialApk(){
+        if(!SDUtil.isSDCardAvailable()){
+            return new ArrayList<>();
+        }
+        File externalDir = Environment.getExternalStorageDirectory();
+        List<AppBean> mLists = new ArrayList<>();
+        return selectSpecialApk(externalDir,mLists);
+    }
+
+    public static List<AppBean> selectSpecialApk(File externalDir,List<AppBean> list){
+        if(externalDir!=null&&externalDir.exists()){
+            File[] files = externalDir.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        if (MimeTypes.isApk(file)) {
+                            if(file.length()==0){
+                                continue;
+                            }
+                            AppBean mBean = new AppBean();
+                            mBean.setSelect(false);
+                            list.add(mBean);
+                        }
+                    }else{
+                        selectSpecialApk(file,list);
+                    }
+                }
+                return list;
+            }else{
+                return  new ArrayList<>();
+            }
+        }else{
+            return  new ArrayList<>();
+        }
+    }
+
+
 
 
 

@@ -33,8 +33,6 @@
             android:id="@+id/select_apk_size_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/select_apk_iv"
-            android:layout_marginBottom="5dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/stroke_gray_solid_transparent_radius5"
             android:textColor="@color/white"
@@ -44,6 +42,7 @@
             android:paddingRight="2dp"
             android:paddingTop="1dp"
             android:paddingBottom="1dp"
+            android:layout_marginTop="5dp"
             />
         <TextView
             android:id="@+id/select_apk_name_tv"
@@ -51,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="30dp"
             android:textColor="@color/default_text"
             android:gravity="center"
             android:textSize="14sp"
