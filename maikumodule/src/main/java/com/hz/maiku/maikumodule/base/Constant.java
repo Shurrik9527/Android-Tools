@@ -57,6 +57,10 @@ public class Constant {
      */
     public static String PLACEMENT_ID;
     /**
+     * FacebookAd
+     */
+    public static int PID;
+    /**
      * 百度Crab
      */
     public static String BAIDU_KEY;

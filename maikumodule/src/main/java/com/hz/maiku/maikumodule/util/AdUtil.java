@@ -3,9 +3,7 @@ package com.hz.maiku.maikumodule.util;
 import android.content.Context;
 import android.util.Log;
 
-import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
-import com.appsflyer.AppsFlyerLib;
 import com.duapps.ad.AbsInterstitialListener;
 import com.duapps.ad.InterstitialAd;
 import com.facebook.ads.Ad;
@@ -18,9 +16,6 @@ import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.AdInfo;
 import com.hz.maiku.maikumodule.http.HttpCenter;
 import com.hz.maiku.maikumodule.http.HttpResult;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -49,17 +44,6 @@ public class AdUtil {
      */
     public static boolean IS_SHOW_AD = true;
 
-    private static BaiduAdListener listener;
-    /**
-     * 百度广告接口
-     */
-    public interface BaiduAdListener {
-        void showBaiduAds();
-    }
-    public static void init(BaiduAdListener listener) {
-        AdUtil.listener = listener;
-    }
-
     /**
      * 直接显示广告
      */
@@ -73,8 +57,7 @@ public class AdUtil {
                     AdUtil.showAdModAds(context);
                     break;
                 case TYPE_BAIDU:
-                    if ( AdUtil.listener != null)
-                        AdUtil.listener.showBaiduAds();
+                    AdUtil.showBaiduAds(context);
                     break;
                 default:
                     //判断Fackbook是否安装
@@ -90,9 +73,10 @@ public class AdUtil {
     }
 
     private static void showBaiduAds(final Context context) {
-        final com.duapps.ad.InterstitialAd interstitialAd = new InterstitialAd(context,162105, InterstitialAd.Type.SCREEN);
+        final com.duapps.ad.InterstitialAd interstitialAd = new InterstitialAd(context, Constant.PID, InterstitialAd.Type.SCREEN);
         interstitialAd.setInterstitialListener(new AbsInterstitialListener() {
             String TAG = "Baidu";
+
             @Override
             public void onAdFail(int errcode) {
                 Log.d(TAG, "Interstitial call to onAdFail, errorcode(" + errcode + ")");
@@ -112,12 +96,16 @@ public class AdUtil {
 
             @Override
             public void onAdPresent() {
+                super.onAdPresent();
                 Log.d(TAG, "Interstitial call to onAdPresent()!");
+                EventUtil.sendEvent(context, AFInAppEventType.PURCHASE, "Someone installed a app from BaiduAds!");
             }
 
             @Override
             public void onAdClicked() {
+                super.onAdClicked();
                 Log.d(TAG, "Interstitial call to onAdClicked()!");
+                EventUtil.onAdClick(context, TAG, String.valueOf(Constant.PID));
             }
         });
         interstitialAd.load();
@@ -165,7 +153,7 @@ public class AdUtil {
             public void onAdClicked(Ad ad) {
                 // Ad clicked callback
                 Log.d(TAG, "Interstitial ad clicked!");
-                AdUtil.onAdClick(context, TAG, Constant.PLACEMENT_ID);
+                EventUtil.onAdClick(context, TAG, Constant.PLACEMENT_ID);
             }
 
             @Override
@@ -178,13 +166,6 @@ public class AdUtil {
         // For auto play video ads, it's recommended to load the ad
         // at least 30 seconds before it is shown
         interstitialAd.loadAd();
-    }
-
-    private static void onAdClick(Context context, String channel, String placementId) {
-        Map<String, Object> eventValues = new HashMap<>();
-        eventValues.put(AFInAppEventParameterName.AF_CHANNEL, channel);
-        eventValues.put(AFInAppEventParameterName.AD_REVENUE_PLACEMENT_ID, placementId);
-        AppsFlyerLib.getInstance().trackEvent(context, AFInAppEventType.AD_CLICK, eventValues);
     }
 
     /**
@@ -228,7 +209,7 @@ public class AdUtil {
             public void onAdOpened() {
                 // Code to be executed when the ad is displayed.
                 Log.d(TAG, "Interstitial ad onAdOpened.");
-                AdUtil.onAdClick(context, TAG, Constant.UNIT_ID);
+                EventUtil.onAdClick(context, TAG, Constant.UNIT_ID);
             }
 
             @Override
