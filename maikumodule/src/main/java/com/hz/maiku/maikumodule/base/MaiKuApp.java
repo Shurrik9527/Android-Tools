@@ -213,17 +213,17 @@ public class MaiKuApp extends LitePalApplication {
      */
     private void initBaiduAds() {
         DuAdNetwork.setConsentStatus(this, true);
-        DuAdNetwork.getConsentStatus(this);
-        /**
-         * the sdk initialization 初始化SDK
-         */
-        DuAdNetwork.init(this, "{\n" +
-                "    \"native\": [\n" +
-                "        {\n" +
-                "            \"pid\": \"" + Constant.PID + "\"\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}");
+//        DuAdNetwork.getConsentStatus(this);
+//        /**
+//         * the sdk initialization 初始化SDK
+//         */
+//        DuAdNetwork.init(this, "{\n" +
+//                "    \"native\": [\n" +
+//                "        {\n" +
+//                "            \"pid\": \"" + Constant.PID + "\"\n" +
+//                "        }\n" +
+//                "    ]\n" +
+//                "}");
     }
 
 

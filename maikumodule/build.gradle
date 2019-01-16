@@ -57,7 +57,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     //图片加载框架
     implementation 'com.github.bumptech.glide:glide:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     //RX获取权限
     api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     //Banner
@@ -80,11 +80,14 @@ dependencies {
     api 'org.litepal.android:core:1.6.1'
     //左右滑动的RecyclerView
     implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
-    //AdMob
+    //AdMob及AdMob中介
     implementation 'com.google.android.gms:play-services-ads:17.1.2'
+    implementation "com.google.ads.mediation:duadplatform:1.0.0.0"
+    implementation "com.android.support:palette-v7:27.1.1"
     //FaceBook Ads
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.facebook.android:audience-network-sdk:5.+'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'// Required by Facebook network
+    implementation 'com.facebook.android:audience-network-sdk:5.1.0'
+    implementation 'com.google.ads.mediation:facebook:5.1.0.0'// Facebook adapter
     //AppsFlyer
     api 'com.appsflyer:af-android-sdk:4.8.15@aar'
     api 'com.android.installreferrer:installreferrer:1.0'
@@ -95,7 +98,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //百度广告
     api(name: 'baiduad-1.2.2', ext: 'aar')
-
     implementation('com.github.huburt-Hu:NewbieGuide:v2.4.0') {
         exclude group: 'com.android.support'
     }

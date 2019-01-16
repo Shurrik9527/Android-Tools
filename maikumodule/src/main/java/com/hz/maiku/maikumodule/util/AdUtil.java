@@ -49,25 +49,26 @@ public class AdUtil {
      */
     public static void showAds(Context context, String source) {
         if (IS_SHOW_AD) {
-            switch (AdUtil.AD_TYPE) {
-                case TYPE_FACEBOOK:
-                    AdUtil.showFacebookAds(context);
-                    break;
-                case TYPE_ADMOB:
-                    AdUtil.showAdModAds(context);
-                    break;
-                case TYPE_BAIDU:
-                    AdUtil.showBaiduAds(context);
-                    break;
-                default:
-                    //判断Fackbook是否安装
-                    if (AppUtil.isInstalled(context, "com.facebook.katana")) {
-                        AdUtil.showFacebookAds(context);
-                    } else {
-                        AdUtil.showAdModAds(context);
-                    }
-                    break;
-            }
+//            switch (AdUtil.AD_TYPE) {
+//                case TYPE_FACEBOOK:
+//                    AdUtil.showFacebookAds(context);
+//                    break;
+//                case TYPE_ADMOB:
+//                    AdUtil.showAdModAds(context);
+//                    break;
+//                case TYPE_BAIDU:
+//                    AdUtil.showBaiduAds(context);
+//                    break;
+//                default:
+//                    //判断Fackbook是否安装
+//                    if (AppUtil.isInstalled(context, "com.facebook.katana")) {
+//                        AdUtil.showFacebookAds(context);
+//                    } else {
+//                        AdUtil.showAdModAds(context);
+//                    }
+//                    break;
+//            }
+            AdUtil.showAdModAds(context);
             Log.e(TAG, "Interstitial ad at " + source);
         }
     }
