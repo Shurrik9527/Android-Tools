@@ -9,6 +9,7 @@ import android.util.Log;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.baidu.crabsdk.CrabSDK;
+import com.duapps.ad.base.DuAdNetwork;
 import com.hz.maiku.maikumodule.bean.AppProcessInfornBean;
 import com.hz.maiku.maikumodule.exception.CustomCrashHandler;
 import com.hz.maiku.maikumodule.manager.AddressListManager;
@@ -55,6 +56,7 @@ public class MaiKuApp extends LitePalApplication {
         if (AdUtil.IS_SHOW_AD) {
             initAppsFlyer();
             initBaiduCrab();
+            initBaiduAds();
         }
     }
 
@@ -65,12 +67,11 @@ public class MaiKuApp extends LitePalApplication {
             String APP_NAME = Config.getPropertiesURL(getApplicationContext(), "APP_NAME");
             String UNIT_ID = Config.getPropertiesURL(getApplicationContext(), "UNIT_ID");
             String PLACEMENT_ID = Config.getPropertiesURL(getApplicationContext(), "PLACEMENT_ID");
+            String PID = Config.getPropertiesURL(getApplicationContext(), "PID");
             String BAIDU_KEY = Config.getPropertiesURL(getApplicationContext(), "BAIDU_KEY");
             String AF_DEV_KEY = Config.getPropertiesURL(getApplicationContext(), "AF_DEV_KEY");
             String PACKAGE_NAME = Config.getPropertiesURL(getApplicationContext(), "PACKAGE_NAME");
             String GMAIL = Config.getPropertiesURL(getApplicationContext(), "GMAIL");
-            String COLORPRIMARY = Config.getPropertiesURL(getApplicationContext(), "COLORPRIMARY");
-            String COLORPRIMARYDARK = Config.getPropertiesURL(getApplicationContext(), "COLORPRIMARYDARK");
 
             if (!TextUtils.isEmpty(UNIT_ID)) {
                 Constant.UNIT_ID = UNIT_ID;
@@ -83,6 +84,9 @@ public class MaiKuApp extends LitePalApplication {
             }
             if (!TextUtils.isEmpty(PLACEMENT_ID)) {
                 Constant.PLACEMENT_ID = PLACEMENT_ID;
+            }
+            if (!TextUtils.isEmpty(PID)) {
+                Constant.PID = Integer.parseInt(PID);
             }
             if (!TextUtils.isEmpty(BAIDU_KEY)) {
                 Constant.BAIDU_KEY = BAIDU_KEY;
@@ -202,6 +206,24 @@ public class MaiKuApp extends LitePalApplication {
         /* 初始化全局异常捕获信息 */
         CustomCrashHandler customCrashHandler = CustomCrashHandler.getInstance();
         customCrashHandler.init(this);
+    }
+
+    /**
+     * 初始化百度广告
+     */
+    private void initBaiduAds() {
+        DuAdNetwork.setConsentStatus(this, true);
+//        DuAdNetwork.getConsentStatus(this);
+//        /**
+//         * the sdk initialization 初始化SDK
+//         */
+//        DuAdNetwork.init(this, "{\n" +
+//                "    \"native\": [\n" +
+//                "        {\n" +
+//                "            \"pid\": \"" + Constant.PID + "\"\n" +
+//                "        }\n" +
+//                "    ]\n" +
+//                "}");
     }
 
 

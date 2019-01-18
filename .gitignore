@@ -60,3 +60,5 @@ fastlane/readme.md
 
 # Mac Os
 .DS_Store
+# Others
+output.json

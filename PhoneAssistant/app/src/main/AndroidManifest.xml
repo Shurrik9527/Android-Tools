@@ -112,7 +112,7 @@
 
         <!-- AppsFlyer -->
         <receiver
-            android:name="com.hz.maiku.maikumodule.broadcase.InstallBroadcastReceiver"
+            android:name="com.appsflyer.SingleInstallBroadcastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
