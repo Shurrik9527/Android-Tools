@@ -7,6 +7,7 @@ import com.hz.maiku.maikumodule.bean.ApkBean;
 import com.hz.maiku.maikumodule.bean.ApkInformBean;
 import com.hz.maiku.maikumodule.bean.AppBean;
 import com.hz.maiku.maikumodule.bean.AudioBean;
+import com.hz.maiku.maikumodule.bean.BigFileBean;
 import com.hz.maiku.maikumodule.bean.VideoBean;
 
 import java.util.List;
@@ -27,7 +28,8 @@ public class DeepCleanContract {
         void showApks(List<ApkBean> mlists);
         void showAudios(List<AudioBean> mLists);
         void showSpecialApk(List<AppBean> mLists);
-
+        void showBigFile(List<BigFileBean> mList);
+        void showAllSize(long size);
     }
 
     public interface Presenter extends BasePresenter {
@@ -36,5 +38,6 @@ public class DeepCleanContract {
         void getUnInstallApk();
         void getAudios();
         void getSpecialApk();
+        void getBigFile();
     }
 }

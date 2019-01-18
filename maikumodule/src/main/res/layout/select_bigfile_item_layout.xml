@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/select_bigfile_rl"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@color/gray1"
+    android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:id="@+id/select_bigfile_iv"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/ic_bigfile"
+        android:layout_centerInParent="true"
+         />
+
+    <CheckBox
+        android:id="@+id/select_bigfile_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:buttonTint="@color/colorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/select_bigfile_size_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/stroke_gray_solid_transparent_radius5"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:id="@+id/select_bigfile_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/default_text"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+       android:layout_alignParentBottom="true"
+        />
+
+
+</RelativeLayout>

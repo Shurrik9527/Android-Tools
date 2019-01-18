@@ -362,15 +362,47 @@ public class MimeTypes {
         return path.endsWith(".apk");
     }
 
+    public static boolean isZipFile(File f) {
+        String path = FileUtil.getFileName(f);
+        return path.endsWith(".zip");
+    }
+
     public static boolean isAmr(File f) {
         String path = FileUtil.getFileName(f);
         return path.endsWith(".amr");
     }
 
 
+    public static boolean isPng(File f) {
+        String path = FileUtil.getFileName(f);
+        return path.endsWith(".png");
+    }
+
+    public static boolean isJpg(File f) {
+        String path = FileUtil.getFileName(f);
+        return path.endsWith(".jpg");
+    }
+
+
+    public static boolean isJpeg(File f) {
+        String path = FileUtil.getFileName(f);
+        return path.endsWith(".jpeg");
+    }
+
+
     public static boolean isMp3(File f) {
         String path = FileUtil.getFileName(f);
         return path.endsWith(".mp3");
+    }
+
+    public static boolean is3gp(File f) {
+        String path = FileUtil.getFileName(f);
+        return path.endsWith(".3gp");
+    }
+
+    public static boolean isMp4(File f) {
+        String path = FileUtil.getFileName(f);
+        return path.endsWith(".mp4");
     }
 
     public static boolean isWma(File f) {

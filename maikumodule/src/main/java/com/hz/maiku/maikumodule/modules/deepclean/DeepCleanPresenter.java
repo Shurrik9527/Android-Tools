@@ -3,10 +3,17 @@ package com.hz.maiku.maikumodule.modules.deepclean;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
+
 import com.hz.maiku.maikumodule.bean.AlbumBean;
 import com.hz.maiku.maikumodule.bean.ApkBean;
+import com.hz.maiku.maikumodule.bean.AppBean;
+import com.hz.maiku.maikumodule.bean.AppInformBean;
 import com.hz.maiku.maikumodule.bean.AudioBean;
+import com.hz.maiku.maikumodule.bean.BigFileBean;
 import com.hz.maiku.maikumodule.bean.VideoBean;
+import com.hz.maiku.maikumodule.manager.LoadingDialogManager;
+import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.DeepCleanUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,21 +108,6 @@ public class DeepCleanPresenter implements DeepCleanContract.Presenter{
     @Override
     public void getAudios() {
 
-//        Observable.create(new ObservableOnSubscribe<List<AudioBean>>() {
-//            @Override
-//            public void subscribe(ObservableEmitter<List<AudioBean>> e) throws Exception {
-//                e.onNext(DeepCleanUtil.getAllAudios());
-//                e.onComplete();
-//            }
-//        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<AudioBean>>() {
-//            @Override
-//            public void accept(List<AudioBean> mAudioBean) throws Exception {
-//                if(mView!=null){
-//                    mView.showAudios(mAudioBean);
-//                }
-//            }
-//        });
-
         final List<AudioBean> mLists = new ArrayList<>();
         DeepCleanUtil.getAllAudiosObservable().zipWith(DeepCleanUtil.getAllAudiosObservable(mContext), new BiFunction<List<AudioBean>, List<AudioBean>, List<AudioBean>>() {
             @Override
@@ -141,7 +133,40 @@ public class DeepCleanPresenter implements DeepCleanContract.Presenter{
 
     @Override
     public void getSpecialApk() {
+        Observable.create(new ObservableOnSubscribe<List<AppBean>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<AppBean>> e) throws Exception {
+                e.onNext(AppUtil.getSpecialApp(mContext));
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<AppBean>>() {
+            @Override
+            public void accept(List<AppBean> appBeans) throws Exception {
+                if(mView!=null){
+                    mView.showSpecialApk(appBeans);
+                }
+            }
+        });
 
+    }
+
+    @Override
+    public void getBigFile() {
+        Observable.create(new ObservableOnSubscribe<List<BigFileBean>>() {
+            @Override
+            public void subscribe(ObservableEmitter<List<BigFileBean>> e) throws Exception {
+                e.onNext(DeepCleanUtil.getAllBigFiles());
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<BigFileBean>>() {
+            @Override
+            public void accept(List<BigFileBean> mBigFileBean) throws Exception {
+                if(mView!=null){
+                    mView.showBigFile(mBigFileBean);
+                    Log.i(TAG,"mBigFileBean"+mBigFileBean.toString());
+                }
+            }
+        });
     }
 
     @Override
@@ -153,4 +178,8 @@ public class DeepCleanPresenter implements DeepCleanContract.Presenter{
     public void unsubscribe() {
 
     }
+
+
+
+
 }

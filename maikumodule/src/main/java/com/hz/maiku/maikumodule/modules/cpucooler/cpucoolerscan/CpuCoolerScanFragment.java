@@ -153,7 +153,7 @@ public class CpuCoolerScanFragment extends Fragment implements CpuCoolerScanCont
 
     @Override
     public void initData() {
-        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.M){
+        if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.O){
             if(!hasPermission()){
                 Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
                 startActivityForResult(intent, PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS);
@@ -168,7 +168,7 @@ public class CpuCoolerScanFragment extends Fragment implements CpuCoolerScanCont
     public void startScan() {
         if (presenter != null) {
             presenter.startScanProcessRunningApp();
-            if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.LOLLIPOP){
+            if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.O){
                 presenter.runAppProcessInform();
             }else{
                 presenter.getProcessRunningApp();

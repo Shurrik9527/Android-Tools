@@ -59,6 +59,12 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class AppUtil {
 
+    private static final String TAG =AppUtil.class.getName();
+    public static final String qq_name ="QQ";
+    public static final String weixing_name ="WeChat";
+    public static final String facebook_name ="Facebook";
+    public static final String instagram_name ="Instagram";
+
     //获取已经安装的应用
     public static List<PackageInfo> getInstalledPackages(Context context) {
         PackageManager packageManager = context.getApplicationContext().getPackageManager();
@@ -555,5 +561,28 @@ public class AppUtil {
         }
         return null;
     }
+
+
+    public static List<AppBean> getSpecialApp(Context context) {
+        List<AppBean> mlists = new ArrayList<AppBean>();
+        PackageManager packageManager = context.getPackageManager();
+        Intent intent = new Intent();
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        intent.setAction(Intent.ACTION_MAIN);
+        List<ResolveInfo> resolveInfo = packageManager.queryIntentActivities(intent,0);
+        for (ResolveInfo ri : resolveInfo) {
+            String name =ri.activityInfo.applicationInfo.loadLabel(packageManager).toString();
+            if(qq_name.equals(name)||facebook_name.equals(name)||weixing_name.equals(name)||instagram_name.equals(name)){
+                AppBean bean =new AppBean();
+                bean.setAppName(name);
+                bean.setAppPackageName(ri.activityInfo.packageName);
+                bean.setAppIcon(ri.activityInfo.applicationInfo.loadIcon(packageManager));
+                bean.setAppSize(AppUtil.getAppSize(ri.activityInfo.applicationInfo));
+                mlists.add(bean);
+            }
+        }
+        return mlists;
+    }
+
 
 }

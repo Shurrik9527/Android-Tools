@@ -80,6 +80,34 @@ public class ChargeBoosterFragment extends Fragment implements ChargeBoosterCont
     @Override
     public void initView() {
         presenter.loadData();
+        sProtectCharging.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    //开启充电保护
+                    presenter.startProtectCharging();
+                    //充电保护开启了
+                    EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Charging protect on!");
+                } else {
+                    //关闭充电保护
+                    presenter.closeProtectCharging();
+                }
+            }
+        });
+
+        sChargeAlert.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    //开启充电提醒
+                    presenter.startChargeAlert();
+                } else {
+                    //关闭充电提醒
+                    presenter.closeChargeAlert();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -104,29 +132,4 @@ public class ChargeBoosterFragment extends Fragment implements ChargeBoosterCont
         sChargeAlert.setChecked(enable);
     }
 
-    @OnCheckedChanged({R2.id.s_protectcharging, R2.id.s_chargealert})
-    public void OnSwitchChecked(CompoundButton buttonView, boolean isChecked) {
-        switch (buttonView.getId()){
-            case R2.id.s_protectcharging:
-                if(isChecked) {
-                    //开启充电保护
-                    presenter.startProtectCharging();
-                    //充电保护开启了
-                    EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Charging protect on!");
-                } else {
-                    //关闭充电保护
-                    presenter.closeProtectCharging();
-                }
-                break;
-            case R2.id.s_chargealert:
-                if(isChecked) {
-                    //开启充电提醒
-                    presenter.startChargeAlert();
-                } else {
-                    //关闭充电提醒
-                    presenter.closeChargeAlert();
-                }
-                break;
-        }
-    }
 }

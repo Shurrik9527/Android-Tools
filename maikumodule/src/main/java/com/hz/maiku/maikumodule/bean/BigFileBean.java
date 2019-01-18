@@ -1,23 +1,18 @@
 package com.hz.maiku.maikumodule.bean;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.io.Serializable;
-
 /**
  * @author heguogui
  * @version v 1.0.0
  * @describe
- * @date 2019/1/4
+ * @date 2019/1/18
  * @email 252774645@qq.com
  */
-public class ImageBean  {
+public class BigFileBean {
 
     private String mUrl;
     private boolean isSelect;
-    private String mTime;
     private long size;
+    private String mName;
 
     public String getmUrl() {
         return mUrl;
@@ -35,14 +30,6 @@ public class ImageBean  {
         isSelect = select;
     }
 
-    public String getmTime() {
-        return mTime;
-    }
-
-    public void setmTime(String mTime) {
-        this.mTime = mTime;
-    }
-
     public long getSize() {
         return size;
     }
@@ -51,13 +38,21 @@ public class ImageBean  {
         this.size = size;
     }
 
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
     @Override
     public String toString() {
-        return "ImageBean{" +
+        return "BigFileBean{" +
                 "mUrl='" + mUrl + '\'' +
                 ", isSelect=" + isSelect +
-                ", mTime='" + mTime + '\'' +
                 ", size=" + size +
+                ", mName='" + mName + '\'' +
                 '}';
     }
 }

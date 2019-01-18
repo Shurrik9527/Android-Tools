@@ -436,7 +436,7 @@ public class ProcessManager {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public List<AppProcessInfornBean>  runAppProcessInform(){
 
         long now = System.currentTimeMillis();
@@ -464,7 +464,7 @@ public class ProcessManager {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Observable<List<AppProcessInfornBean>> runAppProcessInformObservable(){
         return Observable.create(new ObservableOnSubscribe<List<AppProcessInfornBean>>() {
             @Override

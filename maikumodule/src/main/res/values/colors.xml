@@ -31,4 +31,12 @@
     <color name="transparent_default">#00000000</color>
     <color name="half_transparent">#55000000</color>
 
+    <color name="music_color">#0cb769</color>
+    <color name="voice_color">#8c63d9</color>
+    <color name="picture_color">#fcb934</color>
+    <color name="appdata_color">#80cd41</color>
+    <color name="bigfile_color">#6684e6</color>
+    <color name="uninstallapp_color">#24c3fa</color>
+
+
 </resources>

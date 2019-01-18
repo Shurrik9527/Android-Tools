@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,16 +22,18 @@ import com.hz.maiku.maikumodule.bean.AlbumBean;
 import com.hz.maiku.maikumodule.bean.ApkBean;
 import com.hz.maiku.maikumodule.bean.AppBean;
 import com.hz.maiku.maikumodule.bean.AudioBean;
+import com.hz.maiku.maikumodule.bean.BigFileBean;
 import com.hz.maiku.maikumodule.bean.ImageBean;
 import com.hz.maiku.maikumodule.bean.VideoBean;
+import com.hz.maiku.maikumodule.modules.deepclean.appdata.CleanAppDataActivity;
 import com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImageActivity;
 import com.hz.maiku.maikumodule.modules.deepclean.selectVideo.SelectVideoActivity;
 import com.hz.maiku.maikumodule.modules.deepclean.selectaudio.SelectAudiosActivity;
+import com.hz.maiku.maikumodule.modules.deepclean.selectbigfile.SelectBigFileActivity;
 import com.hz.maiku.maikumodule.modules.deepclean.uninstallapk.SelectApkActivity;
 import com.hz.maiku.maikumodule.util.FormatUtil;
-import com.hz.maiku.maikumodule.util.SpaceItemDecoration;
-import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.hz.maiku.maikumodule.widget.DigitalRollingTextView;
+import com.hz.maiku.maikumodule.widget.ProgressWheel;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -41,7 +42,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 /**
@@ -117,14 +117,6 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     ImageView deepcleanLargefilesNextIv;
     @BindView(R2.id.deepclean_largefiles_rl)
     RelativeLayout deepcleanLargefilesRl;
-    @BindView(R2.id.deepclean_installationpackage_iv)
-    ImageView deepcleanInstallationpackageIv;
-    @BindView(R2.id.deepclean_installationpackage_title_tv)
-    TextView deepcleanInstallationpackageTitleTv;
-    @BindView(R2.id.deepclean_installationpackage_next_iv)
-    ImageView deepcleanInstallationpackageNextIv;
-    @BindView(R2.id.deepclean_installationpackage_rl)
-    RelativeLayout deepcleanInstallationpackageRl;
     @BindView(R2.id.deepclean_images_num_tv)
     TextView deepcleanImagesNumTv;
     @BindView(R2.id.deepclean_videos_num_tv)
@@ -137,13 +129,25 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     TextView deepcleanAppcacheNumTv;
     @BindView(R2.id.deepclean_largefile_num_tv)
     TextView deepcleanLargefileNumTv;
-    @BindView(R2.id.deepclean_installationpackage_num_tv)
-    TextView deepcleanInstallationpackageNumTv;
+    @BindView(R2.id.deepclean_images_num_tv_pw)
+    ProgressWheel deepcleanImagesNumTvPw;
+    @BindView(R2.id.deepclean_videos_num_tv_pw)
+    ProgressWheel deepcleanVideosNumTvPw;
+    @BindView(R2.id.deepclean_uninstallapp_num_tv_pw)
+    ProgressWheel deepcleanUninstallappNumTvPw;
+    @BindView(R2.id.deepclean_audio_tv_pw)
+    ProgressWheel deepcleanAudioTvPw;
+    @BindView(R2.id.deepclean_appdata_tv_pw)
+    ProgressWheel deepcleanAppdataTvPw;
+    @BindView(R2.id.deepclean_largefile_tv_pw)
+    ProgressWheel deepcleanLargefileTvPw;
+
 
     private DeepCleanContract.Presenter presenter;
     private DeepCleanImageAdapter mImageAdapter;
     private DeepCleanVideoAdapter mDeepCleanVideoAdapter;
     private DeepCleanUnInstallApkAdapter mDeepCleanUnInstallApkAdapter;
+    public long mAllSize = 0;
 
     public DeepCleanFragment() {
         // Required empty public constructor
@@ -164,17 +168,20 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
         new DeepCleanPresenter(this, getContext());
     }
 
+
+
     @Override
     public void showImageData(List<AlbumBean> mlists) {
 
         if (mlists == null || mlists.size() == 0) {
             deepcleanIamgesRv.setVisibility(View.GONE);
         } else {
+            deepcleanImagesNumTvPw.setVisibility(View.GONE);
             deepcleanIamgesRv.setVisibility(View.VISIBLE);
             Collections.sort(mlists);
             List<ImageBean> mlist = new ArrayList<>();
             int msize = mlists.get(0).getImageBeans().size();
-            if (msize >4) {
+            if (msize > 4) {
                 mlist.add(mlists.get(0).getImageBeans().get(0));
                 mlist.add(mlists.get(0).getImageBeans().get(1));
                 mlist.add(mlists.get(0).getImageBeans().get(2));
@@ -190,7 +197,7 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
                 mlist.add(mlists.get(0).getImageBeans().get(0));
                 mlist.add(mlists.get(0).getImageBeans().get(1));
                 mlist.add(mlists.get(0).getImageBeans().get(2));
-            }  else if (msize == 2) {
+            } else if (msize == 2) {
                 mlist.add(mlists.get(0).getImageBeans().get(0));
                 mlist.add(mlists.get(0).getImageBeans().get(1));
             } else if (msize == 1) {
@@ -218,8 +225,11 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
                     BigDecimal bigDecimal = new BigDecimal(msizes);
                     float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
                     if (deepcleanImagesNumTv != null) {
+                        deepcleanImagesNumTv.setVisibility(View.VISIBLE);
                         deepcleanImagesNumTv.setText(dropped + " " + mFileSize.mUnit + "");
                     }
+
+                    showAllSize(mSize);
                 }
             }
         }
@@ -231,10 +241,11 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
         if (mlists == null || mlists.size() == 0) {
             deepcleanVideosRv.setVisibility(View.GONE);
         } else {
+            deepcleanVideosNumTvPw.setVisibility(View.GONE);
             deepcleanVideosRv.setVisibility(View.VISIBLE);
             List<VideoBean> mlist = new ArrayList<>();
             int msize = mlists.size();
-            if (msize >4) {
+            if (msize > 4) {
                 mlist.add(mlists.get(0));
                 mlist.add(mlists.get(1));
                 mlist.add(mlists.get(2));
@@ -274,8 +285,10 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
                     BigDecimal bigDecimal = new BigDecimal(msizes);
                     float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
                     if (deepcleanVideosNumTv != null) {
+                        deepcleanVideosNumTv.setVisibility(View.VISIBLE);
                         deepcleanVideosNumTv.setText(dropped + " " + mFileSize.mUnit + "");
                     }
+                    showAllSize(mSize);
                 }
             }
         }
@@ -289,10 +302,11 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
         if (mlists == null || mlists.size() == 0) {
             deepcleanUninstallappRv.setVisibility(View.GONE);
         } else {
+            deepcleanUninstallappNumTvPw.setVisibility(View.GONE);
             deepcleanUninstallappRv.setVisibility(View.VISIBLE);
             List<ApkBean> mlist = new ArrayList<>();
             int msize = mlists.size();
-            if (msize >4) {
+            if (msize > 4) {
                 mlist.add(mlists.get(0));
                 mlist.add(mlists.get(1));
                 mlist.add(mlists.get(2));
@@ -332,8 +346,10 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
                     BigDecimal bigDecimal = new BigDecimal(msizes);
                     float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
                     if (deepcleanUninstallappNumTv != null) {
+                        deepcleanUninstallappNumTv.setVisibility(View.VISIBLE);
                         deepcleanUninstallappNumTv.setText(dropped + " " + mFileSize.mUnit + "");
                     }
+                    showAllSize(mSize);
                 }
             }
         }
@@ -345,6 +361,8 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     public void showAudios(List<AudioBean> mLists) {
 
         if (mLists != null && mLists.size() > 0) {
+            deepcleanAudioTvPw.setVisibility(View.GONE);
+
             long mSize = 0;
             for (int i = 0; i < mLists.size(); i++) {
                 AudioBean bean = mLists.get(i);
@@ -359,8 +377,10 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
                 BigDecimal bigDecimal = new BigDecimal(msizes);
                 float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
                 if (deepcleanAudioNumTv != null) {
+                    deepcleanAudioNumTv.setVisibility(View.VISIBLE);
                     deepcleanAudioNumTv.setText(dropped + " " + mFileSize.mUnit + "");
                 }
+                showAllSize(mSize);
             }
         }
 
@@ -369,6 +389,77 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     @Override
     public void showSpecialApk(List<AppBean> mLists) {
 
+
+        if (mLists != null && mLists.size() > 0) {
+            deepcleanAppdataTvPw.setVisibility(View.GONE);
+            long mSize = 0;
+            for (int i = 0; i < mLists.size(); i++) {
+                AppBean bean = mLists.get(i);
+                mSize = mSize + bean.getAppSize();
+            }
+            if (mSize > 0) {
+                FormatUtil.FileSize mFileSize = FormatUtil.formatFileSize(mSize);
+                String msizes = mFileSize.mSize;
+                if (msizes.contains(",")) {
+                    msizes = msizes.replace(",", ".");
+                }
+                BigDecimal bigDecimal = new BigDecimal(msizes);
+                float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+                if (deepcleanAppcacheNumTv != null) {
+                    deepcleanAppcacheNumTv.setVisibility(View.VISIBLE);
+                    deepcleanAppcacheNumTv.setText(dropped + " " + mFileSize.mUnit + "");
+                }
+                showAllSize(mSize);
+            }
+        }
+
+
+    }
+
+    @Override
+    public void showBigFile(List<BigFileBean> mList) {
+        if (mList != null && mList.size() > 0) {
+            deepcleanLargefileTvPw.setVisibility(View.GONE);
+            long mSize = 0;
+            for (int i = 0; i < mList.size(); i++) {
+                BigFileBean bean = mList.get(i);
+                mSize = mSize + bean.getSize();
+            }
+            if (mSize > 0) {
+                FormatUtil.FileSize mFileSize = FormatUtil.formatFileSize(mSize);
+                String msizes = mFileSize.mSize;
+                if (msizes.contains(",")) {
+                    msizes = msizes.replace(",", ".");
+                }
+                BigDecimal bigDecimal = new BigDecimal(msizes);
+                float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+                if (deepcleanLargefileNumTv != null) {
+                    deepcleanLargefileNumTv.setVisibility(View.VISIBLE);
+                    deepcleanLargefileNumTv.setText(dropped + " " + mFileSize.mUnit + "");
+                }
+                showAllSize(mSize);
+            }
+        }
+    }
+
+    @Override
+    public void showAllSize(long size) {
+        mAllSize = mAllSize + size;
+        if (mAllSize > 0) {
+            FormatUtil.FileSize mFileSize = FormatUtil.formatFileSize(mAllSize);
+            String msizes = mFileSize.mSize;
+            if (msizes.contains(",")) {
+                msizes = msizes.replace(",", ".");
+            }
+            BigDecimal bigDecimal = new BigDecimal(msizes);
+            float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+            if (deepcleanTotalTv != null) {
+                deepcleanTotalTv.setText(dropped + "");
+            }
+            if (deepcleanTotalDwTv != null) {
+                deepcleanTotalDwTv.setText(mFileSize.mUnit + "");
+            }
+        }
     }
 
 
@@ -416,9 +507,6 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
         });
 
 
-
-
-
         deepcleanImagesRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -443,31 +531,23 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
         deepcleanAudiosRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),SelectAudiosActivity.class));
+                startActivity(new Intent(getContext(), SelectAudiosActivity.class));
             }
         });
 
         deepcleanAppdatasRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast(getContext(),"05");
+                startActivity(new Intent(getContext(), CleanAppDataActivity.class));
             }
         });
 
         deepcleanLargefilesRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast(getContext(),"06");
+                startActivity(new Intent(getContext(), SelectBigFileActivity.class));
             }
         });
-
-        deepcleanInstallationpackageRl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtil.showToast(getContext(),"07");
-            }
-        });
-
 
 
     }
@@ -481,10 +561,13 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     public void onResume() {
         super.onResume();
         if (presenter != null) {
+            mAllSize = 0;
             presenter.getImages();
             presenter.getVideos();
             presenter.getUnInstallApk();
             presenter.getAudios();
+            presenter.getSpecialApk();
+            presenter.getBigFile();
         }
     }
 
@@ -501,7 +584,6 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
     }
 
 }

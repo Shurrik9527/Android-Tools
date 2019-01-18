@@ -102,7 +102,7 @@
                         android:id="@+id/deepclean_image_iv"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@mipmap/ic_launcher"
+                        app:srcCompat="@drawable/ic_picture"
                         android:layout_marginLeft="20dp"
                         android:layout_centerVertical="true"
                         />
@@ -136,7 +136,19 @@
                         android:layout_toLeftOf="@+id/deepclean_images_next_iv"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_centerVertical="true"
+                        android:visibility="gone"
                         />
+                    <com.hz.maiku.maikumodule.widget.ProgressWheel
+                        android:id="@+id/deepclean_images_num_tv_pw"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:matProg_barColor="@color/colorPrimary"
+                        app:matProg_barWidth="2dp"
+                        android:layout_toLeftOf="@+id/deepclean_images_next_iv"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:visibility="visible"
+                        app:matProg_progressIndeterminate="true" />
 
                 </RelativeLayout>
                 <android.support.v7.widget.RecyclerView
@@ -147,6 +159,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:focusable="false"
+                    android:visibility="gone"
                     >
                 </android.support.v7.widget.RecyclerView>
 
@@ -169,7 +182,7 @@
                         android:id="@+id/deepclean_videos_iv"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@mipmap/ic_launcher"
+                        app:srcCompat="@drawable/ic_voice"
                         android:layout_marginLeft="20dp"
                         android:layout_centerVertical="true"
                         />
@@ -203,7 +216,19 @@
                         android:layout_toLeftOf="@+id/deepclean_videos_next_iv"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_centerVertical="true"
+                        android:visibility="gone"
                         />
+                    <com.hz.maiku.maikumodule.widget.ProgressWheel
+                        android:id="@+id/deepclean_videos_num_tv_pw"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:matProg_barColor="@color/colorPrimary"
+                        app:matProg_barWidth="2dp"
+                        android:layout_toLeftOf="@+id/deepclean_videos_next_iv"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:visibility="visible"
+                        app:matProg_progressIndeterminate="true" />
 
                 </RelativeLayout>
                 <android.support.v7.widget.RecyclerView
@@ -213,6 +238,7 @@
                     android:layout_below="@+id/deepclean_video_rl"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:visibility="gone"
                     >
                 </android.support.v7.widget.RecyclerView>
 
@@ -235,7 +261,7 @@
                         android:id="@+id/deepclean_uninstallapp_iv"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@mipmap/ic_launcher"
+                        app:srcCompat="@drawable/ic_uninstallapp"
                         android:layout_marginLeft="20dp"
                         android:layout_centerVertical="true"
                         />
@@ -269,7 +295,20 @@
                         android:layout_toLeftOf="@+id/deepclean_uninstallapp_next_iv"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_centerVertical="true"
+                        android:visibility="gone"
                         />
+
+                    <com.hz.maiku.maikumodule.widget.ProgressWheel
+                        android:id="@+id/deepclean_uninstallapp_num_tv_pw"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:matProg_barColor="@color/colorPrimary"
+                        app:matProg_barWidth="2dp"
+                        android:layout_toLeftOf="@+id/deepclean_uninstallapp_next_iv"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:visibility="visible"
+                        app:matProg_progressIndeterminate="true" />
 
                 </RelativeLayout>
                 <android.support.v7.widget.RecyclerView
@@ -279,6 +318,7 @@
                     android:layout_below="@+id/deepclean_uninstallapp_rl"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
+                    android:visibility="gone"
                     >
                 </android.support.v7.widget.RecyclerView>
 
@@ -299,7 +339,7 @@
                     android:id="@+id/deepclean_audio_iv"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/ic_music"
                     android:layout_marginLeft="20dp"
                     android:layout_centerVertical="true"
                     />
@@ -346,7 +386,20 @@
                     android:layout_toLeftOf="@+id/deepclean_audio_next_iv"
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_centerVertical="true"
+                    android:visibility="gone"
                     />
+
+                <com.hz.maiku.maikumodule.widget.ProgressWheel
+                    android:id="@+id/deepclean_audio_tv_pw"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:matProg_barColor="@color/colorPrimary"
+                    app:matProg_barWidth="2dp"
+                    android:layout_toLeftOf="@+id/deepclean_audio_next_iv"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_centerVertical="true"
+                    android:visibility="visible"
+                    app:matProg_progressIndeterminate="true" />
 
             </RelativeLayout>
 
@@ -363,7 +416,7 @@
                     android:id="@+id/deepclean_appdata_iv"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/ic_appdata"
                     android:layout_marginLeft="20dp"
                     android:layout_centerVertical="true"
                     />
@@ -410,7 +463,19 @@
                     android:layout_toLeftOf="@+id/deepclean_appdata_next_iv"
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_centerVertical="true"
+                    android:visibility="gone"
                     />
+                <com.hz.maiku.maikumodule.widget.ProgressWheel
+                    android:id="@+id/deepclean_appdata_tv_pw"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:matProg_barColor="@color/colorPrimary"
+                    app:matProg_barWidth="2dp"
+                    android:layout_toLeftOf="@+id/deepclean_appdata_next_iv"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_centerVertical="true"
+                    android:visibility="visible"
+                    app:matProg_progressIndeterminate="true" />
 
             </RelativeLayout>
 
@@ -428,7 +493,7 @@
                     android:id="@+id/deepclean_largefiles_iv"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@mipmap/ic_launcher"
+                    app:srcCompat="@drawable/ic_bigfile"
                     android:layout_marginLeft="20dp"
                     android:layout_centerVertical="true"
                     />
@@ -475,73 +540,22 @@
                     android:layout_toLeftOf="@+id/deepclean_largefiles_next_iv"
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_centerVertical="true"
+                    android:visibility="gone"
                     />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/deepclean_installationpackage_rl"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@color/white"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/deepclean_largefiles_rl"
-                >
-
-                <ImageView
-                    android:id="@+id/deepclean_installationpackage_iv"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@mipmap/ic_launcher"
-                    android:layout_marginLeft="20dp"
-                    android:layout_centerVertical="true"
-                    />
-                <TextView
-                    android:id="@+id/deepclean_installationpackage_title_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/deepclean_installationpackage_title"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/default_text"
-                    android:layout_toRightOf="@+id/deepclean_installationpackage_iv"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginTop="15dp"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/deepclean_installationpackage_msg"
-                    android:textSize="@dimen/sp_14"
-                    android:textColor="@color/gray3"
-                    android:layout_toRightOf="@+id/deepclean_installationpackage_iv"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginTop="3dp"
-                    android:layout_below="@+id/deepclean_installationpackage_title_tv"
-                    />
-
-                <ImageView
-                    android:id="@+id/deepclean_installationpackage_next_iv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/next"
-                    android:layout_marginRight="15dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    />
-
-                <TextView
-                    android:id="@+id/deepclean_installationpackage_num_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0.00B"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/gray3"
-                    android:layout_toLeftOf="@+id/deepclean_installationpackage_next_iv"
+                <com.hz.maiku.maikumodule.widget.ProgressWheel
+                    android:id="@+id/deepclean_largefile_tv_pw"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:matProg_barColor="@color/colorPrimary"
+                    app:matProg_barWidth="2dp"
+                    android:layout_toLeftOf="@+id/deepclean_largefiles_next_iv"
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_centerVertical="true"
-                    />
+                    android:visibility="visible"
+                    app:matProg_progressIndeterminate="true" />
 
             </RelativeLayout>
+
             </RelativeLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

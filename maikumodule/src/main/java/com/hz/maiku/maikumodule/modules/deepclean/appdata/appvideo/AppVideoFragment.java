@@ -1,4 +1,4 @@
-package com.hz.maiku.maikumodule.modules.deepclean.selectVideo;
+package com.hz.maiku.maikumodule.modules.deepclean.appdata.appvideo;
 
 
 import android.content.Intent;
@@ -16,12 +16,16 @@ import android.widget.GridView;
 
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
-import com.hz.maiku.maikumodule.bean.ImageBean;
 import com.hz.maiku.maikumodule.bean.VideoBean;
 import com.hz.maiku.maikumodule.modules.deepclean.cleansuccess.CleanSuccessActivity;
+import com.hz.maiku.maikumodule.modules.deepclean.selectVideo.SelectVideoAdapter;
+import com.hz.maiku.maikumodule.modules.deepclean.selectVideo.SelectVideoContract;
+import com.hz.maiku.maikumodule.modules.deepclean.selectVideo.SelectVideoPresenter;
+import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.FormatUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.widget.dialog.AlertDoubleBtnDialog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,24 +41,25 @@ import butterknife.OnClick;
  * @date 2018/12/13
  * @email 252774645@qq.com
  */
-public class SelectVideoFragment extends Fragment implements SelectVideoContract.View {
+public class AppVideoFragment extends Fragment implements AppVideoContract.View {
 
-    private static final String TAG = SelectVideoFragment.class.getName();
+    private static final String TAG = AppVideoFragment.class.getName();
     @BindView(R2.id.select_iamge_gv)
     GridView selectIamgeGv;
     @BindView(R2.id.select_image_btn)
     Button selectImageBtn;
 
-    private SelectVideoContract.Presenter presenter;
-    private SelectVideoAdapter mSelectVideoAdapter;
+    private AppVideoContract.Presenter presenter;
+    private AppVideoAdapter mAppVideoAdapter;
     private List<VideoBean> mlist;
-    public SelectVideoFragment() {
+    private String temp;
+    public AppVideoFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static SelectVideoFragment newInstance() {
-        SelectVideoFragment fragment = new SelectVideoFragment();
+    public static AppVideoFragment newInstance() {
+        AppVideoFragment fragment = new AppVideoFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -63,19 +68,23 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new SelectVideoPresenter(this, getContext());
+        new AppVideoPresenter(this, getContext());
+        Bundle args =getArguments();
+        if(args!=null){
+            temp =  args.getString("APPDATA");
+        }
     }
 
 
     @Override
-    public void setPresenter(SelectVideoContract.Presenter presenter) {
+    public void setPresenter(AppVideoContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
     @Override
     public void initView() {
         mlist = new ArrayList<>();
-        mSelectVideoAdapter = new SelectVideoAdapter(getContext(), mlist, new SelectVideoAdapter.OnClick() {
+        mAppVideoAdapter = new AppVideoAdapter(getContext(), mlist, new AppVideoAdapter.OnClick() {
             @Override
             public void callBack(int pos) {
                 if (mlist != null && mlist.size() > 0) {
@@ -86,13 +95,13 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
                         mVideoBean.setSelect(true);
                     }
                     mlist.set(pos,mVideoBean);
-                    mSelectVideoAdapter.setData(mlist);
-                    mSelectVideoAdapter.notifyDataSetChanged();
+                    mAppVideoAdapter.setData(mlist);
+                    mAppVideoAdapter.notifyDataSetChanged();
                     reflashView();
                 }
             }
         });
-        selectIamgeGv.setAdapter(mSelectVideoAdapter);
+        selectIamgeGv.setAdapter(mAppVideoAdapter);
         selectIamgeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -104,10 +113,18 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
         });
 
 
-
-
-        if (presenter != null) {
-            presenter.getVideos();
+        if(presenter!=null){
+            if(!TextUtils.isEmpty(temp)){
+                if(temp.equals(AppUtil.qq_name)){
+                    presenter.getVideos("tencent/MobileQQ");
+                }else if(temp.equals(AppUtil.weixing_name)){
+                    presenter.getVideos("tencent/MicroMsg");
+                }else if(temp.equals(AppUtil.instagram_name)){
+                    presenter.getVideos("Movies/Instagram");
+                }else if(temp.equals(AppUtil.facebook_name)){
+                    presenter.getVideos("Movies/Facbook");
+                }
+            }
         }
     }
 
@@ -135,10 +152,10 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
 
     @Override
     public void showVideoData(List<VideoBean> mlists) {
-        if (mlists != null && mlists.size() > 0 && mSelectVideoAdapter != null) {
+        if (mlists != null && mlists.size() > 0 && mAppVideoAdapter != null) {
             this.mlist = mlists;
-            mSelectVideoAdapter.setData(mlist);
-            mSelectVideoAdapter.notifyDataSetChanged();
+            mAppVideoAdapter.setData(mlist);
+            mAppVideoAdapter.notifyDataSetChanged();
         }
         if(selectImageBtn!=null){
             selectImageBtn.setText("Clean");

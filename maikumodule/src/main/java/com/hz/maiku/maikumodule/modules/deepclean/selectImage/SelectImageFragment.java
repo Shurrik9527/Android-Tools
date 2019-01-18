@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,6 @@ public class SelectImageFragment extends Fragment implements SelectImageContract
     private SelectImageContract.Presenter presenter;
     private SelectImageAdapter mImageAdapter;
     private List<ImageBean> mlist;
-    private String deleteUrl;
     public SelectImageFragment() {
         // Required empty public constructor
     }
@@ -111,6 +111,7 @@ public class SelectImageFragment extends Fragment implements SelectImageContract
         if (presenter != null) {
             presenter.getImages();
         }
+
     }
 
     @Override
@@ -142,6 +143,7 @@ public class SelectImageFragment extends Fragment implements SelectImageContract
             for (int i = 0; i < mlists.size(); i++) {
                 mlist.addAll(mlists.get(i).getImageBeans());
             }
+
             this.mlist = mlist;
             mImageAdapter.setData(mlist);
             mImageAdapter.notifyDataSetChanged();
@@ -166,23 +168,11 @@ public class SelectImageFragment extends Fragment implements SelectImageContract
                     }
                 }
                 if(selectImageBtn!=null){
-
                     if(mSize>0){
                         selectImageBtn.setText("Clean  "+FormatUtil.formatFileSize(mSize).toString() );
                     }else{
                         selectImageBtn.setText("Clean");
                     }
-//                    if(mSize>(1024*1024)){
-//                        double size =mSize/(1024*1024);
-//                        selectImageBtn.setText("Clean  "+ String.format("%.1f",size).toString()+"MB");
-//                    }else if(mSize>10240&&mSize<(1024*1024)){
-//                        double size =mSize/1024;
-//                        selectImageBtn.setText("Clean  "+String.format("%.1f",size).toString()+"KB");
-//                    } else if(mSize>0&&mSize<1024){
-//                        selectImageBtn.setText("Clean  "+mSize+"B");
-//                    }else {
-//                        selectImageBtn.setText("Clean");
-//                    }
                 }
             }
         }catch (Exception e){

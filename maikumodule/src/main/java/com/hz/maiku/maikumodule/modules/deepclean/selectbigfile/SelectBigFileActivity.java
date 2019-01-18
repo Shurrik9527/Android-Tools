@@ -1,20 +1,19 @@
-package com.hz.maiku.maikumodule.modules.deepclean.selectaudio;
-
+package com.hz.maiku.maikumodule.modules.deepclean.selectbigfile;
 
 import android.support.v4.app.Fragment;
+
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.base.BaseActivity;
-import com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImageFragment;
-
 
 /**
  * @author heguogui
  * @version v 1.0.0
  * @describe
- * @date 2019/1/11
+ * @date 2019/1/18
  * @email 252774645@qq.com
  */
-public class SelectAudiosActivity extends BaseActivity {
+public class SelectBigFileActivity extends BaseActivity {
+
 
     @Override
     protected int getContentViewId() {
@@ -23,7 +22,7 @@ public class SelectAudiosActivity extends BaseActivity {
 
     @Override
     protected Fragment getFragment() {
-        return SelectAudiosFragment.newInstance();
+        return SelectBigFileFragment.newInstance();
     }
 
     @Override

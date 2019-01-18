@@ -24,7 +24,9 @@ import com.hz.maiku.maikumodule.bean.AlbumBean;
 import com.hz.maiku.maikumodule.bean.ApkBean;
 import com.hz.maiku.maikumodule.bean.ApkInformBean;
 import com.hz.maiku.maikumodule.bean.AppBean;
+import com.hz.maiku.maikumodule.bean.AppDataBean;
 import com.hz.maiku.maikumodule.bean.AudioBean;
+import com.hz.maiku.maikumodule.bean.BigFileBean;
 import com.hz.maiku.maikumodule.bean.ImageBean;
 import com.hz.maiku.maikumodule.bean.JunkCleanerInformBean;
 import com.hz.maiku.maikumodule.bean.JunkCleanerMultiItemBean;
@@ -385,7 +387,46 @@ public class DeepCleanUtil {
         }
     }
 
+    /**
+     * 删除sd卡zip文件
+     * @param list
+     * @return
+     */
+    public static boolean deleteBigFileFile(final List<BigFileBean> list){
 
+        if(list==null||list.size()==0){
+            return false;
+        }
+        try {
+            for (BigFileBean bean :list){
+                FileUtil.deleteTarget(bean.getmUrl());
+            }
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+
+    /**
+     * 删除sd卡app 图片文件
+     * @param list
+     * @return
+     */
+    public static boolean deleteImageFile(final List<ImageBean> list){
+
+        if(list==null||list.size()==0){
+            return false;
+        }
+        try {
+            for (ImageBean bean :list){
+                FileUtil.deleteTarget(bean.getmUrl());
+            }
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
     /**
      * 获取所有录音
@@ -451,7 +492,18 @@ public class DeepCleanUtil {
     }
 
 
-//
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static List<AudioBean> getAllAudioSpecialApp(String content){
+        if(!SDUtil.isSDCardAvailable()){
+            return new ArrayList<>();
+        }
+        File externalDir = Environment.getExternalStorageDirectory();
+        List<AudioBean> audiosLists = new ArrayList<>();
+       // audiosLists.addAll(selectAudios(new File(externalDir.getAbsolutePath()+"/"+content),audiosLists));
+        return selectAudios(new File(externalDir.getAbsolutePath()+"/"+content),audiosLists);
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static List<AudioBean> getAllAudios(){
 
@@ -478,16 +530,10 @@ public class DeepCleanUtil {
                             mBean.setSize(file.length());
                             mBean.setmUrl(file.getAbsolutePath());
                             mBean.setSelect(false);
-
                             if (MimeTypes.isAmr(file)) {
                                 mBean.setType("amr");
                                 mBean.setmName("audio.amr");
-//                                String url =mBean.getmUrl().substring(0,mBean.getmUrl().length()-4)+".mp3";
-//                                Log.i(TAG,"url====="+url);
-//                                VoiceUtil.amrToMap3(mBean.getmUrl(),url);
-//                                mBean.setmUrl(url);
                                 list.add(mBean);
-                                Log.i(TAG,"mBean==="+mBean.getmUrl());
                             }
 
                             if(MimeTypes.isWav(file)){
@@ -632,38 +678,229 @@ public class DeepCleanUtil {
 
 
 
-    public static List<AppBean> getAllSpecialApk(){
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static List<AppDataBean> getAllSpecialApk(List<AppBean> lists){
         if(!SDUtil.isSDCardAvailable()){
             return new ArrayList<>();
         }
         File externalDir = Environment.getExternalStorageDirectory();
-        List<AppBean> mLists = new ArrayList<>();
-        return selectSpecialApk(externalDir,mLists);
+
+        List<AppDataBean> mLists = new ArrayList<>();
+        Log.i(TAG,"==externalDir="+externalDir.getAbsolutePath());
+
+        for (AppBean mAppBean :lists){
+            //微信
+            if(mAppBean.getAppName().equals(AppUtil.weixing_name)){
+                AppDataBean mBean = new AppDataBean();
+                mBean.setAppName(mAppBean.getAppName());
+                mBean.setAppSize(mAppBean.getAppSize());
+                mBean.setAppIcon(mAppBean.getAppIcon());
+                List<ImageBean> imagesLists = new ArrayList<>();
+                List<AudioBean> audioiLists = new ArrayList<>();
+                List<VideoBean> videoLists = new ArrayList<>();
+                mBean.setImageBean(selectImageSpecialApk(new File(externalDir.getAbsolutePath()+"/tencent/MicroMsg"),imagesLists));
+                mBean.setAudioBean(selectAudios(new File(externalDir.getAbsolutePath()+"/tencent/MicroMsg"),audioiLists));
+                mBean.setVideoBean(selectVideoSpecialApk(new File(externalDir.getAbsolutePath()+"/tencent/MicroMsg"),videoLists));
+                mLists.add(mBean);
+            }
+
+            //qq
+            if(mAppBean.getAppName().equals(AppUtil.qq_name)){
+                AppDataBean mBean = new AppDataBean();
+                mBean.setAppName(mAppBean.getAppName());
+                mBean.setAppSize(mAppBean.getAppSize());
+                mBean.setAppIcon(mAppBean.getAppIcon());
+                List<ImageBean> imagesLists = new ArrayList<>();
+                List<AudioBean> audioiLists = new ArrayList<>();
+                List<VideoBean> videoLists = new ArrayList<>();
+                mBean.setImageBean(selectImageSpecialApk(new File(externalDir.getAbsolutePath()+"/tencent/MobileQQ"),imagesLists));
+                mBean.setAudioBean(selectAudios(new File(externalDir.getAbsolutePath()+"/tencent/MobileQQ"),audioiLists));
+                mBean.setVideoBean(selectVideoSpecialApk(new File(externalDir.getAbsolutePath()+"/tencent/MobileQQ"),videoLists));
+                mLists.add(mBean);
+            }
+            //instagram
+            if(mAppBean.getAppName().equals(AppUtil.instagram_name)){
+                AppDataBean mBean = new AppDataBean();
+                mBean.setAppName(mAppBean.getAppName());
+                mBean.setAppSize(mAppBean.getAppSize());
+                mBean.setAppIcon(mAppBean.getAppIcon());
+                List<ImageBean> imagesLists = new ArrayList<>();
+                List<AudioBean> audioiLists = new ArrayList<>();
+                List<VideoBean> videoLists = new ArrayList<>();
+                mBean.setImageBean(selectImageSpecialApk(new File(externalDir.getAbsolutePath()+"/Pictures/Instagram"),imagesLists));
+                mBean.setAudioBean(selectAudios(new File(externalDir.getAbsolutePath()+"/Rewords/Instagram"),audioiLists));
+                mBean.setVideoBean(selectVideoSpecialApk(new File(externalDir.getAbsolutePath()+"/Movies/Instagram"),videoLists));
+                mLists.add(mBean);
+            }
+
+            if(mAppBean.getAppName().equals(AppUtil.facebook_name)){
+                AppDataBean mBean = new AppDataBean();
+                mBean.setAppName(mAppBean.getAppName());
+                mBean.setAppSize(mAppBean.getAppSize());
+                mBean.setAppIcon(mAppBean.getAppIcon());
+                List<ImageBean> imagesLists = new ArrayList<>();
+                List<AudioBean> audioiLists = new ArrayList<>();
+                List<VideoBean> videoLists = new ArrayList<>();
+                mBean.setImageBean(selectImageSpecialApk(new File(externalDir.getAbsolutePath()+"/Pictures/Facebook"),imagesLists));
+                mBean.setAudioBean(selectAudios(new File(externalDir.getAbsolutePath()+"/Rewords/Facebook"),audioiLists));
+                mBean.setVideoBean(selectVideoSpecialApk(new File(externalDir.getAbsolutePath()+"/Movies/Facebook"),videoLists));
+                mLists.add(mBean);
+            }
+
+
+        }
+        return mLists;
     }
 
-    public static List<AppBean> selectSpecialApk(File externalDir,List<AppBean> list){
+
+
+    public static List<ImageBean> getAllSpecialApkImage(String content){
+        if(!SDUtil.isSDCardAvailable()){
+            return new ArrayList<>();
+        }
+        File externalDir = Environment.getExternalStorageDirectory();
+        List<ImageBean> imagesLists = new ArrayList<>();
+        return selectImageSpecialApk(new File(externalDir.getAbsolutePath()+"/"+content),imagesLists);
+    }
+
+
+
+    public static List<ImageBean> selectImageSpecialApk(File externalDir,List<ImageBean> imagesLists){
         if(externalDir!=null&&externalDir.exists()){
             File[] files = externalDir.listFiles();
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile()) {
-                        if (MimeTypes.isApk(file)) {
-                            if(file.length()==0){
-                                continue;
-                            }
-                            AppBean mBean = new AppBean();
-                            mBean.setSelect(false);
-                            list.add(mBean);
+                        if (MimeTypes.isPng(file)) {
+                            ImageBean mImageBean = new ImageBean();
+                            mImageBean.setSize(file.length());
+                            mImageBean.setmUrl(file.getAbsolutePath());
+                            mImageBean.setSelect(false);
+                            imagesLists.add(mImageBean);
                         }
+
+                        if (MimeTypes.isJpg(file)) {
+                            ImageBean mImageBean = new ImageBean();
+                            mImageBean.setSize(file.length());
+                            mImageBean.setmUrl(file.getAbsolutePath());
+                            mImageBean.setSelect(false);
+                            imagesLists.add(mImageBean);
+                        }
+
+                        if (MimeTypes.isJpeg(file)) {
+                            ImageBean mImageBean = new ImageBean();
+                            mImageBean.setSize(file.length());
+                            mImageBean.setmUrl(file.getAbsolutePath());
+                            mImageBean.setSelect(false);
+                            imagesLists.add(mImageBean);
+                        }
+
                     }else{
-                        selectSpecialApk(file,list);
+                        selectImageSpecialApk(file,imagesLists);
                     }
                 }
-                return list;
+                return imagesLists;
             }else{
                 return  new ArrayList<>();
             }
         }else{
+            return  new ArrayList<>();
+        }
+    }
+
+
+    public static List<VideoBean> getAllVideoSpecialApp(String content){
+        if(!SDUtil.isSDCardAvailable()){
+            return new ArrayList<>();
+        }
+        File externalDir = Environment.getExternalStorageDirectory();
+        List<VideoBean> videoBeanLists = new ArrayList<>();
+        //videoBeanLists.addAll(selectVideoSpecialApk(new File(externalDir.getAbsolutePath()+"/"+content),videoBeanLists));
+        return selectVideoSpecialApk(new File(externalDir.getAbsolutePath()+"/"+content),videoBeanLists);
+    }
+
+
+
+    public static List<VideoBean> selectVideoSpecialApk(File externalDir,List<VideoBean> videoLists){
+        if(externalDir!=null&&externalDir.exists()){
+            File[] files = externalDir.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+
+                        if (MimeTypes.isMp4(file)) {
+                            VideoBean mVideoBean = new VideoBean();
+                            mVideoBean.setSize(file.length());
+                            mVideoBean.setmUrl(file.getAbsolutePath());
+                            mVideoBean.setSelect(false);
+                            videoLists.add(mVideoBean);
+                        }
+                        if (MimeTypes.is3gp(file)) {
+                            VideoBean mVideoBean = new VideoBean();
+                            mVideoBean.setSize(file.length());
+                            mVideoBean.setmUrl(file.getAbsolutePath());
+                            mVideoBean.setSelect(false);
+                            videoLists.add(mVideoBean);
+                        }
+
+
+                    }else{
+                        selectVideoSpecialApk(file,videoLists);
+                    }
+                }
+                return videoLists;
+            }else{
+                return  new ArrayList<>();
+            }
+        }else{
+            return  new ArrayList<>();
+        }
+    }
+
+
+
+
+    public static List<BigFileBean> getAllBigFiles(){
+        if(!SDUtil.isSDCardAvailable()){
+            return new ArrayList<>();
+        }
+        File externalDir = Environment.getExternalStorageDirectory();
+        List<BigFileBean> mLists = new ArrayList<>();
+        return selectBigFile(externalDir,mLists);
+    }
+
+    public static List<BigFileBean> selectBigFile(File externalDir,List<BigFileBean> list){
+        try {
+            if(externalDir!=null&&externalDir.exists()){
+                File[] files = externalDir.listFiles();
+                if (files != null) {
+                    for (File file : files) {
+                        if (file.isFile()) {
+                            if (MimeTypes.isZipFile(file)) {
+                                if(file.length()==0){
+                                    continue;
+                                }
+                                BigFileBean mBigFileBean = new BigFileBean();
+                                String path =file.getAbsolutePath();
+                                int length =path.lastIndexOf("/");
+                                mBigFileBean.setmName(path.substring(length+1,path.length()));
+                                mBigFileBean.setSize(file.length());
+                                mBigFileBean.setmUrl(path);
+                                mBigFileBean.setSelect(false);
+                                list.add(mBigFileBean);
+                            }
+                        }else{
+                            selectBigFile(file,list);
+                        }
+                    }
+                    return list;
+                }else{
+                    return  new ArrayList<>();
+                }
+            }else{
+                return  new ArrayList<>();
+            }
+        }catch (Exception e){
             return  new ArrayList<>();
         }
     }

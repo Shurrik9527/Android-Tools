@@ -1,5 +1,4 @@
-package com.hz.maiku.maikumodule.modules.deepclean.selectaudio;
-
+package com.hz.maiku.maikumodule.modules.deepclean.appdata.appaudio;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -16,50 +15,47 @@ import android.widget.GridView;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.bean.AudioBean;
-import com.hz.maiku.maikumodule.bean.ImageBean;
 import com.hz.maiku.maikumodule.manager.AudioPlayManager;
 import com.hz.maiku.maikumodule.modules.deepclean.cleansuccess.CleanSuccessActivity;
+import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.FormatUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.hz.maiku.maikumodule.widget.dialog.AlertDoubleBtnDialog;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
-
 /**
  * @author heguogui
- * @version v 3.0.0
- * @describe 降温成功Fragment
- * @date 2018/12/13
+ * @version v 1.0.0
+ * @describe
+ * @date 2019/1/17
  * @email 252774645@qq.com
  */
-public class SelectAudiosFragment extends Fragment implements SelectAudiosContract.View {
+public class AppAudiosFragment extends Fragment implements AppAudiosContract.View{
 
-    private static final String TAG = SelectAudiosFragment.class.getName();
     @BindView(R2.id.select_audio_gv)
     GridView selectAudioGv;
     @BindView(R2.id.select_audio_btn)
     Button selectAudioBtn;
     private MediaPlayer player;
-    private SelectAudiosContract.Presenter presenter;
-    private SelectAudiosAdapter mSelectAudiosAdapter;
+    private AppAudiosContract.Presenter presenter;
+    private AppAudiosAdapter mAppAudiosAdapter;
     private List<AudioBean> mlist;
     private int selectPos=-1;
-
-    public SelectAudiosFragment() {
+    private String temp;
+    public AppAudiosFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static SelectAudiosFragment newInstance() {
-        SelectAudiosFragment fragment = new SelectAudiosFragment();
+    public static AppAudiosFragment newInstance() {
+        AppAudiosFragment fragment = new AppAudiosFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -68,19 +64,23 @@ public class SelectAudiosFragment extends Fragment implements SelectAudiosContra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new SelectAudiosPresenter(this, getContext());
+        new AppAudiosPresenter(this, getContext());
+        Bundle args =getArguments();
+        if(args!=null){
+            temp =  args.getString("APPDATA");
+        }
     }
 
 
     @Override
-    public void setPresenter(SelectAudiosContract.Presenter presenter) {
+    public void setPresenter(AppAudiosContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
     @Override
     public void initView() {
         mlist = new ArrayList<>();
-        mSelectAudiosAdapter = new SelectAudiosAdapter(getContext(), mlist, new SelectAudiosAdapter.OnClick() {
+        mAppAudiosAdapter = new AppAudiosAdapter(getContext(), mlist, new AppAudiosAdapter.OnClick() {
             @Override
             public void callBack(int pos) {
                 if (mlist != null && mlist.size() > 0) {
@@ -91,13 +91,13 @@ public class SelectAudiosFragment extends Fragment implements SelectAudiosContra
                         mAudioBean.setSelect(true);
                     }
                     mlist.set(pos,mAudioBean);
-                    mSelectAudiosAdapter.setData(mlist);
-                    mSelectAudiosAdapter.notifyDataSetChanged();
+                    mAppAudiosAdapter.setData(mlist);
+                    mAppAudiosAdapter.notifyDataSetChanged();
                     reflashView();
                 }
             }
         });
-        selectAudioGv.setAdapter(mSelectAudiosAdapter);
+        selectAudioGv.setAdapter(mAppAudiosAdapter);
         selectAudioGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -109,11 +109,20 @@ public class SelectAudiosFragment extends Fragment implements SelectAudiosContra
 
             }
         });
-
-
-        if (presenter != null) {
-            presenter.getAudios();
+        if(presenter!=null){
+            if(!TextUtils.isEmpty(temp)){
+                if(temp.equals(AppUtil.qq_name)){
+                    presenter.getAudios("tencent/MobileQQ");
+                }else if(temp.equals(AppUtil.weixing_name)){
+                    presenter.getAudios("tencent/MicroMsg");
+                }else if(temp.equals(AppUtil.instagram_name)){
+                    presenter.getAudios("Rewords/Instagram");
+                }else if(temp.equals(AppUtil.facebook_name)){
+                    presenter.getAudios("Rewords/Facebook");
+                }
+            }
         }
+
     }
 
     @Override
@@ -140,10 +149,10 @@ public class SelectAudiosFragment extends Fragment implements SelectAudiosContra
 
     @Override
     public void showAudiosData(List<AudioBean> mlists) {
-        if (mlists != null && mlists.size() > 0 && mSelectAudiosAdapter != null) {
+        if (mlists != null && mlists.size() > 0 && mAppAudiosAdapter != null) {
             this.mlist = mlists;
-            mSelectAudiosAdapter.setData(mlist);
-            mSelectAudiosAdapter.notifyDataSetChanged();
+            mAppAudiosAdapter.setData(mlist);
+            mAppAudiosAdapter.notifyDataSetChanged();
         }
         if(selectAudioBtn!=null){
             selectAudioBtn.setText("Clean");
@@ -239,4 +248,5 @@ public class SelectAudiosFragment extends Fragment implements SelectAudiosContra
         }
 
     }
+
 }

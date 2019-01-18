@@ -88,13 +88,12 @@ public class AudioPlayManager {
      * 停止播放音频
      */
     public void stopPlay() {
-        if (mediaPlayer != null&&mediaPlayer.isPlaying()) {
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.reset();
             mediaPlayer.release();
             mediaPlayer = null;
         }
-
     }
 
     /**

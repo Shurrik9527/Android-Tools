@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/select_appdata_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_marginTop="5dp"
+    android:background="#BBBBBB">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_centerHorizontal="true"
+        android:descendantFocusability="blocksDescendants"
+        >
+
+        <ImageView
+            android:id="@+id/select_appdata_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_launcher"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:id="@+id/select_appdata_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/default_text"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
+            android:layout_toRightOf="@+id/select_appdata_iv"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            />
+
+        <TextView
+            android:id="@+id/select_appdata_size_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/description_text"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/select_appdata_image_rl"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/select_appdata_name_tv"
+            android:layout_toRightOf="@+id/select_appdata_iv"
+            >
+            <ImageView
+                android:id="@+id/select_appdata_image_tv"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:src="@drawable/ic_launcher"
+                android:layout_marginBottom="15dp"
+                />
+
+            <TextView
+                android:id="@+id/select_appdata_image_size_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/description_text"
+                android:gravity="center"
+                android:layout_below="@+id/select_appdata_image_tv"
+                android:textSize="10sp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="5dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/select_appdata_video_rl"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/select_appdata_name_tv"
+            android:layout_toRightOf="@+id/select_appdata_image_rl"
+            >
+            <ImageView
+                android:id="@+id/select_appdata_video_tv"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:src="@drawable/ic_launcher"
+                android:layout_marginBottom="15dp"
+                />
+
+            <TextView
+                android:id="@+id/select_appdata_video_size_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/description_text"
+                android:gravity="center"
+                android:layout_below="@+id/select_appdata_video_tv"
+                android:textSize="10sp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/select_appdata_name_tv"
+            android:layout_toRightOf="@+id/select_appdata_video_rl"
+            >
+            <ImageView
+                android:id="@+id/select_appdata_audio_tv"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:src="@drawable/ic_launcher"
+                android:layout_marginBottom="15dp"
+                />
+
+            <TextView
+                android:id="@+id/select_appdata_audio_size_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/description_text"
+                android:gravity="center"
+                android:layout_below="@+id/select_appdata_audio_tv"
+                android:textSize="10sp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

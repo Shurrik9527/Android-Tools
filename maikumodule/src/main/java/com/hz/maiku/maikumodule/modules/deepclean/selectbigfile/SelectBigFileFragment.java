@@ -1,30 +1,24 @@
-package com.hz.maiku.maikumodule.modules.deepclean.selectVideo;
+package com.hz.maiku.maikumodule.modules.deepclean.selectbigfile;
 
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
-import com.hz.maiku.maikumodule.bean.ImageBean;
-import com.hz.maiku.maikumodule.bean.VideoBean;
+import com.hz.maiku.maikumodule.bean.BigFileBean;
 import com.hz.maiku.maikumodule.modules.deepclean.cleansuccess.CleanSuccessActivity;
 import com.hz.maiku.maikumodule.util.FormatUtil;
 import com.hz.maiku.maikumodule.util.StringUtil;
 import com.hz.maiku.maikumodule.widget.dialog.AlertDoubleBtnDialog;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,24 +31,24 @@ import butterknife.OnClick;
  * @date 2018/12/13
  * @email 252774645@qq.com
  */
-public class SelectVideoFragment extends Fragment implements SelectVideoContract.View {
+public class SelectBigFileFragment extends Fragment implements SelectBigFileContract.View {
 
-    private static final String TAG = SelectVideoFragment.class.getName();
-    @BindView(R2.id.select_iamge_gv)
+    private static final String TAG = SelectBigFileFragment.class.getName();
+    @BindView(R2.id.select_bigfile_gv)
     GridView selectIamgeGv;
-    @BindView(R2.id.select_image_btn)
-    Button selectImageBtn;
+    @BindView(R2.id.select_bigfile_btn)
+    Button selectbigfileBtn;
+    private SelectBigFileContract.Presenter presenter;
+    private SelectBigFileAdapter mSelectBigFileAdapter;
+    private List<BigFileBean> mlist;
 
-    private SelectVideoContract.Presenter presenter;
-    private SelectVideoAdapter mSelectVideoAdapter;
-    private List<VideoBean> mlist;
-    public SelectVideoFragment() {
+    public SelectBigFileFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static SelectVideoFragment newInstance() {
-        SelectVideoFragment fragment = new SelectVideoFragment();
+    public static SelectBigFileFragment newInstance() {
+        SelectBigFileFragment fragment = new SelectBigFileFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -63,52 +57,41 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new SelectVideoPresenter(this, getContext());
+        new SelectBigFilePresenter(this, getContext());
     }
 
 
     @Override
-    public void setPresenter(SelectVideoContract.Presenter presenter) {
+    public void setPresenter(SelectBigFileContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
     @Override
     public void initView() {
         mlist = new ArrayList<>();
-        mSelectVideoAdapter = new SelectVideoAdapter(getContext(), mlist, new SelectVideoAdapter.OnClick() {
+        mSelectBigFileAdapter = new SelectBigFileAdapter(getContext(), mlist, new SelectBigFileAdapter.OnClick() {
             @Override
             public void callBack(int pos) {
                 if (mlist != null && mlist.size() > 0) {
-                    VideoBean mVideoBean = mlist.get(pos);
-                    if (mVideoBean.isSelect()) {
-                        mVideoBean.setSelect(false);
+                    BigFileBean mBigFileBean = mlist.get(pos);
+                    if (mBigFileBean.isSelect()) {
+                        mBigFileBean.setSelect(false);
                     } else {
-                        mVideoBean.setSelect(true);
+                        mBigFileBean.setSelect(true);
                     }
-                    mlist.set(pos,mVideoBean);
-                    mSelectVideoAdapter.setData(mlist);
-                    mSelectVideoAdapter.notifyDataSetChanged();
+                    mlist.set(pos, mBigFileBean);
+                    mSelectBigFileAdapter.setData(mlist);
+                    mSelectBigFileAdapter.notifyDataSetChanged();
                     reflashView();
                 }
             }
         });
-        selectIamgeGv.setAdapter(mSelectVideoAdapter);
-        selectIamgeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (mlist != null && mlist.size() > 0) {
-                    VideoBean mVideoBean = mlist.get(position);
-                    startVideos(mVideoBean.getmUrl());
-                }
-            }
-        });
-
-
-
+        selectIamgeGv.setAdapter(mSelectBigFileAdapter);
 
         if (presenter != null) {
-            presenter.getVideos();
+            presenter.getBigFiles();
         }
+
     }
 
     @Override
@@ -121,7 +104,7 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.select_image_fragment, container, false);
+        View root = inflater.inflate(R.layout.select_bigfile_fragment, container, false);
         ButterKnife.bind(this, root);
         initView();
         return root;
@@ -132,34 +115,37 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
         super.onDestroyView();
     }
 
-
     @Override
-    public void showVideoData(List<VideoBean> mlists) {
-        if (mlists != null && mlists.size() > 0 && mSelectVideoAdapter != null) {
+    public void showData(List<BigFileBean> mlists) {
+        if (mlists != null && mlists.size() > 0 && mSelectBigFileAdapter != null) {
             this.mlist = mlists;
-            mSelectVideoAdapter.setData(mlist);
-            mSelectVideoAdapter.notifyDataSetChanged();
+            mSelectBigFileAdapter.setData(mlist);
+            mSelectBigFileAdapter.notifyDataSetChanged();
         }
-        if(selectImageBtn!=null){
-            selectImageBtn.setText("Clean");
+        if(selectbigfileBtn!=null){
+            selectbigfileBtn.setText("Clean");
         }
     }
+
+
+
+
 
     @Override
     public void reflashView() {
         try {
             if (mlist != null && mlist.size() > 0) {
                 long mSize = 0;
-                for (VideoBean bean : mlist) {
+                for (BigFileBean bean : mlist) {
                     if(bean.isSelect()){
                         mSize = mSize + bean.getSize();
                     }
                 }
-                if(selectImageBtn!=null){
+                if(selectbigfileBtn!=null){
                     if(mSize>0){
-                        selectImageBtn.setText("Clean  "+FormatUtil.formatFileSize(mSize).toString() );
+                        selectbigfileBtn.setText("Clean  "+FormatUtil.formatFileSize(mSize).toString() );
                     }else{
-                        selectImageBtn.setText("Clean");
+                        selectbigfileBtn.setText("Clean");
                     }
                 }
             }
@@ -179,19 +165,7 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
         getActivity().finish();
     }
 
-    @Override
-    public void startVideos(String url) {
-        if(!TextUtils.isEmpty(url)){
-            Uri uri = Uri.parse(url);
-            Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-            intent.setType("video/*");
-            intent.setDataAndType(uri , "video/*");
-            startActivity(intent);
-        }
-    }
-
-
-    @OnClick(R2.id.select_image_btn)
+    @OnClick(R2.id.select_bigfile_btn)
     public void onClick() {
 
         if(StringUtil.isFastDoubleClick()){
@@ -200,22 +174,23 @@ public class SelectVideoFragment extends Fragment implements SelectVideoContract
 
         if(mlist!=null&&mlist.size()>0){
             if(presenter!=null){
-                final List<VideoBean> list = new ArrayList<>();
+                final List<BigFileBean> list = new ArrayList<>();
                 long mSize = 0;
                 for (int i=0;i<mlist.size();i++){
-                    VideoBean bean = mlist.get(i);
+                    BigFileBean bean = mlist.get(i);
                     if(bean.isSelect()){
                         list.add(bean);
                         mSize = mSize + bean.getSize();
                     }
                 }
+
                 if(list.size()>0){
                     final long finalMSize = mSize;
-                    AlertDoubleBtnDialog dialog = new AlertDoubleBtnDialog(getContext(), getResources().getString(R.string.common_warm_prompt), "Are sure you clear "+list.size()+" Video", "Sure", new AlertDoubleBtnDialog.ConfirmListener() {
+                    AlertDoubleBtnDialog dialog = new AlertDoubleBtnDialog(getContext(), getResources().getString(R.string.common_warm_prompt), "Are sure you clear "+list.size()+" pictures", "Sure", new AlertDoubleBtnDialog.ConfirmListener() {
                         @Override
                         public void callback() {
                             if(presenter!=null){
-                                presenter.delectVideoList(list, finalMSize);
+                                presenter.delectBigFileList(list, finalMSize);
                             }
                         }
                     });
