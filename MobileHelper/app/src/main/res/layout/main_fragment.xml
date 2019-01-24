@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/rl_phonebooster"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:background="@color/colorPrimaryLight"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -22,6 +22,22 @@
             app:lottie_autoPlay="false"
             app:lottie_fileName="mian_fragment_animation.json"
             app:lottie_loop="false" />
+
+        <Button
+            android:id="@+id/main_start_btn"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:textSize="18sp"
+            android:textColor="@color/default_text"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="开始"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"
+            />
     </RelativeLayout>
     <!-- TODO: Update blank fragment layout -->
 

@@ -10,15 +10,20 @@ import android.widget.TextView;
 
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
+import com.hz.maiku.maikumodule.base.Constant;
+import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class AboutUsFragment extends Fragment implements AboutUsContract.View {
     @BindView(R2.id.tv_version_name)
     TextView tvVersionName;
+    @BindView(R2.id.tv_start)
+    TextView tvStart;
 
     private AboutUsContract.Presenter presenter;
 
@@ -91,5 +96,20 @@ public class AboutUsFragment extends Fragment implements AboutUsContract.View {
         }
         versionName = "Version: " + versionName;
         tvVersionName.setText(versionName);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @OnClick(R2.id.tv_start)
+    public void onClick() {
+        boolean showbtn = (boolean) SpHelper.getInstance().get(Constant.ABOUT_SHOW_BTN,false);
+        if(showbtn){
+            SpHelper.getInstance().put(Constant.ABOUT_SHOW_BTN,false);
+        }else {
+            SpHelper.getInstance().put(Constant.ABOUT_SHOW_BTN,true);
+        }
     }
 }

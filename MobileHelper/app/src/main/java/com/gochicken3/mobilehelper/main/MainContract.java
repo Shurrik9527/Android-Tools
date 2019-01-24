@@ -17,6 +17,7 @@ public class MainContract {
         void showPhoneBooster();
         void showChargeBooster();
         void showPermissions();
+        void startShow();
     }
 
     public interface Presenter extends BasePresenter {

@@ -10,13 +10,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
 import com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
+import com.hz.maiku.maikumodule.util.AdUtil;
+import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.gochicken3.mobilehelper.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -38,7 +42,8 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @BindView(R.id.lav_phonebooster)
     LottieAnimationView lavPhoneBooster;
-
+    @BindView(R.id.main_start_btn)
+    Button start_btn;
     public MainFragment() {
         // Required empty public constructor
     }
@@ -63,6 +68,14 @@ public class MainFragment extends Fragment implements MainContract.View {
         super.onResume();
         if (presenter != null) {
             presenter.subscribe();
+        }
+        boolean showbtn = (boolean) SpHelper.getInstance().get(Constant.ABOUT_SHOW_BTN,false);
+        if(start_btn!=null){
+            if(showbtn){
+                start_btn.setVisibility(View.VISIBLE);
+            }else {
+                start_btn.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -97,6 +110,14 @@ public class MainFragment extends Fragment implements MainContract.View {
         startActivity(intent);
 
     }
+
+
+    @OnClick(R.id.main_start_btn)
+    @Override
+    public void startShow() {
+        AdUtil.showAds(getContext(),"MainFragment.startShow()");
+    }
+
 
     @OnClick(R.id.cv_appmanager)
     @Override

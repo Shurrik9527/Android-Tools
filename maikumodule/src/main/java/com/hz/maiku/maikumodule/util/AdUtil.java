@@ -2,12 +2,14 @@ package com.hz.maiku.maikumodule.util;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
 import com.appsflyer.AFInAppEventType;
 import com.duapps.ad.AbsInterstitialListener;
 import com.duapps.ad.InterstitialAd;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -115,6 +117,7 @@ public class AdUtil {
     private static void showFacebookAds(final Context context) {
         //Logcat search "Test mode device hash"
 //        AdSettings.addTestDevice("a087f8ac-8224-477f-a1df-d14ae18e53ad");
+//       AdSettings.addTestDevice("7e2f5d7d-2653-4b8b-a396-32b38ea7a1ec");//国桂hashcode
         final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.PLACEMENT_ID);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
@@ -139,6 +142,10 @@ public class AdUtil {
                 // Ad error callback
                 Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
                 interstitialAd.destroy();
+                boolean showbtn = (boolean) SpHelper.getInstance().get(Constant.ABOUT_SHOW_BTN,false);
+                if(showbtn){
+                   ToastUtil.showToast(context,"Interstitial ad failed to load: " + adError.getErrorMessage());
+                }
                 //RxBus.getDefault().post(new EmptyEvent());
             }
 
