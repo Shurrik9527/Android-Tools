@@ -56,7 +56,7 @@ public class MaiKuApp extends LitePalApplication {
         if (AdUtil.IS_SHOW_AD) {
             initAppsFlyer();
             initBaiduCrab();
-            initBaiduAds();
+            //initBaiduAds();
         }
     }
 

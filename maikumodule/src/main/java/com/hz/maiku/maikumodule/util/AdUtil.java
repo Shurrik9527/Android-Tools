@@ -2,14 +2,12 @@ package com.hz.maiku.maikumodule.util;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import com.appsflyer.AFInAppEventType;
 import com.duapps.ad.AbsInterstitialListener;
 import com.duapps.ad.InterstitialAd;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
-import com.facebook.ads.AdSettings;
 import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -59,7 +57,7 @@ public class AdUtil {
                     AdUtil.showAdModAds(context);
                     break;
                 case TYPE_BAIDU:
-                    AdUtil.showBaiduAds(context);
+                    //AdUtil.showBaiduAds(context);
                     break;
                 default:
                     //判断Fackbook是否安装
