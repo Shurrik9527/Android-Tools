@@ -78,6 +78,9 @@ public class MainActivity extends BaseActivity {
 
         //读取最新广告配置并展示
         AdUtil.getAdTypeAndShow(this, "MainActivity.init()");
+
+//        DeviceUtil deviceUtil = new DeviceUtil(this);
+//        deviceUtil.getCpuName();
     }
 
     @Override
