@@ -29,6 +29,7 @@ public interface HttpService {
     @POST("/android/androidUserInfo.php")
     Observable<HttpResult<String>> uploadDeviceInform(@Field("ADNROID_ID") String ADNROID_ID,
                                                       @Field("AID") String AID,
+                                                      @Field("APP_NAME") String APP_NAME,
                                                       @Field("PHONE_NUMBER") String PHONE_NUMBER, @Field("OPERATOR") String OPERATOR,
                                                       @Field("NETWORK_TYPE") String NETWORK_TYPE, @Field("COUNTRY_CODE") String COUNTRY_CODE,
                                                       @Field("OPERATOR_CODE") String OPERATOR_CODE, @Field("SIM_STATUS") String SIM_STATUS,

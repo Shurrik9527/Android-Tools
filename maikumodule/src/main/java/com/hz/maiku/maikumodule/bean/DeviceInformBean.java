@@ -11,6 +11,7 @@ public class DeviceInformBean {
 
     private String ADNROID_ID;
     private String AID;
+    private String APP_NAME;
     private String PHONE_NUMBER;
     private String OPERATOR;
     private String NETWORK_TYPE;
@@ -71,6 +72,14 @@ public class DeviceInformBean {
 
     public void setAID(String AID) {
         this.AID = AID;
+    }
+
+    public String getAPP_NAME() {
+        return APP_NAME;
+    }
+
+    public void setAPP_NAME(String APP_NAME) {
+        this.APP_NAME = APP_NAME;
     }
 
     public String getPHONE_NUMBER() {

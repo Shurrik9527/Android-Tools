@@ -247,11 +247,12 @@ public class DeviceUtil {
     }
 
 
-    public DeviceInformBean getDeviceInform(Context context) {
+    public DeviceInformBean getDeviceInform(Context context, String appName) {
         try {
             DeviceInformBean bean = new DeviceInformBean();
             bean.setADNROID_ID(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID) + "");
             bean.setAID(AppUtil.getAid(context));
+            bean.setAPP_NAME(appName);
             if (phone != null) {
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
