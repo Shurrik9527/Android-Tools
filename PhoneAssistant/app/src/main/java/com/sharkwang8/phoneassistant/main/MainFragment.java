@@ -7,15 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.hz.maiku.maikumodule.base.Constant;
+import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
+import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.sharkwang8.phoneassistant.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -159,10 +163,24 @@ public class MainFragment extends Fragment implements MainContract.View {
             if (!aBoolean) {
                 showMessageTips("Sorry! no permission, some functions are not available");
                 showPermissions();
+            }else {
+                String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM,"0");
+                if(TextUtils.isEmpty(mflog)||mflog.equals("0")){
+                    if(presenter!=null){
+                        presenter.deviceInform(getContext());
+                    }
+                }
             }
+
         });
     }
 
+    @Override
+    public void uploadDeviceInform(DeviceInformBean deviceInformBean) {
+        if(presenter!=null){
+            presenter.uploadDeviceInform(deviceInformBean);
+        }
+    }
 
     @Override
     public void initView() {

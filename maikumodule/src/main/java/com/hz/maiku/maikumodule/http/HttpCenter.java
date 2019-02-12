@@ -5,6 +5,7 @@ import com.hz.maiku.maikumodule.base.Constant;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,11 +18,15 @@ public class HttpCenter {
     private static final String BASE_URL = Constant.BASE_URL;;
 
     protected static Retrofit getRetrofit(Retrofit.Builder builder) {
+
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new HttpLogger());
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder client = new OkHttpClient().newBuilder();
         client.retryOnConnectionFailure(true);
         client.connectTimeout(1, TimeUnit.MINUTES);
         client.readTimeout(1, TimeUnit.MINUTES);
         client.writeTimeout(1, TimeUnit.MINUTES);
+        client.addNetworkInterceptor(logInterceptor);
         return builder.addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client.build())

@@ -40,6 +40,7 @@ public class Constant {
     public static final String NOTIFICATION_INIT_APP = "NOTIFICATION_INIT_APP";
     public static final String NOTIFICATION_OPEN_STATE = "NOTIFICATION_OPEN_STATE";
     public static final String ABOUT_SHOW_BTN = "ABOUT_SHOW_BTN";
+    public static final String UPLOAD_DEVICE_INFORM = "UPLOAD_DEVICE_INFORM";
 
     /**
      * 域名
