@@ -128,7 +128,7 @@ public class MainFragment extends Fragment implements MainContract.View {
         animator.addUpdateListener(animation -> {
             float value = Float.parseFloat(animation.getAnimatedValue().toString());
             if (value >= 1f) {
-                if(getContext()!=null){
+                if (getContext() != null) {
                     ToastUtil.showToast(getContext(), "Phone Boosted");
                 }
             }
@@ -163,10 +163,10 @@ public class MainFragment extends Fragment implements MainContract.View {
             if (!aBoolean) {
                 showMessageTips("Sorry! no permission, some functions are not available");
                 showPermissions();
-            }else {
-                String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM,"0");
-                if(TextUtils.isEmpty(mflog)||mflog.equals("0")){
-                    if(presenter!=null){
+            } else {
+                String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
+                if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
+                    if (presenter != null) {
                         presenter.deviceInform(getContext());
                     }
                 }
@@ -177,7 +177,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @Override
     public void uploadDeviceInform(DeviceInformBean deviceInformBean) {
-        if(presenter!=null){
+        if (presenter != null) {
             presenter.uploadDeviceInform(deviceInformBean);
         }
     }
@@ -189,7 +189,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @Override
     public void showMessageTips(String msg) {
-        ToastUtil.showToast(getContext(),msg);
+        ToastUtil.showToast(getContext(), msg);
     }
 
 

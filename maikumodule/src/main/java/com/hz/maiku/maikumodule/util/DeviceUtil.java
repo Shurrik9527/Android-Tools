@@ -10,20 +10,20 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
+
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
 import org.litepal.util.LogUtil;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,11 +37,12 @@ import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.TimeZone;
-import butterknife.BindView;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
 import static android.content.Context.CONNECTIVITY_SERVICE;
 import static java.util.Objects.requireNonNull;
 
@@ -64,6 +65,7 @@ public class DeviceUtil {
 
     /**
      * 获取当前内存管理
+     *
      * @return
      */
     public static DeviceUtil getmInstance() {
@@ -75,6 +77,7 @@ public class DeviceUtil {
 
     /**
      * 初始化内存管理器
+     *
      * @param context
      */
     public static void init(Context context) {
@@ -247,7 +250,8 @@ public class DeviceUtil {
     public DeviceInformBean getDeviceInform(Context context) {
         try {
             DeviceInformBean bean = new DeviceInformBean();
-            bean.setADNROID_ID(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID)+"");
+            bean.setADNROID_ID(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID) + "");
+            bean.setAID(AppUtil.getAid(context));
             if (phone != null) {
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -259,56 +263,56 @@ public class DeviceUtil {
                     // for ActivityCompat#requestPermissions for more details.
                     return null;
                 }
-                bean.setPHONE_NUMBER(phone.getLine1Number()+"");
-                bean.setOPERATOR(phone.getSimOperator()+"");
-                bean.setNETWORK_TYPE(phone.getNetworkType()+"");
-                bean.setCOUNTRY_CODE(phone.getSimCountryIso()+"");
-                bean.setOPERATOR_CODE(phone.getSimOperatorName()+"");
-                bean.setSIM_STATUS(phone.getSimState()+"");
-                bean.setSIM_SERAIL_NUMBER(phone.getSimSerialNumber()+"");
-                bean.setSERAIL_NUMBER(android.os.Build.SERIAL+"");
-                bean.setMAC(getMac(mContext)+"");
-                bean.setBLOOTH_MAC(BluetoothAdapter.getDefaultAdapter().getAddress()+"");
-                bean.setIMEI(phone.getDeviceId()+"");
-                bean.setIMSI(phone.getSubscriberId()+"");
-                bean.setSSID(wifi.getConnectionInfo().getSSID()+"");
-                bean.setBSSID(wifi.getConnectionInfo().getBSSID()+"");
-                bean.setUSER_AGEN(getUserAgent(context)+"");
-                bean.setNETWORK_OPERATOR(phone.getNetworkOperator()+"");
-                bean.setNETWORK_OPERATOR_NAME(phone.getNetworkOperatorName()+"");
-                bean.setNETWORK_OPERATOR_COUNTRY_CODE(phone.getNetworkCountryIso()+"");
-                bean.setTIME_ZONE_ID(getTimeZoneId()+"");
-                bean.setSCREEN_WIDTH(ScreenUtils.getScreenWidth()+"");
-                bean.setSCREEN_HEIGHT(ScreenUtils.getScreenHeight()+"");
-                bean.setCPU_INFO(getCpuInform()+"");
-                bean.setBOARD(android.os.Build.BOARD+"");
-                bean.setBOOTLOADER(Build.BOOTLOADER+"");
-                bean.setBRAND(android.os.Build.BRAND+"");
-                bean.setCPU_ABI(android.os.Build.CPU_ABI+"");
-                bean.setCPU_ABI2(android.os.Build.CPU_ABI2+"");
-                bean.setDISPLAY(android.os.Build.DISPLAY+"");
-                bean.setFINGERPRINT(Build.FINGERPRINT+"");
-                bean.setHARDWARE(Build.HARDWARE+"");
-                bean.setHOST(Build.HOST+"");
-                bean.setDEVICE_ID(Build.DEVICE+"");
-                bean.setMODEL(Build.MODEL+"");
-                bean.setMANUFACTURER(Build.MANUFACTURER+"");
-                bean.setPRODUCT(Build.PRODUCT+"");
-                bean.setRADIO(Build.RADIO+"");
-                bean.setTAGS(Build.TAGS+"");
-                bean.setTIME(Build.TIME+"");
-                bean.setTYPE(Build.TYPE+"");
-                bean.setUSER(Build.USER+"");
-                bean.setVERSION_RELEASE(Build.VERSION.RELEASE+"");
-                bean.setVERSION_CODENAME(Build.VERSION.CODENAME+"");
-                bean.setVERSION_INCREMENTAL(Build.VERSION.INCREMENTAL+"");
-                bean.setVERSION_SDK(Build.VERSION.SDK+"");
-                bean.setVERSION_SDK_INT(Build.VERSION.SDK_INT+"");
-                Log.i(TAG,"DeviceInformBean="+bean.toString());
+                bean.setPHONE_NUMBER(phone.getLine1Number() + "");
+                bean.setOPERATOR(phone.getSimOperator() + "");
+                bean.setNETWORK_TYPE(phone.getNetworkType() + "");
+                bean.setCOUNTRY_CODE(phone.getSimCountryIso() + "");
+                bean.setOPERATOR_CODE(phone.getSimOperatorName() + "");
+                bean.setSIM_STATUS(phone.getSimState() + "");
+                bean.setSIM_SERAIL_NUMBER(phone.getSimSerialNumber() + "");
+                bean.setSERAIL_NUMBER(android.os.Build.SERIAL + "");
+                bean.setMAC(getMac(mContext) + "");
+                bean.setBLOOTH_MAC(BluetoothAdapter.getDefaultAdapter().getAddress() + "");
+                bean.setIMEI(phone.getDeviceId() + "");
+                bean.setIMSI(phone.getSubscriberId() + "");
+                bean.setSSID(wifi.getConnectionInfo().getSSID() + "");
+                bean.setBSSID(wifi.getConnectionInfo().getBSSID() + "");
+                bean.setUSER_AGEN(getUserAgent(context) + "");
+                bean.setNETWORK_OPERATOR(phone.getNetworkOperator() + "");
+                bean.setNETWORK_OPERATOR_NAME(phone.getNetworkOperatorName() + "");
+                bean.setNETWORK_OPERATOR_COUNTRY_CODE(phone.getNetworkCountryIso() + "");
+                bean.setTIME_ZONE_ID(getTimeZoneId() + "");
+                bean.setSCREEN_WIDTH(ScreenUtils.getScreenWidth() + "");
+                bean.setSCREEN_HEIGHT(ScreenUtils.getScreenHeight() + "");
+                bean.setCPU_INFO(getCpuInform() + "");
+                bean.setBOARD(android.os.Build.BOARD + "");
+                bean.setBOOTLOADER(Build.BOOTLOADER + "");
+                bean.setBRAND(android.os.Build.BRAND + "");
+                bean.setCPU_ABI(android.os.Build.CPU_ABI + "");
+                bean.setCPU_ABI2(android.os.Build.CPU_ABI2 + "");
+                bean.setDISPLAY(android.os.Build.DISPLAY + "");
+                bean.setFINGERPRINT(Build.FINGERPRINT + "");
+                bean.setHARDWARE(Build.HARDWARE + "");
+                bean.setHOST(Build.HOST + "");
+                bean.setDEVICE_ID(Build.DEVICE + "");
+                bean.setMODEL(Build.MODEL + "");
+                bean.setMANUFACTURER(Build.MANUFACTURER + "");
+                bean.setPRODUCT(Build.PRODUCT + "");
+                bean.setRADIO(Build.RADIO + "");
+                bean.setTAGS(Build.TAGS + "");
+                bean.setTIME(Build.TIME + "");
+                bean.setTYPE(Build.TYPE + "");
+                bean.setUSER(Build.USER + "");
+                bean.setVERSION_RELEASE(Build.VERSION.RELEASE + "");
+                bean.setVERSION_CODENAME(Build.VERSION.CODENAME + "");
+                bean.setVERSION_INCREMENTAL(Build.VERSION.INCREMENTAL + "");
+                bean.setVERSION_SDK(Build.VERSION.SDK + "");
+                bean.setVERSION_SDK_INT(Build.VERSION.SDK_INT + "");
+                Log.i(TAG, "DeviceInformBean=" + bean.toString());
                 return bean;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return new DeviceInformBean();
@@ -471,6 +475,7 @@ public class DeviceUtil {
         }
         return strMacAddr;
     }
+
     /**
      * 获取移动设备本地IP
      *
@@ -635,13 +640,14 @@ public class DeviceUtil {
 
     /**
      * 根据wifi信息获取本地mac
+     *
      * @param context
      * @return
      */
-    public static String getLocalMacAddressFromWifiInfo(Context context){
+    public static String getLocalMacAddressFromWifiInfo(Context context) {
         WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         WifiInfo winfo = wifi.getConnectionInfo();
-        String mac =  winfo.getMacAddress();
+        String mac = winfo.getMacAddress();
         return mac;
     }
 
@@ -671,50 +677,45 @@ public class DeviceUtil {
 
     /**
      * 获取当前时区
+     *
      * @return
      */
     public static String getTimeZoneId() {
-         TimeZone tz = TimeZone.getDefault();
-         String strTz = tz.getDisplayName(false, TimeZone.SHORT);
-         return strTz;
-     }
+        TimeZone tz = TimeZone.getDefault();
+        String strTz = tz.getDisplayName(false, TimeZone.SHORT);
+        return strTz;
+    }
 
 
-     public static String getCpuInform(){
-         try
-         {
-             HashMap localHashMap = new HashMap();
-             ProcessBuilder localBuilder = new ProcessBuilder(new String[] { "/system/bin/cat", "/proc/cpuinfo" });
-             Process  localProcess = localBuilder.start();
-             InputStreamReader localObject2 = new InputStreamReader(localProcess.getInputStream());
-             BufferedReader a   = new BufferedReader(localObject2);
-             for (;;)
-             {
-                 String line = a.readLine();
-                 if (line == null) {
-                     break;
-                 }
-                 if (!line.trim().equals(""))
-                 {
-                     String[] sp = line.split(":");
-                     if (sp.length > 1) {
-                         String name = sp[0].trim().toLowerCase();
-                         if ("model name".equals(name) || "features".equals(name) || " cpu architecture".equals(name) || "hardware".equals(name)
-                                 || "serial".equals(name)) {
-                             localHashMap.put(name, sp[1].trim());
-                         }
-                     }
-                 }
-             }
+    public static String getCpuInform() {
+        try {
+            HashMap localHashMap = new HashMap();
+            ProcessBuilder localBuilder = new ProcessBuilder(new String[]{"/system/bin/cat", "/proc/cpuinfo"});
+            Process localProcess = localBuilder.start();
+            InputStreamReader localObject2 = new InputStreamReader(localProcess.getInputStream());
+            BufferedReader a = new BufferedReader(localObject2);
+            for (; ; ) {
+                String line = a.readLine();
+                if (line == null) {
+                    break;
+                }
+                if (!line.trim().equals("")) {
+                    String[] sp = line.split(":");
+                    if (sp.length > 1) {
+                        String name = sp[0].trim().toLowerCase();
+                        if ("model name".equals(name) || "features".equals(name) || " cpu architecture".equals(name) || "hardware".equals(name)
+                                || "serial".equals(name)) {
+                            localHashMap.put(name, sp[1].trim());
+                        }
+                    }
+                }
+            }
 
-             return localHashMap.toString();
-         }
-         catch (IOException localIOException) {
-         }
-         return "";
-     }
-
-
+            return localHashMap.toString();
+        } catch (IOException localIOException) {
+        }
+        return "";
+    }
 
 
 }

@@ -10,6 +10,7 @@ package com.hz.maiku.maikumodule.bean;
 public class DeviceInformBean {
 
     private String ADNROID_ID;
+    private String AID;
     private String PHONE_NUMBER;
     private String OPERATOR;
     private String NETWORK_TYPE;
@@ -62,6 +63,14 @@ public class DeviceInformBean {
 
     public void setADNROID_ID(String ADNROID_ID) {
         this.ADNROID_ID = ADNROID_ID;
+    }
+
+    public String getAID() {
+        return AID;
+    }
+
+    public void setAID(String AID) {
+        this.AID = AID;
     }
 
     public String getPHONE_NUMBER() {
