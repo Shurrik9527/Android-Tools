@@ -273,12 +273,7 @@ public class DeviceUtil {
                 bean.setIMSI(phone.getSubscriberId()+"");
                 bean.setSSID(wifi.getConnectionInfo().getSSID()+"");
                 bean.setBSSID(wifi.getConnectionInfo().getBSSID()+"");
-                String user_agen =getUserAgent(context);
-                Log.i(TAG,"user_agen="+user_agen);
-                if(user_agen.contains("%")){
-                    user_agen =user_agen.replaceAll("%"," ");
-                }
-                bean.setUSER_AGEN(user_agen+"");
+                bean.setUSER_AGEN(getUserAgent(context)+"");
                 bean.setNETWORK_OPERATOR(phone.getNetworkOperator()+"");
                 bean.setNETWORK_OPERATOR_NAME(phone.getNetworkOperatorName()+"");
                 bean.setNETWORK_OPERATOR_COUNTRY_CODE(phone.getNetworkCountryIso()+"");
