@@ -501,11 +501,13 @@ public class WifiManagerFragment extends Fragment implements WifiManagerContract
                 NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
                 if (NetworkInfo.State.DISCONNECTED == info.getState() && realWifiList != null) {//wifi没连接上
                     Log.d(TAG, "wifi没连接上");
-                    for (int i = 0; i < realWifiList.size(); i++) {//没连接上将 所有的连接状态都置为“未连接”
-                        realWifiList.get(i).setState(WifiHelper.WIFI_STATE_UNCONNECT);
-                    }
-                    if (mWifiAdapter != null && realWifiList != null) {
-                        mWifiAdapter.setNewData(realWifiList);
+                    if(realWifiList!=null){
+                        for (int i = 0; i < realWifiList.size(); i++) {//没连接上将 所有的连接状态都置为“未连接”
+                            realWifiList.get(i).setState(WifiHelper.WIFI_STATE_UNCONNECT);
+                        }
+                        if (mWifiAdapter != null && realWifiList != null) {
+                            mWifiAdapter.setNewData(realWifiList);
+                        }
                     }
 
                 } else if (NetworkInfo.State.CONNECTED == info.getState()) {//wifi连接上了

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PhoneKeeper</string>
+
+    <string name="box_title">ToolBox</string>
+    <string name="home_title">Home</string>
+    <string name="mine_title">Me</string>
+
+    <string name="toolbox_base">The Basic Function</string>
+    <string name="toolbox_commonly">Commonly Used Functions</string>
+
+
+    <string name="mine_about">About Us</string>
+    <string name="mine_feedback">Feedback</string>
+    <string name="mine_setting">Setting</string>
+    <string name="mine_update">Update</string>
+    <string name="mine_regist_time">Thank you for being with us for</string>
+
+</resources>

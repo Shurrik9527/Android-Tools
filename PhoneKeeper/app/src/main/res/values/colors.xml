@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#637aea</color>
+    <color name="colorPrimaryDark">#637aea</color>
+    <color name="colorAccent">#9ccffd</color>
+    <color name="coloricon">#a279ea</color>
+    <color name="titleicon">#666</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="white2">#f6f6f6</color>
+    <color name="white3">#f3f3f3</color>
+    <color name="text666">#666</color>
+    <color name="text999">#999</color>
+    <color name="text333">#333</color>
+    <color name="text555">#555555</color>
+    <color name="yellow">#FFFF00</color>
+
+</resources>

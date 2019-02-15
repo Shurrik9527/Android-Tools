@@ -41,7 +41,8 @@ public class Constant {
     public static final String NOTIFICATION_OPEN_STATE = "NOTIFICATION_OPEN_STATE";
     public static final String ABOUT_SHOW_BTN = "ABOUT_SHOW_BTN";
     public static final String UPLOAD_DEVICE_INFORM = "UPLOAD_DEVICE_INFORM";
-
+    public static final String REGIST_TIME="REGIST_TIME";
+    public static final String SCAN_CLEAN_NUM="SCAN_CLEAN_NUM";
     /**
      * 域名
      */

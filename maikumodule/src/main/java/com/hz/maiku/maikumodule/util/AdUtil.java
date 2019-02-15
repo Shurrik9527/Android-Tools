@@ -54,7 +54,7 @@ public class AdUtil {
                     AdUtil.showFacebookAds(context);
                     break;
                 case TYPE_ADMOB:
-                    AdUtil.showAdModAds(context);
+                   // AdUtil.showAdModAds(context);
                     break;
                 case TYPE_BAIDU:
                     //AdUtil.showBaiduAds(context);

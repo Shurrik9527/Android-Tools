@@ -107,7 +107,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param icon 设置的图标
      */
     public void setIcon(Drawable icon) {
-        actionBar.setHomeAsUpIndicator(icon);
+        if(actionBar!=null){
+            actionBar.setHomeAsUpIndicator(icon);
+        }
     }
 
     /**
@@ -116,15 +118,20 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param title 要设置的标题
      */
     public void setTitle(String title) {
-        actionBar.setTitle(title);
+        if(actionBar!=null){
+            actionBar.setTitle(title);
+        }
     }
 
     /**
      * 隐藏标题栏
      */
     public void hideToolbar() {
-        actionBar.hide();
+        if(actionBar!=null){
+            actionBar.hide();
+        }
     }
+
 
     /**
      * 将Fragment添加到Activity

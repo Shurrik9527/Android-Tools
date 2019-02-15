@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/applock_searchview_rl"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary0"
+        android:background="@color/colorPrimary"
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.SearchView

@@ -26,7 +26,7 @@
     <!--Phone Booster-->
     <string name="phonebooster_title">Phone Booster</string>
     <!--Charge Booster-->
-    <string name="charge_booster">Charge Booster</string>
+    <string name="charge_booster">Battery Saver</string>
     <string name="charge_cover">Charge Cover</string>
     <string name="chargecover_desc">Use charging screen to accelerate charging.</string>
     <string name="charge_alert">Charge Alert</string>
@@ -110,7 +110,7 @@
     <string name="notification_guide_open_state">Slide the button and select the app you want to block notifications</string>
 
     <!--Wi-Fi管理-->
-    <string name="wifi_manager">Wi-Fi Manager</string>
+    <string name="wifi_manager">Smart WiFi</string>
     <string name="wifi_guide_open_state">You can select wifi connection by sliding the button</string>
     <string name="deepclean_scan_complete">Scan is complete</string>
     <string name="deepclean_images_title">Images</string>
@@ -127,5 +127,7 @@
     <string name="deepclean_top_title">Deep Clean</string>
     <string name="deep_clean_audio_noplay">This voice cannot play!</string>
     <string name="deep_clean_amr_noplay">Amr is not playable</string>
+    <string name="trafficstatistis_top_title">Network  Monitoring</string>
+    <string name="applock_top_title">Apps Protecto</string>
 
 </resources>
