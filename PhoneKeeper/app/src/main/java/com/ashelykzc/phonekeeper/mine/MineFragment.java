@@ -1,4 +1,4 @@
-package com.hzmaiku1.phonekeeper.mine;
+package com.ashelykzc.phonekeeper.mine;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appsflyer.AFInAppEventType;
-import com.appsflyer.share.Constants;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.modules.aboutus.AboutUsActivity;
 import com.hz.maiku.maikumodule.modules.applock.gesturelock.setting.SettingLockActivity;
@@ -26,7 +25,7 @@ import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.TimeUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import com.hzmaiku1.phonekeeper.R;
+import com.ashelykzc.phonekeeper.R;
 
 import java.text.ParseException;
 

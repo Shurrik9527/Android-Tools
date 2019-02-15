@@ -42,7 +42,7 @@ public class AdUtil {
     /**
      * 发布第一版的时候设置为false, 其余情况下都是true
      */
-    public static boolean IS_SHOW_AD = true;
+    public static boolean IS_SHOW_AD = false;
 
     /**
      * 直接显示广告
@@ -54,7 +54,7 @@ public class AdUtil {
                     AdUtil.showFacebookAds(context);
                     break;
                 case TYPE_ADMOB:
-                   // AdUtil.showAdModAds(context);
+                    AdUtil.showAdModAds(context);
                     break;
                 case TYPE_BAIDU:
                     //AdUtil.showBaiduAds(context);

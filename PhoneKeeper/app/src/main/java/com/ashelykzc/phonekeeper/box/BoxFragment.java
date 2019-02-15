@@ -1,4 +1,4 @@
-package com.hzmaiku1.phonekeeper.box;
+package com.ashelykzc.phonekeeper.box;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import com.hz.maiku.maikumodule.modules.notificationcleaner.NotificationCleanerA
 import com.hz.maiku.maikumodule.modules.trafficstatistics.TrafficStatisticsActivity;
 import com.hz.maiku.maikumodule.modules.wifimanager.WifiManagerActivity;
 import com.hz.maiku.maikumodule.util.SpHelper;
-import com.hzmaiku1.phonekeeper.R;
+import com.ashelykzc.phonekeeper.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

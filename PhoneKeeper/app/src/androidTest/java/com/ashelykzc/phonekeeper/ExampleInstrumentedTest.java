@@ -1,4 +1,4 @@
-package com.hzmaiku1.phonekeeper;
+package com.ashelykzc.phonekeeper;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.hzmaiku1.phonekeeper", appContext.getPackageName());
+        assertEquals("com.ashelykzc.phonekeeper", appContext.getPackageName());
     }
 }

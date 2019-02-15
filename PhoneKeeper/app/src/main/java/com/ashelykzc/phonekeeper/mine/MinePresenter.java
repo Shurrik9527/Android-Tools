@@ -1,6 +1,6 @@
-package com.hzmaiku1.phonekeeper.mine;
+package com.ashelykzc.phonekeeper.mine;
 
-import com.hzmaiku1.phonekeeper.home.HomeContract;
+import com.ashelykzc.phonekeeper.home.HomeContract;
 
 
 public class MinePresenter implements HomeContract.Presenter {

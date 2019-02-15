@@ -1,4 +1,4 @@
-package com.hzmaiku1.phonekeeper;
+package com.ashelykzc.phonekeeper;
 
 import org.junit.Test;
 

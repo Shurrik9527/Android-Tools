@@ -1,4 +1,4 @@
-package com.hzmaiku1.phonekeeper.home;
+package com.ashelykzc.phonekeeper.home;
 
 import android.Manifest;
 import android.content.Intent;
@@ -19,12 +19,11 @@ import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
-import com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.TimeUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import com.hzmaiku1.phonekeeper.R;
+import com.ashelykzc.phonekeeper.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.text.ParseException;
