@@ -1,6 +1,7 @@
 package com.ashelykzc.phonekeeper.home;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -214,6 +215,20 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             case R.id.home_scan:
 //                intent = new Intent(getContext(), DeepCleanActivity.class);
 //                startActivity(intent);
+                //播放动画
+                lavPhonebooster.playAnimation();
+                //停止动画
+                //lavPhoneBooster.cancelAnimation();
+                ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f).setDuration(3000);
+                animator.addUpdateListener(animation -> {
+                    float value = Float.parseFloat(animation.getAnimatedValue().toString());
+                    if (value >= 1f) {
+                        if (getContext() != null) {
+                            ToastUtil.showToast(getContext(), "Phone Boosted");
+                        }
+                    }
+                });
+                animator.start();
                 break;
         }
     }

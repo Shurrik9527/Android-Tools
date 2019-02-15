@@ -34,6 +34,6 @@ public class AppLockActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle("App Lock");
+        setTitle(getString(R.string.applock_top_title));
     }
 }
