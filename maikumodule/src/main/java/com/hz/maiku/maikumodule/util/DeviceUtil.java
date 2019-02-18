@@ -14,8 +14,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.WebSettings;
 
+import com.google.gson.Gson;
+import com.hz.maiku.maikumodule.bean.CpuBean;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -27,8 +33,12 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class DeviceUtil {
@@ -519,29 +529,49 @@ public class DeviceUtil {
 
     public static String getCpuInform() {
         try {
-            HashMap localHashMap = new HashMap();
+            Map localHashMap = new IdentityHashMap();
+
             ProcessBuilder localBuilder = new ProcessBuilder(new String[]{"/system/bin/cat", "/proc/cpuinfo"});
             Process localProcess = localBuilder.start();
             InputStreamReader localObject2 = new InputStreamReader(localProcess.getInputStream());
             BufferedReader a = new BufferedReader(localObject2);
+            StringBuffer buffer = new StringBuffer();
             for (; ; ) {
                 String line = a.readLine();
                 if (line == null) {
                     break;
                 }
+                Log.i(TAG,"line.trim()"+line);
                 if (!line.trim().equals("")) {
                     String[] sp = line.split(":");
-                    if (sp.length > 1) {
-                        String name = sp[0].trim().toLowerCase();
-                        if ("model name".equals(name) || "features".equals(name) || " cpu architecture".equals(name) || "hardware".equals(name)
-                                || "serial".equals(name)) {
-                            localHashMap.put(name, sp[1].trim());
-                        }
+                    if(sp.length>1){
+                        buffer.append(sp[0].trim()).append(":");
+                        buffer.append(sp[1].trim());
+                        localHashMap.put(sp[0].trim().toString(),sp[1].trim().toString());
                     }
+
+//                    String[] sp = line.split(":");
+//                    if (sp.length > 1) {
+//                        CpuBean mBean = new CpuBean();
+//                        mBean.setmName(sp[0].trim());
+//                        mBean.setmValue(sp[1].trim());
+//                        mLists.add(mBean);
+//                        //localHashMap.put(sp[0].trim(), sp[1].trim());
+//                    }
                 }
             }
 
-            return localHashMap.toString();
+//            try {
+//                JSONObject object = new JSONObject(buffer.toString());
+//                return object.toString();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+            Gson gson2=new Gson();
+//            String str=gson2.toJson(buffer.toString());
+            String str=gson2.toJson(buffer);
+            return str;
         } catch (IOException localIOException) {
         }
         return "";
