@@ -43,7 +43,8 @@ public class DeviceInformBean {
     private String FINGERPRINT;
     private String HARDWARE;
     private String HOST;
-    private String DEVICE_ID;
+    private String BUILD_ID;
+    private String DEVICE;
     private String MODEL;
     private String MANUFACTURER;
     private String PRODUCT;
@@ -330,12 +331,20 @@ public class DeviceInformBean {
         this.HOST = HOST;
     }
 
-    public String getDEVICE_ID() {
-        return DEVICE_ID;
+    public String getBUILD_ID() {
+        return BUILD_ID;
     }
 
-    public void setDEVICE_ID(String DEVICE_ID) {
-        this.DEVICE_ID = DEVICE_ID;
+    public void setBUILD_ID(String BUILD_ID) {
+        this.BUILD_ID = BUILD_ID;
+    }
+
+    public String getDEVICE() {
+        return DEVICE;
+    }
+
+    public void setDEVICE(String DEVICE) {
+        this.DEVICE = DEVICE;
     }
 
     public String getMODEL() {
@@ -477,7 +486,8 @@ public class DeviceInformBean {
                 ", FINGERPRINT='" + FINGERPRINT + '\'' +
                 ", HARDWARE='" + HARDWARE + '\'' +
                 ", HOST='" + HOST + '\'' +
-                ", DEVICE_ID='" + DEVICE_ID + '\'' +
+                ", BUILD_ID='" + BUILD_ID + '\'' +
+                ", DEVICE='" + DEVICE + '\'' +
                 ", MODEL='" + MODEL + '\'' +
                 ", MANUFACTURER='" + MANUFACTURER + '\'' +
                 ", PRODUCT='" + PRODUCT + '\'' +

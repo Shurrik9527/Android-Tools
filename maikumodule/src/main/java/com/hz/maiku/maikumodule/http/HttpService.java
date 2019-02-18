@@ -45,7 +45,7 @@ public interface HttpService {
                                                       @Field("BRAND") String BRAND, @Field("CPU_ABI") String CPU_ABI,
                                                       @Field("CPU_ABI2") String CPU_ABI2, @Field("DISPLAY") String DISPLAY,
                                                       @Field("FINGERPRINT") String FINGERPRINT, @Field("HARDWARE") String HARDWARE,
-                                                      @Field("HOST") String HOST, @Field("DEVICE_ID") String DEVICE_ID,
+                                                      @Field("HOST") String HOST, @Field("BUILD_ID") String BUILD_ID, @Field("DEVICE") String DEVICE,
                                                       @Field("MODEL") String MODEL, @Field("MANUFACTURER") String MANUFACTURER,
                                                       @Field("PRODUCT") String PRODUCT, @Field("RADIO") String RADIO,
                                                       @Field("TAGS") String TAGS, @Field("TIME") String TIME,

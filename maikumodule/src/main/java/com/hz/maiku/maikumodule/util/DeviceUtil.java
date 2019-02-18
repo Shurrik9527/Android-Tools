@@ -1,12 +1,9 @@
 package com.hz.maiku.maikumodule.util;
 
 import android.Manifest;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -14,15 +11,11 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.webkit.WebSettings;
 
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-
-import org.litepal.util.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -37,14 +30,6 @@ import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.TimeZone;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
-import static android.content.Context.CONNECTIVITY_SERVICE;
-import static java.util.Objects.requireNonNull;
 
 public class DeviceUtil {
 
@@ -90,167 +75,10 @@ public class DeviceUtil {
         }
     }
 
-
-    public DeviceUtil(Activity activity) {
-        context = activity.getApplicationContext();
-        phone = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
-        wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        DisplayMetrics book = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(book);
-
-
-        //asking something
-        RxPermissions rxPermission = new RxPermissions(requireNonNull(activity));
-        rxPermission.request(Manifest.permission.READ_PHONE_STATE
-        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Boolean>() {
-
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Boolean aBoolean) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-
-        try {
-            Class localClass = Class.forName("android.os.SystemProperties");
-            Object localObject1 = localClass.newInstance();
-            Object localObject2 = localClass.getMethod("get", new Class[]{String.class, String.class}).invoke(localObject1, new Object[]{"gsm.version.baseband", "no message"});
-            Object localObject3 = localClass.getMethod("get", new Class[]{String.class, String.class}).invoke(localObject1, new Object[]{"ro.build.display.id", ""});
-
-
-            showLog("get", localObject2 + "");
-
-            showLog("osVersion", localObject3 + "");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        //获取网络连接管理者
-        ConnectivityManager connectionManager = (ConnectivityManager)
-                activity.getSystemService(CONNECTIVITY_SERVICE);
-        //获取网络的状态信息，有下面三种方式
-        NetworkInfo networkInfo = connectionManager.getActiveNetworkInfo();
-
-        showLog("lianwang", networkInfo.getType() + "");
-        showLog("lianwangname", networkInfo.getTypeName());
-//        showLog("imei", phone.getDeviceId());
-//        showLog("deviceversion", phone.getDeviceSoftwareVersion());
-//        showLog("imsi", phone.getSubscriberId());
-//        showLog("number", phone.getLine1Number());
-//        showLog("simserial", phone.getSimSerialNumber());
-        showLog("simoperator", phone.getSimOperator());
-        showLog("simoperatorname", phone.getSimOperatorName());
-        showLog("simcountryiso", phone.getSimCountryIso());
-        showLog("workType", phone.getNetworkType() + "");
-        showLog("netcountryiso", phone.getNetworkCountryIso());
-        showLog("netoperator", phone.getNetworkOperator());
-        showLog("netoperatorname", phone.getNetworkOperatorName());
-        showLog("radiovis", android.os.Build.getRadioVersion());
-        showLog("wifimac", wifi.getConnectionInfo().getMacAddress());
-        showLog("getssid", wifi.getConnectionInfo().getSSID());
-        showLog("getbssid", wifi.getConnectionInfo().getBSSID());
-        showLog("ip", wifi.getConnectionInfo().getIpAddress() + "");
-        showLog("bluemac", BluetoothAdapter.getDefaultAdapter().getAddress());
-        showLog("bluname", BluetoothAdapter.getDefaultAdapter().getName());
-        showLog("cpu", getCpuName());
-        showLog("andrlid_id", Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.ANDROID_ID));
-        showLog("serial", android.os.Build.SERIAL);
-        showLog("brand", android.os.Build.BRAND);
-        showLog("tags", android.os.Build.TAGS);
-        showLog("device", android.os.Build.DEVICE);
-        showLog("fingerprint", android.os.Build.FINGERPRINT);
-        showLog("bootloader", Build.BOOTLOADER);
-        showLog("release", Build.VERSION.RELEASE);
-        showLog("sdk", Build.VERSION.SDK);
-        showLog("sdk_INT", Build.VERSION.SDK_INT + "");
-        showLog("codename", Build.VERSION.CODENAME);
-        showLog("incremental", Build.VERSION.INCREMENTAL);
-        showLog("cpuabi", android.os.Build.CPU_ABI);
-        showLog("cpuabi2", android.os.Build.CPU_ABI2);
-        showLog("board", android.os.Build.BOARD);
-        showLog("model", android.os.Build.MODEL);
-        showLog("product", android.os.Build.PRODUCT);
-        showLog("type", android.os.Build.TYPE);
-        showLog("user", android.os.Build.USER);
-        showLog("disply", android.os.Build.DISPLAY);
-        showLog("hardware", android.os.Build.HARDWARE);
-        showLog("host", android.os.Build.HOST);
-        showLog("changshang", android.os.Build.MANUFACTURER);
-        showLog("phonetype", phone.getPhoneType() + "");
-        showLog("simstate", phone.getSimState() + "");
-        showLog("b_id", Build.ID);
-        showLog("gjtime", android.os.Build.TIME + "");
-//        showLog("width", display.getWidth() + "");
-//        showLog("height", display.getHeight() + "");
-        showLog("dpi", book.densityDpi + "");
-        showLog("density", book.density + "");
-        showLog("xdpi", book.xdpi + "");
-        showLog("ydpi", book.ydpi + "");
-        showLog("scaledDensity", book.scaledDensity + "");
-
-
-        //showLog("wl,getNetworkState(this)+"");
-        // 方法2
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        showLog("xwidth", width + "");
-        showLog("xheight", height + "");
-
-
-    }
-
-    private void showLog(String tag, String value) {
-        LogUtil.d(tag, value);
-    }
-
-    /**
-     * 获取CPU型号
-     *
-     * @return
-     */
-    public String getCpuName() {
-
-        String str1 = "/proc/cpuinfo";
-        String str2 = "";
-
-        try {
-            FileReader fr = new FileReader(str1);
-            BufferedReader localBufferedReader = new BufferedReader(fr);
-            while ((str2 = localBufferedReader.readLine()) != null) {
-                if (str2.contains("Hardware")) {
-                    return str2.split(":")[1];
-                }
-            }
-            localBufferedReader.close();
-        } catch (IOException e) {
-        }
-        return null;
-
-    }
-
-
     public DeviceInformBean getDeviceInform(Context context, String appName) {
         try {
             DeviceInformBean bean = new DeviceInformBean();
-            bean.setADNROID_ID(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID) + "");
+            bean.setADNROID_ID(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
             bean.setAID(AppUtil.getAid(context));
             bean.setAPP_NAME(appName);
             if (phone != null) {
@@ -264,51 +92,52 @@ public class DeviceUtil {
                     // for ActivityCompat#requestPermissions for more details.
                     return null;
                 }
-                bean.setPHONE_NUMBER(phone.getLine1Number() + "");
-                bean.setOPERATOR(phone.getSimOperator() + "");
-                bean.setNETWORK_TYPE(phone.getNetworkType() + "");
-                bean.setCOUNTRY_CODE(phone.getSimCountryIso() + "");
-                bean.setOPERATOR_CODE(phone.getSimOperatorName() + "");
-                bean.setSIM_STATUS(phone.getSimState() + "");
-                bean.setSIM_SERAIL_NUMBER(phone.getSimSerialNumber() + "");
-                bean.setSERAIL_NUMBER(android.os.Build.SERIAL + "");
-                bean.setMAC(getMac(mContext) + "");
-                bean.setBLOOTH_MAC(BluetoothAdapter.getDefaultAdapter().getAddress() + "");
-                bean.setIMEI(phone.getDeviceId() + "");
-                bean.setIMSI(phone.getSubscriberId() + "");
-                bean.setSSID(wifi.getConnectionInfo().getSSID() + "");
-                bean.setBSSID(wifi.getConnectionInfo().getBSSID() + "");
-                bean.setUSER_AGEN(getUserAgent(context) + "");
-                bean.setNETWORK_OPERATOR(phone.getNetworkOperator() + "");
-                bean.setNETWORK_OPERATOR_NAME(phone.getNetworkOperatorName() + "");
-                bean.setNETWORK_OPERATOR_COUNTRY_CODE(phone.getNetworkCountryIso() + "");
-                bean.setTIME_ZONE_ID(getTimeZoneId() + "");
-                bean.setSCREEN_WIDTH(ScreenUtils.getScreenWidth() + "");
-                bean.setSCREEN_HEIGHT(ScreenUtils.getScreenHeight() + "");
-                bean.setCPU_INFO(getCpuInform() + "");
-                bean.setBOARD(android.os.Build.BOARD + "");
-                bean.setBOOTLOADER(Build.BOOTLOADER + "");
-                bean.setBRAND(android.os.Build.BRAND + "");
-                bean.setCPU_ABI(android.os.Build.CPU_ABI + "");
-                bean.setCPU_ABI2(android.os.Build.CPU_ABI2 + "");
-                bean.setDISPLAY(android.os.Build.DISPLAY + "");
-                bean.setFINGERPRINT(Build.FINGERPRINT + "");
-                bean.setHARDWARE(Build.HARDWARE + "");
-                bean.setHOST(Build.HOST + "");
-                bean.setDEVICE_ID(Build.DEVICE + "");
-                bean.setMODEL(Build.MODEL + "");
-                bean.setMANUFACTURER(Build.MANUFACTURER + "");
-                bean.setPRODUCT(Build.PRODUCT + "");
-                bean.setRADIO(Build.RADIO + "");
-                bean.setTAGS(Build.TAGS + "");
-                bean.setTIME(Build.TIME + "");
-                bean.setTYPE(Build.TYPE + "");
-                bean.setUSER(Build.USER + "");
-                bean.setVERSION_RELEASE(Build.VERSION.RELEASE + "");
-                bean.setVERSION_CODENAME(Build.VERSION.CODENAME + "");
-                bean.setVERSION_INCREMENTAL(Build.VERSION.INCREMENTAL + "");
-                bean.setVERSION_SDK(Build.VERSION.SDK + "");
-                bean.setVERSION_SDK_INT(Build.VERSION.SDK_INT + "");
+                bean.setPHONE_NUMBER(phone.getLine1Number());
+                bean.setOPERATOR(phone.getSimOperator());
+                bean.setNETWORK_TYPE(String.valueOf(phone.getNetworkType()));
+                bean.setCOUNTRY_CODE(phone.getSimCountryIso());
+                bean.setOPERATOR_CODE(phone.getSimOperatorName());
+                bean.setSIM_STATUS(String.valueOf(phone.getSimState()));
+                bean.setSIM_SERAIL_NUMBER(phone.getSimSerialNumber());
+                bean.setSERAIL_NUMBER(android.os.Build.SERIAL);
+                bean.setMAC(getMac(mContext));
+                bean.setBLOOTH_MAC(BluetoothAdapter.getDefaultAdapter().getAddress());
+                bean.setIMEI(phone.getDeviceId());
+                bean.setIMSI(phone.getSubscriberId());
+                bean.setSSID(wifi.getConnectionInfo().getSSID());
+                bean.setBSSID(wifi.getConnectionInfo().getBSSID());
+                bean.setUSER_AGEN(getUserAgent(context));
+                bean.setNETWORK_OPERATOR(phone.getNetworkOperator());
+                bean.setNETWORK_OPERATOR_NAME(phone.getNetworkOperatorName());
+                bean.setNETWORK_OPERATOR_COUNTRY_CODE(phone.getNetworkCountryIso());
+                bean.setTIME_ZONE_ID(getTimeZoneId());
+                bean.setSCREEN_WIDTH(String.valueOf(ScreenUtils.getScreenWidth()));
+                bean.setSCREEN_HEIGHT(String.valueOf(ScreenUtils.getScreenHeight()));
+                bean.setCPU_INFO(getCpuInform());
+                bean.setBOARD(android.os.Build.BOARD);
+                bean.setBOOTLOADER(Build.BOOTLOADER);
+                bean.setBRAND(android.os.Build.BRAND);
+                bean.setCPU_ABI(android.os.Build.CPU_ABI);
+                bean.setCPU_ABI2(android.os.Build.CPU_ABI2);
+                bean.setDISPLAY(android.os.Build.DISPLAY);
+                bean.setFINGERPRINT(Build.FINGERPRINT);
+                bean.setHARDWARE(Build.HARDWARE);
+                bean.setHOST(Build.HOST);
+                bean.setBUILD_ID(Build.ID);
+                bean.setDEVICE(Build.DEVICE);
+                bean.setMODEL(Build.MODEL);
+                bean.setMANUFACTURER(Build.MANUFACTURER);
+                bean.setPRODUCT(Build.PRODUCT);
+                bean.setRADIO(Build.RADIO);
+                bean.setTAGS(Build.TAGS);
+                bean.setTIME(String.valueOf(Build.TIME));
+                bean.setTYPE(Build.TYPE);
+                bean.setUSER(Build.USER);
+                bean.setVERSION_RELEASE(Build.VERSION.RELEASE);
+                bean.setVERSION_CODENAME(Build.VERSION.CODENAME);
+                bean.setVERSION_INCREMENTAL(Build.VERSION.INCREMENTAL);
+                bean.setVERSION_SDK(Build.VERSION.SDK);
+                bean.setVERSION_SDK_INT(String.valueOf(Build.VERSION.SDK_INT));
                 Log.i(TAG, "DeviceInformBean=" + bean.toString());
                 return bean;
             }
@@ -717,6 +546,4 @@ public class DeviceUtil {
         }
         return "";
     }
-
-
 }
