@@ -270,11 +270,9 @@ public class TrafficStatisUtil {
 
             } while (mobileStats.hasNextBucket());
 
-
             //去重
             List<TrafficStatisBean> wifiList =removeDuplicate(wifiLists);
             List<TrafficStatisBean> mobileList =removeDuplicate(mobileLists);
-
 
             //合并
             List<TrafficStatisBean> lastLists =combine(wifiList,mobileList);

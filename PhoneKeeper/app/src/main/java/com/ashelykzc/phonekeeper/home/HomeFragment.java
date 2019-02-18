@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.hz.maiku.maikumodule.base.Constant;
+import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
@@ -86,6 +88,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showPermissions();
+        new HomePresenter(this);
     }
 
     @Nullable
@@ -141,15 +144,22 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                 showMessageTips("Sorry! no permission, some functions are not available");
                 showPermissions();
             } else {
-//                String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
-//                if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
-//                    if (presenter != null) {
-//                        presenter.deviceInform(getContext());
-//                    }
-//                }
+                String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
+                if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
+                    if (presenter != null) {
+                        presenter.deviceInform(getContext());
+                    }
+                }
             }
 
         });
+    }
+
+    @Override
+    public void uploadDeviceInform(DeviceInformBean deviceInformBean) {
+        if (presenter != null) {
+            presenter.uploadDeviceInform(deviceInformBean);
+        }
     }
 
     @Override

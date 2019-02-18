@@ -1,13 +1,10 @@
 package com.ashelykzc.phonekeeper.mine;
 
-import com.ashelykzc.phonekeeper.home.HomeContract;
-
-
-public class MinePresenter implements HomeContract.Presenter {
+public class MinePresenter implements MineContract.Presenter {
     private static final String TAG = MinePresenter.class.getName();
-    private HomeContract.View mView;
+    private MineContract.View mView;
 
-    public MinePresenter(HomeContract.View view) {
+    public MinePresenter(MineContract.View view) {
         this.mView = view;
         this.mView.setPresenter(this);
     }
