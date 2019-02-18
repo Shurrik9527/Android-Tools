@@ -1,6 +1,9 @@
 package com.hz.maiku.maikumodule.modules.appmanager;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +13,8 @@ import android.widget.ListView;
 
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
+import com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneFragment;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +32,7 @@ public class AppManagerFragment extends Fragment implements AppManagerContract.V
     private List<ApplicationInfo> data;
 
     private AppManagerAdapter adapter;
-
+    private PackageReceiver mPackageReceiver;
     public AppManagerFragment() {
         // Required empty public constructor
     }
@@ -46,6 +51,12 @@ public class AppManagerFragment extends Fragment implements AppManagerContract.V
         if (getArguments() != null) {
 
         }
+
+        mPackageReceiver = new PackageReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addDataScheme("package");
+        getContext().registerReceiver(mPackageReceiver, filter);
+
     }
 
     @Override
@@ -95,6 +106,13 @@ public class AppManagerFragment extends Fragment implements AppManagerContract.V
         if(presenter!=null){
             presenter.loadData(getContext());
         }
+    }
+
+
+    @Override
+    public void onDestroy() {
+        getContext().unregisterReceiver(mPackageReceiver);
+        super.onDestroy();
     }
 
     @Override

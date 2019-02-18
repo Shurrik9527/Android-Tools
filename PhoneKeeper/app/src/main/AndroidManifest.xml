@@ -90,12 +90,12 @@
         <!-- 锁屏服务 -->
         <service android:name="com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerService" />
 
-        <receiver android:name="com.hz.maiku.maikumodule.modules.appmanager.PackageReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
+        <!--<receiver android:name="com.hz.maiku.maikumodule.modules.appmanager.PackageReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.PACKAGE_REMOVED" />-->
+                <!--<data android:scheme="package" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
         <!-- 加载应用服务 -->
         <service android:name="com.hz.maiku.maikumodule.service.LoadAppListService" />
         <!-- 应用锁服务 -->

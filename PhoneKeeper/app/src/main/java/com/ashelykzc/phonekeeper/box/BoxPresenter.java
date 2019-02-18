@@ -1,13 +1,11 @@
 package com.ashelykzc.phonekeeper.box;
 
-import com.ashelykzc.phonekeeper.home.HomeContract;
 
-
-public class BoxPresenter implements HomeContract.Presenter {
+public class BoxPresenter implements BoxContract.Presenter {
     private static final String TAG = BoxPresenter.class.getName();
-    private HomeContract.View mView;
+    private BoxContract.View mView;
 
-    public BoxPresenter(HomeContract.View view) {
+    public BoxPresenter(BoxContract.View view) {
         this.mView = view;
         this.mView.setPresenter(this);
     }

@@ -91,6 +91,7 @@ public class NotificationCleanerFragment extends Fragment implements Notificatio
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         new NotificationCleanerPresenter(this, getContext());
+        checkPermission();
     }
 
     @Override
@@ -109,6 +110,7 @@ public class NotificationCleanerFragment extends Fragment implements Notificatio
         return true;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -124,7 +126,6 @@ public class NotificationCleanerFragment extends Fragment implements Notificatio
     public void onResume() {
         super.onResume();
         NotificationsCleanerUtil.toggleNotificationListenerService(getContext());
-        checkPermission();
     }
 
     @Override
