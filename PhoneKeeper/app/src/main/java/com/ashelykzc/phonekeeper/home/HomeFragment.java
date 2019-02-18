@@ -88,6 +88,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showPermissions();
+        new HomePresenter(this);
     }
 
     @Nullable
