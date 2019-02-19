@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.ashelykzc.phonekeeper.R;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
-import com.hz.maiku.maikumodule.http.HttpCenter;
-import com.hz.maiku.maikumodule.http.HttpResult;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
@@ -37,12 +34,9 @@ import java.text.ParseException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static android.support.constraint.Constraints.TAG;
 import static java.util.Objects.requireNonNull;
 
 
