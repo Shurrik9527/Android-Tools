@@ -21,10 +21,12 @@ public class MainContract {
         void showChargeBooster();
         void showPermissions();
         void uploadDeviceInform(DeviceInformBean deviceInformBean);
+        void showState(boolean state);
     }
 
     public interface Presenter extends BasePresenter {
         void deviceInform(Context context);
         void uploadDeviceInform(DeviceInformBean deviceInformBean);
+        void checkOpenState();
     }
 }

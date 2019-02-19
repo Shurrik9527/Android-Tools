@@ -104,7 +104,7 @@ public class HomePresenter implements HomeContract.Presenter {
                 .subscribe(new Observer<HttpResult<String>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                      
+
                     }
 
                     @Override

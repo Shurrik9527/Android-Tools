@@ -164,11 +164,8 @@ public class MainFragment extends Fragment implements MainContract.View {
                 showMessageTips("Sorry! no permission, some functions are not available");
                 showPermissions();
             } else {
-                String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
-                if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
-                    if (presenter != null) {
-                        presenter.deviceInform(getContext());
-                    }
+                if (presenter != null) {
+                    presenter.checkOpenState();
                 }
             }
 
@@ -179,6 +176,18 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void uploadDeviceInform(DeviceInformBean deviceInformBean) {
         if (presenter != null) {
             presenter.uploadDeviceInform(deviceInformBean);
+        }
+    }
+
+    @Override
+    public void showState(boolean state) {
+        if(state){
+            String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
+            if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
+                if (presenter != null) {
+                    presenter.deviceInform(getContext());
+                }
+            }
         }
     }
 
