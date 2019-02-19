@@ -24,8 +24,9 @@ public interface HttpService {
     @POST("/android.php")
     Observable<HttpResult<AdInfo>> getAdType(@Query("action") String action, @Query("type") String type);
 
+    @FormUrlEncoded
     @POST("/android/androidUserInfo.php")
-    Observable<HttpResult<String>> getStatus(@Query("action") String action, @Query("APP_NAME") String type);
+    Observable<HttpResult<String>> getStatus(@Field("action") String action, @Field("appname") String type);
 
     @FormUrlEncoded
     @POST("/android/androidUserInfo.php")

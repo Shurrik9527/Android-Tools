@@ -19,6 +19,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class HomePresenter implements HomeContract.Presenter {
     private static final String TAG = HomePresenter.class.getName();
     private HomeContract.View mView;
@@ -92,5 +94,39 @@ public class HomePresenter implements HomeContract.Presenter {
             public void onComplete() {
             }
         });
+    }
+
+    @Override
+    public void checkOpenState() {
+
+        HttpCenter.getService().getStatus("getStatus", Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
+                .observeOn(AndroidSchedulers.mainThread())//指定的是它之后（下方）执行的操作所在的线程
+                .subscribe(new Observer<HttpResult<String>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                      
+                    }
+
+                    @Override
+                    public void onNext(HttpResult<String> httpResult) {
+                        if (httpResult.getResult() == 0) {
+                            if(mView!=null){
+                                mView.showState(true);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
     }
 }

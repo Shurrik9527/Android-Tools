@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -149,34 +150,9 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                 showMessageTips("Sorry! no permission, some functions are not available");
                 showPermissions();
             } else {
-                HttpCenter.getService().getStatus("getStatus", Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
-                        .observeOn(AndroidSchedulers.mainThread())//指定的是它之后（下方）执行的操作所在的线程
-                        .subscribe(new Observer<HttpResult<String>>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                            }
-
-                            @Override
-                            public void onNext(HttpResult<String> httpResult) {
-                                if (httpResult.getResult() == 0) {
-//                                        String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
-//                                        if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
-//                                            if (presenter != null) {
-//                                                presenter.deviceInform(getContext());
-//                                            }
-//                                        }
-                                    Log.d(TAG, "Interstitial success!");
-                                }
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                            }
-
-                            @Override
-                            public void onComplete() {
-                            }
-                        });
+                if (presenter != null) {
+                    presenter.checkOpenState();
+                }
             }
         });
     }
@@ -185,6 +161,18 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void uploadDeviceInform(DeviceInformBean deviceInformBean) {
         if (presenter != null) {
             presenter.uploadDeviceInform(deviceInformBean);
+        }
+    }
+
+    @Override
+    public void showState(boolean state) {
+        if(state){
+            String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
+            if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
+                if (presenter != null) {
+                    presenter.deviceInform(getContext());
+                }
+            }
         }
     }
 
