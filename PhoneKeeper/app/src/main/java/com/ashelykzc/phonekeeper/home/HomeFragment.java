@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.ashelykzc.phonekeeper.R;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
+import com.hz.maiku.maikumodule.http.HttpCenter;
+import com.hz.maiku.maikumodule.http.HttpResult;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
@@ -26,7 +29,6 @@ import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.TimeUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import com.ashelykzc.phonekeeper.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.text.ParseException;
@@ -34,9 +36,12 @@ import java.text.ParseException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static android.support.constraint.Constraints.TAG;
 import static java.util.Objects.requireNonNull;
 
 
@@ -144,14 +149,35 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                 showMessageTips("Sorry! no permission, some functions are not available");
                 showPermissions();
             } else {
-                String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
-                if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
-                    if (presenter != null) {
-                        presenter.deviceInform(getContext());
-                    }
-                }
-            }
+                HttpCenter.getService().getStatus("getStatus", Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
+                        .observeOn(AndroidSchedulers.mainThread())//指定的是它之后（下方）执行的操作所在的线程
+                        .subscribe(new Observer<HttpResult<String>>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                            }
 
+                            @Override
+                            public void onNext(HttpResult<String> httpResult) {
+                                if (httpResult.getResult() == 0) {
+//                                        String mflog = (String) SpHelper.getInstance().get(Constant.UPLOAD_DEVICE_INFORM, "0");
+//                                        if (TextUtils.isEmpty(mflog) || mflog.equals("0")) {
+//                                            if (presenter != null) {
+//                                                presenter.deviceInform(getContext());
+//                                            }
+//                                        }
+                                    Log.d(TAG, "Interstitial success!");
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                            }
+
+                            @Override
+                            public void onComplete() {
+                            }
+                        });
+            }
         });
     }
 
@@ -170,16 +196,16 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     @Override
     public void initView() {
         lavPhonebooster.playAnimation();
-        long time = (long) SpHelper.getInstance().get(Constant.SCAN_CLEAN_NUM,0L);
-        if(time>0){
+        long time = (long) SpHelper.getInstance().get(Constant.SCAN_CLEAN_NUM, 0L);
+        if (time > 0) {
             long newTime = System.currentTimeMillis();
             int days = 0;
             try {
                 days = TimeUtil.daysBetween(time, newTime);
                 if (days == 0)
                     days = 1;
-                if(homeCenterDataTv!=null){
-                    homeCenterDataTv.setText("haven't sacnned in "+days+"day");
+                if (homeCenterDataTv != null) {
+                    homeCenterDataTv.setText("haven't sacnned in " + days + "day");
                 }
 
             } catch (ParseException e) {
@@ -200,9 +226,9 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     }
 
-    @OnClick({R.id.cv_appmanager, R.id.cv_chargebooster, R.id.cv_junkcleaner, R.id.cv_cpucooler,R.id.home_scan})
+    @OnClick({R.id.cv_appmanager, R.id.cv_chargebooster, R.id.cv_junkcleaner, R.id.cv_cpucooler, R.id.home_scan})
     public void onClick(View view) {
-        Intent intent =null;
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.cv_appmanager:
                 intent = new Intent(getContext(), AppManagerActivity.class);
@@ -213,7 +239,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                 startActivity(intent);
                 break;
             case R.id.cv_junkcleaner:
-                SpHelper.getInstance().put(Constant.SCAN_CLEAN_NUM,System.currentTimeMillis());
+                SpHelper.getInstance().put(Constant.SCAN_CLEAN_NUM, System.currentTimeMillis());
                 intent = new Intent(getContext(), JunkCleanerActivity.class);
                 startActivity(intent);
                 break;
