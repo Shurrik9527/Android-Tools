@@ -15,7 +15,6 @@ import android.util.Log;
 import android.webkit.WebSettings;
 
 import com.google.gson.Gson;
-import com.hz.maiku.maikumodule.bean.CpuBean;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
 
@@ -546,18 +545,10 @@ public class DeviceUtil {
                     String[] sp = line.split(":");
                     if(sp.length>1){
                         buffer.append(sp[0].trim()).append(":");
-                        buffer.append(sp[1].trim());
-                        localHashMap.put(sp[0].trim().toString(),sp[1].trim().toString());
+                        buffer.append(sp[1].trim()).append(",");
+                       // localHashMap.put(sp[0].trim().toString(),sp[1].trim().toString());
                     }
 
-//                    String[] sp = line.split(":");
-//                    if (sp.length > 1) {
-//                        CpuBean mBean = new CpuBean();
-//                        mBean.setmName(sp[0].trim());
-//                        mBean.setmValue(sp[1].trim());
-//                        mLists.add(mBean);
-//                        //localHashMap.put(sp[0].trim(), sp[1].trim());
-//                    }
                 }
             }
 
@@ -570,7 +561,7 @@ public class DeviceUtil {
 //            return null;
             Gson gson2=new Gson();
 //            String str=gson2.toJson(buffer.toString());
-            String str=gson2.toJson(buffer);
+            String str=gson2.toJson(buffer.toString().substring(0,buffer.toString().length()-1));
             return str;
         } catch (IOException localIOException) {
         }

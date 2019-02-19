@@ -15,18 +15,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/gray1"
+            android:background="@color/white"
             >
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray1"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:textSize="18sp"
-                android:textColor="@color/text555"
+                android:textColor="@color/white"
                 android:text="@string/toolbox_base"
-                android:layout_marginLeft="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
                 android:gravity="center_vertical"
+                android:background="@color/titleicon"
                 />
             <TextView
                 android:layout_width="match_parent"
@@ -272,9 +277,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:textSize="18sp"
-                android:textColor="@color/text555"
+                android:textColor="@color/white"
                 android:text="@string/toolbox_commonly"
-                android:layout_marginLeft="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:background="@color/titleicon"
                 android:gravity="center_vertical"
                 />
             <TextView
