@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    >
     <RelativeLayout
         android:id="@+id/notification_rl"
         android:layout_width="match_parent"
@@ -13,8 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/notification_cleaner_notice"
-            android:padding="3dp"
-            android:textColor="@color/gray3"
+            android:padding="10dp"
+            android:textColor="@color/description_text"
             android:layout_marginLeft="15dp"
             />
     </RelativeLayout>
@@ -34,12 +36,9 @@
         android:id="@+id/notification_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
         android:text="@string/notification_cleaner_all"
-        android:background="@drawable/stroke_default_solid_default_radius5"
+        android:background="@color/colorPrimary"
         style="@style/MyButton"
         android:textColor="@color/white"
         android:textSize="16sp"

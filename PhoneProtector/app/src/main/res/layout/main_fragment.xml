@@ -1,0 +1,307 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".main.MainFragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/main_bg"
+        >
+        <RelativeLayout
+            android:id="@+id/rl_pp"
+            android:layout_width="@dimen/x450"
+            android:layout_height="@dimen/y450"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y60"
+            >
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lav_pp"
+                android:layout_width="@dimen/x450"
+                android:layout_height="@dimen/y450"
+                app:lottie_autoPlay="false"
+                app:lottie_fileName="datalast.json"
+                android:layout_centerHorizontal="true"
+                app:lottie_loop="false" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                >
+
+                <com.hz.maiku.maikumodule.widget.DigitalRollingTextView
+                    android:id="@+id/name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="40sp"
+                    android:textColor="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:text="0"
+                    android:textStyle="normal"
+                    app:runWhenChange="false"
+                    app:textType="num"
+                    />
+
+                <TextView
+                    android:layout_below="@+id/name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FRACTION"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/y10"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/scan_tv"
+            android:layout_below="@+id/rl_pp"
+            android:layout_width="@dimen/x350"
+            android:layout_height="@dimen/y90"
+            android:text="@string/common_scan"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/y90"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_write_brode_tran"
+            />
+
+        <TextView
+            android:id="@+id/scan_data_tv"
+            android:layout_below="@+id/scan_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Haven't sacnned in 0 days"
+            android:layout_centerHorizontal="true"
+            android:textSize="14sp"
+            android:layout_marginTop="@dimen/y30"
+            android:gravity="center"
+            android:textColor="@color/white"
+
+            />
+        <!-- TODO: Update blank fragment layout -->
+
+        <RelativeLayout
+            android:id="@+id/bootom_rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y520"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/junk_iv"
+                            android:layout_width="@dimen/x90"
+                            android:layout_height="@dimen/y90"
+                            android:src="@drawable/ic_junk_cleaner"
+                            android:layout_centerInParent="true"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/junk_iv"
+                            android:text="@string/app_junk_cleaner"
+                            android:gravity="center"
+                            android:textColor="@color/titleicon"
+                            android:textSize="@dimen/text_large_size"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="2dp"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/cpucooler_iv"
+                            android:layout_width="@dimen/x90"
+                            android:layout_height="@dimen/y90"
+                            android:src="@drawable/ic_cpu_cooler"
+                            android:layout_centerInParent="true"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cpucooler_iv"
+                            android:text="@string/app_cpu_cooler"
+                            android:gravity="center"
+                            android:textColor="@color/titleicon"
+                            android:textSize="@dimen/text_large_size"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="2dp"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:id="@+id/app_lock_iv"
+                            android:layout_width="@dimen/x90"
+                            android:layout_height="@dimen/y90"
+                            android:src="@drawable/ic_applock_icon"
+                            android:layout_centerInParent="true"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/app_lock_iv"
+                            android:text="@string/app_apps_protector"
+                            android:gravity="center"
+                            android:textColor="@color/titleicon"
+                            android:textSize="@dimen/text_large_size"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="2dp"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        >
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            >
+                            <ImageView
+                                android:id="@+id/notice_iv"
+                                android:layout_width="@dimen/x90"
+                                android:layout_height="@dimen/y90"
+                                android:src="@drawable/ic_notic_icon"
+                                android:layout_centerInParent="true"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/notice_iv"
+                                android:text="@string/app_notification_manager"
+                                android:gravity="center"
+                                android:textColor="@color/titleicon"
+                                android:textSize="@dimen/text_large_size"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="2dp"
+                                />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            >
+                            <ImageView
+                                android:id="@+id/network_monitoring_iv"
+                                android:layout_width="@dimen/x90"
+                                android:layout_height="@dimen/y90"
+                                android:src="@drawable/ic_traffic_icon"
+                                android:layout_centerInParent="true"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/network_monitoring_iv"
+                                android:text="@string/app_network_monitoring"
+                                android:gravity="center"
+                                android:textColor="@color/titleicon"
+                                android:textSize="@dimen/text_large_size"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="2dp"
+                                />
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            >
+                            <ImageView
+                                android:id="@+id/wifi_iv"
+                                android:layout_width="@dimen/x90"
+                                android:layout_height="@dimen/y90"
+                                android:src="@drawable/ic_wifi_icon"
+                                android:layout_centerInParent="true"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/wifi_iv"
+                                android:text="@string/app_smart_wifi"
+                                android:gravity="center"
+                                android:textColor="@color/titleicon"
+                                android:textSize="@dimen/text_large_size"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="2dp"
+                                />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

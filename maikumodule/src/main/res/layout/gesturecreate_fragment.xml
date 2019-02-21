@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="@color/white"
     >
 
     <RelativeLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/colorPrimaryLight">
+        android:layout_height="220dp"
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/gesturecreate_lock_icon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
             android:id="@+id/gesturecreate_tip_tv"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="15dp"
             android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:text="@string/gesturecreate_create_password"
             android:textColor="@color/white"
             android:textSize="14sp"/>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/gesturecreate_reset_btn"
+        android:layout_below="@+id/top_layout"
+        >
+        <com.hz.maiku.maikumodule.widget.LockPatternView
+            android:id="@+id/gesturecreate_lpv"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerInParent="true"
+            android:visibility="visible"/>
 
-    <com.hz.maiku.maikumodule.widget.LockPatternView
-        android:id="@+id/gesturecreate_lpv"
-        android:layout_width="290dp"
-        android:layout_height="290dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:visibility="visible"/>
+    </RelativeLayout>
+
 
     <Button
         android:id="@+id/gesturecreate_reset_btn"
-        android:layout_width="120dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:gravity="center"
         android:text="@string/gesturecreate_reset_tv"
-        android:background="@drawable/stroke_blue_solid_blue_radius5"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
         android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
         android:textSize="14sp"/>
 
-</LinearLayout>
+</RelativeLayout>

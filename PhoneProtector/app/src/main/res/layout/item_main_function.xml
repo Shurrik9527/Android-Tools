@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_main_function"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@color/white"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardCornerRadius="@dimen/element_half_space">
+
+    <TextView
+        android:id="@+id/tv_main_function"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_junk_cleaner"
+        android:gravity="center"
+        android:padding="@dimen/element_default_space"
+        android:textSize="@dimen/text_default_size"
+        android:text="@string/junk_cleaner"
+        android:textColor="@color/white" />
+</android.support.v7.widget.CardView>
