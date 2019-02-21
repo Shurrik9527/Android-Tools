@@ -30,6 +30,6 @@ public class TrafficStatisticsActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        setTitle("TrafficStatistics");
+        setTitle(getString(R.string.app_network_monitoring));
     }
 }

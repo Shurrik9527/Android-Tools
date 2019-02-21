@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/divider"
     >
-
     <RelativeLayout
         android:id="@+id/rl_phonebooster"
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
             android:layout_height="320dp"
             android:layout_centerInParent="true"
             app:lottie_autoPlay="false"
-            app:lottie_fileName="spinning_gear_with_check.json"
+            app:lottie_fileName="mian_fragment_animation.json"
             app:lottie_loop="false" />
     </RelativeLayout>
     <!-- TODO: Update blank fragment layout -->
@@ -31,83 +30,25 @@
         android:id="@+id/cv_appmanager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/thin_line_size"
-        android:layout_marginEnd="@dimen/thin_line_size"
-        android:layout_marginRight="0.5dp"
         android:layout_marginTop="@dimen/element_half_space"
-        android:clickable="true"
+        android:layout_marginEnd="@dimen/thin_line_size"
+        android:layout_marginBottom="@dimen/thin_line_size"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@id/cv_junkcleaner"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/cv_cpucooler"
+        app:layout_constraintRight_toLeftOf="@id/cv_chargebooster"
         app:layout_constraintTop_toBottomOf="@+id/rl_phonebooster">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_feedback"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_appmanager"
-            android:text="App Manager"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/text_large_size" />
-    </android.support.v7.widget.CardView>
-
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_cpucooler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/thin_line_size"
-        android:layout_marginStart="@dimen/thin_line_size"
-        android:layout_marginLeft="0.5dp"
-        android:layout_marginTop="@dimen/element_half_space"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@id/cv_chargebooster"
-        app:layout_constraintLeft_toRightOf="@id/cv_appmanager"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl_phonebooster">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_cpucooler"
-            android:text="CPU Cooler"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/text_large_size" />
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_junkcleaner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/thin_line_size"
-        android:layout_marginRight="0.5dp"
-        android:layout_marginTop="@dimen/thin_line_size"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cv_chargebooster"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_appmanager">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_junkcleaner"
-            android:text="Junk Files"
-            android:textColor="@color/colorAccent"
+            android:text="@string/app_manager"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_large_size" />
     </android.support.v7.widget.CardView>
 
@@ -116,26 +57,74 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/thin_line_size"
-        android:layout_marginLeft="0.5dp"
-        android:layout_marginTop="@dimen/thin_line_size"
-        android:clickable="true"
+        android:layout_marginTop="@dimen/element_half_space"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cv_cpucooler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_junkcleaner"
-        app:layout_constraintTop_toBottomOf="@+id/cv_cpucooler">
+        app:layout_constraintStart_toEndOf="@+id/cv_appmanager"
+        app:layout_constraintTop_toBottomOf="@+id/rl_phonebooster">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_appcache_icon"
             android:drawablePadding="5dp"
-            android:drawableTop="@mipmap/ic_chargebooster"
-            android:text="Charge Booster"
-            android:textColor="@color/colorAccent"
+            android:text="@string/charge_booster"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_large_size" />
     </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_junkcleaner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/thin_line_size"
+        android:layout_marginEnd="@dimen/thin_line_size"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cv_cpucooler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_appmanager">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_setting"
+            android:drawablePadding="5dp"
+            android:text="@string/junk_cleaner"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_large_size" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_cpucooler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/thin_line_size"
+        android:layout_marginTop="@dimen/thin_line_size"
+        android:layout_marginBottom="@dimen/thin_line_size"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/cv_junkcleaner"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_chargebooster">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_cpucooler_icon"
+            android:drawablePadding="5dp"
+            android:text="@string/cpu_cooler"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_large_size" />
+    </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

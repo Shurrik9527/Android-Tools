@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     >
 
     <RelativeLayout
@@ -65,12 +66,20 @@
     <TextView
         android:id="@+id/junkclearner_current_scan_tv"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="35dp"
         android:layout_below="@+id/junkclearner_Rl"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textColor="@color/description_text"
        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
+        android:paddingLeft="15dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/junkclearner_current_scan_tv"
         />
 
     <ExpandableListView

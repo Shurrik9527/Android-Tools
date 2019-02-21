@@ -85,7 +85,7 @@
                 android:src="@mipmap/next"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="20dp"
                 />
             <TextView
                 android:layout_width="match_parent"

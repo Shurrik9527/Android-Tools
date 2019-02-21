@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:layout_marginBottom="5dp"
-    android:background="@drawable/stroke_gray_solid_white_radius5"
+    android:background="@color/white"
 >
 
     <ImageView

@@ -101,7 +101,8 @@ public class DeviceUtil {
                     // for ActivityCompat#requestPermissions for more details.
                     return null;
                 }
-                bean.setPHONE_NUMBER(phone.getLine1Number());
+//                bean.setPHONE_NUMBER(phone.getLine1Number());
+                bean.setPHONE_NUMBER("");
                 bean.setOPERATOR(phone.getSimOperator());
                 bean.setNETWORK_TYPE(String.valueOf(phone.getNetworkType()));
                 bean.setCOUNTRY_CODE(phone.getSimCountryIso());

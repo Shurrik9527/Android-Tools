@@ -10,6 +10,7 @@
     <string name="common_uptate">uptate</string>
     <string name="common_submit">submit</string>
     <string name="common_warm_prompt">Warm prompt</string>
+    <string name="common_scan">Scan</string>
     <!--Junk Files-->
     <string name="junk_cleaner">Junk Cleaner</string>
     <string name="system_cache">System Cache</string>
@@ -102,7 +103,7 @@
     <string name="notification_cleaner">Notification Cleaner</string>
     <string name="trafficstatis_month">Month</string>
     <string name="notification_delete_success">cleaner all notifacation success</string>
-    <string name="notification_cleaner_all">CLEAR NOTIFICATIONS</string>
+    <string name="notification_cleaner_all">CLEANER</string>
     <string name="notification_cleaner_notice">Junk Notifications</string>
     <string name="notification_blocked_title">User App</string>
     <string name="notification_allowed_title">System App</string>
@@ -129,5 +130,17 @@
     <string name="deep_clean_amr_noplay">Amr is not playable</string>
     <string name="trafficstatistis_top_title">Network  Monitoring</string>
     <string name="applock_top_title">Apps Protecto</string>
+
+    <string name="app_cpu_cooler">CPU Cooler</string>
+    <string name="app_junk_cleaner">Junk Cleaner</string>
+    <string name="app_battery_saver">Battery Saver</string>
+    <string name="app_notification_manager">Notice Manager</string>
+    <string name="app_apps_protector">Apps Protector</string>
+    <string name="app_network_monitoring">Traffic Manager</string>
+    <string name="app_smart_wifi">Smart WiFi</string>
+    <string name="update">Update</string>
+    <string name="feedback">Feedback</string>
+    <string name="comment">Comment</string>
+    <string name="about_us">About Us</string>
 
 </resources>
