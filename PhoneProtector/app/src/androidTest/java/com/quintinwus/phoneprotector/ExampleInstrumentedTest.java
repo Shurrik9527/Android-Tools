@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.sharkwang8.phoneassistant", appContext.getPackageName());
+        assertEquals("com.sharkwang8.phoneprotector", appContext.getPackageName());
     }
 }
