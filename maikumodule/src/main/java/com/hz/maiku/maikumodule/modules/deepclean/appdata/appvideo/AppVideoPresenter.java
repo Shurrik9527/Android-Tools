@@ -55,7 +55,7 @@ public class AppVideoPresenter implements AppVideoContract.Presenter{
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
-                e.onNext(DeepCleanUtil.deleteVideoFile(mContext,mlists));
+                e.onNext(DeepCleanUtil.deleteSpecialVideoFile(mlists));
                 e.onComplete();
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Boolean>() {

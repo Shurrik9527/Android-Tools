@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@color/gray1"
     >
 
     <android.support.design.widget.AppBarLayout
@@ -157,8 +157,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_below="@+id/deepclean_image_rl"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:focusable="false"
                     android:visibility="gone"
                     >
@@ -237,8 +235,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_below="@+id/deepclean_video_rl"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:visibility="gone"
                     >
                 </android.support.v7.widget.RecyclerView>
@@ -317,8 +313,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_below="@+id/deepclean_uninstallapp_rl"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:visibility="gone"
                     >
                 </android.support.v7.widget.RecyclerView>

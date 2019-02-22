@@ -905,7 +905,25 @@ public class DeepCleanUtil {
         }
     }
 
+    /**
+     * 删除sd卡 Video文件
+     * @param list
+     * @return
+     */
+    public static boolean deleteSpecialVideoFile(final List<VideoBean> list){
 
+        if(list==null||list.size()==0){
+            return false;
+        }
+        try {
+            for (VideoBean bean :list){
+                FileUtil.deleteTarget(bean.getmUrl());
+            }
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
 
 

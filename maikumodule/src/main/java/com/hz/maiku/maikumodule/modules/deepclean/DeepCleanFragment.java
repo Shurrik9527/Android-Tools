@@ -172,11 +172,12 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
 
     @Override
     public void showImageData(List<AlbumBean> mlists) {
-
+        if(deepcleanImagesNumTvPw!=null){
+            deepcleanImagesNumTvPw.setVisibility(View.GONE);
+        }
         if (mlists == null || mlists.size() == 0) {
             deepcleanIamgesRv.setVisibility(View.GONE);
         } else {
-            deepcleanImagesNumTvPw.setVisibility(View.GONE);
             deepcleanIamgesRv.setVisibility(View.VISIBLE);
             Collections.sort(mlists);
             List<ImageBean> mlist = new ArrayList<>();
@@ -237,11 +238,17 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
 
     @Override
     public void showVideos(List<VideoBean> mlists) {
+        if(deepcleanVideosNumTvPw!=null){
+            deepcleanVideosNumTvPw.setVisibility(View.GONE);
+        }
 
         if (mlists == null || mlists.size() == 0) {
             deepcleanVideosRv.setVisibility(View.GONE);
+            if (deepcleanVideosNumTv != null) {
+                deepcleanVideosNumTv.setVisibility(View.VISIBLE);
+                deepcleanVideosNumTv.setText("");
+            }
         } else {
-            deepcleanVideosNumTvPw.setVisibility(View.GONE);
             deepcleanVideosRv.setVisibility(View.VISIBLE);
             List<VideoBean> mlist = new ArrayList<>();
             int msize = mlists.size();
@@ -298,11 +305,17 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
 
     @Override
     public void showApks(List<ApkBean> mlists) {
+        if(deepcleanUninstallappNumTvPw!=null){
+            deepcleanUninstallappNumTvPw.setVisibility(View.GONE);
+        }
 
         if (mlists == null || mlists.size() == 0) {
             deepcleanUninstallappRv.setVisibility(View.GONE);
+            if (deepcleanUninstallappNumTv != null) {
+                deepcleanUninstallappNumTv.setVisibility(View.VISIBLE);
+                deepcleanUninstallappNumTv.setText("");
+            }
         } else {
-            deepcleanUninstallappNumTvPw.setVisibility(View.GONE);
             deepcleanUninstallappRv.setVisibility(View.VISIBLE);
             List<ApkBean> mlist = new ArrayList<>();
             int msize = mlists.size();
@@ -359,10 +372,11 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
 
     @Override
     public void showAudios(List<AudioBean> mLists) {
+        if(deepcleanAudioTvPw!=null){
+            deepcleanAudioTvPw.setVisibility(View.GONE);
+        }
 
         if (mLists != null && mLists.size() > 0) {
-            deepcleanAudioTvPw.setVisibility(View.GONE);
-
             long mSize = 0;
             for (int i = 0; i < mLists.size(); i++) {
                 AudioBean bean = mLists.get(i);
@@ -382,16 +396,21 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
                 }
                 showAllSize(mSize);
             }
+        }else {
+            if (deepcleanAudioNumTv != null) {
+                deepcleanAudioNumTv.setVisibility(View.VISIBLE);
+                deepcleanAudioNumTv.setText("");
+            }
         }
 
     }
 
     @Override
     public void showSpecialApk(List<AppBean> mLists) {
-
-
-        if (mLists != null && mLists.size() > 0) {
+        if(deepcleanAppdataTvPw!=null){
             deepcleanAppdataTvPw.setVisibility(View.GONE);
+        }
+        if (mLists != null && mLists.size() > 0) {
             long mSize = 0;
             for (int i = 0; i < mLists.size(); i++) {
                 AppBean bean = mLists.get(i);
@@ -411,6 +430,11 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
                 }
                 showAllSize(mSize);
             }
+        }else {
+            if (deepcleanAppcacheNumTv != null) {
+                deepcleanAppcacheNumTv.setVisibility(View.VISIBLE);
+                deepcleanAppcacheNumTv.setText("");
+            }
         }
 
 
@@ -418,8 +442,10 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
 
     @Override
     public void showBigFile(List<BigFileBean> mList) {
-        if (mList != null && mList.size() > 0) {
+        if(deepcleanLargefileTvPw!=null){
             deepcleanLargefileTvPw.setVisibility(View.GONE);
+        }
+        if (mList != null && mList.size() > 0) {
             long mSize = 0;
             for (int i = 0; i < mList.size(); i++) {
                 BigFileBean bean = mList.get(i);
@@ -438,6 +464,10 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
                     deepcleanLargefileNumTv.setText(dropped + " " + mFileSize.mUnit + "");
                 }
                 showAllSize(mSize);
+            }
+        }else {
+            if(deepcleanLargefileNumTv!=null){
+                deepcleanLargefileNumTv.setText("");
             }
         }
     }
@@ -458,6 +488,13 @@ public class DeepCleanFragment extends Fragment implements DeepCleanContract.Vie
             }
             if (deepcleanTotalDwTv != null) {
                 deepcleanTotalDwTv.setText(mFileSize.mUnit + "");
+            }
+        }else {
+            if (deepcleanTotalTv != null) {
+                deepcleanTotalTv.setText("");
+            }
+            if (deepcleanTotalDwTv != null) {
+                deepcleanTotalDwTv.setText("B");
             }
         }
     }

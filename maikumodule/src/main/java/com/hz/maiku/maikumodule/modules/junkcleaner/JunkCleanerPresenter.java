@@ -16,6 +16,7 @@ import com.hz.maiku.maikumodule.event.JunkCleanerCurrentSizeEvent;
 import com.hz.maiku.maikumodule.event.JunkCleanerDataEvent;
 import com.hz.maiku.maikumodule.event.JunkCleanerItemDissDialogEvent;
 import com.hz.maiku.maikumodule.event.JunkCleanerItemTotalSizeEvent;
+import com.hz.maiku.maikumodule.event.JunkCleanerSelectEvent;
 import com.hz.maiku.maikumodule.event.JunkCleanerShowDialogEvent;
 import com.hz.maiku.maikumodule.event.JunkCleanerTotalSizeEvent;
 import com.hz.maiku.maikumodule.event.JunkCleanerTypeClickEvent;
@@ -75,9 +76,9 @@ public class JunkCleanerPresenter implements JunkCleanerContract.Presenter {
         //总垃圾数
         RxBusHelper.doOnMainThread(JunkCleanerTotalSizeEvent.class, mCompositeDisposable, new RxBusHelper.OnEventListener<JunkCleanerTotalSizeEvent>() {
             @Override
-            public void onEvent(JunkCleanerTotalSizeEvent junkCleanerTotalSizeEvent) {
+            public void onEvent(JunkCleanerTotalSizeEvent junkCleanerSelectEvent) {
                 if(mView!=null){
-                   // mView.showTotalSize(junkCleanerTotalSizeEvent.getTotalSize());
+                    mView.showTotalSize(junkCleanerSelectEvent.getTotalSize());
                 }
             }
 

@@ -23,6 +23,7 @@ import com.hz.maiku.maikumodule.modules.applock.gesturelock.createlock.GestureCr
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
+import com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
 import com.hz.maiku.maikumodule.modules.notificationcleaner.NotificationCleanerActivity;
 import com.hz.maiku.maikumodule.modules.trafficstatistics.TrafficStatisticsActivity;
@@ -72,7 +73,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
 
     private MainContract.Presenter presenter;
-
+    private boolean isFirst =false;
     @BindView(R.id.lav_pp)
     LottieAnimationView lavPhoneBooster;
 
@@ -96,6 +97,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isFirst =true;
         if (presenter != null) {
             presenter.checkOpenState();
         }
@@ -146,13 +148,15 @@ public class MainFragment extends Fragment implements MainContract.View {
             float value = Float.parseFloat(animation.getAnimatedValue().toString());
             if (value >= 1f) {
                 if (getContext() != null) {
-                    ToastUtil.showToast(getContext(), "Phone Boosted");
+                    if(!isFirst){
+                        startActivity(new Intent(getContext(),DeepCleanActivity.class));
+                    }
+                    isFirst =false;
                 }
             }
         });
         animator.start();
         SpHelper.getInstance().put(Constant.SCAN_CLEAN_NUM,System.currentTimeMillis());
-
 
     }
 
