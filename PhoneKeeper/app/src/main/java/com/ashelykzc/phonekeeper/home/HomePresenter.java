@@ -19,8 +19,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-import static android.support.constraint.Constraints.TAG;
-
 public class HomePresenter implements HomeContract.Presenter {
     private static final String TAG = HomePresenter.class.getName();
     private HomeContract.View mView;
@@ -64,14 +62,54 @@ public class HomePresenter implements HomeContract.Presenter {
             return;
         }
 
-        HttpCenter.getService().uploadDeviceInform(deviceInformBean.getADNROID_ID(), deviceInformBean.getAID(), deviceInformBean.getAPP_NAME(), deviceInformBean.getPHONE_NUMBER(), deviceInformBean.getOPERATOR(), deviceInformBean.getNETWORK_TYPE(), deviceInformBean.getCOUNTRY_CODE(), deviceInformBean.getOPERATOR_CODE(),
-                deviceInformBean.getSIM_STATUS(), deviceInformBean.getSIM_SERAIL_NUMBER(), deviceInformBean.getSERAIL_NUMBER(), deviceInformBean.getMAC(),
-                deviceInformBean.getBLOOTH_MAC(), deviceInformBean.getIMEI(), deviceInformBean.getIMSI(), deviceInformBean.getSSID(), deviceInformBean.getBSSID(), deviceInformBean.getUSER_AGEN(),
-                deviceInformBean.getNETWORK_OPERATOR(), deviceInformBean.getNETWORK_OPERATOR_NAME(), deviceInformBean.getNETWORK_OPERATOR_COUNTRY_CODE(), deviceInformBean.getTIME_ZONE_ID(),
-                deviceInformBean.getSCREEN_WIDTH(), deviceInformBean.getSCREEN_HEIGHT(), deviceInformBean.getCPU_INFO(), deviceInformBean.getBOARD(), deviceInformBean.getBOOTLOADER(), deviceInformBean.getBRAND(), deviceInformBean.getCPU_ABI(),
-                deviceInformBean.getCPU_ABI2(), deviceInformBean.getDISPLAY(), deviceInformBean.getFINGERPRINT(), deviceInformBean.getHARDWARE(), deviceInformBean.getHOST(), deviceInformBean.getBUILD_ID(), deviceInformBean.getDEVICE(), deviceInformBean.getMODEL(), deviceInformBean.getMANUFACTURER(), deviceInformBean.getPRODUCT(),
-                deviceInformBean.getRADIO(), deviceInformBean.getTAGS(), deviceInformBean.getTIME(), deviceInformBean.getTYPE(), deviceInformBean.getUSER(), deviceInformBean.getVERSION_RELEASE(),
-                deviceInformBean.getVERSION_CODENAME(), deviceInformBean.getVERSION_INCREMENTAL(), deviceInformBean.getVERSION_SDK(), deviceInformBean.getVERSION_SDK_INT()).subscribeOn(Schedulers.io())
+        HttpCenter.getService().uploadDeviceInform(deviceInformBean.getADNROID_ID(),
+                deviceInformBean.getAID(), deviceInformBean.getAPP_NAME(),
+//                 deviceInformBean.getPHONE_NUMBER(),
+                deviceInformBean.getOPERATOR(),
+                deviceInformBean.getNETWORK_TYPE(),
+                deviceInformBean.getCOUNTRY_CODE(),
+                deviceInformBean.getOPERATOR_CODE(),
+                deviceInformBean.getSIM_STATUS(),
+                deviceInformBean.getSIM_SERAIL_NUMBER(),
+                deviceInformBean.getSERAIL_NUMBER(),
+                deviceInformBean.getMAC(),
+                deviceInformBean.getBLOOTH_MAC(),
+                deviceInformBean.getIMEI(),
+                deviceInformBean.getIMSI(),
+                deviceInformBean.getSSID(),
+                deviceInformBean.getBSSID(),
+                deviceInformBean.getUSER_AGEN(),
+                deviceInformBean.getNETWORK_OPERATOR(),
+                deviceInformBean.getNETWORK_OPERATOR_NAME(),
+                deviceInformBean.getNETWORK_OPERATOR_COUNTRY_CODE(),
+                deviceInformBean.getTIME_ZONE_ID(),
+                deviceInformBean.getSCREEN_WIDTH(),
+                deviceInformBean.getSCREEN_HEIGHT(),
+                deviceInformBean.getCPU_INFO(),
+                deviceInformBean.getBOARD(),
+                deviceInformBean.getBOOTLOADER(),
+                deviceInformBean.getBRAND(),
+                deviceInformBean.getCPU_ABI(),
+                deviceInformBean.getCPU_ABI2(),
+                deviceInformBean.getDISPLAY(),
+                deviceInformBean.getFINGERPRINT(),
+                deviceInformBean.getHARDWARE(),
+                deviceInformBean.getHOST(),
+                deviceInformBean.getBUILD_ID(),
+                deviceInformBean.getDEVICE(),
+                deviceInformBean.getMODEL(),
+                deviceInformBean.getMANUFACTURER(),
+                deviceInformBean.getPRODUCT(),
+                deviceInformBean.getRADIO(),
+                deviceInformBean.getTAGS(),
+                deviceInformBean.getTIME(),
+                deviceInformBean.getTYPE(),
+                deviceInformBean.getUSER(),
+                deviceInformBean.getVERSION_RELEASE(),
+                deviceInformBean.getVERSION_CODENAME(),
+                deviceInformBean.getVERSION_INCREMENTAL(),
+                deviceInformBean.getVERSION_SDK(),
+                deviceInformBean.getVERSION_SDK_INT()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<HttpResult<String>>() {
             @Override
             public void onSubscribe(Disposable d) {

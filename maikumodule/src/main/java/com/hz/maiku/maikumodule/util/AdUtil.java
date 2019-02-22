@@ -190,7 +190,7 @@ public class AdUtil {
         final com.google.android.gms.ads.InterstitialAd interstitialAd = new com.google.android.gms.ads.InterstitialAd(context);
         interstitialAd.setAdUnitId(Constant.UNIT_ID);
         AdRequest request = new AdRequest.Builder()
-                .addTestDevice("3354EE0DE60D4DE6C845A1C28842FDEA")
+//                .addTestDevice("3354EE0DE60D4DE6C845A1C28842FDEA")
                 .build();
         interstitialAd.loadAd(request);
         //初始化成功以后直接显示
