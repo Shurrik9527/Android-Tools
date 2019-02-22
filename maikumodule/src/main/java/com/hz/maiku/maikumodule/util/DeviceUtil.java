@@ -18,10 +18,6 @@ import com.google.gson.Gson;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -32,11 +28,8 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.IdentityHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -102,7 +95,6 @@ public class DeviceUtil {
                     return null;
                 }
 //                bean.setPHONE_NUMBER(phone.getLine1Number());
-                bean.setPHONE_NUMBER("");
                 bean.setOPERATOR(phone.getSimOperator());
                 bean.setNETWORK_TYPE(String.valueOf(phone.getNetworkType()));
                 bean.setCOUNTRY_CODE(phone.getSimCountryIso());
