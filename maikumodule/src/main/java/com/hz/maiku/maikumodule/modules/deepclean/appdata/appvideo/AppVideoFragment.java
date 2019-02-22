@@ -44,10 +44,10 @@ import butterknife.OnClick;
 public class AppVideoFragment extends Fragment implements AppVideoContract.View {
 
     private static final String TAG = AppVideoFragment.class.getName();
-    @BindView(R2.id.select_iamge_gv)
-    GridView selectIamgeGv;
-    @BindView(R2.id.select_image_btn)
-    Button selectImageBtn;
+    @BindView(R2.id.select_video_gv)
+    GridView selectVideoGv;
+    @BindView(R2.id.select_video_btn)
+    Button selectVideoBtn;
 
     private AppVideoContract.Presenter presenter;
     private AppVideoAdapter mAppVideoAdapter;
@@ -101,8 +101,8 @@ public class AppVideoFragment extends Fragment implements AppVideoContract.View 
                 }
             }
         });
-        selectIamgeGv.setAdapter(mAppVideoAdapter);
-        selectIamgeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        selectVideoGv.setAdapter(mAppVideoAdapter);
+        selectVideoGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mlist != null && mlist.size() > 0) {
@@ -138,7 +138,7 @@ public class AppVideoFragment extends Fragment implements AppVideoContract.View 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.select_image_fragment, container, false);
+        View root = inflater.inflate(R.layout.select_video_fragment, container, false);
         ButterKnife.bind(this, root);
         initView();
         return root;
@@ -157,8 +157,8 @@ public class AppVideoFragment extends Fragment implements AppVideoContract.View 
             mAppVideoAdapter.setData(mlist);
             mAppVideoAdapter.notifyDataSetChanged();
         }
-        if(selectImageBtn!=null){
-            selectImageBtn.setText("Clean");
+        if(selectVideoBtn!=null){
+            selectVideoBtn.setText("Clean");
         }
     }
 
@@ -172,11 +172,11 @@ public class AppVideoFragment extends Fragment implements AppVideoContract.View 
                         mSize = mSize + bean.getSize();
                     }
                 }
-                if(selectImageBtn!=null){
+                if(selectVideoBtn!=null){
                     if(mSize>0){
-                        selectImageBtn.setText("Clean  "+FormatUtil.formatFileSize(mSize).toString() );
+                        selectVideoBtn.setText("Clean  "+FormatUtil.formatFileSize(mSize).toString() );
                     }else{
-                        selectImageBtn.setText("Clean");
+                        selectVideoBtn.setText("Clean");
                     }
                 }
             }
@@ -208,7 +208,7 @@ public class AppVideoFragment extends Fragment implements AppVideoContract.View 
     }
 
 
-    @OnClick(R2.id.select_image_btn)
+    @OnClick(R2.id.select_video_btn)
     public void onClick() {
 
         if(StringUtil.isFastDoubleClick()){

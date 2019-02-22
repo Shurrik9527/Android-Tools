@@ -41,10 +41,12 @@ public class JunkCleanerSuccessFragment extends Fragment implements JunkCleanerS
     ImageView cpucoolerSuccessRotateIv;
     @BindView(R2.id.junkclearn_time_tv)
     TextView cpucoolerTimeTv;
+    @BindView(R2.id.junkclearn_success_dw_tv)
+    TextView cpucoolerDanweiTv;
 
     private JunkCleanerSuccessContract.Presenter presenter;
     private  String mTemp =null;
-
+    private  String danwei =null;
 
     public JunkCleanerSuccessFragment() {
         // Required empty public constructor
@@ -65,6 +67,7 @@ public class JunkCleanerSuccessFragment extends Fragment implements JunkCleanerS
             Bundle mBundle =getArguments();
             if(mBundle!=null){
                 mTemp =mBundle.getString("BUNDLE");
+                danwei =mBundle.getString("DANWEI");
                 if(mTemp.contains(",")){
                     mTemp =mTemp.replace(",",".");
                 }
@@ -108,6 +111,11 @@ public class JunkCleanerSuccessFragment extends Fragment implements JunkCleanerS
             cpucoolerSuccessTv.setModleType(DigitalRollingTextView.ModleType.MONEY_TYPE);
             cpucoolerSuccessTv.setText("0.00");
         }
+
+        if(cpucoolerDanweiTv!=null){
+            cpucoolerDanweiTv.setText(danwei+"");
+        }
+
         if(cpucoolerTimeTv!=null){
             cpucoolerTimeTv.setText("Junk Files Cleaned");
         }
@@ -163,7 +171,8 @@ public class JunkCleanerSuccessFragment extends Fragment implements JunkCleanerS
 
             if(!TextUtils.isEmpty(mTemp)) {
                 float temp = Float.parseFloat(mTemp);
-                BigDecimal bigDecimal = new BigDecimal(Math.abs(msize - temp));
+//                BigDecimal bigDecimal = new BigDecimal(Math.abs(msize - temp));
+                BigDecimal bigDecimal = new BigDecimal(temp);
                 float dropped = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
                 if(cpucoolerSuccessTv!=null){
                     cpucoolerSuccessTv.setContent(dropped + "");

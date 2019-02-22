@@ -53,9 +53,9 @@ public class CleanAppDataAdapter extends BaseQuickAdapter<AppDataBean, BaseViewH
             FormatUtil.FileSize mImageFileSize=FormatUtil.formatFileSize(item.getImageSize());
             String mimagesizes =mImageFileSize.mSize;
             if (mimagesizes.contains(",")) {
-                msizes = msizes.replace(",", ".");
+                mimagesizes = mimagesizes.replace(",", ".");
             }
-            BigDecimal bigiamgeDecimal = new BigDecimal(msizes);
+            BigDecimal bigiamgeDecimal = new BigDecimal(mimagesizes);
             float iamgedropped = bigiamgeDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
             helper.setText(R.id.select_appdata_image_size_tv,iamgedropped+""+mImageFileSize.mUnit);
             if(iamgedropped==0){
@@ -79,7 +79,6 @@ public class CleanAppDataAdapter extends BaseQuickAdapter<AppDataBean, BaseViewH
             }else {
                 helper.setVisible(R.id.select_appdata_audio_size_tv,true);
             }
-
 
             FormatUtil.FileSize mvideoFileSize=FormatUtil.formatFileSize(item.getVideoSize());
             String mvideosizes =mvideoFileSize.mSize;

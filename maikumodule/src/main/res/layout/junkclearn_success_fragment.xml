@@ -49,7 +49,6 @@
         android:id="@+id/junkclearn_success_dw_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="M"
         android:textColor="@color/white"
         android:textSize="50sp"
         android:layout_toRightOf="@+id/junkclearn_success_tv"

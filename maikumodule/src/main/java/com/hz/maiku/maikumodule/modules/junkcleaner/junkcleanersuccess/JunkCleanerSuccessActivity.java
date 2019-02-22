@@ -30,8 +30,10 @@ public class JunkCleanerSuccessActivity extends BaseActivity {
         Intent mIntent =getIntent();
         if(mIntent!=null){
             String temp = mIntent.getStringExtra("BUNDLE");
+            String danwei = mIntent.getStringExtra("DANWEI");
             Bundle mBundle = new Bundle();
             mBundle.putString("BUNDLE",temp);
+            mBundle.putString("DANWEI",danwei);
             junkCleanerSuccessFragment.setArguments(mBundle);
         }
         return junkCleanerSuccessFragment;

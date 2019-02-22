@@ -50,6 +50,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
 
 
 /**
@@ -84,6 +85,7 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     private JunkCleanerDialog mJunkCleanerDialog;
     private boolean isStart = true;
     private String mNum;
+    private String danwei =null;
     private float mTemp = 0.0f;
     private static final Long totalNum = 3072L;
     private static final int PERMISSIONS_REQUEST_PACKAGE_USAGE_STATS = 1102;
@@ -106,6 +108,15 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
         if (getArguments() != null) {
 
         }
+//        //总垃圾数
+//        RxBusHelper.doOnMainThread(JunkCleanerSelectEvent.class, new CompositeDisposable(), new RxBusHelper.OnEventListener<JunkCleanerSelectEvent>() {
+//            @Override
+//            public void onEvent(JunkCleanerSelectEvent junkCleanerSelectEvent) {
+//                showTotalSize(FormatUtil.formatFileSize(Long.parseLong(junkCleanerSelectEvent.getTotalSize())).toString());
+//            }
+//
+//        });
+
     }
 
     @Override
@@ -192,43 +203,49 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
     @Override
     public void showTotalSize(String size) {
 
-        if (TextUtils.isEmpty(size))
-            return;
-        Log.i(TAG, "size=" + size);
+        try {
+            if (TextUtils.isEmpty(size))
+                return;
+            Log.i(TAG, "size=" + size);
 
-        if (size.contains(",")) {
-            size = size.replace(",", ".");
-        }
-
-        if (junkclearnerNumTv != null) {
-            if (size.contains("M")) {
-                String[] sizes = size.split("M");
-                mNum = sizes[0].trim();
-                junkclearnerNumTv.setContent(mNum);
-                junkclearnerNumDwTv.setText("MB");
-                setProgress();
-            } else if (size.contains("B")) {
-                String[] sizes = size.split("B");
-                mNum = sizes[0].trim();
-                junkclearnerNumTv.setContent(mNum);
-                junkclearnerNumDwTv.setText("B");
-            } else if (size.contains("G")) {
-                String[] sizes = size.split("G");
-                mNum = sizes[0].trim();
-                junkclearnerNumTv.setContent(mNum);
-                junkclearnerNumDwTv.setText("G");
-                try {
-                    if (!TextUtils.isEmpty(mNum)) {
-                        float number = Float.parseFloat(mNum) * 1024;
-                        mNum = String.valueOf(number);
-                        setProgress();
-                    }
-                } catch (Exception e) {
-
-                }
+            if (size.contains(",")) {
+                size = size.replace(",", ".");
             }
 
+            if (junkclearnerNumTv != null) {
+                if (size.contains("M")) {
+                    String[] sizes = size.split("M");
+                    mNum = sizes[0].trim();
+                    junkclearnerNumTv.setContent(mNum);
+                    junkclearnerNumDwTv.setText("MB");
+                    danwei ="M";
+                    setProgress();
+                } else if (size.contains("B")) {
+                    String[] sizes = size.split("B");
+                    mNum = sizes[0].trim();
+                    junkclearnerNumTv.setContent(mNum);
+                    junkclearnerNumDwTv.setText("B");
+                    danwei ="B";
+                } else if (size.contains("G")) {
+                    String[] sizes = size.split("G");
+                    mNum = sizes[0].trim();
+                    junkclearnerNumTv.setContent(mNum);
+                    junkclearnerNumDwTv.setText("G");
+                    danwei ="G";
+
+                }else {
+                    String[] sizes = size.split("K");
+                    mNum = sizes[0].trim();
+                    junkclearnerNumTv.setContent(mNum);
+                    junkclearnerNumDwTv.setText("K");
+                    danwei ="K";
+                }
+
+            }
+        }catch (Exception e){
+
         }
+
 
     }
 
@@ -305,6 +322,7 @@ public class JunkCleanerFragment extends Fragment implements JunkCleanerContract
                 if (!TextUtils.isEmpty(mNum)) {
                     if (mIntent != null) {
                         mIntent.putExtra("BUNDLE", mNum + "");
+                        mIntent.putExtra("DANWEI", danwei + "");
                     }
                 }
                 startActivity(mIntent);

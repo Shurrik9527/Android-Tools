@@ -87,6 +87,17 @@
         <activity android:name="com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneActivity" />
         <activity android:name="com.hz.maiku.maikumodule.modules.applock.gesturelock.setting.SettingLockActivity" />
         <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity" />
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.selectImage.SelectImageActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.cleansuccess.CleanSuccessActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.selectVideo.SelectVideoActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.uninstallapk.SelectApkActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.appdata.CleanAppDataActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.selectbigfile.SelectBigFileActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.appdata.appImage.AppImageActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.appdata.appvideo.AppVideoActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.appdata.appaudio.AppAudiosActivity"/>
+        <activity android:name="com.hz.maiku.maikumodule.modules.deepclean.selectaudio.SelectAudiosActivity"/>
+
         <!-- 锁屏服务 -->
         <service android:name="com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerService" />
 
