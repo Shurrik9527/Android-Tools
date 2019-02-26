@@ -42,7 +42,7 @@ public class AdUtil {
     /**
      * 发布第一版的时候设置为false, 其余情况下都是true
      */
-    public static boolean IS_SHOW_AD = false;
+    public static boolean IS_SHOW_AD = true;
 
     /**
      * 直接显示广告
