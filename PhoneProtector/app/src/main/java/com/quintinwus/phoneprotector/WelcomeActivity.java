@@ -17,8 +17,6 @@ import java.lang.ref.WeakReference;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * @author heguogui
  * @version v 1.0.0
@@ -28,19 +26,22 @@ import static java.util.Objects.requireNonNull;
  */
 public class WelcomeActivity extends AppCompatActivity {
     private static final int SHOW_TIME = 2500;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_activity);
+        setContentView(R.layout.activity_welcome);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         new Handler().postDelayed(new MyRunnable(WelcomeActivity.this), SHOW_TIME);
     }
 
-    private  class MyRunnable implements Runnable {
+    private class MyRunnable implements Runnable {
         WeakReference<WelcomeActivity> mActivity;
+
         public MyRunnable(WelcomeActivity activity) {
             mActivity = new WeakReference<>(activity);
         }
+
         @Override
         public void run() {
             if (mActivity.get() == null) {
@@ -52,10 +53,9 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
 
+    private void showPermissions() {
 
-    private void showPermissions(){
-
-        if(WelcomeActivity.this!=null){
+        if (WelcomeActivity.this != null) {
             RxPermissions rxPermission = new RxPermissions(WelcomeActivity.this);
             rxPermission.request(Manifest.permission.CLEAR_APP_CACHE,
                     Manifest.permission.DELETE_CACHE_FILES
@@ -68,7 +68,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     Manifest.permission.READ_PHONE_STATE
             ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
                 if (!aBoolean) {
-                    ToastUtil.showToast(WelcomeActivity.this,"Sorry! no permission, some functions are not available");
+                    ToastUtil.showToast(WelcomeActivity.this, "Sorry! no permission, some functions are not available");
                     showPermissions();
                 } else {
                     startActivity(new Intent(WelcomeActivity.this, MainActivity.class));

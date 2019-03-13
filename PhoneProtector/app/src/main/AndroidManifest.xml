@@ -45,7 +45,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.quintinwus.phoneprotector.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -153,21 +153,21 @@
         </service>
 
         <!-- Baidu AD -->
-        <meta-data
-            android:name="app_license"
-            android:value="5f5e24d699b4c9bd75acb4782b613c07" />
-        <provider
-            android:name="com.duapps.ad.stats.DuAdCacheProvider"
-            android:authorities="${applicationId}.DuAdCacheProvider"
-            android:exported="false">
-        </provider>
+        <!--<meta-data-->
+            <!--android:name="app_license"-->
+            <!--android:value="5f5e24d699b4c9bd75acb4782b613c07" />-->
+        <!--<provider-->
+            <!--android:name="com.duapps.ad.stats.DuAdCacheProvider"-->
+            <!--android:authorities="${applicationId}.DuAdCacheProvider"-->
+            <!--android:exported="false">-->
+        <!--</provider>-->
 
-        <receiver android:name="com.duapps.ad.base.PackageAddReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
+        <!--<receiver android:name="com.duapps.ad.base.PackageAddReceiver" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.PACKAGE_ADDED" />-->
+                <!--<data android:scheme="package" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
     </application>
 
 </manifest>
