@@ -45,7 +45,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".main.MainActivity"
+            android:name=".WelcomeActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,6 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.MainActivity" android:launchMode="singleTask"/>
         <activity android:name="com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity" />
         <activity android:name="com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity" />
         <activity android:name="com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity" />

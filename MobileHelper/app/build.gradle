@@ -8,13 +8,14 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         multiDexEnabled true
-        versionCode 5
-        versionName "1.0.4"
+        versionCode 6
+        versionName "1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             aaptOptions.cruncherEnabled = false
             aaptOptions.useNewCruncher = false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

@@ -3,28 +3,31 @@ package com.gochicken3.mobilehelper.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.appsflyer.AFInAppEventType;
+import com.gochicken3.mobilehelper.BaseActivity;
+import com.gochicken3.mobilehelper.R;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.modules.aboutus.AboutUsActivity;
 import com.hz.maiku.maikumodule.modules.applock.AppLockActivity;
 import com.hz.maiku.maikumodule.modules.applock.gesturelock.createlock.GestureCreateActivity;
 import com.hz.maiku.maikumodule.modules.applock.gesturelock.setting.SettingLockActivity;
+import com.hz.maiku.maikumodule.util.ActivityUtil;
 import com.hz.maiku.maikumodule.util.AdUtil;
 import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.jaeger.library.StatusBarUtil;
-import com.gochicken3.mobilehelper.BaseActivity;
-import com.gochicken3.mobilehelper.R;
 
 import butterknife.BindView;
 
@@ -179,17 +182,26 @@ public class MainActivity extends BaseActivity {
     }
 
 
-//    /**
-//     * 5.x以上系统启用 JobScheduler API 进行实现守护进程的唤醒操作
-//     */
-//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-//    private void startJobScheduler() {
-//        int jobId = 1;
-//        JobInfo.Builder jobInfo = new JobInfo.Builder(jobId, new ComponentName(this, VMDaemonJobService.class));
-//        jobInfo.setPeriodic(10000);
-//        jobInfo.setPersisted(true);
-//        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-//        jobScheduler.schedule(jobInfo.build());
-//    }
+    private boolean mIsExit; // 是否退出App
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mIsExit) {
+                ActivityUtil.getmInstance().exit();
+            } else {
+                ToastUtil.showToast(MainActivity.this, "Press exit again");
+                mIsExit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mIsExit = false;
+                    }
+                }, 2000);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }
