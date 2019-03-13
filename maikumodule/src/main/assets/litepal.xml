@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
-    <dbname value="phonehelper" />
+    <dbname value="phoneguard" />
     <version value="1" />
     <list>
         <mapping class="com.hz.maiku.maikumodule.bean.CommLockInfo" />

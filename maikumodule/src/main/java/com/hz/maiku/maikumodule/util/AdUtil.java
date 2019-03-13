@@ -3,9 +3,6 @@ package com.hz.maiku.maikumodule.util;
 import android.content.Context;
 import android.util.Log;
 
-import com.appsflyer.AFInAppEventType;
-import com.duapps.ad.AbsInterstitialListener;
-import com.duapps.ad.InterstitialAd;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.InterstitialAdListener;
@@ -68,53 +65,53 @@ public class AdUtil {
                     }
                     break;
             }
-//            AdUtil.showFacebookAds(context);
+//            AdUtil.showAdModAds(context);
             Log.e(TAG, "Interstitial ad at " + source);
         }
     }
 
-    private static void showBaiduAds(final Context context) {
-        final com.duapps.ad.InterstitialAd interstitialAd = new InterstitialAd(context, Constant.PID, InterstitialAd.Type.SCREEN);
-        interstitialAd.setInterstitialListener(new AbsInterstitialListener() {
-            String TAG = "Baidu";
-
-            @Override
-            public void onAdFail(int errcode) {
-                Log.d(TAG, "Interstitial call to onAdFail, errorcode(" + errcode + ")");
-            }
-
-            @Override
-            public void onAdReceive() {
-                interstitialAd.show();
-                Log.d(TAG, "Interstitial call to onAdReceive()!");
-            }
-
-            @Override
-            public void onAdDismissed() {
-                Log.d(TAG, "Interstitial call to onAdDismissed()!");
-                interstitialAd.destroy();
-            }
-
-            @Override
-            public void onAdPresent() {
-                super.onAdPresent();
-                Log.d(TAG, "Interstitial call to onAdPresent()!");
-                EventUtil.sendEvent(context, AFInAppEventType.PURCHASE, "Someone installed a app from BaiduAds!");
-            }
-
-            @Override
-            public void onAdClicked() {
-                super.onAdClicked();
-                Log.d(TAG, "Interstitial call to onAdClicked()!");
-                EventUtil.onAdClick(context, TAG, String.valueOf(Constant.PID));
-            }
-        });
-        interstitialAd.load();
-    }
+//    private static void showBaiduAds(final Context context) {
+//        final com.duapps.ad.InterstitialAd interstitialAd = new InterstitialAd(context, Constant.PID, InterstitialAd.Type.SCREEN);
+//        interstitialAd.setInterstitialListener(new AbsInterstitialListener() {
+//            String TAG = "Baidu";
+//
+//            @Override
+//            public void onAdFail(int errcode) {
+//                Log.d(TAG, "Interstitial call to onAdFail, errorcode(" + errcode + ")");
+//            }
+//
+//            @Override
+//            public void onAdReceive() {
+//                interstitialAd.show();
+//                Log.d(TAG, "Interstitial call to onAdReceive()!");
+//            }
+//
+//            @Override
+//            public void onAdDismissed() {
+//                Log.d(TAG, "Interstitial call to onAdDismissed()!");
+//                interstitialAd.destroy();
+//            }
+//
+//            @Override
+//            public void onAdPresent() {
+//                super.onAdPresent();
+//                Log.d(TAG, "Interstitial call to onAdPresent()!");
+//                EventUtil.sendEvent(context, AFInAppEventType.PURCHASE, "Someone installed a app from BaiduAds!");
+//            }
+//
+//            @Override
+//            public void onAdClicked() {
+//                super.onAdClicked();
+//                Log.d(TAG, "Interstitial call to onAdClicked()!");
+//                EventUtil.onAdClick(context, TAG, String.valueOf(Constant.PID));
+//            }
+//        });
+//        interstitialAd.load();
+//    }
 
     private static void showFacebookAds(final Context context) {
         //Logcat search "Test mode device hash"
-//        AdSettings.addTestDevice("95fae20b-5770-44fb-9388-4d85bb1b120f");
+//        AdSettings.addTestDevice("05b875b5-c87d-4c4c-9ff1-a8ff27a43033");
         final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.PLACEMENT_ID);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
@@ -190,7 +187,7 @@ public class AdUtil {
         final com.google.android.gms.ads.InterstitialAd interstitialAd = new com.google.android.gms.ads.InterstitialAd(context);
         interstitialAd.setAdUnitId(Constant.UNIT_ID);
         AdRequest request = new AdRequest.Builder()
-//                .addTestDevice("3354EE0DE60D4DE6C845A1C28842FDEA")
+//                .addTestDevice("80726688617867515FAC67EBCDD41875")
                 .build();
         interstitialAd.loadAd(request);
         //初始化成功以后直接显示

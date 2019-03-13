@@ -48,7 +48,7 @@ public class XmlFileUtil {
     public static void updateXML(Context context,String key,String value,int id){
         try {
             DocumentBuilder newDocumentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            File file = new File("E:/progect/tools/Android-Tools/phonehelper/maikumodule/src/main/res/values/colors.xml");
+            File file = new File("E:/progect/tools/Android-Tools/phoneguard/maikumodule/src/main/res/values/colors.xml");
             Document doc = newDocumentBuilder.parse(file);
             Element root = doc.getDocumentElement();
             NodeList personList = root.getElementsByTagName("color");

@@ -9,7 +9,6 @@ import android.util.Log;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.baidu.crabsdk.CrabSDK;
-import com.duapps.ad.base.DuAdNetwork;
 import com.hz.maiku.maikumodule.bean.AppProcessInfornBean;
 import com.hz.maiku.maikumodule.exception.CustomCrashHandler;
 import com.hz.maiku.maikumodule.manager.AddressListManager;
@@ -54,7 +53,8 @@ public class MaiKuApp extends LitePalApplication {
         initServices();
         initAppsFlyer();
         initBaiduCrab();
-        //initBaiduAds();
+        //初始化百度广告
+        //DuAdNetwork.setConsentStatus(this, true);
     }
 
     /**
@@ -208,25 +208,6 @@ public class MaiKuApp extends LitePalApplication {
         CustomCrashHandler customCrashHandler = CustomCrashHandler.getInstance();
         customCrashHandler.init(this);
     }
-
-    /**
-     * 初始化百度广告
-     */
-    private void initBaiduAds() {
-        DuAdNetwork.setConsentStatus(this, true);
-//        DuAdNetwork.getConsentStatus(this);
-//        /**
-//         * the sdk initialization 初始化SDK
-//         */
-//        DuAdNetwork.init(this, "{\n" +
-//                "    \"native\": [\n" +
-//                "        {\n" +
-//                "            \"pid\": \"" + Constant.PID + "\"\n" +
-//                "        }\n" +
-//                "    ]\n" +
-//                "}");
-    }
-
 
     public static Context getmContext() {
         return mContext;

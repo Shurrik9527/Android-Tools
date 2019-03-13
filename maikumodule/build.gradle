@@ -97,7 +97,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //百度广告
-    api(name: 'baiduad-1.2.2', ext: 'aar')
+//    api(name: 'baiduad-1.2.2', ext: 'aar')
     implementation('com.github.huburt-Hu:NewbieGuide:v2.4.0') {
         exclude group: 'com.android.support'
     }

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主色-->
+    <color name="colorPrimary">#3592ff</color>
+    <!--深原色-->
+    <color name="colorPrimaryDark">#1582ff</color>
+    <!--浅原色-->
+    <color name="colorPrimaryLight">#12ffed</color>
+    <!--突出色-->
+    <color name="colorAccent">#ff2a2b</color>
+    <!--普通文本-->
+    <color name="default_text">#212121</color>
+    <!--辅助文本-->
+    <color name="description_text">#757575</color>
+    <!--分割线/控件不可用-->
+    <color name="divider">#f8f8f8</color>
+
+
+    <!--Phone Guard MainFunctions-->
+    <color name="junk_cleaner">#30dbff</color>
+    <color name="cpu_cooler">#3061ff</color>
+    <color name="app_manager">#12bcfc</color>
+    <color name="charge_booster">#6753fe</color>
+    <color name="notification_cleaner">#3096ff</color>
+    <color name="wifi_manager">#7e4deb</color>
+</resources>
