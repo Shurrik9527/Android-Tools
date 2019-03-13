@@ -68,7 +68,7 @@ public class AdUtil {
                     }
                     break;
             }
-            //AdUtil.showAdModAds(context);
+//            AdUtil.showFacebookAds(context);
             Log.e(TAG, "Interstitial ad at " + source);
         }
     }
@@ -114,7 +114,7 @@ public class AdUtil {
 
     private static void showFacebookAds(final Context context) {
         //Logcat search "Test mode device hash"
-//        AdSettings.addTestDevice("338e7105-4335-40c6-8d62-96e753c0884e");
+//        AdSettings.addTestDevice("95fae20b-5770-44fb-9388-4d85bb1b120f");
         final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.PLACEMENT_ID);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {

@@ -24,7 +24,6 @@ import com.hz.maiku.maikumodule.modules.screenlocker.ScreenLockerService;
 import com.hz.maiku.maikumodule.service.HideAppService;
 import com.hz.maiku.maikumodule.service.LoadAppListService;
 import com.hz.maiku.maikumodule.service.LockService;
-import com.hz.maiku.maikumodule.util.AdUtil;
 import com.hz.maiku.maikumodule.util.DeviceUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
@@ -53,15 +52,14 @@ public class MaiKuApp extends LitePalApplication {
         initConfig();
         initManagers();
         initServices();
-
-        if (AdUtil.IS_SHOW_AD) {
-            initAppsFlyer();
-            initBaiduCrab();
-            //initBaiduAds();
-        }
+        initAppsFlyer();
+        initBaiduCrab();
+        //initBaiduAds();
     }
 
-
+    /**
+     * 初始化全局配置
+     */
     private void initConfig() {
         try {
             String BASE_URL = Config.getPropertiesURL(getApplicationContext(), "BASE_URL");
