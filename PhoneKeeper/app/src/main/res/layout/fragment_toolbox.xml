@@ -29,7 +29,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:text="@string/toolbox_base"
-                android:paddingLeft="@dimen/dp_10"
+                android:paddingLeft="@dimen/element_default_space"
                 android:gravity="center_vertical"
                 android:background="@color/titleicon"
                 />
@@ -65,7 +65,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/element_default_space"
                     android:text="@string/app_manager"
                     android:layout_toRightOf="@+id/toolbox_appmanager_iv"
                     />
@@ -111,7 +111,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/element_default_space"
                     android:text="@string/junk_cleaner"
                     android:layout_toRightOf="@+id/toolbox_junkclean_iv"
                     />
@@ -157,7 +157,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/element_default_space"
                     android:text="@string/cpu_cooler"
                     android:layout_toRightOf="@+id/toolbox_cpucooler_iv"
                     />
@@ -203,7 +203,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/element_default_space"
                     android:text="@string/notification_cleaner"
                     android:layout_toRightOf="@+id/toolbox_notice_iv"
                     />
@@ -251,7 +251,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/element_default_space"
                     android:text="@string/applock_top_title"
                     android:layout_toRightOf="@+id/toolbox_applock_iv"
                     />
@@ -279,7 +279,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:text="@string/toolbox_commonly"
-                android:paddingLeft="@dimen/dp_10"
+                android:paddingLeft="@dimen/element_default_space"
                 android:background="@color/titleicon"
                 android:gravity="center_vertical"
                 />
@@ -315,7 +315,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/element_default_space"
                     android:text="@string/charge_booster"
                     android:layout_toRightOf="@+id/toolbox_chargebooster_iv"
                     />
@@ -361,7 +361,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/element_default_space"
                     android:text="@string/wifi_manager"
                     android:layout_toRightOf="@+id/toolbox_wifi_iv"
                     />
@@ -407,7 +407,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textSize="16sp"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/element_default_space"
                     android:text="@string/trafficstatistis_top_title"
                     android:layout_toRightOf="@+id/toolbox_trffic_iv"
                     />

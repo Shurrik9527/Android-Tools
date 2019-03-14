@@ -129,7 +129,7 @@
     <string name="deep_clean_audio_noplay">This voice cannot play!</string>
     <string name="deep_clean_amr_noplay">Amr is not playable</string>
     <string name="trafficstatistis_top_title">Network  Monitoring</string>
-    <string name="applock_top_title">Apps Protecto</string>
+    <string name="applock_top_title">Apps Protector</string>
 
     <string name="app_cpu_cooler">CPU Cooler</string>
     <string name="app_junk_cleaner">Junk Cleaner</string>

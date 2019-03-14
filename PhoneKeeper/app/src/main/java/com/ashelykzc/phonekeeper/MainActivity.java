@@ -261,17 +261,20 @@ public class MainActivity extends BaseActivity {
     }
 
     private boolean mIsExit; // 是否退出App
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-
             if (mIsExit) {
                 ActivityUtil.getmInstance().exit();
             } else {
-                ToastUtil.showToast(this, "再按一次退出");
+                ToastUtil.showToast(MainActivity.this,"Press exit again");
                 mIsExit = true;
-                new Handler().postDelayed(() -> mIsExit = false, 2000);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mIsExit = false;
+                    }
+                },2000);
             }
             return true;
         }
@@ -292,4 +295,6 @@ public class MainActivity extends BaseActivity {
             actionBar.setDisplayShowHomeEnabled(false);
         }
     }
+
+
 }
