@@ -15,8 +15,6 @@ public class MainContract {
     public interface View extends BaseView<Presenter> {
 
         void showPhoneBooster();
-
-        void showPermissions();
     }
 
     public interface Presenter extends BasePresenter {

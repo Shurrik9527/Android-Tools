@@ -160,36 +160,6 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     }
 
-
-
-
-    @SuppressLint("CheckResult")
-    @Override
-    public void showPermissions() {
-//        //asking something
-//        RxPermissions rxPermission = new RxPermissions(requireNonNull(getActivity()));
-//        rxPermission.request(Manifest.permission.CLEAR_APP_CACHE,
-//                Manifest.permission.DELETE_CACHE_FILES
-//        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
-//
-//        });
-//
-//        RxPermissions rxPermission1 = new RxPermissions(getActivity());
-//        rxPermission1.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_PHONE_STATE
-//        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
-//            if (!aBoolean) {
-//                showMessageTips("Sorry! no permission, some functions are not available");
-//                showPermissions();
-//            } else {
-//                if (presenter != null) {
-//                    presenter.checkOpenState();
-//                }
-//            }
-//
-//        });
-    }
-
     @Override
     public void uploadDeviceInform(DeviceInformBean deviceInformBean) {
         if (presenter != null) {

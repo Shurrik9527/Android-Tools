@@ -8,13 +8,14 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         multiDexEnabled true
-        versionCode 5
-        versionName "1.2.1"
+        versionCode 6
+        versionName "1.2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             aaptOptions.cruncherEnabled = false
             aaptOptions.useNewCruncher = false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -23,9 +24,9 @@ android {
     productFlavors {
     }
 
-    sourceSets{
+    sourceSets {
         main {
-            aidl.srcDirs = ['src/main/aidl','src/main/java']
+            aidl.srcDirs = ['src/main/aidl', 'src/main/java']
         }
     }
 

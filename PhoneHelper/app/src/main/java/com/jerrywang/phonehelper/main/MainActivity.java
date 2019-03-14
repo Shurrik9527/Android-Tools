@@ -12,8 +12,6 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.appsflyer.AFInAppEventType;
-import com.jerrywang.phonehelper.BaseActivity;
-import com.jerrywang.phonehelper.R;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.modules.aboutus.AboutUsActivity;
 import com.hz.maiku.maikumodule.util.AdUtil;
@@ -21,6 +19,8 @@ import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.jaeger.library.StatusBarUtil;
+import com.jerrywang.phonehelper.BaseActivity;
+import com.jerrywang.phonehelper.R;
 
 import butterknife.BindView;
 

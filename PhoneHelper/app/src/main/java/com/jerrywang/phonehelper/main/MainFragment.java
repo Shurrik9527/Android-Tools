@@ -1,6 +1,5 @@
 package com.jerrywang.phonehelper.main;
 
-import android.Manifest;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,16 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.jerrywang.phonehelper.R;
 import com.hz.maiku.maikumodule.util.SpaceItemDecoration;
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.jerrywang.phonehelper.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Shurrik on 2018/12/26.
@@ -51,7 +47,6 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showPermissions();
     }
 
     @Override
@@ -102,34 +97,6 @@ public class MainFragment extends Fragment implements MainContract.View {
         });
         animator.start();
     }
-
-    @Override
-    public void showPermissions() {
-        //asking something
-        RxPermissions rxPermission = new RxPermissions(getActivity());
-        rxPermission.request(Manifest.permission.CLEAR_APP_CACHE,
-                Manifest.permission.DELETE_CACHE_FILES
-        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new io.reactivex.functions.Consumer<Boolean>() {
-            @Override
-            public void accept(Boolean aBoolean) throws Exception {
-
-            }
-        });
-
-        RxPermissions rxPermission1 = new RxPermissions(getActivity());
-        rxPermission1.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_PHONE_STATE
-        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new io.reactivex.functions.Consumer<Boolean>() {
-            @Override
-            public void accept(Boolean aBoolean) throws Exception {
-                if (!aBoolean) {
-                    showMessageTips("Sorry! no permission, some functions are not available");
-                    showPermissions();
-                }
-            }
-        });
-    }
-
 
     @Override
     public void initView() {

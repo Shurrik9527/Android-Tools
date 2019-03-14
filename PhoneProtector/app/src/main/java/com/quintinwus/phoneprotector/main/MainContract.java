@@ -19,7 +19,6 @@ public class MainContract {
 
     public interface View extends BaseView<Presenter> {
         void showPhoneBooster();
-        void showPermissions();
         void uploadDeviceInform(DeviceInformBean deviceInformBean);
         void showState(boolean state);
         void showMemory(float afloat);
