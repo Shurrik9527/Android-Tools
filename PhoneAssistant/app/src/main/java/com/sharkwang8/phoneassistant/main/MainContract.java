@@ -19,7 +19,6 @@ public class MainContract {
         void showCpuCooler();
         void showPhoneBooster();
         void showChargeBooster();
-        void showPermissions();
         void uploadDeviceInform(DeviceInformBean deviceInformBean);
         void showState(boolean state);
     }

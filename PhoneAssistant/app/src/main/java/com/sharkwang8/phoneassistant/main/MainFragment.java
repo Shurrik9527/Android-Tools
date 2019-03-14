@@ -1,8 +1,6 @@
 package com.sharkwang8.phoneassistant.main;
 
-import android.Manifest;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,15 +20,10 @@ import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.sharkwang8.phoneassistant.R;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Created by Shurrik on 2018/12/26.
@@ -58,7 +51,6 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showPermissions();
     }
 
     @Override
@@ -143,33 +135,6 @@ public class MainFragment extends Fragment implements MainContract.View {
         //智能充电
         Intent intent = new Intent(getActivity(), ChargeBoosterActivity.class);
         startActivity(intent);
-    }
-
-    @SuppressLint("CheckResult")
-    @Override
-    public void showPermissions() {
-        //asking something
-        RxPermissions rxPermission = new RxPermissions(requireNonNull(getActivity()));
-        rxPermission.request(Manifest.permission.CLEAR_APP_CACHE,
-                Manifest.permission.DELETE_CACHE_FILES
-        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
-
-        });
-
-        RxPermissions rxPermission1 = new RxPermissions(getActivity());
-        rxPermission1.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_PHONE_STATE
-        ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
-            if (!aBoolean) {
-                showMessageTips("Sorry! no permission, some functions are not available");
-                showPermissions();
-            } else {
-                if (presenter != null) {
-                    presenter.checkOpenState();
-                }
-            }
-
-        });
     }
 
     @Override
