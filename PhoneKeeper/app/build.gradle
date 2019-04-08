@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.ashelykzc.phonekeeper"
+        applicationId "com.ashelykzc.devicecleaner"
         minSdkVersion 19
         targetSdkVersion 27
         multiDexEnabled true
-        versionCode 9
-        versionName "1.0.8"
+        versionCode 1
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

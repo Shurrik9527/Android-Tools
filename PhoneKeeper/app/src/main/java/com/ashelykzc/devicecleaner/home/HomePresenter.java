@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper.home;
+package com.ashelykzc.devicecleaner.home;
 
 import android.content.Context;
 import android.util.Log;

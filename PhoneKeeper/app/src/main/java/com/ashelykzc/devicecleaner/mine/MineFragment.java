@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper.mine;
+package com.ashelykzc.devicecleaner.mine;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -25,7 +25,7 @@ import com.hz.maiku.maikumodule.util.EventUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.TimeUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import com.ashelykzc.phonekeeper.R;
+import com.ashelykzc.devicecleaner.R;
 
 import java.text.ParseException;
 

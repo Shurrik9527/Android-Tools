@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper.home;
+package com.ashelykzc.devicecleaner.home;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.ashelykzc.phonekeeper.R;
+import com.ashelykzc.devicecleaner.R;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;

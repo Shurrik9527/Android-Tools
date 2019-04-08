@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper.box;
+package com.ashelykzc.devicecleaner.box;
 
 
 public class BoxPresenter implements BoxContract.Presenter {

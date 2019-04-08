@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper;
+package com.ashelykzc.devicecleaner;
 
 import android.Manifest;
 import android.content.Intent;

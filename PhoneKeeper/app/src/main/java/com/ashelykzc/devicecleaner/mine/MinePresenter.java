@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper.mine;
+package com.ashelykzc.devicecleaner.mine;
 
 public class MinePresenter implements MineContract.Presenter {
     private static final String TAG = MinePresenter.class.getName();

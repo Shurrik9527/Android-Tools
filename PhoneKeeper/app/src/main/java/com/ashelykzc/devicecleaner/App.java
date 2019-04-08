@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper;
+package com.ashelykzc.devicecleaner;
 
 import android.support.multidex.MultiDex;
 

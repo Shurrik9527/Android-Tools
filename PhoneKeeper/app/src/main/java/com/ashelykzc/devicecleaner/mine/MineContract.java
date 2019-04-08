@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper.mine;
+package com.ashelykzc.devicecleaner.mine;
 
 
 import com.hz.maiku.maikumodule.base.BasePresenter;

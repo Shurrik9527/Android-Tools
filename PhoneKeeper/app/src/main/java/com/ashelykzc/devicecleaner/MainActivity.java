@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper;
+package com.ashelykzc.devicecleaner;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,9 +17,9 @@ import com.hz.maiku.maikumodule.base.BaseActivity;
 import com.hz.maiku.maikumodule.util.ActivityUtil;
 import com.hz.maiku.maikumodule.util.AdUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import com.ashelykzc.phonekeeper.box.BoxFragment;
-import com.ashelykzc.phonekeeper.home.HomeFragment;
-import com.ashelykzc.phonekeeper.mine.MineFragment;
+import com.ashelykzc.devicecleaner.box.BoxFragment;
+import com.ashelykzc.devicecleaner.home.HomeFragment;
+import com.ashelykzc.devicecleaner.mine.MineFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;

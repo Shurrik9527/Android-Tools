@@ -1,4 +1,4 @@
-package com.ashelykzc.phonekeeper.box;
+package com.ashelykzc.devicecleaner.box;
 
 
 import com.hz.maiku.maikumodule.base.BasePresenter;
