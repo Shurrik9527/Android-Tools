@@ -1,4 +1,4 @@
-package com.quintinwus.phoneprotector;
+package com.quintinwus.deviceprotector;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;

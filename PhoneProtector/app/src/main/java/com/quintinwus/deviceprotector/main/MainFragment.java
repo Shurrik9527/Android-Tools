@@ -1,8 +1,6 @@
-package com.quintinwus.phoneprotector.main;
+package com.quintinwus.deviceprotector.main;
 
-import android.Manifest;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -20,8 +17,6 @@ import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.modules.applock.AppLockActivity;
 import com.hz.maiku.maikumodule.modules.applock.gesturelock.createlock.GestureCreateActivity;
-import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
-import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
 import com.hz.maiku.maikumodule.modules.deepclean.DeepCleanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
@@ -32,16 +27,13 @@ import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.TimeUtil;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.hz.maiku.maikumodule.widget.DigitalRollingTextView;
-import com.quintinwus.phoneprotector.R;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.quintinwus.deviceprotector.R;
 
 import java.text.ParseException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import static java.util.Objects.requireNonNull;
 

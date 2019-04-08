@@ -1,4 +1,4 @@
-package com.quintinwus.phoneprotector.main;
+package com.quintinwus.deviceprotector.main;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,23 +12,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.appsflyer.AFInAppEventType;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.modules.aboutus.AboutUsActivity;
-import com.hz.maiku.maikumodule.modules.applock.AppLockActivity;
-import com.hz.maiku.maikumodule.modules.applock.gesturelock.createlock.GestureCreateActivity;
 import com.hz.maiku.maikumodule.modules.applock.gesturelock.setting.SettingLockActivity;
 import com.hz.maiku.maikumodule.util.ActivityUtil;
 import com.hz.maiku.maikumodule.util.AdUtil;
 import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.EventUtil;
-import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.jaeger.library.StatusBarUtil;
-import com.quintinwus.phoneprotector.BaseActivity;
-import com.quintinwus.phoneprotector.R;
+import com.quintinwus.deviceprotector.BaseActivity;
+import com.quintinwus.deviceprotector.R;
 
 import butterknife.BindView;
 

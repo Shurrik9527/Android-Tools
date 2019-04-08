@@ -1,4 +1,4 @@
-package com.quintinwus.phoneprotector.main;
+package com.quintinwus.deviceprotector.main;
 
 import android.content.Context;
 import android.util.Log;

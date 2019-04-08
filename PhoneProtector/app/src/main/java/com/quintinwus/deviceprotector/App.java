@@ -1,4 +1,4 @@
-package com.quintinwus.phoneprotector;
+package com.quintinwus.deviceprotector;
 
 import android.support.multidex.MultiDex;
 

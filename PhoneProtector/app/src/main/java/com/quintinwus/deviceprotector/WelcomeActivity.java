@@ -1,4 +1,4 @@
-package com.quintinwus.phoneprotector;
+package com.quintinwus.deviceprotector;
 
 import android.Manifest;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hz.maiku.maikumodule.util.ToastUtil;
-import com.quintinwus.phoneprotector.main.MainActivity;
+import com.quintinwus.deviceprotector.main.MainActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.lang.ref.WeakReference;
