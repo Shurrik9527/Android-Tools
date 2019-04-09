@@ -125,7 +125,7 @@
         <!-- AdMob -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6733251518106696~8898957643" />
+            android:value="ca-app-pub-3278487552925068~5380622646" />
 
         <service
             android:name="com.hz.maiku.maikumodule.service.VMDaemonJobService"
