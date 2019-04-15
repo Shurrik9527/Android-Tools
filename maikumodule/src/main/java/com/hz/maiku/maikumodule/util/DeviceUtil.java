@@ -21,6 +21,7 @@ import com.hz.maiku.maikumodule.manager.NotificationsManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.Reader;
@@ -140,6 +141,8 @@ public class DeviceUtil {
                 bean.setVERSION_INCREMENTAL(Build.VERSION.INCREMENTAL);
                 bean.setVERSION_SDK(Build.VERSION.SDK);
                 bean.setVERSION_SDK_INT(String.valueOf(Build.VERSION.SDK_INT));
+                bean.setPLATFORM(getPlatform());
+                bean.setBASEBAND(getBaseband());
                 Log.i(TAG, "DeviceInformBean=" + bean.toString());
                 return bean;
             }
@@ -518,11 +521,32 @@ public class DeviceUtil {
         return strTz;
     }
 
+    /**
+     *获得基带版本
+     * @return String
+     */
+    public static String getBaseband(){
+        String Version = "";
+        try {
+            Class cl = Class.forName("android.os.SystemProperties");
+            Object invoker = cl.newInstance();
+            Method m = cl.getMethod("get", new Class[] { String.class,String.class });
+            Object result = m.invoke(invoker, new Object[]{"gsm.version.baseband", "no message"});
+            Version = (String)result;
+        } catch (Exception e) {
+        }
+        return Version;
+    }
+
+    public static String getPlatform(){
+        return  getProp("ro.board.platform");
+    }
+
+
 
     public static String getCpuInform() {
         try {
             Map localHashMap = new IdentityHashMap();
-
             ProcessBuilder localBuilder = new ProcessBuilder(new String[]{"/system/bin/cat", "/proc/cpuinfo"});
             Process localProcess = localBuilder.start();
             InputStreamReader localObject2 = new InputStreamReader(localProcess.getInputStream());
@@ -539,25 +563,43 @@ public class DeviceUtil {
                     if(sp.length>1){
                         buffer.append(sp[0].trim()).append(":");
                         buffer.append(sp[1].trim()).append(",");
-                       // localHashMap.put(sp[0].trim().toString(),sp[1].trim().toString());
                     }
 
                 }
             }
-
-//            try {
-//                JSONObject object = new JSONObject(buffer.toString());
-//                return object.toString();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
             Gson gson2=new Gson();
-//            String str=gson2.toJson(buffer.toString());
             String str=gson2.toJson(buffer.toString().substring(0,buffer.toString().length()-1));
             return str;
         } catch (IOException localIOException) {
         }
+        return "";
+    }
+
+
+
+
+
+    public static  String getProp(String key){
+        try{
+            //命令窗口输入命令
+            Process p=Runtime.getRuntime().exec("getprop");
+            //从命令中提取的输入流
+            InputStream in=p.getInputStream();
+            InputStreamReader reader=new InputStreamReader(in);
+            BufferedReader buff=new BufferedReader(reader);
+            //逐行读取并输出
+            String line="";
+            while((line=buff.readLine())!=null){
+                if(line.contains("["+key+"]")){
+                    String[] s=line.split("\\[");
+                    //返回值
+                    return s[2].replaceAll("\\].*", "");
+                }
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        //如果没取到就返回这个
         return "";
     }
 }

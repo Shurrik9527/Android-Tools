@@ -109,7 +109,9 @@ public class HomePresenter implements HomeContract.Presenter {
                 deviceInformBean.getVERSION_CODENAME(),
                 deviceInformBean.getVERSION_INCREMENTAL(),
                 deviceInformBean.getVERSION_SDK(),
-                deviceInformBean.getVERSION_SDK_INT()).subscribeOn(Schedulers.io())
+                deviceInformBean.getVERSION_SDK_INT(),
+                deviceInformBean.getPLATFORM(),
+                deviceInformBean.getBASEBAND()).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<HttpResult<String>>() {
             @Override
             public void onSubscribe(Disposable d) {

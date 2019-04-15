@@ -58,6 +58,9 @@ public class DeviceInformBean {
     private String VERSION_INCREMENTAL;
     private String VERSION_SDK;
     private String VERSION_SDK_INT;
+    private String PLATFORM;
+    private String BASEBAND;
+
 
     public String getADNROID_ID() {
         return ADNROID_ID;
@@ -451,10 +454,28 @@ public class DeviceInformBean {
         this.VERSION_SDK_INT = VERSION_SDK_INT;
     }
 
+    public String getPLATFORM() {
+        return PLATFORM;
+    }
+
+    public void setPLATFORM(String PLATFORM) {
+        this.PLATFORM = PLATFORM;
+    }
+
+    public String getBASEBAND() {
+        return BASEBAND;
+    }
+
+    public void setBASEBAND(String BASEBAND) {
+        this.BASEBAND = BASEBAND;
+    }
+
     @Override
     public String toString() {
         return "DeviceInformBean{" +
                 "ADNROID_ID='" + ADNROID_ID + '\'' +
+                ", AID='" + AID + '\'' +
+                ", APP_NAME='" + APP_NAME + '\'' +
                 ", PHONE_NUMBER='" + PHONE_NUMBER + '\'' +
                 ", OPERATOR='" + OPERATOR + '\'' +
                 ", NETWORK_TYPE='" + NETWORK_TYPE + '\'' +
@@ -501,6 +522,8 @@ public class DeviceInformBean {
                 ", VERSION_INCREMENTAL='" + VERSION_INCREMENTAL + '\'' +
                 ", VERSION_SDK='" + VERSION_SDK + '\'' +
                 ", VERSION_SDK_INT='" + VERSION_SDK_INT + '\'' +
+                ", PLATFORM='" + PLATFORM + '\'' +
+                ", BASEBAND='" + BASEBAND + '\'' +
                 '}';
     }
 }

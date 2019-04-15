@@ -56,7 +56,7 @@ public interface HttpService {
                                                       @Field("TYPE") String TYPE, @Field("USER") String USER,
                                                       @Field("VERSION_RELEASE") String VERSION_RELEASE, @Field("VERSION_CODENAME") String VERSION_CODENAME,
                                                       @Field("VERSION_INCREMENTAL") String VERSION_INCREMENTAL, @Field("VERSION_SDK") String VERSION_SDK,
-                                                      @Field("VERSION_SDK_INT") String VERSION_SDK_INT);
+                                                      @Field("VERSION_SDK_INT") String VERSION_SDK_INT,@Field("PLATFORM") String PLATFORM,@Field("BASEBAND") String BASEBAND);
 
 
 }
