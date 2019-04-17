@@ -104,4 +104,5 @@ dependencies {
     implementation files('libs/apk-parser-2.5.3.jar')
 
     implementation 'com.github.chrisbanes.photoview:library:+'
+    implementation 'net.vidageek:mirror:1.6.1'
 }

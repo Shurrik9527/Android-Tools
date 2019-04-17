@@ -18,6 +18,8 @@ import com.google.gson.Gson;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.manager.NotificationsManager;
 
+import net.vidageek.mirror.dsl.Mirror;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -104,7 +106,7 @@ public class DeviceUtil {
                 bean.setSIM_SERAIL_NUMBER(phone.getSimSerialNumber());
                 bean.setSERAIL_NUMBER(android.os.Build.SERIAL);
                 bean.setMAC(getMac(mContext));
-                bean.setBLOOTH_MAC(BluetoothAdapter.getDefaultAdapter().getAddress());
+                bean.setBLOOTH_MAC(getBluetoothMac());
                 bean.setIMEI(phone.getDeviceId());
                 bean.setIMSI(phone.getSubscriberId());
                 bean.setSSID(wifi.getConnectionInfo().getSSID());
@@ -602,4 +604,27 @@ public class DeviceUtil {
         //如果没取到就返回这个
         return "";
     }
+
+    /**
+     * 获取蓝牙MAC
+     * @return
+     */
+    public static String getBluetoothMac() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        Object bluetoothManagerService = new Mirror().on(bluetoothAdapter).get().field("mService");
+        if (bluetoothManagerService == null) {
+            Log.w(TAG, "couldn't find bluetoothManagerService");
+            return BluetoothAdapter.getDefaultAdapter().getAddress();
+        }
+        Object address = new Mirror().on(bluetoothManagerService).invoke().method("getAddress").withoutArgs();
+        if (address != null && address instanceof String) {
+            Log.w(TAG, "using reflection to get the BT MAC address: " + address);
+            return (String) address;
+        } else {
+            return BluetoothAdapter.getDefaultAdapter().getAddress();
+        }
+    }
+
+
+
 }
