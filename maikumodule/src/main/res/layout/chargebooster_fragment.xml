@@ -67,8 +67,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:checked="false"
-            android:shadowColor="@color/colorPrimary"
-            android:theme="@style/MySwitch" />
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -108,8 +109,9 @@
             android:layout_centerVertical="true"
             android:checked="false"
             android:enabled="false"
-            android:shadowColor="@color/colorPrimary"
-            android:theme="@style/MySwitch" />
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track"
+            />
     </RelativeLayout>
 
 

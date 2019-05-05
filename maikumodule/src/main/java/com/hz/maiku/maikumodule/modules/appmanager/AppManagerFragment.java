@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
+import com.hz.maiku.maikumodule.bean.AppManagerBean;
 import com.hz.maiku.maikumodule.modules.appmanager.appmanager1.AppManagerOneFragment;
 
 
@@ -21,6 +23,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.jaredrummler.android.processes.AndroidProcesses.TAG;
 
 
 public class AppManagerFragment extends Fragment implements AppManagerContract.View {
@@ -121,6 +125,15 @@ public class AppManagerFragment extends Fragment implements AppManagerContract.V
             if(data!=null&&data.size()>0){
                 data.clear();
             }
+
+            for (ApplicationInfo appManagerBean : lists) {
+                if (appManagerBean.packageName.equals(getContext().getPackageName())) {
+                    Log.i(TAG, "删除自己应用--->" + appManagerBean.packageName);
+                    lists.remove(appManagerBean);
+                    break;
+                }
+            }
+
             data.addAll(lists);
             adapter.notifyDataSetChanged();
         }

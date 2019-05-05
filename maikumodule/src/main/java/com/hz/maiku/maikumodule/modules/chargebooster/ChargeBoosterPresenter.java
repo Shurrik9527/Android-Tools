@@ -28,6 +28,10 @@ public class ChargeBoosterPresenter implements ChargeBoosterContract.Presenter {
     public void loadData() {
         boolean isProtect = (boolean) SpHelper.getInstance().get("isProtect", false);
         view.switchProtectCharging(isProtect);
+        if(isProtect){
+            view.setEnableAlert(true);
+        }
+
     }
 
     @Override

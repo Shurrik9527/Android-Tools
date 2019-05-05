@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">IGG Cleaner</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <!--功能名称-->
+    <string name="app_manager">App Manager</string>
+    <string name="cpu_cooler">CPU Cooler</string>
+    <string name="junk_cleaner">Junk Cleaner</string>
+    <string name="charge_booster">Charge Booster</string>
+    <string name="notification_cleaner">Notification Cleaner</string>
+    <string name="wifi_manager">Wi-Fi Manager</string>
+    <string name="update">Update</string>
+    <string name="feedback">Feedback</string>
+    <string name="comment">Comment</string>
+    <string name="about_us">About Us</string>
+
+    <!--其他-->
+    <string name="start">Start</string>
+
+</resources>

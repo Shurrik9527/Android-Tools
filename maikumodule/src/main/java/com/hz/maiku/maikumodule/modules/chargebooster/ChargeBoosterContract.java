@@ -9,6 +9,8 @@ public class ChargeBoosterContract {
         void showScreenLocker();
         void switchProtectCharging(boolean checked);
         void chargeAlert(boolean enable);
+        void switchChargeAlert(boolean checked);
+        void setEnableAlert(boolean enable);
     }
 
     public interface Presenter extends BasePresenter {

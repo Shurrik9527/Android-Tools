@@ -35,6 +35,18 @@
 
     </style>
 
+    <style name="MSwitch" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorControlNormal">@color/gray2</item>
+        <item name="colorSwitchThumbNormal">@color/description_text</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="android:colorForeground">@color/colorAccent</item>
+    </style>
+
+
     <style name="dialogTransparent">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>

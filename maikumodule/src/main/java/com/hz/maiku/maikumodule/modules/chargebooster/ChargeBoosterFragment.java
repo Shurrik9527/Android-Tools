@@ -132,4 +132,19 @@ public class ChargeBoosterFragment extends Fragment implements ChargeBoosterCont
         sChargeAlert.setChecked(enable);
     }
 
+    @Override
+    public void switchChargeAlert(boolean checked) {
+        if(sChargeAlert!=null){
+            sChargeAlert.setChecked(checked);
+        }
+    }
+
+    @Override
+    public void setEnableAlert(boolean enable) {
+        if(enable){
+            sChargeAlert.setEnabled(true);
+        }
+    }
+
+
 }
