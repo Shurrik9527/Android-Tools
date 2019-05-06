@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.jerrywang724.phoneguard">
+    package="com.jerry724.phoneguard">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -36,7 +36,7 @@
 
 
     <application
-        android:name="com.jerrywang724.phoneguard.App"
+        android:name="com.jerry724.phoneguard.App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
@@ -45,7 +45,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.jerrywang724.phoneguard.main.MainActivity"
+            android:name="com.jerry724.phoneguard.main.MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -120,15 +120,18 @@
         <service android:name="com.hz.maiku.maikumodule.service.PhoneService" />
 
         <!-- AdMob -->
-        <!--<meta-data-->
-            <!--android:name="com.google.android.gms.ads.APPLICATION_ID"-->
-            <!--android:value="ca-app-pub-4493564583214456~4665090782" />-->
-        <!--<meta-data-->
-            <!--android:name="com.google.android.gms.ads.APPLICATION_ID"-->
-            <!--android:value="ca-app-pub-3449504718620802~9775433387" />-->
+        <!--<meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4493564583214456~4665090782" />-->
+        <!--<meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3449504718620802~9775433387" />-->
+        <!--<meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7497621343688275~8346314915" />-->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7497621343688275~8346314915" />
+            android:value="ca-app-pub-4602903744683064~4785357741" />
 
         <service
             android:name="com.hz.maiku.maikumodule.service.VMDaemonJobService"

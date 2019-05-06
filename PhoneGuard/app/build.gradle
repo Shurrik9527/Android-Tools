@@ -4,7 +4,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.jerrywang724.phoneguard"
+        applicationId "com.jerry724.phoneguard"
         minSdkVersion 19
         targetSdkVersion 27
         multiDexEnabled true

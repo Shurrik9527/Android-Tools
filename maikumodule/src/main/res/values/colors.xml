@@ -9,7 +9,6 @@
     <color name="colorPrimaryLight">#b3e5fc</color>
     <!--突出色-->
     <color name="colorAccent">#448aff</color>
-    <color name="colorPrimary0">#03a9f4</color>
     <!--普通文本-->
     <color name="default_text">#212121</color>
     <!--辅助文本-->
