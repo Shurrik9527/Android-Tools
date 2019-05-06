@@ -39,7 +39,7 @@ public class AdUtil {
     /**
      * 发布第一版的时候设置为false, 其余情况下都是true
      */
-    public static boolean IS_SHOW_AD = true;
+    public static boolean IS_SHOW_AD = false;
 
     /**
      * 直接显示广告
@@ -111,7 +111,7 @@ public class AdUtil {
 
     private static void showFacebookAds(final Context context) {
         //Logcat search "Test mode device hash"
-//        AdSettings.addTestDevice("05b875b5-c87d-4c4c-9ff1-a8ff27a43033");
+//        AdSettings.addTestDevice("422c6039-c1d7-46c2-a079-ef3e51dc6664");
         final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.PLACEMENT_ID);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
@@ -187,7 +187,7 @@ public class AdUtil {
         final com.google.android.gms.ads.InterstitialAd interstitialAd = new com.google.android.gms.ads.InterstitialAd(context);
         interstitialAd.setAdUnitId(Constant.UNIT_ID);
         AdRequest request = new AdRequest.Builder()
-//                .addTestDevice("80726688617867515FAC67EBCDD41875")
+//                .addTestDevice("2709A5CDA4B233AC4191F0DB0E2320E8")
                 .build();
         interstitialAd.loadAd(request);
         //初始化成功以后直接显示
