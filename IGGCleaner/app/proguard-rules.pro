@@ -74,3 +74,32 @@
 -keep class com.hz.maiku.maikumodule.http.HttpResult { *; }
 
 -ignorewarnings
+
+# <-- Adtiming Start
+-dontwarn com.aiming.mdt.**.*
+-dontwarn com.adt.**.*
+-dontwarn com.mopub.**.*
+-dontoptimize
+-dontskipnonpubliclibraryclasses
+-keepattributes *Annotation*
+ #adt
+-keep class com.admuing.** { *; }
+-keep class com.aiming.mdt.** { *; }
+-keep class com.adt.** { *; }
+-keep class com.mopub.** { *; }
+#R
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+# If integrate Admob ads, please add the following categories to Proguard configuration:
+-keep public class com.google.android.gms.** {
+   public *;
+}
+-keep public class com.google.ads.** {
+   public *;
+}
+
+# If integrate Facebook ads, please add the following categories to Proguard configuration:
+-keep class com.facebook.ads.** { *; }
+#  Adtiming End -->

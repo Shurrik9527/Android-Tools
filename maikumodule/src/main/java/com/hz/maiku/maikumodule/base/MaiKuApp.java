@@ -6,6 +6,8 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.aiming.mdt.sdk.AdtAds;
+import com.aiming.mdt.sdk.Callback;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.baidu.crabsdk.CrabSDK;
@@ -53,8 +55,21 @@ public class MaiKuApp extends LitePalApplication {
         initServices();
         initAppsFlyer();
         initBaiduCrab();
-        //初始化百度广告
-        //DuAdNetwork.setConsentStatus(this, true);
+
+        //初始化Adtiming聚合平台
+        String appKey = "8YC4dCDr8za3BGScWIaLVYaGqrrQ8K0L";
+        AdtAds.init(this, appKey, new Callback() {
+            @Override
+            public void onSuccess() {
+                //Adtiming SDK init Success
+                Log.d(TAG, "Adtiming SDK init Success");
+            }
+            @Override
+            public void onError(String msg) {
+                //Adtiming SDK init Error
+                Log.d(TAG, "Adtiming SDK init Error");
+            }
+        });
     }
 
     /**

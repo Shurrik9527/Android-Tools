@@ -3,6 +3,7 @@ package com.hz.maiku.maikumodule.util;
 import android.content.Context;
 import android.util.Log;
 
+import com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAd;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.InterstitialAdListener;
@@ -39,7 +40,7 @@ public class AdUtil {
     /**
      * 发布第一版的时候设置为false, 其余情况下都是true
      */
-    public static boolean IS_SHOW_AD = false;
+    public static boolean IS_SHOW_AD = true;
 
     /**
      * 直接显示广告
@@ -53,9 +54,9 @@ public class AdUtil {
                 case TYPE_ADMOB:
                     AdUtil.showAdModAds(context);
                     break;
-                case TYPE_BAIDU:
-                    //AdUtil.showBaiduAds(context);
-                    break;
+//                case TYPE_BAIDU:
+//                    AdUtil.showAdtiming(context);
+//                    break;
                 default:
                     //判断Fackbook是否安装
                     if (AppUtil.isInstalled(context, "com.facebook.katana")) {
@@ -65,50 +66,46 @@ public class AdUtil {
                     }
                     break;
             }
-//            AdUtil.showAdModAds(context);
-            Log.e(TAG, "Interstitial ad at " + source);
+            Log.d(TAG, "Interstitial ad at " + source);
         }
     }
 
-//    private static void showBaiduAds(final Context context) {
-//        final com.duapps.ad.InterstitialAd interstitialAd = new InterstitialAd(context, Constant.PID, InterstitialAd.Type.SCREEN);
-//        interstitialAd.setInterstitialListener(new AbsInterstitialListener() {
-//            String TAG = "Baidu";
-//
-//            @Override
-//            public void onAdFail(int errcode) {
-//                Log.d(TAG, "Interstitial call to onAdFail, errorcode(" + errcode + ")");
-//            }
-//
-//            @Override
-//            public void onAdReceive() {
-//                interstitialAd.show();
-//                Log.d(TAG, "Interstitial call to onAdReceive()!");
-//            }
-//
-//            @Override
-//            public void onAdDismissed() {
-//                Log.d(TAG, "Interstitial call to onAdDismissed()!");
-//                interstitialAd.destroy();
-//            }
-//
-//            @Override
-//            public void onAdPresent() {
-//                super.onAdPresent();
-//                Log.d(TAG, "Interstitial call to onAdPresent()!");
-//                EventUtil.sendEvent(context, AFInAppEventType.PURCHASE, "Someone installed a app from BaiduAds!");
-//            }
-//
-//            @Override
-//            public void onAdClicked() {
-//                super.onAdClicked();
-//                Log.d(TAG, "Interstitial call to onAdClicked()!");
-//                EventUtil.onAdClick(context, TAG, String.valueOf(Constant.PID));
-//            }
-//        });
-//        interstitialAd.load();
-//    }
+    private static void showAdtiming(final Context context) {
+        String placementId = "4965";
+        final com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAd interstitialAd = new InterstitialAd(context, placementId);
+        interstitialAd.setListener(new com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAdListener() {
+            String TAG = "Adtiming";
+            @Override
+            public void onADReady() {
+                // interstitialAd is load success
+                Log.d(TAG, "Interstitial ad is load success.");
+                interstitialAd.show(context);
+            }
+            @Override
+            public void onADClick() {
+                // interstitialAd click
+                Log.d(TAG, "Interstitial ad click.");
+            }
+            @Override
+            public void onADFail(String msg) {
+                // interstitialAd fail
+                Log.e(TAG, "Interstitial ad fail. errorMsg is " + msg);
+                interstitialAd.destroy(context);
+            }
+            @Override
+            public void onADClose() {
+                // interstitialAd close
+                Log.d(TAG, "Interstitial ad close.");
+                interstitialAd.destroy(context);
+            }
+        });
+        interstitialAd.loadAd(context);
+    }
 
+    /**
+     * Facebook
+     * @param context
+     */
     private static void showFacebookAds(final Context context) {
         //Logcat search "Test mode device hash"
 //        AdSettings.addTestDevice("422c6039-c1d7-46c2-a079-ef3e51dc6664");
