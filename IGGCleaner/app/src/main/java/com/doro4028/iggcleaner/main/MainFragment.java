@@ -1,5 +1,7 @@
 package com.doro4028.iggcleaner.main;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,7 +17,9 @@ import android.view.animation.AnimationSet;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
@@ -37,6 +41,13 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @BindView(R.id.dunpai_iv)
     ImageView dunpaiIv;
+    @BindView(R.id.start_tv)
+    TextView startTv;
+    @BindView(R.id.lav_phonebooster)
+    LottieAnimationView lavPhoneBooster;
+    @BindView(R.id.start_notice_tv)
+    TextView startNoticeTv;
+
     private MainContract.Presenter presenter;
 
 
@@ -151,6 +162,36 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void initView() {
 
+        if(presenter!=null){
+            presenter.checkOpenState();
+        }
+
+        lavPhoneBooster.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                bigImageView();
+                if(lavPhoneBooster!=null){
+                    lavPhoneBooster.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+
     }
 
     @Override
@@ -163,81 +204,87 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void playHeartbeatAnimation() {
         AnimationSet animationSet = new AnimationSet(true);
-        animationSet.addAnimation(new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f,
+        animationSet.addAnimation(new ScaleAnimation(1.0f, 0.0f, 1.0f, 0.0f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
                 0.5f));
         animationSet.addAnimation(new AlphaAnimation(1.0f, 0.4f));
-        animationSet.setDuration(1000);
+        animationSet.setDuration(500);
         animationSet.setInterpolator(new AccelerateInterpolator());
         animationSet.setFillAfter(true);
-
         animationSet.setAnimationListener(new Animation.AnimationListener() {
-
             @Override
             public void onAnimationStart(Animation animation) {
-            }
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                AnimationSet animationSet = new AnimationSet(true);
-                animationSet.addAnimation(new ScaleAnimation(1.2f, 1.0f, 1.2f,
-                        1.0f, Animation.RELATIVE_TO_SELF, 0.5f,
-                        Animation.RELATIVE_TO_SELF, 0.5f));
-                animationSet.addAnimation(new AlphaAnimation(0.4f, 1.0f));
-
-                animationSet.setDuration(1000);
-                animationSet.setInterpolator(new DecelerateInterpolator());
-                animationSet.setFillAfter(false);
-                // 实现心跳的View
-                if (dunpaiIv != null) {
-                    dunpaiIv.startAnimation(animationSet);
+                //播放动画
+                if(lavPhoneBooster!=null){
+                    lavPhoneBooster.setVisibility(View.VISIBLE);
+                    lavPhoneBooster.playAnimation();
                 }
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
             }
         });
-        // 实现心跳的View
         if (dunpaiIv != null) {
             dunpaiIv.startAnimation(animationSet);
         }
     }
 
+
+    private void  bigImageView(){
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f));
+        animationSet.addAnimation(new AlphaAnimation(1.0f, 0.4f));
+        animationSet.setDuration(500);
+        animationSet.setInterpolator(new AccelerateInterpolator());
+        animationSet.setFillAfter(true);
+        animationSet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                ToastUtil.showToast(getActivity(), "Your phone is much better now!");
+                if(startTv!=null){
+                    startTv.setVisibility(View.VISIBLE);
+                }
+                if(startNoticeTv!=null){
+                    startNoticeTv.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        if (dunpaiIv != null) {
+            dunpaiIv.startAnimation(animationSet);
+        }
+    }
+
+
+
     @Override
     public void startHeartBeat() {
-
-        try{
-            new Thread() {
-                public void run() {
-                    int time =6;
-                    while (time>0) {
-                        if (getActivity() != null) {
-                            getActivity().runOnUiThread(new Runnable() {
-                                public void run() {
-                                    playHeartbeatAnimation();
-                                }
-                            });
-                        }
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        time--;
-                    }
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ToastUtil.showToast(getActivity(), "Your phone is much better now!");
-                        }
-                    });
-                }
-            }.start();
-        }catch (Exception e){
-
+        playHeartbeatAnimation();
+        if(startTv!=null){
+            startTv.setVisibility(View.GONE);
         }
-
+        if(startNoticeTv!=null){
+            startNoticeTv.setVisibility(View.GONE);
+        }
     }
 }

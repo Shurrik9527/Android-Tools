@@ -45,6 +45,7 @@
                     android:gravity="center"
                     />
                 <TextView
+                    android:id="@+id/start_notice_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -56,9 +57,16 @@
                     />
 
             </RelativeLayout>
-
         </RelativeLayout>
-
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_phonebooster"
+            android:layout_width="@dimen/x500"
+            android:layout_height="@dimen/x500"
+            android:layout_centerHorizontal="true"
+            app:lottie_autoPlay="false"
+            android:layout_marginTop="@dimen/x50"
+            app:lottie_fileName="home_top.json"
+            app:lottie_loop="false" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

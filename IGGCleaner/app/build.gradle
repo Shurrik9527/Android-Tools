@@ -8,18 +8,17 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         multiDexEnabled true
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 100
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             aaptOptions.cruncherEnabled = false
             aaptOptions.useNewCruncher = false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            multiDexKeepProguard file('multidex-config.pro')
         }
     }
     productFlavors {
@@ -61,6 +60,7 @@ dependencies {
     //ButterKnife是一个专注于Android系统的View注入框架
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
 
     //主要功能模块
     implementation project(':maikumodule')
