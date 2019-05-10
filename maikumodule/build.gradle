@@ -108,4 +108,7 @@ dependencies {
 
     //Adtiming
     api(name: 'adt', ext: 'aar')
+
+    //Unity Ads
+    api(name: 'unity-ads', ext: 'aar')
 }

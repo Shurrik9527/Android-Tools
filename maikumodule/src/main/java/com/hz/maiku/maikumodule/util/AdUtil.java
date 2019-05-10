@@ -1,5 +1,6 @@
 package com.hz.maiku.maikumodule.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -14,6 +15,11 @@ import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.AdInfo;
 import com.hz.maiku.maikumodule.http.HttpCenter;
 import com.hz.maiku.maikumodule.http.HttpResult;
+import com.unity3d.services.UnityServices;
+import com.unity3d.services.monetization.IUnityMonetizationListener;
+import com.unity3d.services.monetization.UnityMonetization;
+import com.unity3d.services.monetization.placementcontent.ads.ShowAdPlacementContent;
+import com.unity3d.services.monetization.placementcontent.core.PlacementContent;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -45,14 +51,15 @@ public class AdUtil {
     /**
      * 直接显示广告
      */
-    public static void showAds(Context context, String source) {
+    public static void showAds(Activity context, String source) {
         if (IS_SHOW_AD) {
             switch (AdUtil.AD_TYPE) {
                 case TYPE_FACEBOOK:
                     AdUtil.showFacebookAds(context);
                     break;
                 case TYPE_ADMOB:
-                    AdUtil.showAdModAds(context);
+//                    AdUtil.showAdModAds(context);
+                    AdUtil.showUnityAds(context);
                     break;
 //                case TYPE_BAIDU:
 //                    AdUtil.showAdtiming(context);
@@ -70,6 +77,42 @@ public class AdUtil {
         }
     }
 
+    public static void showUnityAds(final Activity context){
+        String unityGameID = "3144679";
+        IUnityMonetizationListener myListener = new IUnityMonetizationListener() {
+            @Override
+            public void onUnityServicesError(UnityServices.UnityServicesError unityServicesError, String s) {
+                Log.e(TAG, "Interstitial ad onUnityServicesError." + s);
+            }
+
+            @Override
+            public void onPlacementContentReady(String placementId, PlacementContent placementContent) {
+
+                if(placementId.equals("Loading")) {
+                    Log.d(TAG, "Interstitial ad onPlacementContentReady.");
+                    // Retrieve the PlacementContent that is ready:
+                    PlacementContent pc = UnityMonetization.getPlacementContent (placementId);
+                    // Check that the PlacementContent is the desired type:
+                    if (pc.getType ().equalsIgnoreCase ("SHOW_AD")) {
+                        // Cast the PlacementContent as the desired type:
+                        ShowAdPlacementContent p = (ShowAdPlacementContent) pc;
+                        // Show the PlacementContent:
+                        p.show (context, null);
+                    }
+                }
+            }
+
+            @Override
+            public void onPlacementContentStateChange(String s, PlacementContent placementContent, UnityMonetization.PlacementContentState placementContentState, UnityMonetization.PlacementContentState placementContentState1) {
+                Log.d(TAG, "Interstitial ad onPlacementContentStateChange.");
+            }
+        };
+        UnityMonetization.initialize (context, unityGameID, myListener, false);
+    }
+
+    /**
+     * Adting
+     */
     private static void showAdtiming(final Context context) {
         String placementId = "4965";
         final com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAd interstitialAd = new InterstitialAd(context, placementId);
@@ -235,7 +278,7 @@ public class AdUtil {
     /**
      * 获取最新的广告配置并展示
      */
-    public static void getAdTypeAndShow(final Context context, final String source) {
+    public static void getAdTypeAndShow(final Activity context, final String source) {
         if (IS_SHOW_AD) {
             HttpCenter.getService().getAdType("getad_type", Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
                     .doOnSubscribe(new Consumer<Disposable>() {
