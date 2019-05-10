@@ -334,24 +334,31 @@ public class AppUtil {
      * 获取Google Advertising ID
      */
     public static String getAid(Context context) throws Exception {
-        if (Looper.getMainLooper() == Looper.myLooper()) {
-            return "Cannot call in the main thread, You must call in the other thread";
-        }
-        PackageManager pm = context.getPackageManager();
-        pm.getPackageInfo("com.android.vending", 0);
-        AdvertisingConnection connection = new AdvertisingConnection();
-        Intent intent = new Intent(
-                "com.google.android.gms.ads.identifier.service.START");
-        intent.setPackage("com.google.android.gms");
-        if (context.bindService(intent, connection, Context.BIND_AUTO_CREATE)) {
-            try {
-                AdvertisingInterface adInterface = new AdvertisingInterface(connection.getBinder());
-                return adInterface.getId();
-            } finally {
-                context.unbindService(connection);
+
+
+        try {
+            if (Looper.getMainLooper() == Looper.myLooper()) {
+                return "Cannot call in the main thread, You must call in the other thread";
             }
+            PackageManager pm = context.getPackageManager();
+            pm.getPackageInfo("com.android.vending", 0);
+            AdvertisingConnection connection = new AdvertisingConnection();
+            Intent intent = new Intent(
+                    "com.google.android.gms.ads.identifier.service.START");
+            intent.setPackage("com.google.android.gms");
+            if (context.bindService(intent, connection, Context.BIND_AUTO_CREATE)) {
+                try {
+                    AdvertisingInterface adInterface = new AdvertisingInterface(connection.getBinder());
+                    return adInterface.getId();
+                } finally {
+                    context.unbindService(connection);
+                }
+            }
+            return "";
+        }catch (Exception e){
+            return "";
         }
-        return "";
+
     }
 
     private static final class AdvertisingConnection implements ServiceConnection {

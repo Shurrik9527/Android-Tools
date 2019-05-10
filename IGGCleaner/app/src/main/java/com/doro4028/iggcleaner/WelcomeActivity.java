@@ -64,7 +64,8 @@ public class WelcomeActivity extends AppCompatActivity {
             });
 
             RxPermissions rxPermission1 = new RxPermissions(WelcomeActivity.this);
-            rxPermission1.request(Manifest.permission.WRITE_EXTERNAL_STORAGE
+            rxPermission1.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_PHONE_STATE
             ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
                 if (!aBoolean) {
                     ToastUtil.showToast(WelcomeActivity.this, "Sorry! no permission, some functions are not available");

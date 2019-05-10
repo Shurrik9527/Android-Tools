@@ -482,34 +482,43 @@ public class DeviceUtil {
      * @return
      */
     public static String getLocalMacAddressFromWifiInfo(Context context) {
-        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo winfo = wifi.getConnectionInfo();
-        String mac = winfo.getMacAddress();
-        return mac;
+        try {
+            WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            WifiInfo winfo = wifi.getConnectionInfo();
+            String mac = winfo.getMacAddress();
+            return mac;
+        }catch (Exception e){
+            return "";
+        }
     }
 
     private static String getUserAgent(Context context) {
 //        return new WebView(context).getSettings().getUserAgentString();
-        String userAgent = "";
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            try {
-                userAgent = WebSettings.getDefaultUserAgent(context);
-            } catch (Exception e) {
+        try {
+            String userAgent = "";
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                try {
+                    userAgent = WebSettings.getDefaultUserAgent(context);
+                } catch (Exception e) {
+                    userAgent = System.getProperty("http.agent");
+                }
+            } else {
                 userAgent = System.getProperty("http.agent");
             }
-        } else {
-            userAgent = System.getProperty("http.agent");
-        }
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0, length = userAgent.length(); i < length; i++) {
-            char c = userAgent.charAt(i);
-            if (c <= '\u001f' || c >= '\u007f') {
-                sb.append(String.format("\\u%04x", (int) c));
-            } else {
-                sb.append(c);
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0, length = userAgent.length(); i < length; i++) {
+                char c = userAgent.charAt(i);
+                if (c <= '\u001f' || c >= '\u007f') {
+                    sb.append(String.format("\\u%04x", (int) c));
+                } else {
+                    sb.append(c);
+                }
             }
+            return sb.toString();
+        }catch (Exception e){
+            return "";
         }
-        return sb.toString();
+
     }
 
     /**
@@ -610,19 +619,24 @@ public class DeviceUtil {
      * @return
      */
     public static String getBluetoothMac() {
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        Object bluetoothManagerService = new Mirror().on(bluetoothAdapter).get().field("mService");
-        if (bluetoothManagerService == null) {
-            Log.w(TAG, "couldn't find bluetoothManagerService");
-            return BluetoothAdapter.getDefaultAdapter().getAddress();
+        try {
+            BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            Object bluetoothManagerService = new Mirror().on(bluetoothAdapter).get().field("mService");
+            if (bluetoothManagerService == null) {
+                Log.w(TAG, "couldn't find bluetoothManagerService");
+                return BluetoothAdapter.getDefaultAdapter().getAddress();
+            }
+            Object address = new Mirror().on(bluetoothManagerService).invoke().method("getAddress").withoutArgs();
+            if (address != null && address instanceof String) {
+                Log.w(TAG, "using reflection to get the BT MAC address: " + address);
+                return (String) address;
+            } else {
+                return BluetoothAdapter.getDefaultAdapter().getAddress();
+            }
+        }catch (Exception e){
+            return "";
         }
-        Object address = new Mirror().on(bluetoothManagerService).invoke().method("getAddress").withoutArgs();
-        if (address != null && address instanceof String) {
-            Log.w(TAG, "using reflection to get the BT MAC address: " + address);
-            return (String) address;
-        } else {
-            return BluetoothAdapter.getDefaultAdapter().getAddress();
-        }
+
     }
 
 
