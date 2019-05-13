@@ -69,7 +69,8 @@ public class AdUtil {
                     if (AppUtil.isInstalled(context, "com.facebook.katana")) {
                         AdUtil.showFacebookAds(context);
                     } else {
-                        AdUtil.showAdModAds(context);
+//                        AdUtil.showAdModAds(context);
+                        AdUtil.showUnityAds(context);
                     }
                     break;
             }
@@ -79,6 +80,8 @@ public class AdUtil {
 
     public static void showUnityAds(final Activity context){
         String unityGameID = "3144679";
+        final String placementId = "Loading";
+
         IUnityMonetizationListener myListener = new IUnityMonetizationListener() {
             @Override
             public void onUnityServicesError(UnityServices.UnityServicesError unityServicesError, String s) {
@@ -86,19 +89,10 @@ public class AdUtil {
             }
 
             @Override
-            public void onPlacementContentReady(String placementId, PlacementContent placementContent) {
-
-                if(placementId.equals("Loading")) {
-                    Log.d(TAG, "Interstitial ad onPlacementContentReady.");
+            public void onPlacementContentReady(String s, PlacementContent placementContent) {
+                if(s.equals(placementId)) {
                     // Retrieve the PlacementContent that is ready:
-                    PlacementContent pc = UnityMonetization.getPlacementContent (placementId);
-                    // Check that the PlacementContent is the desired type:
-                    if (pc.getType ().equalsIgnoreCase ("SHOW_AD")) {
-                        // Cast the PlacementContent as the desired type:
-                        ShowAdPlacementContent p = (ShowAdPlacementContent) pc;
-                        // Show the PlacementContent:
-                        p.show (context, null);
-                    }
+                    AdUtil.showUnityPlacement(context, placementId);
                 }
             }
 
@@ -107,7 +101,25 @@ public class AdUtil {
                 Log.d(TAG, "Interstitial ad onPlacementContentStateChange.");
             }
         };
-        UnityMonetization.initialize (context, unityGameID, myListener, false);
+        
+        if(UnityMonetization.isReady(placementId)) {
+            Log.d(TAG, "Interstitial ad is ready.");
+            AdUtil.showUnityPlacement(context, placementId);
+        } else {
+            UnityMonetization.initialize (context, unityGameID, myListener, false);
+        }
+    }
+
+    private static void showUnityPlacement(final Activity context, String placementId ) {
+        PlacementContent pc = UnityMonetization.getPlacementContent (placementId);
+        // Check that the PlacementContent is the desired type:
+        if (pc.getType ().equalsIgnoreCase ("SHOW_AD")) {
+            // Cast the PlacementContent as the desired type:
+            ShowAdPlacementContent p = (ShowAdPlacementContent) pc;
+            // Show the PlacementContent:
+            p.show (context, null);
+            Log.d(TAG, "Loading Interstitial Showing.");
+        }
     }
 
     /**
