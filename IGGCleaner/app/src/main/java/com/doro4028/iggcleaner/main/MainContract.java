@@ -23,11 +23,13 @@ public class MainContract {
         void showState(boolean state);
         void playHeartbeatAnimation();
         void startHeartBeat();
+        void showUpdateApp(String content, String type,String packageName,boolean isclick);
     }
 
     public interface Presenter extends BasePresenter {
         void deviceInform(Context context);
         void uploadDeviceInform(DeviceInformBean deviceInformBean);
         void checkOpenState();
+        void checkUpdate(Context context,boolean isclick);
     }
 }

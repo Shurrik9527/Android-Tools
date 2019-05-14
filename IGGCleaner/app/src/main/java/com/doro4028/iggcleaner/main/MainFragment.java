@@ -3,6 +3,7 @@ package com.doro4028.iggcleaner.main;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -26,9 +27,11 @@ import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
 import com.hz.maiku.maikumodule.modules.chargebooster.ChargeBoosterActivity;
 import com.hz.maiku.maikumodule.modules.cpucooler.cpucoolerscan.CpuCoolerScanActivity;
 import com.hz.maiku.maikumodule.modules.junkcleaner.JunkCleanerActivity;
+import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.doro4028.iggcleaner.R;
+import com.hz.maiku.maikumodule.widget.dialog.UpdateAppDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +51,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     @BindView(R.id.start_notice_tv)
     TextView startNoticeTv;
 
-    private MainContract.Presenter presenter;
+    public MainContract.Presenter presenter;
 
 
     public MainFragment() {
@@ -164,6 +167,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
         if(presenter!=null){
             presenter.checkOpenState();
+            presenter.checkUpdate(getContext(),false);
         }
 
         lavPhoneBooster.addAnimatorListener(new Animator.AnimatorListener() {
@@ -287,4 +291,75 @@ public class MainFragment extends Fragment implements MainContract.View {
             startNoticeTv.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void showUpdateApp(String content, String type, String packageName,boolean isclick) {
+        if(isclick){
+
+        }else {
+
+        }
+        if(!TextUtils.isEmpty(type)){
+            UpdateAppDialog dialog = null;
+            if(type.equals("1")){
+                dialog = new UpdateAppDialog(getContext(), content,false,new UpdateAppDialog.ConfirmListener() {
+                    @Override
+                    public void callback(){
+                        if(!TextUtils.isEmpty(packageName)){
+                            if (AppUtil.isInstalled(getContext(), "com.android.vending")) {
+                                SpHelper.getInstance().put(Constant.SAVE_UPDATE_APP_ISINSTALL,true);
+                                final String GOOGLE_PLAY = "com.android.vending";
+                                Uri uri = Uri.parse("market://details?id=" +packageName);
+                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                intent.setPackage(GOOGLE_PLAY);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            } else {
+                                ToastUtil.showToast(getContext(), "Please install GooglePlay first!");
+                            }
+                        }
+                    }
+                });
+                dialog.show();
+            }else if(type.equals("2")){
+                dialog = new UpdateAppDialog(getContext(), content,true,new UpdateAppDialog.ConfirmListener() {
+                    @Override
+                    public void callback(){
+                        if(!TextUtils.isEmpty(packageName)){
+                            if (AppUtil.isInstalled(getContext(), "com.android.vending")) {
+                                SpHelper.getInstance().put(Constant.SAVE_UPDATE_APP_ISINSTALL,true);
+                                final String GOOGLE_PLAY = "com.android.vending";
+                                Uri uri = Uri.parse("market://details?id=" +packageName);
+                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                intent.setPackage(GOOGLE_PLAY);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            } else {
+                                ToastUtil.showToast(getContext(), "Please install GooglePlay first!");
+                            }
+                        }
+                    }
+                });
+                dialog.show();
+            }else {
+                //手动点击可以跳转
+                if(isclick){
+                    if (AppUtil.isInstalled(getContext(), "com.android.vending")) {
+                        SpHelper.getInstance().put(Constant.SAVE_UPDATE_APP_ISINSTALL,true);
+                        final String GOOGLE_PLAY = "com.android.vending";
+                        Uri uri = Uri.parse("market://details?id=" +Constant.APP_NAME);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        intent.setPackage(GOOGLE_PLAY);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    } else {
+                        ToastUtil.showToast(getContext(), "Please install GooglePlay first!");
+                    }
+                }
+            }
+
+        }
+
+    }
+
 }

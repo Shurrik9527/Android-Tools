@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
 
-
+    private MainFragment mainFragment;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected Fragment getFragment() {
-        MainFragment mainFragment = MainFragment.newInstance();
+         mainFragment = MainFragment.newInstance();
         // Create the presenter
         new MainPresenter(mainFragment);
         return mainFragment;
@@ -101,7 +101,10 @@ public class MainActivity extends BaseActivity {
                         case R.id.main_update_menu_item:
                             //检查更新
 //                                ToastUtil.showToast(MainActivity.this, "This is the newest version!");
-                            goToAppDetailPage();
+                            if(mainFragment!=null&&mainFragment.presenter!=null){
+                                mainFragment.presenter.checkUpdate(MainActivity.this,true);
+                            }
+//                            goToAppDetailPage();
                             //有人想更新程序
                             EventUtil.sendEvent(MainActivity.this, AFInAppEventType.UPDATE, "Someone try to update!");
                             break;

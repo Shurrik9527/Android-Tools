@@ -14,7 +14,8 @@ public class Constant {
     public static final String SAVE_JUNK_CLEANER_TIME = "SAVE_JUNK_CLEANER_TIME";//上次垃圾扫描时间
     public static final String SAVE_JUNK_CLEANER_ISALL = "SAVE_JUNK_CLEANER_ISALL";//清理垃圾是否所有
     public static final String SAVE_CPU_COOLER_TIME = "SAVE_CPU_COOLER_TIME";//上次CPU降温时间
-
+    public static final String SAVE_UPDATE_APP_TIME ="SAVE_UPDATE_APP_TIME";//保存更新时间
+    public static final String SAVE_UPDATE_APP_ISINSTALL = "SAVE_UPDATE_APP_ISINSTALL";//是否更新
     public static final String APP_PACKAGE_NAME = MaiKuApp.getmContext().getPackageName(); //包名
     public static final String LOCK_IS_INIT_FAVITER = "lock_is_init_faviter"; //是否初始化了推荐数据库表
     public static final String LOCK_IS_INIT_DB = "lock_is_init_db"; //是否初始化了数据库表

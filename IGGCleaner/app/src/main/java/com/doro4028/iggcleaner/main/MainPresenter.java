@@ -1,14 +1,22 @@
 package com.doro4028.iggcleaner.main;
 
 import android.content.Context;
+import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.hz.maiku.maikumodule.base.Constant;
+import com.hz.maiku.maikumodule.bean.AdInfo;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
+import com.hz.maiku.maikumodule.bean.UpdateAppBean;
 import com.hz.maiku.maikumodule.http.HttpCenter;
 import com.hz.maiku.maikumodule.http.HttpResult;
+import com.hz.maiku.maikumodule.modules.junkcleaner.optimized.OptimizedActivity;
+import com.hz.maiku.maikumodule.util.AdUtil;
+import com.hz.maiku.maikumodule.util.AppUtil;
 import com.hz.maiku.maikumodule.util.DeviceUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
+import com.hz.maiku.maikumodule.util.TimeUtil;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -16,6 +24,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -26,7 +35,6 @@ import io.reactivex.schedulers.Schedulers;
 public class MainPresenter implements MainContract.Presenter {
     private static final String TAG = MainPresenter.class.getName();
     private MainContract.View mView;
-
     public MainPresenter(MainContract.View view) {
         this.mView = view;
         this.mView.setPresenter(this);
@@ -144,6 +152,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void checkOpenState() {
+
         HttpCenter.getService().getStatus("getStatus", Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
                 .observeOn(AndroidSchedulers.mainThread())//指定的是它之后（下方）执行的操作所在的线程
                 .subscribe(new Observer<HttpResult<String>>() {
@@ -174,4 +183,76 @@ public class MainPresenter implements MainContract.Presenter {
 
 
     }
+
+    @Override
+    public void checkUpdate(Context context,boolean isclick) {
+
+        if(isclick){
+            HttpCenter.getService().checkUpdate("getad_app",Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
+                    .observeOn(AndroidSchedulers.mainThread())//指定的是它之后（下方）执行的操作所在的线程
+                    .subscribe(new Observer<HttpResult<UpdateAppBean>>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(HttpResult<UpdateAppBean> httpResult) {
+                            if (httpResult.getResult() == 0) {
+                                if(mView!=null){
+                                    UpdateAppBean bean = httpResult.getData();
+                                    mView.showUpdateApp(bean.getUpdateInfo(),bean.getIsUpdate()+"",bean.getNewPackageName(),isclick);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+        }else {
+            String lastTime = (String) SpHelper.getInstance().get(Constant.SAVE_UPDATE_APP_TIME, "");
+            boolean isTrue = (boolean) SpHelper.getInstance().get(Constant.SAVE_UPDATE_APP_ISINSTALL, false);
+            //48小时未安装 再次弹出
+            if ((!TextUtils.isEmpty(lastTime)&& TimeUtil.isTrue(lastTime, TimeUtil.currentTimeStr(), 1000*60*60*48) && !isTrue)||TextUtils.isEmpty(lastTime)) {
+                HttpCenter.getService().checkUpdate("getad_app",Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
+                        .observeOn(AndroidSchedulers.mainThread())//指定的是它之后（下方）执行的操作所在的线程
+                        .subscribe(new Observer<HttpResult<UpdateAppBean>>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(HttpResult<UpdateAppBean> httpResult) {
+                                if (httpResult.getResult() == 0) {
+                                    if(mView!=null){
+                                        UpdateAppBean bean = httpResult.getData();
+                                        SpHelper.getInstance().put(Constant.SAVE_UPDATE_APP_TIME, TimeUtil.currentTimeStr());
+                                        mView.showUpdateApp(bean.getUpdateInfo(),bean.getIsUpdate()+"",bean.getNewPackageName(),isclick);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+
+            }
+        }
+    }
+
 }

@@ -611,6 +611,13 @@ public class AppUtil {
         return false;
     }
 
-
+    public static int packageCode(Context context) {
+        PackageManager manager = context.getPackageManager();
+        int code = 0;
+        try { PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            code = info.versionCode;
+        } catch (PackageManager.NameNotFoundException e) { e.printStackTrace();
+        } return code;
+    }
 
 }

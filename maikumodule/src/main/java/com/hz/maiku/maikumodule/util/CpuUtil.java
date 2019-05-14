@@ -65,6 +65,10 @@ public class CpuUtil {
                     return false;
                 }
             });
+            if(files==null||files.length==0){
+                result.add(0L);
+                return result;
+            }
             final int SIZE = files.length;
             for (int i = 0; i < SIZE; i++) {
 

@@ -1,10 +1,13 @@
 package com.hz.maiku.maikumodule.http;
 
 import com.hz.maiku.maikumodule.bean.AdInfo;
+import com.hz.maiku.maikumodule.bean.UpdateAppBean;
+
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -58,5 +61,16 @@ public interface HttpService {
                                                       @Field("VERSION_INCREMENTAL") String VERSION_INCREMENTAL, @Field("VERSION_SDK") String VERSION_SDK,
                                                       @Field("VERSION_SDK_INT") String VERSION_SDK_INT,@Field("PLATFORM") String PLATFORM,@Field("BASEBAND") String BASEBAND);
 
+
+
+
+    /**
+     * 版本更新
+     * @param appname 应用名称
+     * @return
+     */
+
+    @POST("/android/androidversion.php")
+    Observable<HttpResult<UpdateAppBean>> checkUpdate(@Query("action") String action, @Query("appname") String appname);
 
 }
