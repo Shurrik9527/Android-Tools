@@ -294,11 +294,6 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @Override
     public void showUpdateApp(String content, String type, String packageName,boolean isclick) {
-        if(isclick){
-
-        }else {
-
-        }
         if(!TextUtils.isEmpty(type)){
             UpdateAppDialog dialog = null;
             if(type.equals("1")){
@@ -347,7 +342,7 @@ public class MainFragment extends Fragment implements MainContract.View {
                     if (AppUtil.isInstalled(getContext(), "com.android.vending")) {
                         SpHelper.getInstance().put(Constant.SAVE_UPDATE_APP_ISINSTALL,true);
                         final String GOOGLE_PLAY = "com.android.vending";
-                        Uri uri = Uri.parse("market://details?id=" +Constant.APP_NAME);
+                        Uri uri = Uri.parse("market://details?id=" +Constant.PACKAGE_NAME);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         intent.setPackage(GOOGLE_PLAY);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
