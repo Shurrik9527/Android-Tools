@@ -159,6 +159,9 @@ public class MainFragment extends Fragment implements MainContract.View {
                     presenter.deviceInform(getContext());
                 }
             }
+            if(presenter!=null){
+                presenter.checkUpdate(getContext(),false);
+            }
         }
     }
 
@@ -167,7 +170,6 @@ public class MainFragment extends Fragment implements MainContract.View {
 
         if(presenter!=null){
             presenter.checkOpenState();
-            presenter.checkUpdate(getContext(),false);
         }
 
         lavPhoneBooster.addAnimatorListener(new Animator.AnimatorListener() {
