@@ -77,7 +77,7 @@ dependencies {
     //闪烁的TextView
     implementation 'com.romainpiel.shimmer:library:1.4.0@aar'
     //数据库
-    api 'org.litepal.android:core:1.6.1'
+    implementation 'org.litepal.android:core:1.6.1'
     //左右滑动的RecyclerView
     implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
     //AdMob及AdMob中介
