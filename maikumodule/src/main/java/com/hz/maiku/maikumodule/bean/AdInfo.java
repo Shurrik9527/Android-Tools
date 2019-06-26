@@ -4,6 +4,7 @@ public class AdInfo {
     private String ad_name;
     private int ad_type;
     private int ad_status;
+    private int about_status;
     private long ad_time;
 
     public String getAd_name() {
@@ -36,5 +37,13 @@ public class AdInfo {
 
     public void setAd_time(long ad_time) {
         this.ad_time = ad_time;
+    }
+
+    public int getAbout_status() {
+        return about_status;
+    }
+
+    public void setAbout_status(int about_status) {
+        this.about_status = about_status;
     }
 }

@@ -1,12 +1,11 @@
 package com.hz.maiku.maikumodule.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAd;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AdSettings;
 import com.facebook.ads.InterstitialAdListener;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -15,11 +14,6 @@ import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.AdInfo;
 import com.hz.maiku.maikumodule.http.HttpCenter;
 import com.hz.maiku.maikumodule.http.HttpResult;
-import com.unity3d.services.UnityServices;
-import com.unity3d.services.monetization.IUnityMonetizationListener;
-import com.unity3d.services.monetization.UnityMonetization;
-import com.unity3d.services.monetization.placementcontent.ads.ShowAdPlacementContent;
-import com.unity3d.services.monetization.placementcontent.core.PlacementContent;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -38,6 +32,8 @@ public class AdUtil {
      */
     public static int AD_STATUS = 1;
     public static long AD_TIME = 3600000;
+    public static int ABOUT_STATUS = 0;
+
 
     private static final int TYPE_FACEBOOK = 1;
     private static final int TYPE_ADMOB = 2;
@@ -51,15 +47,15 @@ public class AdUtil {
     /**
      * 直接显示广告
      */
-    public static void showAds(Activity context, String source) {
+    public static void showAds(Context context, String source) {
         if (IS_SHOW_AD) {
             switch (AdUtil.AD_TYPE) {
                 case TYPE_FACEBOOK:
                     AdUtil.showFacebookAds(context);
                     break;
                 case TYPE_ADMOB:
-//                    AdUtil.showAdModAds(context);
-                    AdUtil.showUnityAds(context);
+                    AdUtil.showAdModAds(context);
+//                    AdUtil.showUnityAds(context);
                     break;
 //                case TYPE_BAIDU:
 //                    AdUtil.showAdtiming(context);
@@ -69,8 +65,8 @@ public class AdUtil {
                     if (AppUtil.isInstalled(context, "com.facebook.katana")) {
                         AdUtil.showFacebookAds(context);
                     } else {
-//                        AdUtil.showAdModAds(context);
-                        AdUtil.showUnityAds(context);
+                        AdUtil.showAdModAds(context);
+//                        AdUtil.showUnityAds(context);
                     }
                     break;
             }
@@ -78,84 +74,84 @@ public class AdUtil {
         }
     }
 
-    public static void showUnityAds(final Activity context){
-        String unityGameID = "3144679";
-        final String placementId = "Loading";
-
-        IUnityMonetizationListener myListener = new IUnityMonetizationListener() {
-            @Override
-            public void onUnityServicesError(UnityServices.UnityServicesError unityServicesError, String s) {
-                Log.e(TAG, "Interstitial ad onUnityServicesError." + s);
-            }
-
-            @Override
-            public void onPlacementContentReady(String s, PlacementContent placementContent) {
-                if(s.equals(placementId)) {
-                    // Retrieve the PlacementContent that is ready:
-                    AdUtil.showUnityPlacement(context, placementId);
-                }
-            }
-
-            @Override
-            public void onPlacementContentStateChange(String s, PlacementContent placementContent, UnityMonetization.PlacementContentState placementContentState, UnityMonetization.PlacementContentState placementContentState1) {
-                Log.d(TAG, "Interstitial ad onPlacementContentStateChange.");
-            }
-        };
-        
-        if(UnityMonetization.isReady(placementId)) {
-            Log.d(TAG, "Interstitial ad is ready.");
-            AdUtil.showUnityPlacement(context, placementId);
-        } else {
-            UnityMonetization.initialize (context, unityGameID, myListener, false);
-        }
-    }
-
-    private static void showUnityPlacement(final Activity context, String placementId ) {
-        PlacementContent pc = UnityMonetization.getPlacementContent (placementId);
-        // Check that the PlacementContent is the desired type:
-        if (pc.getType ().equalsIgnoreCase ("SHOW_AD")) {
-            // Cast the PlacementContent as the desired type:
-            ShowAdPlacementContent p = (ShowAdPlacementContent) pc;
-            // Show the PlacementContent:
-            p.show (context, null);
-            Log.d(TAG, "Loading Interstitial Showing.");
-        }
-    }
-
-    /**
-     * Adting
-     */
-    private static void showAdtiming(final Context context) {
-        String placementId = "4965";
-        final com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAd interstitialAd = new InterstitialAd(context, placementId);
-        interstitialAd.setListener(new com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAdListener() {
-            String TAG = "Adtiming";
-            @Override
-            public void onADReady() {
-                // interstitialAd is load success
-                Log.d(TAG, "Interstitial ad is load success.");
-                interstitialAd.show(context);
-            }
-            @Override
-            public void onADClick() {
-                // interstitialAd click
-                Log.d(TAG, "Interstitial ad click.");
-            }
-            @Override
-            public void onADFail(String msg) {
-                // interstitialAd fail
-                Log.e(TAG, "Interstitial ad fail. errorMsg is " + msg);
-                interstitialAd.destroy(context);
-            }
-            @Override
-            public void onADClose() {
-                // interstitialAd close
-                Log.d(TAG, "Interstitial ad close.");
-                interstitialAd.destroy(context);
-            }
-        });
-        interstitialAd.loadAd(context);
-    }
+//    public static void showUnityAds(final Activity context){
+//        String unityGameID = "3144679";
+//        final String placementId = "Loading";
+//
+//        IUnityMonetizationListener myListener = new IUnityMonetizationListener() {
+//            @Override
+//            public void onUnityServicesError(UnityServices.UnityServicesError unityServicesError, String s) {
+//                Log.e(TAG, "Interstitial ad onUnityServicesError." + s);
+//            }
+//
+//            @Override
+//            public void onPlacementContentReady(String s, PlacementContent placementContent) {
+//                if(s.equals(placementId)) {
+//                    // Retrieve the PlacementContent that is ready:
+//                    AdUtil.showUnityPlacement(context, placementId);
+//                }
+//            }
+//
+//            @Override
+//            public void onPlacementContentStateChange(String s, PlacementContent placementContent, UnityMonetization.PlacementContentState placementContentState, UnityMonetization.PlacementContentState placementContentState1) {
+//                Log.d(TAG, "Interstitial ad onPlacementContentStateChange.");
+//            }
+//        };
+//
+//        if(UnityMonetization.isReady(placementId)) {
+//            Log.d(TAG, "Interstitial ad is ready.");
+//            AdUtil.showUnityPlacement(context, placementId);
+//        } else {
+//            UnityMonetization.initialize (context, unityGameID, myListener, false);
+//        }
+//    }
+//
+//    private static void showUnityPlacement(final Activity context, String placementId ) {
+//        PlacementContent pc = UnityMonetization.getPlacementContent (placementId);
+//        // Check that the PlacementContent is the desired type:
+//        if (pc.getType ().equalsIgnoreCase ("SHOW_AD")) {
+//            // Cast the PlacementContent as the desired type:
+//            ShowAdPlacementContent p = (ShowAdPlacementContent) pc;
+//            // Show the PlacementContent:
+//            p.show (context, null);
+//            Log.d(TAG, "Loading Interstitial Showing.");
+//        }
+//    }
+//
+//    /**
+//     * Adting
+//     */
+//    private static void showAdtiming(final Context context) {
+//        String placementId = "4965";
+//        final com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAd interstitialAd = new InterstitialAd(context, placementId);
+//        interstitialAd.setListener(new com.aiming.mdt.sdk.ad.interstitialAd.InterstitialAdListener() {
+//            String TAG = "Adtiming";
+//            @Override
+//            public void onADReady() {
+//                // interstitialAd is load success
+//                Log.d(TAG, "Interstitial ad is load success.");
+//                interstitialAd.show(context);
+//            }
+//            @Override
+//            public void onADClick() {
+//                // interstitialAd click
+//                Log.d(TAG, "Interstitial ad click.");
+//            }
+//            @Override
+//            public void onADFail(String msg) {
+//                // interstitialAd fail
+//                Log.e(TAG, "Interstitial ad fail. errorMsg is " + msg);
+//                interstitialAd.destroy(context);
+//            }
+//            @Override
+//            public void onADClose() {
+//                // interstitialAd close
+//                Log.d(TAG, "Interstitial ad close.");
+//                interstitialAd.destroy(context);
+//            }
+//        });
+//        interstitialAd.loadAd(context);
+//    }
 
     /**
      * Facebook
@@ -163,7 +159,7 @@ public class AdUtil {
      */
     private static void showFacebookAds(final Context context) {
         //Logcat search "Test mode device hash"
-//        AdSettings.addTestDevice("422c6039-c1d7-46c2-a079-ef3e51dc6664");
+        AdSettings.addTestDevice("5ecd25e8-83a8-4528-b785-45c098c0b4f7");
         final com.facebook.ads.InterstitialAd interstitialAd = new com.facebook.ads.InterstitialAd(context, Constant.PLACEMENT_ID);
         // Set listeners for the Interstitial Ad
         interstitialAd.setAdListener(new InterstitialAdListener() {
@@ -290,7 +286,7 @@ public class AdUtil {
     /**
      * 获取最新的广告配置并展示
      */
-    public static void getAdTypeAndShow(final Activity context, final String source) {
+    public static void getAdTypeAndShow(final Context context, final String source) {
         if (IS_SHOW_AD) {
             HttpCenter.getService().getAdType("getad_type", Constant.APP_NAME).subscribeOn(Schedulers.io())//指定网络请求所在的线程
                     .doOnSubscribe(new Consumer<Disposable>() {
@@ -320,7 +316,8 @@ public class AdUtil {
                                     AdUtil.AD_TYPE = adInfo.getAd_type();
                                     AdUtil.AD_STATUS = adInfo.getAd_status();
                                     AdUtil.AD_TIME = adInfo.getAd_time();
-                                    Log.d(TAG, "Interstitial ad type is [" + adInfo.getAd_name() + "] now! status is [" + AdUtil.AD_STATUS + "] and time is " + AdUtil.AD_TIME);
+                                    AdUtil.ABOUT_STATUS = adInfo.getAbout_status();
+                                    Log.d(TAG, "Interstitial ad type is [" + adInfo.getAd_name() + "] now! status is [" + AdUtil.ABOUT_STATUS + "] and time is " + AdUtil.AD_TIME);
                                 }
                             }
                         }

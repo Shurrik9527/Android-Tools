@@ -3,6 +3,7 @@ package com.hz.maiku.maikumodule.modules.aboutus;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.hz.maiku.maikumodule.R;
 import com.hz.maiku.maikumodule.R2;
 import com.hz.maiku.maikumodule.base.Constant;
+import com.hz.maiku.maikumodule.util.AdUtil;
 import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 
@@ -110,6 +112,15 @@ public class AboutUsFragment extends Fragment implements AboutUsContract.View {
             SpHelper.getInstance().put(Constant.ABOUT_SHOW_BTN,false);
         }else {
             SpHelper.getInstance().put(Constant.ABOUT_SHOW_BTN,true);
+        }
+    }
+
+    @OnClick(R2.id.about_iv)
+    public void TestAd() {
+        if(AdUtil.ABOUT_STATUS == 1) {
+            AdUtil.showAds(getActivity(), "AboutUs");
+        } else {
+            ToastUtil.showToast(getActivity(), "Hello,World!");
         }
     }
 }

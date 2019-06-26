@@ -106,8 +106,8 @@ dependencies {
     implementation 'com.github.chrisbanes.photoview:library:+'
     implementation 'net.vidageek:mirror:1.6.1'
     //Adtiming
-    api(name: 'adt', ext: 'aar')
+    //api(name: 'adt', ext: 'aar')
 
     //Unity Ads
-    api(name: 'unity-ads', ext: 'aar')
+    //api(name: 'unity-ads', ext: 'aar')
 }
