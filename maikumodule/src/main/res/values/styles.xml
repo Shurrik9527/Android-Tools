@@ -73,7 +73,9 @@
     </style>
 
     <style name="unlock_activity_style" parent="AppTheme">
-        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:activityOpenEnterAnimation">@null</item>

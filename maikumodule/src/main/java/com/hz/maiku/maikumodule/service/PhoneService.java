@@ -58,7 +58,7 @@ public class PhoneService extends Service{
                     @Override
                     public void run() {
                         // 延迟1s
-                        SystemClock.sleep(1000);
+                        SystemClock.sleep(2000);
                         stopForeground(true);
                         // 移除Service弹出的通知
                         manager.cancel(100);

@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,13 +67,17 @@ public class AppManagerFragment extends Fragment implements AppManagerContract.V
     @Override
     public void onResume() {
         super.onResume();
-        presenter.subscribe();
+        if(presenter!=null){
+            presenter.subscribe();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        presenter.unsubscribe();
+        if(presenter!=null){
+            presenter.unsubscribe();
+        }
     }
 
     @Override
@@ -127,10 +132,11 @@ public class AppManagerFragment extends Fragment implements AppManagerContract.V
             }
 
             for (ApplicationInfo appManagerBean : lists) {
-                if (appManagerBean.packageName.equals(getContext().getPackageName())) {
-                    Log.i(TAG, "删除自己应用--->" + appManagerBean.packageName);
-                    lists.remove(appManagerBean);
-                    break;
+                if(!TextUtils.isEmpty(appManagerBean.packageName)&&getContext()!=null){
+                    if (appManagerBean.packageName.equals(getContext().getPackageName())) {
+                        lists.remove(appManagerBean);
+                        break;
+                    }
                 }
             }
 

@@ -37,44 +37,46 @@ public class NotificationService extends NotificationListenerService {
     private  static final String TAG =NotificationService.class.getName();
 
     @Override
-    public void onNotificationPosted(StatusBarNotification sbn) {
+    public void onNotificationPosted(final StatusBarNotification sbn) {
 
-        final StatusBarNotification[]  notifications =getActiveNotifications();
-        if(getApplicationContext()!=null){
+        Observable.create(new ObservableOnSubscribe<StatusBarNotification[]>() {
+            @Override
+            public void subscribe(ObservableEmitter<StatusBarNotification[]> e) throws Exception {
+                e.onNext(getActiveNotifications());
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<StatusBarNotification[]>() {
+            @Override
+            public void accept(final StatusBarNotification[] statusBarNotifications) throws Exception {
+                if(statusBarNotifications!=null&&statusBarNotifications.length>0){
+                    if(getApplicationContext()!=null){
+                        boolean openstate = (boolean) SpHelper.getInstance().get(Constant.NOTIFICATION_OPEN_STATE,false);
+                        if(openstate){
+                            Observable.create(new ObservableOnSubscribe<Boolean>() {
+                                @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
+                                @Override
+                                public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
+                                    e.onNext(NotificationsCleanerUtil.saveAllNotification(getApplicationContext(),statusBarNotifications));
+                                }
+                            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Boolean>() {
+                                @Override
+                                public void accept(Boolean mboolean) throws Exception {
 
-            boolean openstate = (boolean) SpHelper.getInstance().get(Constant.NOTIFICATION_OPEN_STATE,false);
-            if(openstate){
-                Observable.create(new ObservableOnSubscribe<Boolean>() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
-                    @Override
-                    public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
-                        e.onNext(NotificationsCleanerUtil.saveAllNotification(getApplicationContext(),notifications));
-                    }
-                }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean mboolean) throws Exception {
+                                }
+                            });
 
-                    }
-                });
-
-
-//                if(NotificationsCleanerUtil.isNotificationEnable(this,sbn.getPackageName())){
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                        cancelNotification(sbn.getKey());
-//                    }else {
-//                        cancelNotification(sbn.getPackageName(),sbn.getTag(),sbn.getId());
-//                    }
-//                }
-
-                if(NotificationsManager.getmInstance().isSettingApp(sbn.getPackageName())){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        cancelNotification(sbn.getKey());
-                    }else {
-                        cancelNotification(sbn.getPackageName(),sbn.getTag(),sbn.getId());
+                            if(NotificationsManager.getmInstance().isSettingApp(sbn.getPackageName())){
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    cancelNotification(sbn.getKey());
+                                }else {
+                                    cancelNotification(sbn.getPackageName(),sbn.getTag(),sbn.getId());
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
+        });
+
     }
 
 
