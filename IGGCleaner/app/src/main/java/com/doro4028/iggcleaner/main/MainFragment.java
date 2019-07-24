@@ -1,5 +1,6 @@
 package com.doro4028.iggcleaner.main;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
@@ -21,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.doro4028.iggcleaner.WelcomeActivity;
+import com.facebook.appevents.AppEventsLogger;
 import com.hz.maiku.maikumodule.base.Constant;
 import com.hz.maiku.maikumodule.bean.DeviceInformBean;
 import com.hz.maiku.maikumodule.modules.appmanager.AppManagerActivity;
@@ -32,10 +35,13 @@ import com.hz.maiku.maikumodule.util.SpHelper;
 import com.hz.maiku.maikumodule.util.ToastUtil;
 import com.doro4028.iggcleaner.R;
 import com.hz.maiku.maikumodule.widget.dialog.UpdateAppDialog;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Shurrik on 2018/12/26.
@@ -52,7 +58,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     TextView startNoticeTv;
 
     public MainContract.Presenter presenter;
-
+    private AppEventsLogger logger;
 
     public MainFragment() {
         // Required empty public constructor
@@ -70,7 +76,14 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        logger =AppEventsLogger.newLogger(getActivity());
     }
+
+    public void logSentRequestEvent (String event) {
+        logger.logEvent(event);
+    }
+
+
 
     @Override
     public void onResume() {
@@ -106,15 +119,33 @@ public class MainFragment extends Fragment implements MainContract.View {
     @OnClick(R.id.cv_junkcleaner)
     @Override
     public void showJunkCleaner() {
-        //垃圾清理
-        Intent intent = new Intent(getContext(), JunkCleanerActivity.class);
-        startActivity(intent);
+        logSentRequestEvent("JunkCleanerEvent");
+        showPermissions();
 
+    }
+
+    private void showPermissions() {
+        if(getActivity()!=null){
+            RxPermissions rxPermission1 = new RxPermissions(getActivity());
+            rxPermission1.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_PHONE_STATE
+            ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(aBoolean -> {
+                if (!aBoolean) {
+                    ToastUtil.showToast(getActivity(), "Sorry! no permission, some functions are not available");
+                    showPermissions();
+                }else {
+                    //垃圾清理
+                    Intent intent = new Intent(getContext(), JunkCleanerActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     @OnClick(R.id.cv_appmanager)
     @Override
     public void showAppManager() {
+        logSentRequestEvent("AppManagerEvent");
         //应用管理
         Intent intent = new Intent(getContext(), AppManagerActivity.class);
         startActivity(intent);
@@ -123,6 +154,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     @OnClick(R.id.cv_cpucooler)
     @Override
     public void showCpuCooler() {
+        logSentRequestEvent("CpuCoolerEvent");
         //手机降温
         Intent intent = new Intent(getContext(), CpuCoolerScanActivity.class);
         startActivity(intent);
@@ -138,6 +170,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     @OnClick(R.id.cv_chargebooster)
     @Override
     public void showChargeBooster() {
+        logSentRequestEvent("ChargeBoosterEvent");
         //智能充电
         Intent intent = new Intent(getActivity(), ChargeBoosterActivity.class);
         startActivity(intent);

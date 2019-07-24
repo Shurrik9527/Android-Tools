@@ -15,7 +15,7 @@ public class LoadingDialogManager {
 
 
     private static LoadingDialog mDialog;
-
+    private static Context mContext;
     public static boolean isShow() {
         if (mDialog == null) {
             return false;
@@ -28,7 +28,11 @@ public class LoadingDialogManager {
      * @param context
      */
     public static void show(Context context){
+        if(context==null){
+            return;
+        }
         if(mDialog ==null){
+            mContext =context;
             mDialog = new LoadingDialog(context);
         }
         mDialog.show();
@@ -39,6 +43,9 @@ public class LoadingDialogManager {
      * 隐藏进度条
      */
     public static void hideProgressDialog() {
+        if(mContext==null){
+            return;
+        }
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
             mDialog = null;

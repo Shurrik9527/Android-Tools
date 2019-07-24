@@ -17,4 +17,8 @@
     <!--其他-->
     <string name="start">Start</string>
 
+    <string name="facebook_app_id">1382433925242565</string>
+    <string name="fb_login_protocol_scheme">1382433925242565</string>
+
+
 </resources>

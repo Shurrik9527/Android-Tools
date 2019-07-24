@@ -52,15 +52,15 @@ public class LoadAppListService extends IntentService {
                 final NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 manager.createNotificationChannel(channel);
                 Notification notification = new Notification.Builder(getApplicationContext(),"id").build();
-                startForeground(100, notification);
+                startForeground(102, notification);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         // 延迟1s
-                        SystemClock.sleep(1000);
+                        SystemClock.sleep(2000);
                         stopForeground(true);
                         // 移除Service弹出的通知
-                        manager.cancel(100);
+                        manager.cancel(102);
                     }
                 }).start();
             }
@@ -85,7 +85,13 @@ public class LoadAppListService extends IntentService {
         //每次都获取手机上的所有应用
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        if(mPackageManager==null){
+            return;
+        }
         List<ResolveInfo> resolveInfos = mPackageManager.queryIntentActivities(intent, 0);
+        if(resolveInfos==null){
+            return;
+        }
         //非第一次，对比数据
         if (isInitDb) {
             List<ResolveInfo> appList = new ArrayList<>();
@@ -112,7 +118,7 @@ public class LoadAppListService extends IntentService {
                     }
                 }
                 try {
-                    if (reslist.size() != 0)
+                    if (reslist!=null&&reslist.size()>0&&mLockInfoManager!=null)
                         mLockInfoManager.instanceCommLockInfoTable(reslist); //将剩下不同的插入数据库
                 } catch (PackageManager.NameNotFoundException e) {
                     e.printStackTrace();

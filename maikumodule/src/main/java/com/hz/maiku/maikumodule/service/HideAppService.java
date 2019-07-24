@@ -41,15 +41,15 @@ public class HideAppService extends IntentService {
                 final NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 manager.createNotificationChannel(channel);
                 Notification notification = new Notification.Builder(getApplicationContext(), "id").build();
-                startForeground(100, notification);
+                startForeground(103, notification);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         // 延迟1s
-                        SystemClock.sleep(1000);
+                        SystemClock.sleep(2000);
                         stopForeground(true);
                         // 移除Service弹出的通知
-                        manager.cancel(100);
+                        manager.cancel(103);
                     }
                 }).start();
             }
@@ -57,6 +57,8 @@ public class HideAppService extends IntentService {
 
         }
     }
+
+
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {

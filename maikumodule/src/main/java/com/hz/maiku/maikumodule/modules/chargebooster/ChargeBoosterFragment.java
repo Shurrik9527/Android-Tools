@@ -53,13 +53,17 @@ public class ChargeBoosterFragment extends Fragment implements ChargeBoosterCont
     @Override
     public void onResume() {
         super.onResume();
-        presenter.subscribe();
+        if(presenter!=null){
+            presenter.subscribe();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        presenter.unsubscribe();
+        if(presenter!=null){
+            presenter.unsubscribe();
+        }
     }
 
     @Override
@@ -79,18 +83,24 @@ public class ChargeBoosterFragment extends Fragment implements ChargeBoosterCont
 
     @Override
     public void initView() {
-        presenter.loadData();
+        if(presenter!=null){
+            presenter.loadData();
+        }
         sProtectCharging.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     //开启充电保护
-                    presenter.startProtectCharging();
+                    if(presenter!=null){
+                        presenter.startProtectCharging();
+                    }
                     //充电保护开启了
                     EventUtil.sendEvent(getActivity(), AFInAppEventType.START_TRIAL, "Charging protect on!");
                 } else {
                     //关闭充电保护
-                    presenter.closeProtectCharging();
+                    if(presenter!=null){
+                        presenter.closeProtectCharging();
+                    }
                 }
             }
         });
@@ -100,10 +110,14 @@ public class ChargeBoosterFragment extends Fragment implements ChargeBoosterCont
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     //开启充电提醒
-                    presenter.startChargeAlert();
+                    if(presenter!=null){
+                        presenter.startChargeAlert();
+                    }
                 } else {
                     //关闭充电提醒
-                    presenter.closeChargeAlert();
+                    if(presenter!=null){
+                        presenter.closeChargeAlert();
+                    }
                 }
             }
         });

@@ -56,7 +56,12 @@ public class MainPresenter implements MainContract.Presenter {
         Observable.create(new ObservableOnSubscribe<DeviceInformBean>() {
             @Override
             public void subscribe(ObservableEmitter<DeviceInformBean> e) throws Exception {
-                e.onNext(DeviceUtil.getmInstance().getDeviceInform(context, Constant.APP_NAME));
+                DeviceInformBean bean=  DeviceUtil.getmInstance().getDeviceInform(context, Constant.APP_NAME);
+                if(bean==null){
+                    e.onError(new Throwable("fail!"));
+                }else {
+                    e.onNext(bean);
+                }
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<DeviceInformBean>() {
             @Override
