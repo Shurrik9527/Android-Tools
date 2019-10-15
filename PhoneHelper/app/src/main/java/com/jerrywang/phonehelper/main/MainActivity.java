@@ -72,8 +72,9 @@ public class MainActivity extends BaseActivity {
         super.init();
         setIcon(getResources().getDrawable(R.drawable.ic_menu));
         //读取最新广告配置并展示
-        AdUtil.getAdTypeAndShow(this, "MainActivity.init()");
-
+//        AdUtil.getAdTypeAndShow(this, "MainActivity.init()");
+        //仅读取最新广告配置
+        AdUtil.getAdType();
 
         //守护进程
 //        if (Build.VERSION.SDK_INT >= 21) {
